@@ -1,0 +1,6 @@
+# Private master (your personal version with medical details) — never publish
+master.private.html
+*.private.html
+
+# PDFs (personal copies)
+*.pdf

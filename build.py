@@ -12,7 +12,7 @@ Master defaults to the private file; output defaults to ./index.html
 """
 import re, sys
 
-MASTER = sys.argv[1] if len(sys.argv) > 1 else "/tmp/postpartum_kitchen.html"
+MASTER = sys.argv[1] if len(sys.argv) > 1 else "master.private.html"
 OUT    = sys.argv[2] if len(sys.argv) > 2 else "index.html"
 
 html = open(MASTER, encoding="utf-8").read()
