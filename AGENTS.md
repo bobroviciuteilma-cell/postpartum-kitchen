@@ -112,10 +112,16 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
 2. **MCT oil** — add to the Glossary + a "+ ½ tsp MCT" line on the Power Smoothie card (offered, not yet done).
 3. **Swap the 4 gated "My version" cards** for the real recipes once owner fetches them.
    - ✅ DONE (2026-06-20): added **13 recipes** from the 14 saved IG posts Ilma listed (2 pho posts merged).
-     Recipe count 46 → **59**. Lithuanian/Spanish captions translated. **Categories now: The Plan · Salads ·
-     Soups & Bowls · Burgers & Patties · Drinks & Tonics · Sandwiches · Bakes & Breakfast · Snacks & Sweets ·
-     Glossary.** CATEGORY PHILOSOPHY (Ilma, emphatic): **call things what they are; "Mains"/"Meals" are NOT
-     categories** — use specific food types and expect MANY more as the bucket grows (Stews, Porridges, Eggs…).
+     Recipe count 46 → **60**. Lithuanian/Spanish captions translated. **19 specific categories (2026-06-20):**
+     The Plan · Sandwiches & Wraps · Salads · Burgers & Patties · Liver & Organs · Soups & Bowls · Cookies ·
+     Pancakes · Waffles · Fritters · Porridge · Breads · Drinks & Tonics · Bites & Balls · Treats · Dips &
+     Crackers · Bakes & Tarts · Ferments · Glossary & Guide. (Replaced the "Bakes & Breakfast"/"Snacks &
+     Sweets" grab-bags.) CATEGORY PHILOSOPHY (Ilma, emphatic): **call things what they are; "Mains"/"Meals"
+     are NOT categories** — specific food types, singletons OK (they grow), split freely (Pancakes≠Waffles).
+     **"Treats" is a valid category** (treating yourself = real morale need). Every recipe needs a real
+     postpartum "why". `CATS` order matters (catFor = first match wins): sandwiches before breads, drinks
+     before bites. **GF tag**: curated title list in the auto-tagger (`var GF=[...]`) — conservative, wheat/
+     pasta/tortilla recipes left unmarked; `.tag.gf` is green.
      Renamed "Plan & Meals" → "The Plan"; added "Sandwiches" (the Zucchini Bread Sandwich = her "tuna melt",
      moved out of Bakes — Sandwiches sits before Bakes in `CATS` so `sandwich` wins routing). Every recipe MUST
      show a **source hyperlink** (`@handle →` in the subtitle). Only add **nutrition / postpartum-appropriate**
