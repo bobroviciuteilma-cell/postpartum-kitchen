@@ -273,6 +273,15 @@
     #appBar .baction.on svg{ fill:currentColor; }
     #appBar .baction:active{ transform:scale(.92); }
     #catList .empty{ color:var(--grey); font-size:14px; line-height:1.6; padding:24px 6px; text-align:center; }
+    #catList .helpintro{ font-size:13px; color:var(--grey); line-height:1.5; padding:2px 4px 4px; }
+    #catList .helpintro b{ color:var(--rust); }
+    #catList .helphd{ font-family:'Fraunces',serif; font-weight:600; font-size:13.5px; color:var(--rust); letter-spacing:.04em; text-transform:uppercase; padding:18px 4px 2px; }
+    #catList .helpnote{ font-size:11.5px; color:var(--grey); padding:0 4px 4px; }
+    #catList .ri .arrow{ color:var(--rust); font-weight:600; }
+    #catList .ri.noli{ cursor:default; }
+    #catList .ri.noli:hover .rt{ color:var(--ink); }
+    #catList .shopbox{ background:#fdf3ea; border:1px solid var(--rule); border-radius:14px; padding:13px 15px; font-size:12.5px; line-height:1.85; margin-top:8px; }
+    #catList .shopbox b{ color:var(--rust); }
     #catList .chrow{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
     #catList .linkact{ color:var(--rust); font-weight:600; font-size:13px; cursor:pointer; white-space:nowrap; }
     #catList .shopclear{ text-align:right; padding:2px 4px 10px; }
@@ -2659,13 +2668,54 @@
     c.items.forEach(function(it){ var r=rowFor(it,false); r.addEventListener('click',function(){showRecipe(it,c);}); list.appendChild(r); });
     window.scrollTo(0,0);
   }
-  function showRecipe(it,c){ hideAll(); it.sec.classList.add('appActive'); active=it.sec; curRecipe=it;
+  function showRecipe(it,c,back){ hideAll(); it.sec.classList.add('appActive'); active=it.sec; curRecipe=it;
     bar.style.display='grid'; bar.querySelector('.bt').textContent=it.title;
-    bar.querySelector('.bk').onclick=function(){ if(c&&c.items){showCat(c);} else {showHome();} };
+    bar.querySelector('.bk').onclick=function(){ if(typeof back==='function'){back();} else if(c&&c.items){showCat(c);} else {showHome();} };
     showBarActions(true); syncRecipeBtns(); window.scrollTo(0,0);
   }
-  var helperSec=document.getElementById('helperprep');
-  function showHelper(){ hideAll(); curRecipe=null; if(helperSec){ helperSec.classList.add('appActive'); active=helperSec; } bar.style.display='grid'; bar.querySelector('.bt').textContent='Helper Prep List'; bar.querySelector('.bk').onclick=showHome; showBarActions(false); window.scrollTo(0,0); }
+  var HELPER=[
+    {h:'1 · Batch-cook & freeze', note:'Make ahead, freeze in portions. Tap any dish for the full recipe + original.', items:[
+      {t:'Bone broth ×2 (beef + chicken)', find:['bone broth'], why:'freeze in jars & cubes — the #1 food'},
+      {t:'Liver Pâté Pops', find:['pops'], why:'freeze in molds — daily iron'},
+      {t:'Greek Chicken Burgers', find:['chicken burgers'], why:'shape & freeze raw'},
+      {t:'Chicken & Potato Cutlets', find:['potato cutlets'], why:'cook & freeze — soft, one-handed'},
+      {t:'Short Rib Pho', find:['short rib pho'], why:'freeze portions — iron + collagen'},
+      {t:'Lactation Cookies', find:["milk makin"], why:'bake & freeze — milk support'},
+      {t:'Banana Bread', find:['banana bread'], why:'freeze in slices'},
+      {t:'Nut & Gum Energy Balls', find:['energy balls'], why:'a jar, keeps weeks'},
+      {t:'Sesame & Jaggery Bites', find:['sesame & jaggery'], why:'iron + calcium'}
+    ]},
+    {h:'2 · Start today', items:[
+      {t:'Beet Kvass', find:['beet kvass'], why:'start the ferment now — ready in 1–2 weeks'}
+    ]},
+    {h:'3 · Fresh & quick (first days)', note:'Quick to make fresh. Tap for the recipe.', items:[
+      {t:'Power Smoothie', find:['power smoothie'], why:'protein + healthy fat'},
+      {t:'Buckwheat Porridge', find:['buckwheat'], why:'warm mornings, gluten-free'},
+      {t:'Rice & Lentil Porridge', find:['khichdi'], why:'gentle, easy to reheat'},
+      {t:'Soothing Chai Tea', find:['chai'], why:'warm, calming'},
+      {t:'Date, Saffron & Almond Tonic', find:['date, saffron'], why:'iron, energy & calm'}
+    ]}
+  ];
+  var SHOPLIST='<b>Meat & fish:</b> beef bones, chicken bones, chicken livers, ground chicken, short ribs<br><b>Pantry:</b> dates, gond, sesame, jaggery, nuts, ghee, red lentils, rice, buckwheat, millet, oats<br><b>Produce:</b> beets, ginger, garlic, onions, carrots, lemons, bananas, leafy greens<br><b>Dairy & other:</b> coconut + almond milk, yoghurt, eggs, saffron, cardamom, cinnamon, frozen berries, ground flax';
+  function showHelper(){ hideAll(); curRecipe=null; list.style.display='block'; bar.style.display='grid'; showBarActions(false);
+    bar.querySelector('.bt').textContent='Helper Prep List'; bar.querySelector('.bk').onclick=showHome;
+    list.innerHTML='<div class="ch">Helper Prep List</div>';
+    var intro=el('div','helpintro'); intro.innerHTML='For a helper — what to <b>batch-cook, freeze &amp; shop</b> in the first weeks. <b>Tap any dish</b> to see exactly how to make it, with the original recipe.'; list.appendChild(intro);
+    HELPER.forEach(function(sec){
+      var hd=el('div','helphd'); hd.textContent=sec.h; list.appendChild(hd);
+      if(sec.note){ var nt=el('div','helpnote'); nt.textContent=sec.note; list.appendChild(nt); }
+      sec.items.forEach(function(item){
+        var rec=item.find?byTitle(item.find):null;
+        var r=el('div','ri'+(rec?'':' noli'));
+        r.innerHTML='<div class="rt">'+item.t+(rec?' <span class="arrow">&rarr;</span>':'')+'</div>'+(item.why?'<div class="rs">'+item.why+'</div>':'');
+        if(rec){ r.addEventListener('click',function(){ showRecipe(rec,rec.cat,showHelper); }); }
+        list.appendChild(r);
+      });
+    });
+    var sh=el('div','helphd'); sh.textContent='Shop & stock'; list.appendChild(sh);
+    var box=el('div','shopbox'); box.innerHTML=SHOPLIST; list.appendChild(box);
+    window.scrollTo(0,0);
+  }
   function syncRecipeBtns(){ if(!curRecipe)return; var id=curRecipe.sec.id; favBtn.classList.toggle('on',isFav(id)); addBtn.classList.toggle('on',isShop(id)); }
   favBtn.addEventListener('click',function(){ if(!curRecipe)return; var id=curRecipe.sec.id; var i=FAV.indexOf(id); if(i>-1)FAV.splice(i,1); else FAV.push(id); SS('pk_favs',FAV); syncRecipeBtns(); updCounts(); });
   addBtn.addEventListener('click',function(){ if(!curRecipe)return; var id=curRecipe.sec.id; var i=SHOP.indexOf(id); if(i>-1)SHOP.splice(i,1); else SHOP.push(id); SS('pk_shop',SHOP); syncRecipeBtns(); updCounts(); });
