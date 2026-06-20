@@ -111,8 +111,15 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
    line-art on the hero + dividers. NOTE: in-session AI image generation (nano-banana) is NOT available.
 2. **MCT oil** — add to the Glossary + a "+ ½ tsp MCT" line on the Power Smoothie card (offered, not yet done).
 3. **Swap the 4 gated "My version" cards** for the real recipes once owner fetches them.
-   - ✅ DONE (2026-06-20): added **13 recipes** from the 14 saved IG posts Ilma listed (2 pho posts merged) +
-     new **"Burgers & Patties"** category. Recipe count 46 → **59**. Lithuanian/Spanish captions translated.
+   - ✅ DONE (2026-06-20): added **13 recipes** from the 14 saved IG posts Ilma listed (2 pho posts merged).
+     Recipe count 46 → **59**. Lithuanian/Spanish captions translated. **Categories now: The Plan · Salads ·
+     Soups & Bowls · Burgers & Patties · Drinks & Tonics · Sandwiches · Bakes & Breakfast · Snacks & Sweets ·
+     Glossary.** CATEGORY PHILOSOPHY (Ilma, emphatic): **call things what they are; "Mains"/"Meals" are NOT
+     categories** — use specific food types and expect MANY more as the bucket grows (Stews, Porridges, Eggs…).
+     Renamed "Plan & Meals" → "The Plan"; added "Sandwiches" (the Zucchini Bread Sandwich = her "tuna melt",
+     moved out of Bakes — Sandwiches sits before Bakes in `CATS` so `sandwich` wins routing). Every recipe MUST
+     show a **source hyperlink** (`@handle →` in the subtitle). Only add **nutrition / postpartum-appropriate**
+     recipes from HER links — don't pull arbitrary content.
    - **IG scraping:** individual public post URLs → Apify `apify/instagram-scraper` (`directUrls`, `resultsType:posts`)
      works without a browser. But Ilma's **private saved folder** (`instagram.com/ilmabob/saved/food/...`) is NOT
      reachable that way — to add "the rest" of her saved collection, need the Claude-in-Chrome extension re-authed
@@ -128,11 +135,14 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
      overflow; show via `bar.style.display='grid'` (do NOT use `display:…!important` on `#appBar` — it
      overrides the inline `display:none` used to hide it on home). Goal filter is **keyword-based**, so
      results are approximate (e.g. Glossary can match "iron") — tune `GOALS[].kw` if needed.
-   - ✅ DONE (2026-06-20, batch 2): **Night mode** (dim 3am theme, moon toggle, key `pk_night`, scoped to
-     `@media screen` so the PDF is unaffected — night overrides MUST include the `#appHome`/`#appBar`/
-     `#catList` ID to beat the ID-specificity base rules); **Phase view** ("Where are you?" Week 1–2 / 3–4
-     / 5–6 pills via `PHASES` array, reuses `toggleGoal`/`goalHits`, shows a `.phasefocus` line);
-     **Make-ahead flag** (auto-tagger rule: `freez`/`make ahead`/`meal prep` → `.tag.makeahead`).
+   - ✅ DONE (2026-06-20, batch 2): **Phase view** ("Where are you?" Week 1–2 / 3–4 / 5–6 pills via `PHASES`
+     array, reuses `toggleGoal`/`goalHits`, shows a `.phasefocus` line); **Make-ahead flag** (auto-tagger
+     rule: `freez`/`make ahead`/`meal prep` → `.tag.makeahead`).
+   - ❌ REMOVED (2026-06-20): **Night mode** — Ilma: "i dont care about the night mode". Don't re-add.
+   - **DIRECTION (2026-06-20):** Ilma chose **keep building the WEB version** — NOT a PWA/installable app yet.
+     Focus on content + structure + the recovery flow; it stays a shareable link. PWA/app-icon (her gouache art)
+     comes later. Personalisation quiz still deferred. To add more recipes/categories, need her saved-folder
+     access (re-auth Claude-in-Chrome) or more pasted links.
    - Still open: Download-PDF button, feedback link for mum testers, per-category recipe icons, servings scaler.
 5. **Commercial strategy session** (DEFERRED by owner until after birth + her own version is finalised):
    the real product = the **personalisation** (a guided "build your postpartum kitchen" quiz → tailored
