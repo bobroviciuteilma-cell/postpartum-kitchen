@@ -112,7 +112,13 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
 2. **MCT oil** — add to the Glossary + a "+ ½ tsp MCT" line on the Power Smoothie card (offered, not yet done).
 3. **Swap the 4 gated "My version" cards** for the real recipes once owner fetches them.
    - ✅ DONE (2026-06-20): added **13 recipes** from the 14 saved IG posts Ilma listed (2 pho posts merged).
-     Recipe count 46 → **60**. Lithuanian/Spanish captions translated. **19 specific categories (2026-06-20):**
+     Recipe count 46 → **64** (added 3 porridges: buckwheat/millet/red lentil, + a Date-Saffron-Almond
+     tonic from @bridgeayurveda). **NAMING RULE (Ilma: "indian names tell me nothing"):** lead titles with
+     **plain English**, foreign name in a small grey `<span>` in brackets — e.g. "Rice & Lentil Porridge
+     (Khichdi)", "Nut & Gum Energy Balls (Gond Laddu)", "Sesame & Jaggery Bites (Til-Gur)", "Calming Noodle
+     Bowl (Sattvic)", "Spiced Fruit Porridge (Vedic)", "Calming Bedtime Milk (Ashwagandha)". Khichdi is a
+     savoury porridge → moved Soups→**Porridge** (removed 'khichdi' from soups match). Lithuanian/Spanish
+     captions translated. **19 specific categories (2026-06-20):**
      The Plan · Sandwiches & Wraps · Salads · Burgers & Patties · Liver & Organs · Soups & Bowls · Cookies ·
      Pancakes · Waffles · Fritters · Porridge · Breads · Drinks & Tonics · Bites & Balls · Treats · Dips &
      Crackers · Bakes & Tarts · Ferments · Glossary & Guide. (Replaced the "Bakes & Breakfast"/"Snacks &
