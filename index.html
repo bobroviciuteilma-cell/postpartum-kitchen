@@ -2327,6 +2327,40 @@
   <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Date, Saffron &amp; Almond Tonic</div>
 </section>
 
+<!-- ============ HELPER PREP (app entry, skipped from categories) ============ -->
+<section class="page dense" id="helperprep">
+  <h1 class="title">Helper Prep List</h1>
+  <div class="subtitle">For a helper &mdash; what to batch-cook, start &amp; shop in the first weeks</div>
+  <div class="box" style="margin-top:14px;"><span class="lead">Three jobs:</span> batch-cook &amp; freeze the list, start the beet kvass today (it needs 1&ndash;2 weeks), and shop the stock list. The goal: warm, soft, iron- &amp; collagen-rich food always within arm's reach.</div>
+  <div class="twocol" style="margin-top:16px;">
+    <div>
+      <div class="colhead">1 &middot; BATCH-COOK &amp; FREEZE</div>
+      <div class="ing"><b>Bone broth &times;2 pots</b> (beef + chicken) <span class="note">freeze in jars &amp; ice-cube trays &mdash; the #1 food</span></div>
+      <div class="ing"><b>Liver P&acirc;t&eacute; Pops</b> <span class="note">freeze in silicone molds &mdash; daily iron</span></div>
+      <div class="ing"><b>Greek Chicken Burgers</b> <span class="note">shape &amp; freeze raw</span></div>
+      <div class="ing"><b>Chicken &amp; Potato Cutlets</b> <span class="note">cook &amp; freeze &mdash; soft, one-handed</span></div>
+      <div class="ing"><b>Short Rib Pho</b> or a beef stew <span class="note">freeze portions &mdash; iron + collagen</span></div>
+      <div class="ing"><b>Lactation Cookies + Banana Bread</b> <span class="note">bake &amp; freeze in slices</span></div>
+      <div class="ing"><b>Energy Balls + Sesame Bites</b> <span class="note">a jar each, keeps weeks</span></div>
+      <div class="colhead" style="margin-top:16px;">2 &middot; START TODAY</div>
+      <div class="ing"><b>Beet Kvass</b> <span class="note">start the ferment now &mdash; ready in 1&ndash;2 weeks</span></div>
+    </div>
+    <div>
+      <div class="colhead">3 &middot; SHOP &amp; STOCK</div>
+      <div class="ing"><b>Meat &amp; fish:</b> beef bones, chicken bones, chicken livers, ground chicken, short ribs</div>
+      <div class="ing"><b>Pantry:</b> dates, gond, sesame, jaggery, nuts, ghee, red lentils, rice, buckwheat, millet, oats</div>
+      <div class="ing"><b>Produce:</b> beets, ginger, garlic, onions, carrots, lemons, bananas, leafy greens</div>
+      <div class="ing"><b>Dairy &amp; other:</b> coconut + almond milk, yoghurt, eggs, saffron, cardamom, cinnamon, frozen berries, ground flax</div>
+      <div class="colhead" style="margin-top:16px;">4 &middot; FRESH &amp; QUICK (first days)</div>
+      <div class="ing"><b>Morning:</b> warm porridge (buckwheat / millet) or a Power Smoothie</div>
+      <div class="ing"><b>Anytime:</b> warm bone broth + a tonic (Chai / Bedtime Milk / Date-Saffron)</div>
+      <div class="ing"><b>Meals:</b> reheat broth + a cutlet/burger + soft rice or khichdi</div>
+      <div class="ing"><b>Comfort</b> (hemorrhoids): stewed fruit, ground flax in porridge, lots of broth &amp; water</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Helper Prep List</div>
+</section>
+
 <!-- ============ GLOSSARY ============ -->
 <section class="page dense" id="glossary">
   <h1 class="title">New to These? &mdash; Glossary</h1>
@@ -2475,6 +2509,7 @@
   var ALL=[];
   [].slice.call(document.querySelectorAll('section.page')).forEach(function(sec){
     if(sec.classList.contains('hero')||sec.classList.contains('cover')||sec.classList.contains('divider'))return;
+    if(sec.id==='helperprep')return;
     var h=sec.querySelector('h1.title')||sec.querySelector('h1'); if(!h)return;
     var title=h.textContent.trim().replace(/\s+/g,' ');
     if(/^(from your saved feed|community recipes)$/i.test(title))return;
@@ -2580,6 +2615,10 @@
   feat.innerHTML='<div class="ft"><h3>Start here</h3><p>Your recovery plan &amp; daily rhythm — read this first.</p></div><div class="go">→</div>';
   feat.addEventListener('click',function(){ var st=byTitle(['recovery plan']); if(st){showRecipe(st,st.cat);} else {showCat(CATS[0]);} });
   tiles.appendChild(feat);
+  var feat2=el('div','tile feat'); feat2.style.background='linear-gradient(135deg,#b0481f,#8f3815)';
+  feat2.innerHTML='<div class="ft"><h3>For a helper</h3><p>What to batch-cook, freeze &amp; shop — the prep list.</p></div><div class="go">→</div>';
+  feat2.addEventListener('click',function(){ showHelper(); });
+  tiles.appendChild(feat2);
   CATS.forEach(function(c){ if(!c.items||!c.items.length)return;
     var t=el('div','tile'); t.style.background=c.color;
     t.innerHTML='<div class="ic">'+svg(c.key)+'</div><div class="tn">'+c.name+'</div><div class="tc">'+c.items.length+' '+(c.items.length===1?'recipe':'recipes')+'</div>';
@@ -2625,6 +2664,8 @@
     bar.querySelector('.bk').onclick=function(){ if(c&&c.items){showCat(c);} else {showHome();} };
     showBarActions(true); syncRecipeBtns(); window.scrollTo(0,0);
   }
+  var helperSec=document.getElementById('helperprep');
+  function showHelper(){ hideAll(); curRecipe=null; if(helperSec){ helperSec.classList.add('appActive'); active=helperSec; } bar.style.display='grid'; bar.querySelector('.bt').textContent='Helper Prep List'; bar.querySelector('.bk').onclick=showHome; showBarActions(false); window.scrollTo(0,0); }
   function syncRecipeBtns(){ if(!curRecipe)return; var id=curRecipe.sec.id; favBtn.classList.toggle('on',isFav(id)); addBtn.classList.toggle('on',isShop(id)); }
   favBtn.addEventListener('click',function(){ if(!curRecipe)return; var id=curRecipe.sec.id; var i=FAV.indexOf(id); if(i>-1)FAV.splice(i,1); else FAV.push(id); SS('pk_favs',FAV); syncRecipeBtns(); updCounts(); });
   addBtn.addEventListener('click',function(){ if(!curRecipe)return; var id=curRecipe.sec.id; var i=SHOP.indexOf(id); if(i>-1)SHOP.splice(i,1); else SHOP.push(id); SS('pk_shop',SHOP); syncRecipeBtns(); updCounts(); });
@@ -2682,6 +2723,7 @@
   document.body.appendChild(home); document.body.appendChild(bar); document.body.appendChild(list);
   home.querySelector('#qq').addEventListener('input',function(){runSearch(this.value);});
   document.body.classList.add('app'); updCounts(); showHome();
+  if(/^#(helper|prep)$/i.test(location.hash)) showHelper();
 })();
 </script>
 </body>
