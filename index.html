@@ -204,6 +204,17 @@
     #catList .ri:hover .rt { color:var(--rust); }
     #catList .ri .rt { font-family:'Fraunces',serif; font-size:17px; color:var(--ink); }
     #catList .ri .rs { color:var(--grey); font-size:11.5px; margin-top:2px; }
+    #appHome .asearch { display:flex; align-items:center; gap:9px; margin-top:22px; background:#fff; border:1.5px solid var(--rule); border-radius:14px; padding:0 14px; transition:border-color .15s, box-shadow .15s; }
+    #appHome .asearch:focus-within { border-color:var(--rust); box-shadow:0 0 0 3px rgba(176,72,31,.10); }
+    #appHome .asearch svg { width:18px; height:18px; flex:none; }
+    #appHome .asearch input { flex:1; min-width:0; width:100%; border:none; outline:none; background:transparent; font-family:'Inter',sans-serif; font-size:15px; color:var(--ink); padding:13px 0; }
+    #appHome #searchRes { margin-top:18px; }
+    #appHome #searchRes .ri { padding:14px 6px; border-bottom:1px solid var(--rule); cursor:pointer; }
+    #appHome #searchRes .ri:hover .rt { color:var(--rust); }
+    #appHome #searchRes .ri .rt { font-family:'Fraunces',serif; font-size:17px; color:var(--ink); }
+    #appHome #searchRes .ri .rs { color:var(--grey); font-size:11.5px; margin-top:3px; }
+    #appHome #searchRes .ri .rcat { font-weight:600; }
+    #appHome #searchRes .nohit { color:var(--grey); font-size:14px; padding:20px 4px; text-align:center; }
   }
   @media print { #appHome, #appBar, #catList { display:none !important; } body.app > section.page { display:block !important; } }
 
@@ -1868,29 +1879,35 @@
   function svg(k){return '<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">'+(I[k]||I.meals)+'</svg>';}
   var CATS=[
     {key:'plan',name:'Plan & Meals',color:'#b0481f',match:['recovery plan','your day','recovery timeline','breakfast','lunch','dinner','snacks & drinks']},
-    {key:'meals',name:'Mains',color:'#c0633a',match:['khichdi','sattvic','chicken heart','courgette']},
     {key:'salads',name:'Salads',color:'#5f7d4a',match:['salad']},
-    {key:'soups',name:'Soups & Broths',color:'#bf7233',match:['broth','soup']},
+    {key:'soups',name:'Soups & Bowls',color:'#c0633a',match:['broth','soup','khichdi','sattvic','chicken heart']},
     {key:'drinks',name:'Drinks & Tonics',color:'#3f7d6e',match:['postpartum teas','chai','ashwagandha','power smoothie','quick tonics']},
-    {key:'bakes',name:'Bakes & Breakfast',color:'#bb8a3a',match:['porridge','pancakes','waffles','seeded','banana bread','keto rolls','cottage cheese bake']},
+    {key:'bakes',name:'Bakes & Breakfast',color:'#bb8a3a',match:['porridge','pancakes','waffles','seeded','banana bread','keto rolls','cottage cheese bake','courgette']},
     {key:'snacks',name:'Snacks & Sweets',color:'#9a6b3f',match:['laddu','til-gur','chicken liver','brownie','bark','fat bombs','fro-yo','skyr','date chocolate','truffle','major milk','fermented']},
     {key:'guide',name:'Glossary & Guide',color:'#5a6472',match:['glossary','helper','best foods','supplement']}
   ];
   function catFor(t){t=t.toLowerCase(); for(var i=0;i<CATS.length;i++){var m=CATS[i].match;for(var j=0;j<m.length;j++){if(t.indexOf(m[j])>-1)return CATS[i];}} return null;}
+  var ALL=[];
   [].slice.call(document.querySelectorAll('section.page')).forEach(function(sec){
     if(sec.classList.contains('hero')||sec.classList.contains('cover')||sec.classList.contains('divider'))return;
     var h=sec.querySelector('h1.title')||sec.querySelector('h1'); if(!h)return;
     var title=h.textContent.trim().replace(/\s+/g,' ');
     if(/^(from your saved feed|community recipes)$/i.test(title))return;
     if(!sec.id){sec.id='sx-'+Math.abs(title.split('').reduce(function(a,c){return (a*31+c.charCodeAt(0))|0;},7));}
-    var c=catFor(title)||CATS[6];
-    (c.items=c.items||[]).push({title:title,sec:sec,sub:(sec.querySelector('.subtitle')?sec.querySelector('.subtitle').textContent.trim().replace(/\s+/g,' '):'')});
+    var c=catFor(title)||CATS[5];
+    var sub=(sec.querySelector('.subtitle')?sec.querySelector('.subtitle').textContent.trim().replace(/\s+/g,' '):'');
+    var it={title:title,sec:sec,sub:sub,cat:c,hay:(title+' '+sub+' '+sec.textContent).toLowerCase()};
+    (c.items=c.items||[]).push(it);
+    ALL.push(it);
   });
   var hero=document.querySelector('section.hero');
   var home=el('div'); home.id='appHome';
   var ah=el('div','ahero');
   ah.innerHTML=(hero&&hero.querySelector('.heroart')?hero.querySelector('.heroart').outerHTML:'')+'<div class="at">Postpartum Kitchen</div><div class="asub">Everything for your fourth-trimester recovery &mdash; tap a section to explore, one calm step at a time.</div>';
   home.appendChild(ah);
+  var sb=el('div','asearch');
+  sb.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#b0481f" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg><input type="search" id="qq" placeholder="Search recipes, tonics, ingredients…" autocomplete="off">';
+  home.appendChild(sb);
   var tiles=el('div','tiles');
   CATS.forEach(function(c){ if(!c.items||!c.items.length)return;
     var t=el('div','tile'); t.style.background=c.color;
@@ -1898,11 +1915,12 @@
     t.addEventListener('click',function(){showCat(c);}); tiles.appendChild(t);
   });
   home.appendChild(tiles);
+  var sr=el('div'); sr.id='searchRes'; sr.style.display='none'; home.appendChild(sr);
   var bar=el('div'); bar.id='appBar'; bar.innerHTML='<span class="bk">&#8592; Back</span><span class="bt"></span>';
   var list=el('div'); list.id='catList';
   var active=null;
   function clearActive(){ if(active){active.classList.remove('appActive');active=null;} }
-  function showHome(){ clearActive(); bar.style.display='none'; list.style.display='none'; home.style.display='block'; window.scrollTo(0,0); }
+  function showHome(){ clearActive(); bar.style.display='none'; list.style.display='none'; home.style.display='block'; var q=home.querySelector('#qq'); if(q){q.value='';} if(sr){sr.style.display='none';} if(tiles){tiles.style.display='grid';} window.scrollTo(0,0); }
   function showCat(c){ clearActive(); home.style.display='none'; list.style.display='block'; bar.style.display='flex';
     bar.querySelector('.bt').textContent=c.name; bar.querySelector('.bk').onclick=showHome;
     list.innerHTML='<div class="ch">'+c.name+'</div>';
@@ -1912,7 +1930,18 @@
   function showRecipe(it,c){ home.style.display='none'; list.style.display='none'; clearActive(); it.sec.classList.add('appActive'); active=it.sec;
     bar.style.display='flex'; bar.querySelector('.bt').textContent=it.title; bar.querySelector('.bk').onclick=function(){showCat(c);}; window.scrollTo(0,0);
   }
+  function runSearch(q){
+    q=q.trim().toLowerCase();
+    if(!q){ sr.style.display='none'; tiles.style.display='grid'; return; }
+    tiles.style.display='none'; sr.style.display='block'; sr.innerHTML='';
+    var terms=q.split(/\s+/);
+    var hits=ALL.filter(function(it){return terms.every(function(t){return it.hay.indexOf(t)>-1;});});
+    if(!hits.length){ sr.innerHTML='<div class="nohit">No matches for &ldquo;'+q.replace(/</g,'&lt;')+'&rdquo;. Try a single ingredient or recipe word.</div>'; return; }
+    hits.sort(function(a,b){return (b.title.toLowerCase().indexOf(terms[0])>-1?1:0)-(a.title.toLowerCase().indexOf(terms[0])>-1?1:0);});
+    hits.forEach(function(it){ var r=el('div','ri'); r.innerHTML='<div class="rt">'+it.title+'</div><div class="rs"><span class="rcat" style="color:'+it.cat.color+'">'+it.cat.name+'</span>'+(it.sub?' &middot; '+it.sub:'')+'</div>'; r.addEventListener('click',function(){showRecipe(it,it.cat);}); sr.appendChild(r); });
+  }
   document.body.appendChild(home); document.body.appendChild(bar); document.body.appendChild(list);
+  home.querySelector('#qq').addEventListener('input',function(){runSearch(this.value);});
   document.body.classList.add('app'); showHome();
 })();
 </script>
