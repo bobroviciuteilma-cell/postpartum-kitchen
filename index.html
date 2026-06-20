@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #2b2b2b;
+    background: #ffffff;
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  :root{
+    --rust:#b0481f;
+    --rust-soft:#c0633a;
+    --ink:#2b2b2b;
+    --grey:#7c7c7c;
+    --grey-light:#9a9a9a;
+    --box:#fdf3ea;
+    --box-border:#e7c4a8;
+    --rule:#ececec;
+  }
+  .page{
+    position:relative;
+    width:210mm;
+    min-height:297mm;
+    padding:64px 60px 40px;
+    page-break-after:always;
+    background:#ffffff;
+  }
+  .page:last-child{ page-break-after:auto; }
+
+  h1.title{ color:var(--rust); font-size:27px; font-weight:800; letter-spacing:-0.4px; }
+  h1.title .zh{ font-size:18px; font-weight:600; }
+  .cjk, h1.title .zh{ font-family:"PingFang SC","Hiragino Sans GB","Heiti SC","Songti SC",sans-serif; }
+  .subtitle{ color:var(--grey); font-size:12px; margin-top:5px; }
+
+  .twocol{ display:grid; grid-template-columns:37% 63%; gap:34px; margin-top:26px; }
+  .colhead{ color:var(--rust); font-size:11px; font-weight:800; letter-spacing:1.2px; padding-bottom:8px; border-bottom:1.5px solid var(--rust); margin-bottom:6px; }
+
+  .ing{ padding:9px 0; border-bottom:1px solid var(--rule); }
+  .ing b{ color:var(--ink); }
+  .ing .note{ color:var(--grey); }
+  .subgroup{ color:var(--ink); font-weight:800; font-size:10.5px; letter-spacing:.6px; margin:14px 0 2px; }
+  .subgroup span{ color:var(--rust); font-weight:600; }
+
+  .step{ display:grid; grid-template-columns:26px 1fr; gap:12px; margin-bottom:13px; }
+  .badge{ width:22px; height:22px; border-radius:50%; background:var(--rust); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .step .h{ font-weight:700; color:var(--ink); }
+  .step .h .time{ color:var(--rust-soft); font-weight:600; }
+  .step .b{ color:#3a3a3a; }
+
+  .box{ background:var(--box); border:1px solid var(--box-border); border-left:3px solid var(--rust); border-radius:5px; padding:13px 15px; margin-top:16px; }
+  .box .lead{ color:var(--rust); font-weight:700; }
+  .box.warn{ border-left-color:#c0392b; }
+  .box.warn .lead{ color:#c0392b; }
+  .box-tight{ margin-top:10px; }
+
+  .footer{ position:absolute; bottom:24px; left:0; right:0; text-align:center; color:var(--grey-light); font-size:10px; }
+
+  /* cover */
+  .cover{ text-align:center; padding-top:64px; }
+  .cover h1{ color:var(--rust); font-size:38px; font-weight:800; letter-spacing:-0.6px; }
+  .cover .sub{ color:var(--grey); font-size:13.5px; margin-top:8px; }
+  .inside{ max-width:670px; margin:34px auto 0; text-align:left; background:var(--box); border:1px solid var(--box-border); border-radius:8px; padding:22px 30px; }
+  .inside .lbl{ color:var(--rust); font-weight:800; font-size:11px; letter-spacing:1.4px; margin-bottom:12px; }
+  .inside .row{ display:grid; grid-template-columns:20px 1fr; gap:8px; padding:5px 0; }
+  .inside .row .n{ color:var(--rust); font-weight:700; }
+  .inside .row .t b{ color:var(--ink); }
+  .inside .row .t .d{ color:var(--grey); font-size:10.5px; }
+  .cover .foot{ color:var(--grey-light); font-size:11px; margin-top:26px; }
+
+  /* menu / variation pages */
+  .var{ padding:13px 0 13px; border-bottom:1px solid var(--rule); }
+  .var .name{ color:var(--rust); font-weight:800; font-size:13px; }
+  .var .name .star{ color:#e0a93b; }
+  .var .build{ margin-top:3px; color:#3a3a3a; }
+  .var .tags{ margin-top:5px; font-size:10.3px; color:var(--grey); }
+  .var .tags b{ color:var(--rust-soft); font-weight:700; }
+  .lead-p{ color:#3a3a3a; margin-top:20px; }
+
+  table.stack{ width:100%; border-collapse:collapse; margin-top:8px; }
+  table.stack th{ text-align:left; color:var(--rust); font-size:10px; letter-spacing:.8px; border-bottom:1.5px solid var(--rust); padding:7px 10px 7px 0; }
+  table.stack td{ vertical-align:top; padding:9px 10px 9px 0; border-bottom:1px solid var(--rule); }
+  table.stack td.k{ font-weight:700; color:var(--ink); width:26%; }
+  table.stack td.w{ color:var(--grey); width:28%; }
+  table.stack td.f{ color:#3a3a3a; }
+
+  .rhythm{ margin-top:18px; }
+  .rhythm .r{ display:grid; grid-template-columns:120px 1fr; gap:14px; padding:8px 0; border-bottom:1px solid var(--rule); }
+  .rhythm .r .when{ color:var(--rust); font-weight:700; }
+  .days{ display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:20px; }
+  .day{ background:var(--box); border:1px solid var(--box-border); border-radius:6px; padding:16px 18px; }
+  .day h3{ color:var(--rust); font-size:12px; font-weight:800; margin-bottom:8px; }
+  .day .step-line{ padding:5px 0; border-bottom:1px dashed #e5d3c2; }
+  .day .step-line:last-child{ border-bottom:none; }
+  .day .step-line b{ color:var(--ink); }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:0 34px; margin-top:8px; }
+  p.spaced{ margin-top:10px; color:#3a3a3a; }
+
+  .phase{ margin-top:15px; }
+  .phase h3{ color:var(--rust); font-size:13px; font-weight:800; }
+  .phase .ph-sub{ color:var(--grey-light); font-weight:600; font-size:11px; }
+  .phase .tl-line{ padding:3px 0; color:#3a3a3a; }
+  .phase .tl-line .k{ color:var(--rust-soft); font-weight:700; }
+  .dense .phase{ margin-top:12px; }
+  .dense .phase .tl-line{ padding:2.5px 0; }
+
+  /* denser layout for content-heavy cards so they fit one page */
+  .dense{ padding-top:48px; }
+  .dense .twocol{ margin-top:16px; }
+  .dense .ing{ padding:6px 0; }
+  .dense .subgroup{ margin:9px 0 1px; }
+  .dense .step{ margin-bottom:9px; }
+  .dense .box{ margin-top:10px; padding:10px 13px; }
+  .dense .box.box-tight{ margin-top:8px; }
+  .dense .colhead{ margin-bottom:4px; padding-bottom:6px; }
+  .dense .subtitle{ margin-top:3px; }
+  a{ color:var(--rust); text-decoration:underline; text-underline-offset:2px; }
+  .coverwrap{ column-count:2; column-gap:28px; }
+  .coverwrap .row{ break-inside:avoid; }
+  .glosswrap{ column-count:2; column-gap:30px; margin-top:14px; }
+  .gloss{ break-inside:avoid; padding:7px 0; border-bottom:1px solid var(--rule); }
+  .gloss b{ color:var(--rust-soft); }
+  .gloss .note{ color:var(--grey); }
+  .dense .gloss{ padding:5px 0; }
+
+  /* ---- screen / responsive (does not affect print/PDF) ---- */
+  @media screen {
+    body{ background:#ece8e3; }
+    .page{ width:210mm; margin:18px auto; box-shadow:0 1px 8px rgba(0,0,0,.12); }
+  }
+  @media screen and (max-width: 840px){
+    .page{ width:auto; max-width:100%; min-height:auto; margin:0 0 10px; padding:30px 18px; box-shadow:none; border-bottom:6px solid #ece8e3; }
+    .twocol{ grid-template-columns:1fr !important; gap:6px !important; }
+    .coverwrap, .glosswrap{ column-count:1 !important; }
+    .rhythm .r{ grid-template-columns:90px 1fr !important; }
+    .days{ grid-template-columns:1fr !important; }
+    h1.title{ font-size:21px; }
+    .cover h1{ font-size:27px; }
+    .cover{ padding-top:24px; }
+    .inside{ max-width:100%; }
+    table.stack td.k{ width:34%; } table.stack td.w{ width:30%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="page cover">
+  <h1>Postpartum Kitchen</h1>
+  <div class="sub">A Mediterranean &times; confinement recovery plan &mdash; for energy, repair &amp; minimal hair loss</div>
+  <div class="inside">
+    <div class="lbl">INSIDE</div>
+    <div class="coverwrap">
+    <div class="row"><div class="n">1.</div><div class="t"><b>Your Recovery Plan</b><div class="d">approach, nutrient stack &amp; supplements</div></div></div>
+    <div class="row"><div class="n">2.</div><div class="t"><b>Your Day, Top to Bottom</b><div class="d">daily rhythm + two sample days</div></div></div>
+    <div class="row"><div class="n">3.</div><div class="t"><b>Your Recovery Timeline</b><div class="d">first 2 weeks vs after</div></div></div>
+    <div class="row"><div class="n">4.</div><div class="t"><b>Breakfast</b><div class="d">protein-forward, low-sugar starts</div></div></div>
+    <div class="row"><div class="n">5.</div><div class="t"><b>Lunch</b><div class="d">the anchor &mdash; protein, iron &amp; colour</div></div></div>
+    <div class="row"><div class="n">6.</div><div class="t"><b>Dinner</b><div class="d">lighter, warm, still protein-anchored</div></div></div>
+    <div class="row"><div class="n">7.</div><div class="t"><b>Snacks &amp; Drinks</b><div class="d">grazing + the daily tonics</div></div></div>
+    <div class="row"><div class="n">8.</div><div class="t"><b>Bone Broth</b><div class="d">collagen, iron &amp; warming roots</div></div></div>
+    <div class="row"><div class="n">9.</div><div class="t"><b>Postpartum Teas</b><div class="d">one base + boosters by job</div></div></div>
+    <div class="row"><div class="n">10.</div><div class="t"><b>Ashwagandha Bedtime Milk</b><div class="d">calming nightly tonic &mdash; after birth</div></div></div>
+    <div class="row"><div class="n">11.</div><div class="t"><b>Gond Laddu</b><div class="d">warming energy balls &mdash; after birth</div></div></div>
+    <div class="row"><div class="n">12.</div><div class="t"><b>Power Smoothie</b><div class="d">protein, collagen, iron &amp; vit C</div></div></div>
+    <div class="row"><div class="n">13.</div><div class="t"><b>Khichdi</b><div class="d">the gentle one-pot recovery meal</div></div></div>
+    <div class="row"><div class="n">14.</div><div class="t"><b>Til-Gur Bites</b><div class="d">sesame + jaggery &mdash; calcium &amp; iron</div></div></div>
+    <div class="row"><div class="n">15.</div><div class="t"><b>Quick Tonics &amp; Bites</b><div class="d">fennel water, hot cacao, hummus &amp; more</div></div></div>
+    <div class="row"><div class="n">16.</div><div class="t"><b>Chicken Liver P&acirc;t&eacute;</b><div class="d">iron &amp; vitamin A powerhouse</div></div></div>
+    <div class="row"><div class="n">17.</div><div class="t"><b>Postpartum Banana Bread</b><div class="d">lactation loaf &mdash; oats, flax, shatavari</div></div></div>
+    <div class="row"><div class="n">18.</div><div class="t"><b>Helper Cook List</b><div class="d">cook fresh + make-ahead</div></div></div>
+    <div class="row"><div class="n">19.</div><div class="t"><b>Community Recipes</b><div class="d">great recipes from around the web</div></div></div>
+    <div class="row"><div class="n">20.</div><div class="t"><b>New Ingredients &mdash; Glossary</b><div class="d">every unfamiliar one explained</div></div></div>
+    </div>
+  </div>
+  <div class="foot">Keep this in the kitchen. Drinks &amp; tonics work now; meals are built for after birth.</div>
+</section>
+
+<!-- ============ 1. RECOVERY PLAN ============ -->
+<section class="page">
+  <h1 class="title">Your Recovery Plan</h1>
+  <div class="subtitle">Mediterranean &times; confinement &mdash; built for steady energy, fast repair &amp; the least hair loss your hormones allow</div>
+
+  <p class="lead-p">Your Mediterranean base &mdash; olive oil, fish, eggs, greens, nuts, yoghurt &mdash; is the most evidence-backed anti-inflammatory recovery diet there is. The Eastern confinement layer adds <b>warmth</b> and <b>blood-building</b>, which a healing body genuinely wants. We fuse the two, lean the carbs gently lower (you lean lower-carb), and keep everything warm and nutrient-dense.</p>
+
+  <div class="box">
+    <span class="lead">On keto while nursing &mdash; keep it keto-<i>leaning</i>, not strict.</span> Your body makes milk sugar (lactose) for the baby, and very-low-carb eating in the early weeks can dip supply and, rarely, cause lactation ketoacidosis. So keep fats and protein high, but take carbs from <b>gentle whole sources</b> &mdash; a moderate scoop of porridge, lentils, chickpeas, berries, a date or two. Aim roughly <b>100&ndash;130g quality carbs a day, not 20</b>. This is the version that makes you thrive instead of crash at week three.
+  </div>
+
+  <div class="box">
+    <span class="lead">On hair loss &mdash; the honest version.</span> Postpartum shedding peaks around month 3&ndash;4 and is driven by the <b>oestrogen drop</b> after birth. It is partly hormonal and <b>not fully preventable</b> by anyone &mdash; no food stops it completely. But the <i>severity</i> and <i>regrowth speed</i> are very nutritional. Protect <b>ferritin, protein, zinc and vitamin D</b> and shedding stays mild, brief and fast-recovering. That is the real, achievable win this plan is built around.
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="colhead" style="display:inline-block; padding-right:40px;">THE NUTRIENT STACK</div>
+  </div>
+  <table class="stack">
+    <tr><th style="width:26%;">Lever</th><th style="width:28%;">Why it matters</th><th>Your foods</th></tr>
+    <tr><td class="k">Ferritin (iron stores)</td><td class="w">#1 driver of hair loss + fatigue</td><td class="f"><b>liver 1&ndash;2&times;/wk</b>, red meat, fish/sardines, lentils, red dates, greens &mdash; always with vitamin C (amla, lemon, berries)</td></tr>
+    <tr><td class="k">Protein ~1.5&ndash;2g/kg</td><td class="w">hair is protein; milk + tissue repair</td><td class="f">eggs, fish, meat, cottage cheese, Greek yoghurt, lentils, chickpeas, collagen</td></tr>
+    <tr><td class="k">Zinc + biotin</td><td class="w">hair-shaft strength &amp; regrowth</td><td class="f">pumpkin seeds, egg yolk, liver, black sesame tahini, nuts, red meat</td></tr>
+    <tr><td class="k">Omega-3 (DHA)</td><td class="w">follicle health, mood, baby's brain</td><td class="f">salmon, sardines, walnuts, flax, chia</td></tr>
+    <tr><td class="k">Vit D + selenium + iodine</td><td class="w">thyroid &rarr; energy &amp; hair</td><td class="f">egg yolk, <b>sardines (with bones), liver</b>, Brazil nuts (selenium), kombu/seaweed (iodine)</td></tr>
+    <tr><td class="k">Collagen + vitamin C</td><td class="w">skin/tissue repair; C is the cofactor</td><td class="f">collagen powder + amla / berries / lemon</td></tr>
+    <tr><td class="k">Magnesium + stable sugar</td><td class="w">steady energy, no crashes</td><td class="f">raw cacao, pumpkin seeds &mdash; the low-carb structure itself helps</td></tr>
+  </table>
+
+  <div class="box warn">
+    <span class="lead">Worth confirming with your OB &mdash; three I'd treat as non-negotiable:</span> <b>vitamin D3</b>, an <b>omega-3 / DHA</b>, and a <b>continued postnatal multivitamin</b> (&plusmn; iron if your ferritin is low &mdash; worth a blood test). Plus one Brazil nut a day for selenium, and a little seaweed now and then for iodine.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Your Recovery Plan</div>
+</section>
+
+<!-- ============ 2. DAILY PLAN ============ -->
+<section class="page">
+  <h1 class="title">Your Day, Top to Bottom</h1>
+  <div class="subtitle">A simple rhythm &mdash; then two sample days you can copy</div>
+
+  <div class="rhythm">
+    <div class="r"><div class="when">On waking</div><div><b>Amla warm water</b> &mdash; &frac12;&ndash;1 tsp amla powder in a mug of warm (not boiling) water on an empty stomach; a little honey or lemon softens the tartness (start at &frac12; tsp). Or fennel-cumin water.</div></div>
+    <div class="r"><div class="when">Breakfast</div><div>Pick one protein-forward start &mdash; <a href="#breakfast">see Breakfast options &rarr;</a></div></div>
+    <div class="r"><div class="when">Mid-morning</div><div><a href="#teas">Red date &amp; goji tea &rarr;</a> + a small snack (hair-pair seeds, or <a href="#tilgur">a til-gur bite &rarr;</a>)</div></div>
+    <div class="r"><div class="when">Lunch</div><div>The anchor &mdash; protein + iron + colour, with your fish or meat &mdash; <a href="#lunch">see Lunch options &rarr;</a></div></div>
+    <div class="r"><div class="when">Afternoon</div><div><a href="#broth">Bone broth &rarr;</a> or tea + a snack; recovery hot cacao if you fancy it (daytime only)</div></div>
+    <div class="r"><div class="when">Dinner</div><div>Lighter, warm, still protein-anchored &mdash; <a href="#dinner">see Dinner options &rarr;</a></div></div>
+    <div class="r"><div class="when">Bedtime</div><div><a href="#milk">Ashwagandha + saffron milk &rarr;</a> (after birth) &mdash; &frac14; tsp ashwagandha + a pinch each of cardamom &amp; saffron in warm milk; calming for sleep.</div></div>
+  </div>
+  <div class="box box-tight"><span class="lead">Tip:</span> tap any underlined item to jump straight to its recipe &mdash; and the Breakfast / Lunch / Dinner pages each hold several alternatives to swap in.</div>
+
+  <div class="days">
+    <div class="day">
+      <h3>Day A &mdash; early weeks (all warm, gentle gut)</h3>
+      <div class="step-line"><b>Wake:</b> amla warm water</div>
+      <div class="step-line"><b>Breakfast:</b> warm grain porridge + moringa + tahini + nuts</div>
+      <div class="step-line"><b>Mid-am:</b> <a href="#teas">red date &amp; goji tea</a> + a <a href="#tilgur">til-gur bite</a></div>
+      <div class="step-line"><b>Lunch:</b> <a href="#khichdi">khichdi</a> + flaked fish (or ginger-liver soup, 1&ndash;2&times;/wk) + a cup of <a href="#broth">broth</a></div>
+      <div class="step-line"><b>Afternoon:</b> broth + hair-pair (pumpkin seeds + Brazil nut)</div>
+      <div class="step-line"><b>Dinner:</b> light moong khichdi / barley-broth soup</div>
+      <div class="step-line"><b>Bed:</b> <a href="#milk">ashwagandha + saffron milk</a></div>
+    </div>
+    <div class="day">
+      <h3>Day B &mdash; recovered (Mediterranean-keto)</h3>
+      <div class="step-line"><b>Wake:</b> amla warm water</div>
+      <div class="step-line"><b>Breakfast:</b> savory turmeric eggs + avocado + seeds</div>
+      <div class="step-line"><b>Mid-am:</b> tea + cottage cheese, berries &amp; walnuts</div>
+      <div class="step-line"><b>Lunch:</b> salmon + warm grain &amp; greens bowl, tahini-lemon</div>
+      <div class="step-line"><b>Afternoon:</b> hot cacao + cacao-tahini ball</div>
+      <div class="step-line"><b>Dinner:</b> fish + roasted veg in olive oil</div>
+      <div class="step-line"><b>Bed:</b> <a href="#milk">ashwagandha + saffron milk</a></div>
+    </div>
+  </div>
+
+  <div class="box box-tight">
+    <span class="lead">The one rule that ties it together:</span> every meal carries <b>protein + a good fat</b>, and every iron food meets a little <b>vitamin C</b> (lemon, amla, berries). Keep tea, coffee and big servings of dairy/cottage cheese <b>~1 hour away from your iron meals</b> &mdash; they block absorption. That timing is what turns "healthy eating" into actual recovery.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Your Day, Top to Bottom</div>
+</section>
+
+<!-- ============ 2b. RECOVERY TIMELINE ============ -->
+<section class="page dense">
+  <h1 class="title">Your Recovery Timeline</h1>
+  <div class="subtitle">When to eat what &mdash; same pantry, different emphasis as you heal</div>
+
+  <div class="phase">
+    <h3>Phase 1 &nbsp;&middot;&nbsp; Days 1&ndash;14 <span class="ph-sub">&mdash; Rest &amp; Warm</span></h3>
+    <div class="tl-line"><span class="k">Your body:</span> healing and bleeding, milk coming in, sluggish digestion + constipation, night sweats, hormones dropping fast.</div>
+    <div class="tl-line"><span class="k">Eat:</span> warm, soft, cooked, easy to digest. Small frequent meals. Maximum fluids.</div>
+    <div class="tl-line"><span class="k">Lean on:</span> bone broth daily, red date &amp; goji tea, warm porridge/congee, khichdi &amp; moong dal, a gentle ginger-liver soup, soft eggs, mashed sardines, cottage cheese. Start ashwagandha milk + one gond laddu a day.</div>
+    <div class="tl-line"><span class="k">Go easy on:</span> cold &amp; raw &mdash; big salads, cold smoothies, iced drinks; the cooling gond katira; and very gassy foods (large beans, raw cruciferous). Ease these in later.</div>
+    <div class="tl-line"><span class="k">First priority:</span> fluids + a comfortable first bowel movement &mdash; ghee, soaked prunes/figs, flax with plenty of water, fennel-cumin water.</div>
+    <div class="tl-line"><span class="k">Stitches &amp; comfort:</span> <b>soft stool is priority #1</b> &mdash; magnesium, plenty of fluids, soaked prunes/figs, flax (with water), and no straining. Protein, vitamin C &amp; zinc then speed the perineal healing.</div>
+  </div>
+
+  <div class="phase">
+    <h3>Phase 2 &nbsp;&middot;&nbsp; Weeks 3&ndash;6 <span class="ph-sub">&mdash; Rebuild</span></h3>
+    <div class="tl-line"><span class="k">Your body:</span> wounds knitting, energy flickering back, milk supply settling.</div>
+    <div class="tl-line"><span class="k">Eat:</span> keep meals warm but widen the range &mdash; warm grain &amp; greens bowls, Mediterranean protein plates (room-temp), gradually more raw.</div>
+    <div class="tl-line"><span class="k">Double down:</span> liver &amp; red-meat days for ferritin, salmon/sardines for DHA, the full snack tin.</div>
+    <div class="tl-line"><span class="k">If milk dips:</span> lean on your galactagogues &mdash; oats, moringa, fenugreek (methi), fennel.</div>
+  </div>
+
+  <div class="phase">
+    <h3>Phase 3 &nbsp;&middot;&nbsp; Week 6+ (through months 2&ndash;4) <span class="ph-sub">&mdash; Thrive &amp; Defend Your Hair</span></h3>
+    <div class="tl-line"><span class="k">Your body:</span> 6-week check done, energy steadier &mdash; but hair shedding peaks around month 3&ndash;4.</div>
+    <div class="tl-line"><span class="k">Eat:</span> full Mediterranean-keto &mdash; cold smoothies, fresh salads and the gond katira cooling drink are all fine now.</div>
+    <div class="tl-line"><span class="k">Don't ease off:</span> this is exactly when ferritin, protein, zinc &amp; vitamin D matter most. Keep liver 1&ndash;2&times;/wk, protein every meal, supplements going &mdash; the shedding lags the depletion, so stay ahead of it.</div>
+  </div>
+
+  <div class="box">
+    <span class="lead">Don't cut calories to lose weight yet.</span> Recovery + breastfeeding burns roughly <b>450&ndash;500 extra kcal a day</b>. Keto-leaning is fine, but <b>eat to fullness</b> &mdash; under-eating now is the fastest way to tank milk, energy and hair. The weight settles later; nourishment comes first.
+  </div>
+
+  <div class="box box-tight">
+    <span class="lead">Hydration:</span> aim for ~2.5&ndash;3 litres of warm fluids a day while nursing &mdash; broth and tea count. Keep a flask by the feeding chair.
+  </div>
+
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Your Recovery Timeline</div>
+</section>
+
+<!-- ============ 3. BREAKFAST ============ -->
+<section class="page" id="breakfast">
+  <h1 class="title">Breakfast</h1>
+  <div class="subtitle">Protein- and fat-forward, low sugar &mdash; pick one</div>
+
+  <div class="var">
+    <div class="name">1. Savory Turmeric Eggs <span class="star">&#9733;</span></div>
+    <div class="build"><b>Build:</b> 2&ndash;3 eggs soft-scrambled or fried in ghee or olive oil; a handful of greens wilted alongside; &frac12; avocado; scatter of pumpkin seeds.</div>
+    <div class="tags"><b>Spices:</b> turmeric + black pepper + a pinch of ajwain &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> protein, biotin, zinc, choline &mdash; the keto-Med star</div>
+  </div>
+  <div class="var">
+    <div class="name">2. Greek Yoghurt Recovery Bowl</div>
+    <div class="build"><b>Build:</b> full-fat Greek yoghurt + berries + walnuts + 1 tbsp flax/chia + 1 scoop collagen + a drizzle of black sesame tahini; stir in &frac12; tsp amla. (Room-temp in the early weeks.)</div>
+    <div class="tags"><b>Spices:</b> cinnamon &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> hair &amp; skin (collagen + vitamin C), omega-3, protein, gut</div>
+  </div>
+  <div class="var">
+    <div class="name">3. Warm Grain Porridge <span style="color:var(--grey-light);font-weight:600;font-size:10.5px;">(moderate portion)</span></div>
+    <div class="build"><b>Build:</b> &#8531;&ndash;&frac12; cup millet / oats / buckwheat in milk or water + ghee + 1 date; top with tahini, banana and nuts; stir <b>moringa + amla</b> in off the heat. Your milk-supply &amp; steady-energy morning.</div>
+    <div class="tags"><b>Spices:</b> cardamom + cinnamon + dry ginger &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> milk supply, slow energy, calcium</div>
+  </div>
+  <div class="var">
+    <div class="name">4. Power Smoothie <span style="color:var(--grey-light);font-weight:600;font-size:10.5px;">(your habit, lower-sugar)</span></div>
+    <div class="build"><b>Build:</b> yoghurt, berries, coconut, collagen + protein + moringa + amla + flax; half-banana or skip it on lower-carb days. Full recipe on the Power Smoothie card.</div>
+    <div class="tags"><b>Spices:</b> cinnamon (+ pinch ginger) &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> fast one-handed nutrition during feeds</div>
+  </div>
+  <div class="var">
+    <div class="name">5. Cottage Cheese Bowl</div>
+    <div class="build"><b>Build:</b> cottage cheese as the base &mdash; <b>savory</b> with olive oil, tomato/cucumber, seeds &amp; herbs, or <b>sweet</b> with berries, flax and a drizzle of tahini. Highest-protein, lowest-sugar start; also a great before-bed repair snack.</div>
+    <div class="tags"><b>Spices:</b> black pepper &amp; herbs, or cinnamon &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> slow casein protein, calcium, keto-friendly</div>
+  </div>
+
+  <div class="box">
+    <span class="lead">Make it warming early on:</span> in the first weeks lean on the eggs and porridge, take yoghurt/smoothie room-temp (not fridge-cold), and add a pinch of cinnamon or ginger. Keep berries and banana modest to stay lower-carb.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Breakfast</div>
+</section>
+
+<!-- ============ 4. LUNCH ============ -->
+<section class="page" id="lunch">
+  <h1 class="title">Lunch</h1>
+  <div class="subtitle">The anchor meal &mdash; protein + iron + colour, with your fish or meat</div>
+
+  <div class="var">
+    <div class="name">1. Salmon + Warm Grain &amp; Greens Bowl <span class="star">&#9733;</span></div>
+    <div class="build"><b>Build:</b> pan or oven salmon (or sardines) + &frac12; cup cooked barley / millet / buckwheat + wilted greens + olive oil + a black-sesame-tahini &amp; lemon dressing + pumpkin seeds + fresh coconut.</div>
+    <div class="tags"><b>Spices:</b> black pepper, a little garlic &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> omega-3 (hair &amp; mood), iron + vitamin C, complete</div>
+  </div>
+  <div class="var">
+    <div class="name">2. Red-Meat Iron Day <span style="color:var(--grey-light);font-weight:600;font-size:10.5px;">(1&ndash;2&times; a week)</span> <span class="star">&#9733;</span></div>
+    <div class="build"><b>Build:</b> beef or lamb + a big pile of greens + a squeeze of lemon + roasted veg or a small grain. This is your ferritin meal &mdash; the single most protective thing against hair loss.</div>
+    <div class="tags"><b>Spices:</b> cumin, black pepper, garlic; rosemary/thyme on the meat &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> ferritin, B12, zinc</div>
+  </div>
+  <div class="var">
+    <div class="name">3. Khichdi or Green-Lentil Dal + fish/meat</div>
+    <div class="build"><b>Build:</b> rice or millet + moong / green lentils cooked soft in ghee; finish with moringa + lemon + a tahini drizzle; top with flaked fish or shredded meat. Gentle-gut confinement day.</div>
+    <div class="tags"><b>Spices:</b> cumin, ginger, turmeric, garlic, ajwain, pinch of fenugreek &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> complete protein, easy digestion, iron</div>
+  </div>
+  <div class="var">
+    <div class="name">4. Big Mediterranean Protein Plate <span style="color:var(--grey-light);font-weight:600;font-size:10.5px;">(weeks 3+)</span></div>
+    <div class="build"><b>Build:</b> chicken or fish + chickpeas + greens + olive oil + a little feta + seeds + lemon. Your "salad with fish/meat" &mdash; serve warm or room-temp in the early weeks.</div>
+    <div class="tags"><b>Spices:</b> oregano/thyme, black pepper &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> protein, fibre, calcium</div>
+  </div>
+  <div class="var">
+    <div class="name">5. Liver &mdash; confinement-style <span style="color:var(--grey-light);font-weight:600;font-size:10.5px;">(1&ndash;2&times; a week)</span> <span class="star">&#9733;</span></div>
+    <div class="build"><b>Build:</b> chicken or beef liver as a <b>ginger-liver soup</b> (Chinese liver-soup style), pan-seared with onions, or chicken-liver p&acirc;t&eacute; on the side. Serve with greens + a squeeze of lemon. Your most concentrated recovery food.</div>
+    <div class="tags"><b>Spices:</b> ginger, black pepper, a little garlic &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> ferritin, vitamin A, B12, choline. <b>1&ndash;2&times;/wk, not daily</b> &mdash; vitamin A accumulates.</div>
+  </div>
+
+  <div class="box">
+    <span class="lead">Iron rule &mdash; absorb more of what you eat:</span> use a squeeze of <b>lemon</b> (not amla) for the vitamin-C boost in cooked dishes &mdash; heat destroys amla's vitamin C, so keep amla for your raw morning water and smoothie. And <b>time it right:</b> tea, coffee and big calcium servings (dairy, cottage cheese) block iron &mdash; keep them about an hour away from your liver and red-meat meals.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Lunch</div>
+</section>
+
+<!-- ============ 5. DINNER ============ -->
+<section class="page" id="dinner">
+  <h1 class="title">Dinner</h1>
+  <div class="subtitle">Lighter, warm, still protein-anchored &mdash; kind to the evening gut</div>
+
+  <div class="var">
+    <div class="name">1. Fish + Roasted Veg in Olive Oil</div>
+    <div class="build"><b>Build:</b> white fish or salmon + seasonal veg roasted in olive oil or ghee. Simple, anti-inflammatory, light on digestion.</div>
+    <div class="tags"><b>Spices:</b> ajwain + rosemary + thyme &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> omega-3, light protein</div>
+  </div>
+  <div class="var">
+    <div class="name">2. Lentil / Chickpea &amp; Greens Stew</div>
+    <div class="build"><b>Build:</b> green lentils or chickpeas + greens + olive oil + a squeeze of lemon; a small grain on the side if you want it. (Or hummus made with your black sesame tahini.)</div>
+    <div class="tags"><b>Spices:</b> turmeric + cumin + ginger + garlic + bay &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> fibre, iron, calcium</div>
+  </div>
+  <div class="var">
+    <div class="name">3. Light Moong Khichdi / Broth-Barley Soup</div>
+    <div class="build"><b>Build:</b> soft moong khichdi, or pearl barley simmered in your bone broth with a few red dates + a slice of ginger. The most restorative gut-rest night.</div>
+    <div class="tags"><b>Spices:</b> cumin + ginger + bay &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> gut-rest, warming, blood-building</div>
+  </div>
+  <div class="var">
+    <div class="name">4. Omelette + Greens <span style="color:var(--grey-light);font-weight:600;font-size:10.5px;">(easy night)</span></div>
+    <div class="build"><b>Build:</b> a 2&ndash;3 egg omelette with greens, fresh herbs and a little cheese. Five-minute complete protein when you're running on empty.</div>
+    <div class="tags"><b>Spices:</b> black pepper, herbs &nbsp;&nbsp;|&nbsp;&nbsp; <b>Good for:</b> fast protein, choline</div>
+  </div>
+
+  <div class="box">
+    <span class="lead">Keep dinner the lightest meal.</span> Front-load protein and carbs earlier in the day; a warm, easy-to-digest evening meal sits better while your gut recovers and supports sleep between feeds.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Dinner</div>
+</section>
+
+<!-- ============ 6. SNACKS & DRINKS ============ -->
+<section class="page" id="snacks">
+  <h1 class="title">Snacks &amp; Drinks</h1>
+  <div class="subtitle">Easy grazing for energy &amp; milk &mdash; plus the daily tonics</div>
+
+  <div class="twocol" style="grid-template-columns:50% 50%; margin-top:22px;">
+    <div>
+      <div class="colhead">SNACKS &amp; SMALL BITES</div>
+      <div class="ing"><b>Daily "hair pair"</b> <span class="note">&mdash; pumpkin seeds + 1 Brazil nut (zinc + selenium)</span></div>
+      <div class="ing"><b>Cottage cheese + berries &amp; flax</b> <span class="note">&mdash; or savory with olive oil &amp; herbs (slow protein, calcium)</span></div>
+      <div class="ing"><b>Sardines on rye / crackers</b> <span class="note">&mdash; omega-3, calcium (the bones!), vitamin D</span></div>
+      <div class="ing"><b><a href="#pate">Chicken-liver p&acirc;t&eacute;</a> on toast or veg</b> <span class="note">&mdash; iron powerhouse; 1&ndash;2&times;/wk</span></div>
+      <div class="ing"><b><a href="#tilgur">Til-gur bites</a></b> <span class="note">&mdash; black sesame + jaggery (calcium, iron, zinc; bones)</span></div>
+      <div class="ing"><b><a href="#cacaoballs">Cacao-tahini-date balls</a></b> <span class="note">&mdash; dates + tahini + raw cacao + oats (magnesium, mood)</span></div>
+      <div class="ing"><b><a href="#laddu">Gond laddu</a></b> <span class="note">&mdash; after birth (warmth, joints, energy)</span></div>
+      <div class="ing"><b>Greek yoghurt + walnuts + cinnamon</b></div>
+      <div class="ing"><b>Boiled eggs / olives / cheese / nuts</b> <span class="note">&mdash; keto-Med grazing</span></div>
+      <div class="ing"><b>Dates stuffed with nut butter or ghee</b> <span class="note">&mdash; feed-time energy</span></div>
+      <div class="ing"><b>Soaked figs or prunes</b> <span class="note">&mdash; iron + gentle regularity</span></div>
+      <div class="ing"><b><a href="#tonics">Hummus</a> + veg sticks</b> <span class="note">&mdash; chickpea + black sesame tahini</span></div>
+      <div class="ing"><b>Fresh coconut + a little jaggery</b></div>
+    </div>
+    <div>
+      <div class="colhead">THE DAILY DRINKS</div>
+      <div class="ing"><b>Amla warm water</b> <span class="note">&mdash; on waking; vitamin C + digestion. <a href="#glossary">what's amla? &rarr;</a></span></div>
+      <div class="ing"><b><a href="#teas">Red date &amp; goji tea</a></b> <span class="note">&mdash; all day; + nettle (minerals) + saffron (mood)</span></div>
+      <div class="ing"><b><a href="#broth">Bone broth</a></b> <span class="note">&mdash; collagen, iron, deeply restorative</span></div>
+      <div class="ing"><b><a href="#fennelwater">Fennel-cumin (jeera) water</a></b> <span class="note">&mdash; eases gas &amp; bloating</span></div>
+      <div class="ing"><b><a href="#tonics">Black sesame milk</a></b> <span class="note">&mdash; calcium + iron tonic</span></div>
+      <div class="ing"><b><a href="#tonics">Recovery hot cacao</a></b> <span class="note">&mdash; daytime only; magnesium + mood</span></div>
+      <div class="ing"><b><a href="#milk">Ashwagandha + saffron milk</a></b> <span class="note">&mdash; at night, after birth</span></div>
+      <div class="ing"><b><a href="#gondkatira">Gond katira soak-drink</a></b> <span class="note">&mdash; soaked in water; cooling + constipation</span></div>
+
+      <div class="box box-tight">
+        <span class="lead">Caffeine note:</span> raw cacao has a little caffeine &amp; theobromine &mdash; keep it to a daytime cup, and ease off if baby seems unusually wired.
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <span class="lead">Batch &amp; freeze before your due date:</span> til-gur, cacao-tahini balls and gond laddu all keep for weeks. A tin of ready snacks by the feeding chair is one of the highest-value things you can prep now.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Snacks &amp; Drinks</div>
+</section>
+
+<!-- ============ 7. BONE BROTH ============ -->
+<section class="page" id="broth">
+  <h1 class="title">Postpartum Recovery Bone Broth</h1>
+  <div class="subtitle">Makes about 3 litres &nbsp;&bull;&nbsp; Simple step-by-step</div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>4 chicken feet</b> <span class="note">(more if they fit)</span></div>
+      <div class="ing"><b>2 chicken necks</b></div>
+      <div class="ing"><b>3 litres</b> cold water</div>
+      <div class="ing"><b>2 tbsp</b> apple cider vinegar</div>
+      <div class="ing"><b>&frac34; tsp</b> ginger powder</div>
+      <div class="ing"><b>1 tsp</b> turmeric powder</div>
+      <div class="ing"><b>&frac12; tsp</b> black peppercorns</div>
+      <div class="ing"><b>4</b> garlic cloves, smashed</div>
+      <div class="ing"><b>&frac12; tsp</b> whole ajwain seeds</div>
+      <div class="ing"><b>2</b> bay leaves</div>
+      <div class="ing"><b>1</b> small sprig rosemary</div>
+      <div class="ing"><b>1</b> small sprig thyme</div>
+      <div class="ing"><b>7</b> red dates (jujube), each cut open a little</div>
+      <div class="ing"><b>1 tbsp</b> goji berries</div>
+      <div class="ing"><b>Moringa powder</b> <span class="note">&mdash; about &frac12; tsp per bowl (at the very end)</span></div>
+      <div class="ing"><b>Salt</b> <span class="note">&mdash; to taste</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Soak. <span class="time">30 min</span></div><div class="b">Put the chicken feet, necks and water in a big pot. Add the apple cider vinegar. Leave it to sit with no heat for 30 minutes.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Boil &amp; skim. <span class="time">about 15 min</span></div><div class="b">Turn the heat to high and bring to a strong boil. Grey foam will rise &mdash; scoop it off with a spoon and throw it away.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Simmer low. <span class="time">1.5&ndash;2.5 hours</span></div><div class="b">Turn the heat to low (only tiny bubbles). Add ginger, turmeric, peppercorns, garlic, ajwain, bay, rosemary, thyme and red dates. Cook slowly. Every 30&ndash;60 min, scoop off foam and add a little hot water if it gets low.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Add goji. <span class="time">last 15 min only</span></div><div class="b">Add the goji berries for the last 10&ndash;15 minutes only. (Longer makes them mushy and bitter.)</div></div></div>
+      <div class="step"><div class="badge">5</div><div><div class="h">Season &amp; strain.</div><div class="b">Add salt slowly until it tastes good. Pour the broth through a strainer to remove the bones, dates and bits. Keep the clear liquid.</div></div></div>
+      <div class="step"><div class="badge">6</div><div><div class="h">Moringa &mdash; in the bowl.</div><div class="b"><b>Do not boil the moringa.</b> When serving, stir about &frac12; tsp into each bowl. The broth turns a little green &mdash; normal and good.</div></div></div>
+      <div class="box box-tight"><span class="lead">How to know it's done:</span> after the broth cools in the fridge, it should look like wobbly jelly. That means it's perfect. <b>Storing:</b> fridge up to 4 days, or freeze in portions.</div>
+    </div>
+  </div>
+  <div class="box">
+    <span class="lead">OPTIONAL &mdash; Warming "Confinement" Version (a SWAP, not an add)</span><br>
+    For a warmer, spiced broth, change only Step 3: <b>TAKE OUT</b> the rosemary &amp; thyme. <b>PUT IN instead:</b> 1 small cinnamon stick + 1 star anise + 2&ndash;3 whole cloves. Everything else stays the same &mdash; <i>instead of</i> the rosemary &amp; thyme, not on top of them. <b>Note:</b> use Chinese star anise only, and keep this spiced broth for mum &mdash; not the baby.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Bone Broth</div>
+</section>
+
+<!-- ============ 8. POSTPARTUM TEAS ============ -->
+<section class="page dense" id="teas">
+  <h1 class="title">Postpartum Teas</h1>
+  <div class="subtitle">One daily base + boosters by job &mdash; sip warm through the day</div>
+  <div class="twocol" style="grid-template-columns:45% 55%;">
+    <div>
+      <div class="colhead">THE DAILY BASE (on repeat)</div>
+      <div class="ing"><b>6&ndash;8</b> red dates, slit open</div>
+      <div class="ing"><b>1 tbsp</b> goji berries <span class="note">(at the end)</span></div>
+      <div class="ing"><b>2&ndash;3 slices</b> fresh ginger</div>
+      <div class="ing"><b>1 tsp</b> honey <span class="note">(off the heat &mdash; never boiled)</span></div>
+      <div class="ing"><b>500&ndash;750 ml</b> water</div>
+      <div class="box box-tight">
+        <span class="lead">Method:</span> simmer dates + ginger 15&ndash;20 min. Add goji (and any steeped boosters) for the last 5 min. Take off the heat, then stir in honey. Refill the same dates for a second, lighter brew.
+      </div>
+      <div class="box box-tight">
+        <span class="lead">Keep these as their own cup:</span><br>
+        &bull; <b>Chamomile</b> &mdash; calming; an <b>evening</b> cup, on its own (not in the daytime mineral mix).<br>
+        &bull; <b>Raspberry leaf</b> &mdash; late-pregnancy birth-prep, solo, cleared with your OB. Not a postpartum blend.
+      </div>
+    </div>
+    <div>
+      <div class="colhead">BOOSTERS &mdash; ADD BY WHAT YOU NEED</div>
+      <div class="ing"><b>Warming &amp; digestion:</b> <span class="note">1&ndash;2 cloves &middot; &frac12; cinnamon stick &middot; 1 cardamom pod &mdash; simmer with the base</span></div>
+      <div class="ing"><b>Minerals (iron/calcium):</b> <span class="note">1 nettle tea bag &mdash; steep the last 5 min, then remove (don't boil &mdash; turns bitter)</span></div>
+      <div class="ing"><b>Gas, bloating &amp; milk:</b> <span class="note">&frac12; tsp caraway (kmynai) &mdash; your fennel stand-in; simmer with the base, or steep alone as a seed tea</span></div>
+      <div class="ing"><b>Liver + milk supply:</b> <span class="note">&frac12; tsp milk thistle seeds (margainio sėklos), lightly crushed &mdash; simmer 10 min</span></div>
+      <div class="ing"><b>Mood:</b> <span class="note">pinch saffron (4&ndash;6 strands), bloomed &mdash; stir in at the end</span></div>
+      <div class="ing"><b>Deeper blood tonic:</b> <span class="note">4&ndash;6 dried longan &mdash; simmer with the dates</span></div>
+      <div class="box box-tight">
+        <span class="lead">Flask shortcut:</span> red dates + goji in a thermos of hot water &mdash; sip all day, one-handed during feeds.
+      </div>
+      <div class="box box-tight">
+        <span class="lead">Two rules:</span> seeds (caraway, milk thistle) get lightly crushed &amp; simmered; leaves &amp; bags (nettle, chamomile) only <b>steep</b>, never boiled. Mineral base by day, chamomile in the evening.
+      </div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Postpartum Teas</div>
+</section>
+
+<!-- ============ 9. ASHWAGANDHA MILK ============ -->
+<section class="page" id="milk">
+  <h1 class="title">Ashwagandha Bedtime Milk</h1>
+  <div class="subtitle">Makes 1 mug &nbsp;&bull;&nbsp; A calming nightly tonic</div>
+  <div class="box warn" style="margin-top:18px;">
+    <span class="lead">For AFTER birth only &mdash; not during pregnancy.</span> If breastfeeding, it's worth checking with your doctor or lactation consultant first.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>1 cup (250 ml)</b> milk <span class="note">(dairy, or oat/almond)</span></div>
+      <div class="ing"><b>&frac14; tsp</b> ashwagandha powder <span class="note">(start low)</span></div>
+      <div class="ing"><b>1 pinch</b> ground cardamom</div>
+      <div class="ing"><b>1 pinch</b> saffron, bloomed <span class="note">(optional &mdash; mood lift)</span></div>
+      <div class="ing"><b>1 tsp</b> ghee or coconut oil <span class="note">(optional &mdash; helps absorption)</span></div>
+      <div class="ing"><b>1 tsp</b> honey or maple syrup, to taste <span class="note">(optional)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Warm the milk. <span class="time">2&ndash;3 min</span></div><div class="b">Gently heat the milk in a small pot until steaming &mdash; not boiling.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Add &amp; whisk. <span class="time">2&ndash;3 min</span></div><div class="b">Whisk in the ashwagandha, cardamom, bloomed saffron and ghee (if using). Whisk well so there are no lumps, then keep on low for 2&ndash;3 minutes.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Sweeten &amp; sip.</div><div class="b">Take off the heat. Stir in honey if you want it sweet. Sip warm about 30&ndash;60 minutes before bed &mdash; it's calming, so night suits it best.</div></div></div>
+      <div class="box box-tight"><span class="lead">Dose:</span> start at &frac14; tsp. Only move up toward &frac12; tsp once you know how it sits with you.</div>
+      <div class="box box-tight"><span class="lead">Pregnancy-safe version (for now):</span> skip the ashwagandha and make it simply <b>saffron + cardamom milk</b>.</div>
+    </div>
+  </div>
+  <div class="box">
+    <span class="lead">Pairs with nettle tea:</span> nettle by day (iron &amp; minerals), this ashwagandha milk at night (calming). Same day is fine &mdash; just keep them as two separate cups.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Ashwagandha Bedtime Milk</div>
+</section>
+
+<!-- ============ 10. GOND LADDU ============ -->
+<section class="page dense" id="laddu">
+  <h1 class="title">Gond Laddu &mdash; Highest-Nutrition Version</h1>
+  <div class="subtitle">Makes ~18&ndash;20 balls &nbsp;&bull;&nbsp; Flourless &nbsp;&bull;&nbsp; After-birth food</div>
+  <div class="box" style="margin-top:18px;">
+    <span class="lead">Sourcing in Singapore:</span> the only tricky item is the gum. Buy <b>"gond / dink / edible gum"</b> &mdash; the kind that puffs when fried &mdash; at Mustafa Centre or a Little India provision shop, or online (Shopee / Lazada / Amazon SG: search "edible gum" or "dink"). <b>Not gond katira</b> (that's the cooling one that won't fry). Everything else is at NTUC / Cold Storage / RedMart; Mustafa is cheapest for nuts, seeds &amp; jaggery in bulk. You already have the almond flour, ajwain &amp; moringa.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="subgroup">BODY</div>
+      <div class="ing"><b>&frac12; cup</b> edible gum (gond/dink)</div>
+      <div class="ing"><b>&frac12;&ndash;&frac34; cup</b> ghee</div>
+      <div class="ing"><b>1&ndash;1&frac14; cups</b> almond flour <span class="note">(flour replacement)</span></div>
+      <div class="subgroup">NUTS &amp; SEEDS</div>
+      <div class="ing"><b>&frac12; cup</b> almonds</div>
+      <div class="ing"><b>&frac12; cup</b> cashews</div>
+      <div class="ing"><b>&#8531; cup</b> walnuts <span class="note">(omega-3)</span></div>
+      <div class="ing"><b>&frac14; cup</b> pumpkin seeds <span class="note">(iron, zinc)</span></div>
+      <div class="ing"><b>&frac14; cup</b> sesame seeds <span class="note">(calcium)</span></div>
+      <div class="ing"><b>2 tbsp</b> ground flax or chia <span class="note">(omega-3)</span></div>
+      <div class="ing"><b>&frac34; cup</b> desiccated coconut</div>
+      <div class="subgroup">SWEETENER <span>(iron-rich)</span></div>
+      <div class="ing"><b>1 cup</b> soft pitted dates (as paste) <span class="note">&mdash; and/or &frac34; cup jaggery</span></div>
+      <div class="subgroup">SPICE &amp; BOOSTERS</div>
+      <div class="ing"><b>1 tsp</b> dry ginger powder (saunth)</div>
+      <div class="ing"><b>1 tsp</b> cardamom powder</div>
+      <div class="ing"><b>1 tsp</b> ajwain <span class="note">(optional)</span></div>
+      <div class="ing"><b>1 tsp</b> methi/fenugreek powder <span class="note">(optional &mdash; milk support, bitter so keep small)</span></div>
+      <div class="ing"><b>1 tbsp</b> moringa powder <span class="note">(optional &mdash; iron/calcium)</span></div>
+      <div class="ing"><b>Pinch (15&ndash;20 strands)</b> saffron, bloomed <span class="note">(optional &mdash; makes it kesar laddu)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Fry the gum.</div><div class="b">Heat ghee on medium. Add gum a little at a time &mdash; it puffs white and crisp in seconds. Scoop out, cool, crush to coarse bits.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Roast the almond flour. <span class="time">3&ndash;4 min</span></div><div class="b">In 1 tbsp ghee, roast the almond flour until fragrant and pale gold. Set aside.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Roast nuts, seeds &amp; coconut.</div><div class="b">Lightly roast the nuts, cool, and pulse to coarse rubble. Toast the coconut until just golden.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Make the sweetener.</div><div class="b">Blend dates to a paste, or melt jaggery with 1 tbsp ghee into a syrup.</div></div></div>
+      <div class="step"><div class="badge">5</div><div><div class="h">Mix while warm.</div><div class="b">Combine crushed gum, almond flour, nuts, seeds, coconut, spices &amp; boosters. Stir in the date paste / jaggery, bloomed saffron + enough warm ghee to bind.</div></div></div>
+      <div class="step"><div class="badge">6</div><div><div class="h">Roll into balls.</div><div class="b">Shape while warm. Too dry &rarr; add warm ghee or date paste. Too loose &rarr; add almond flour or coconut.</div></div></div>
+      <div class="step"><div class="badge">7</div><div><div class="h">Cool &amp; store.</div><div class="b">Cool fully, then store airtight. Keeps ~3&ndash;4 weeks at room temp; freezes well. <b>Eat 1 a day</b> after birth.</div></div></div>
+      <div class="box box-tight"><span class="lead">Why it's high-nutrition:</span> iron (dates, jaggery, pumpkin seeds, moringa), calcium (sesame, almond, gum, moringa), omega-3 (walnut, flax), plus warming energy from ghee &amp; nuts &mdash; no empty flour filler.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Gond Laddu</div>
+</section>
+
+<!-- ============ 11. POWER SMOOTHIE ============ -->
+<section class="page" id="smoothie">
+  <h1 class="title">Postpartum Power Smoothie</h1>
+  <div class="subtitle">Makes 1 large glass &nbsp;&bull;&nbsp; Protein, collagen, iron &amp; vitamin C &nbsp;&bull;&nbsp; No-cook</div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="subgroup">BASE</div>
+      <div class="ing"><b>1</b> banana</div>
+      <div class="ing"><b>&frac12; cup</b> yoghurt</div>
+      <div class="ing"><b>&frac12; cup</b> berries</div>
+      <div class="ing"><b>&frac12; cup</b> coconut milk or water</div>
+      <div class="ing"><b>1 scoop</b> collagen powder</div>
+      <div class="ing"><b>1 scoop</b> protein powder</div>
+      <div class="subgroup">BOOSTERS <span>(add as you like)</span></div>
+      <div class="ing"><b>&frac12;&ndash;1 tsp</b> moringa powder <span class="note">(iron, calcium, milk &mdash; start low, it's grassy)</span></div>
+      <div class="ing"><b>&frac12;&ndash;1 tsp</b> amla powder <span class="note">(vitamin C &mdash; absorbs the iron, builds collagen)</span></div>
+      <div class="ing"><b>1&ndash;2</b> soft pitted dates <span class="note">(natural sweetness + iron)</span></div>
+      <div class="ing"><b>1 tbsp</b> ground flax or chia <span class="note">(omega-3 + fibre for regularity)</span></div>
+      <div class="ing"><b>Pinch</b> cinnamon or ginger <span class="note">(warming &mdash; for confinement balance)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Blend the base.</div><div class="b">Blend banana, yoghurt, berries, coconut, collagen and protein until smooth.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Add your boosters.</div><div class="b">Add any of the moringa, amla, dates, flax/chia and spice. Blend again until smooth.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Drink fresh.</div><div class="b">Best straight away &mdash; the vitamin C fades the longer it stands.</div></div></div>
+      <div class="box box-tight"><span class="lead">The synergy:</span> amla's vitamin C unlocks the iron (moringa) <b>and</b> builds the collagen &mdash; they work together. All boosters go in <b>raw/cold</b> to keep the vitamin C intact.</div>
+      <div class="box box-tight"><span class="lead">Warming tweak (confinement):</span> with yoghurt + berries this is a cooling smoothie. In the early weeks use room-temp ingredients (not frozen/fridge-cold), add a pinch of cinnamon or ginger, and balance it with warm broth and tea through the day.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Power Smoothie</div>
+</section>
+
+<!-- ============ KHICHDI ============ -->
+<section class="page" id="khichdi">
+  <h1 class="title">Postpartum Khichdi</h1>
+  <div class="subtitle">Serves 3&ndash;4 &nbsp;&bull;&nbsp; The gentle one-pot recovery meal &mdash; soft, warm, complete protein</div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>&frac12; cup</b> rice <span class="note">(or millet)</span></div>
+      <div class="ing"><b>&frac12; cup</b> split moong dal <span class="note">(yellow; softest)</span></div>
+      <div class="ing"><b>4 cups</b> water <span class="note">(more for softer/soupier)</span></div>
+      <div class="ing"><b>1&ndash;2 tbsp</b> ghee</div>
+      <div class="ing"><b>1 tsp</b> cumin seeds</div>
+      <div class="ing"><b>1 inch</b> ginger, grated &middot; <b>1</b> garlic clove</div>
+      <div class="ing"><b>&frac12; tsp</b> turmeric &middot; salt</div>
+      <div class="ing"><b>Handful</b> greens (spinach / moringa leaves)</div>
+      <div class="subgroup">TO FINISH</div>
+      <div class="ing"><b>1 tsp</b> moringa &middot; squeeze of lemon &middot; extra ghee</div>
+      <div class="ing"><b>Lunch:</b> flaked fish or shredded meat on top</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Rinse.</div><div class="b">Rinse the rice + dal together until the water runs fairly clear.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Bloom the spices.</div><div class="b">Heat ghee, crackle the cumin, then add ginger, garlic and turmeric for ~30 sec until fragrant.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Simmer. <span class="time">25&ndash;30 min</span></div><div class="b">Add rice, dal, water and salt. Simmer until soft and porridge-like, topping up with hot water if it thickens too much.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Greens.</div><div class="b">Stir the greens in for the last 5 minutes.</div></div></div>
+      <div class="step"><div class="badge">5</div><div><div class="h">Finish off the heat.</div><div class="b">Stir in the moringa, a squeeze of lemon and a little extra ghee. Top with tahini; add fish or meat for lunch.</div></div></div>
+      <div class="box box-tight"><span class="lead">Why it's the keystone:</span> grain + dal = complete protein, soft and easy on a healing gut. Make it soupy in the early weeks; it reheats beautifully (a great one for a helper).</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Khichdi</div>
+</section>
+
+<!-- ============ TIL-GUR BITES ============ -->
+<section class="page" id="tilgur">
+  <h1 class="title">Til-Gur Bites <span style="font-size:15px;font-weight:600;color:var(--grey);">(sesame &amp; jaggery)</span></h1>
+  <div class="subtitle">Makes ~12&ndash;15 &nbsp;&bull;&nbsp; Calcium + iron + warmth &mdash; the classic postpartum bite</div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>1 cup</b> black sesame seeds (til)</div>
+      <div class="ing"><b>&frac34; cup</b> jaggery, grated or powder</div>
+      <div class="ing"><b>1&ndash;2 tbsp</b> ghee</div>
+      <div class="ing"><b>&frac14; tsp</b> cardamom <span class="note">(optional)</span></div>
+      <div class="ing"><b>pinch</b> dry ginger <span class="note">(optional, warming)</span></div>
+      <div class="ing"><b>2 tbsp</b> chopped nuts <span class="note">(optional)</span></div>
+      <div class="box box-tight">
+        <span class="lead">What it is:</span> "til-gur" = sesame (til) + jaggery (gur) &mdash; a traditional postpartum sweet. Black sesame is one of the richest plant sources of <b>calcium &amp; iron</b>; jaggery adds warmth and a little more iron. Brilliant for bones, blood and milk.
+      </div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Toast the sesame. <span class="time">3&ndash;5 min</span></div><div class="b">Dry-toast the seeds in a pan on low until they pop and smell nutty. Tip out and cool slightly.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Melt the jaggery.</div><div class="b">Melt the jaggery with the ghee on low heat until it just turns to a syrup &mdash; don't let it burn.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Combine.</div><div class="b">Off the heat, stir in the sesame (and cardamom, ginger, nuts if using).</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Roll &amp; set.</div><div class="b">While still warm, grease your palms with a little ghee and roll into small balls. Cool fully to firm up.</div></div></div>
+      <div class="box box-tight"><span class="lead">Store:</span> airtight, ~2&ndash;3 weeks. A perfect snack-tin staple to batch before baby.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Til-Gur Bites</div>
+</section>
+
+<!-- ============ QUICK TONICS & BITES ============ -->
+<section class="page dense" id="tonics">
+  <h1 class="title">Quick Tonics &amp; Bites</h1>
+  <div class="subtitle">The little daily extras &mdash; every drink &amp; snack your plan mentions, made simple</div>
+  <div class="twocol" style="grid-template-columns:50% 50%;">
+    <div>
+      <div class="colhead">WARM TONICS</div>
+      <div class="var" id="fennelwater"><div class="name">Fennel-Cumin Water</div><div class="build">Simmer &frac12; tsp each fennel + cumin seeds in 2 cups water for 5 min; strain, sip warm. Eases gas &amp; bloating; gently supports milk.</div></div>
+      <div class="var"><div class="name">Black Sesame Milk</div><div class="build">Whisk 1 tbsp black sesame tahini (or ground toasted black sesame) into a mug of warm milk with a date or a little honey. A calcium + iron tonic.</div></div>
+      <div class="var"><div class="name">Recovery Hot Cacao</div><div class="build">Warm milk + 1&ndash;2 tsp raw cacao + a little ghee + a date or jaggery + pinch cinnamon/cardamom. <b>Daytime only</b> &mdash; cacao has caffeine.</div></div>
+    </div>
+    <div>
+      <div class="colhead">COOLING &amp; BITES</div>
+      <div class="var" id="gondkatira"><div class="name">Gond Katira Cooling Drink</div><div class="build">Soak &frac14;&ndash;&frac12; tsp gond katira in a big glass of water 3&ndash;4 hrs (or overnight) until it swells to a soft jelly; stir into cold milk or lemon water with honey. Cooling + eases constipation. <b>Always fully soaked</b>, never dry (it swells &mdash; choking risk).</div></div>
+      <div class="var" id="cacaoballs"><div class="name">Cacao-Tahini-Date Balls</div><div class="build">Blend ~1 cup soft pitted dates + &frac12; cup tahini + &frac14; cup raw cacao + &frac12; cup oats + pinch salt. Roll into balls, chill. Magnesium + iron snack.</div></div>
+      <div class="var"><div class="name">Hummus</div><div class="build">Blend 1 can chickpeas + 3 tbsp black sesame tahini + juice of &frac12; lemon + 1 garlic clove + olive oil + salt. Protein, fibre &amp; calcium &mdash; with veg sticks.</div></div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Quick Tonics &amp; Bites</div>
+</section>
+
+<!-- ============ CHICKEN LIVER PATE ============ -->
+<section class="page" id="pate">
+  <h1 class="title">Chicken Liver P&acirc;t&eacute;</h1>
+  <div class="subtitle">Makes ~1 jar &nbsp;&bull;&nbsp; Iron &amp; vitamin A powerhouse &nbsp;&bull;&nbsp; 1&ndash;2&times; a week</div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>500g</b> chicken liver</div>
+      <div class="ing"><b>1 cup</b> milk <span class="note">(for soaking)</span></div>
+      <div class="ing"><b>1</b> onion, sliced</div>
+      <div class="ing"><b>1</b> apple, peeled &amp; diced</div>
+      <div class="ing"><b>200g</b> mushrooms, sliced</div>
+      <div class="ing"><b>2&ndash;3 tbsp</b> butter</div>
+      <div class="ing"><b>Fresh sage leaves</b> <span class="note">(the classic herb for liver)</span></div>
+      <div class="ing"><b>1 tsp</b> salt <span class="note">(or to taste)</span> &middot; <b>black pepper</b></div>
+      <div class="box box-tight">
+        <span class="lead">Why it's here:</span> the most nutrient-dense food for ferritin &mdash; heme iron, vitamin A, B12, folate, choline. Eat <b>1&ndash;2&times;/wk, not daily</b> (vitamin A accumulates). A perfect make-ahead a helper can batch; fridge ~1 week or freeze in small tubs.
+      </div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Soak the liver. <span class="time">15 min</span></div><div class="b">Sit the liver in the milk for 15 minutes &mdash; it mellows the flavour and reduces bitterness.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Caramelise the veg.</div><div class="b">Meanwhile, cook the onion, apple and mushrooms in a little butter + a pinch of salt over medium heat until soft, golden and caramelised. Set aside.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Cook the liver. <span class="time">3&ndash;4 min/side</span></div><div class="b">Drain and pat the liver dry. Add butter to the same pan, drop in the sage leaves for ~30 sec until fragrant, then add the liver. Cook until browned outside but still slightly pink in the centre.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Blend.</div><div class="b">Add the liver, onion, apple, mushrooms, sage and any pan juices to a food processor. Blend smooth. Adjust salt &amp; pepper; add a little extra butter for a silkier texture.</div></div></div>
+      <div class="step"><div class="badge">5</div><div><div class="h">Chill.</div><div class="b">Transfer to a jar and refrigerate before serving.</div></div></div>
+      <div class="box box-tight"><span class="lead">Serve:</span> on sourdough toast or crackers. A little goes a long way.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Chicken Liver P&acirc;t&eacute;</div>
+</section>
+
+<!-- ============ BANANA BREAD ============ -->
+<section class="page dense">
+  <h1 class="title">Postpartum Banana Bread</h1>
+  <div class="subtitle">Makes ~10 slices &nbsp;&bull;&nbsp; Lactation-supporting &nbsp;&bull;&nbsp; After birth &nbsp;&bull;&nbsp; <a href="https://www.peacelovehormones.com/blogs/herbal-recipes/postpartum-banana-bread-recipe-lactation-supporting-nourishing">source &rarr;</a></div>
+  <div class="box warn" style="margin-top:14px;">
+    <span class="lead">After birth only.</span> Contains <b>shatavari</b>, a lactation herb not used during pregnancy. Leave it out (or swap in extra oat flour) if you bake this before birth.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>3</b> very ripe bananas, mashed</div>
+      <div class="ing"><b>1&frac14; cups</b> 1:1 gluten-free flour</div>
+      <div class="ing"><b>&frac34; cup</b> oat flour <span class="note">(lactation + fibre)</span></div>
+      <div class="ing"><b>&frac12; cup</b> coconut sugar</div>
+      <div class="ing"><b>&frac12; cup</b> ghee, melted</div>
+      <div class="ing"><b>2</b> eggs</div>
+      <div class="ing"><b>3 tbsp</b> full-fat yoghurt or sour cream</div>
+      <div class="ing"><b>1 tsp</b> vanilla extract</div>
+      <div class="ing"><b>2 tbsp</b> ground flaxseed <span class="note">(omega-3, milk)</span></div>
+      <div class="ing"><b>3 tsp</b> shatavari powder <span class="note">(galactagogue)</span></div>
+      <div class="ing"><b>2 tsp</b> Ceylon cinnamon</div>
+      <div class="ing"><b>1 tsp</b> baking powder &middot; <b>1 tsp</b> baking soda</div>
+      <div class="ing"><b>&frac12; tsp</b> sea salt &middot; <b>chocolate chips</b> <span class="note">(optional)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Heat the oven. <span class="time">350&deg;F / 175&deg;C</span></div><div class="b">Grease or line a loaf pan.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Wet mix.</div><div class="b">Mash the bananas in a large bowl. Stir in the sugar and melted ghee, then the eggs, yoghurt and vanilla until smooth.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Dry mix.</div><div class="b">Add all the dry ingredients straight into the bowl. Fold gently until just combined; fold in chocolate chips if using.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Rest. <span class="time">10 min</span></div><div class="b">Let the batter sit 10 minutes so the oat flour &amp; flax hydrate.</div></div></div>
+      <div class="step"><div class="badge">5</div><div><div class="h">Bake. <span class="time">~65 min</span></div><div class="b">Bake at 350&deg;F for 20 min, then drop to 325&deg;F (160&deg;C) and bake another 35&ndash;45 min, until a skewer comes out clean.</div></div></div>
+      <div class="step"><div class="badge">6</div><div><div class="h">Cool.</div><div class="b">Cool completely before slicing. Freezes well in slices.</div></div></div>
+      <div class="box box-tight"><span class="lead">Why it works:</span> oats + flax + shatavari are the milk-supporting trio; ghee + banana give warming, steady energy. Keep a couple of slices by the feeding chair.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Postpartum Banana Bread</div>
+</section>
+
+<!-- ============ 14. HELPER'S COOK LIST ============ -->
+<section class="page dense">
+  <h1 class="title">Helper Cook List</h1>
+  <div class="subtitle">Cooked fresh on demand &mdash; only a few things are worth making ahead</div>
+  <div class="twocol" style="grid-template-columns:55% 45%;">
+    <div>
+      <div class="colhead">COOK FRESH (ON DEMAND)</div>
+      <div class="ing"><b>Bone broth</b> <span class="note">&mdash; a big pot every 3&ndash;4 days; keeps in the fridge, reheat by the mug</span></div>
+      <div class="ing"><b>Khichdi &amp; moong / green-lentil dal</b> <span class="note">&mdash; quick, forgiving, daily</span></div>
+      <div class="ing"><b>Warm grain &amp; greens bowls</b> <span class="note">&mdash; with fish or meat at lunch</span></div>
+      <div class="ing"><b>Porridge</b> <span class="note">&mdash; fresh each morning; moringa/amla off the heat</span></div>
+      <div class="ing"><b>Ginger-liver soup</b> <span class="note">&mdash; 1&ndash;2&times;/wk, fresh</span></div>
+      <div class="ing"><b>Eggs, fish &amp; simple proteins</b> <span class="note">&mdash; to order</span></div>
+      <div class="ing"><b>Red date &amp; goji tea</b> <span class="note">&mdash; simmer &amp; flask it each day</span></div>
+      <div class="box box-tight">
+        <span class="lead">Teach her the 3 anchors:</span> broth, khichdi/dal, and the red-date tea. Forgiving, hard to get wrong, and they cover most of your day.
+      </div>
+    </div>
+    <div>
+      <div class="colhead">WORTH MAKING AHEAD</div>
+      <div class="ing"><b>Gond laddu</b> <span class="note">&mdash; full batch; keeps weeks</span></div>
+      <div class="ing"><b>Til-gur bites &amp; cacao-tahini balls</b> <span class="note">&mdash; batches; grab-and-go</span></div>
+      <div class="ing"><b>Chicken-liver p&acirc;t&eacute;</b> <span class="note">&mdash; small tubs; fridge or freeze</span></div>
+      <div class="ing"><b>Red date + goji baggies</b> <span class="note">&mdash; pre-portioned for the flask</span></div>
+      <div class="box box-tight">
+        <span class="lead">A little frozen backup:</span> stash 3&ndash;4 portions of broth + dal for the first days, before the routine settles.
+      </div>
+    </div>
+  </div>
+  <div class="box">
+    <span class="lead">Set up the feeding station:</span> a flask of warm tea/broth, a water bottle, and a snack tin (laddu, til-gur, balls, nuts, dates) within arm's reach of where you'll feed &mdash; one-handed nourishment for the 3am sessions.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Helper Cook List</div>
+</section>
+
+<!-- ============ FROM YOUR SAVED FEED — INDEX ============ -->
+<section class="page">
+  <h1 class="title">Community Recipes</h1>
+  <div class="subtitle">Great recipes from around the web, built into cards &mdash; with credit to each creator</div>
+  <div class="twocol" style="grid-template-columns:50% 50%; margin-top:20px;">
+    <div>
+      <div class="colhead">SAVORY, MEALS &amp; GUT</div>
+      <div class="ing"><b>Iron Orzo Salad</b> <span class="note">&mdash; @raquels.pantry</span></div>
+      <div class="ing"><b>Sardine Tahini Salad</b> <span class="note">&mdash; @raquels.pantry</span></div>
+      <div class="ing"><b>Roasted Chicken &amp; Nectarine Salad</b> <span class="note">&mdash; @nestorasmaistas</span></div>
+      <div class="ing"><b>Herbed Chickpea Salad</b> <span class="note">&mdash; @anna.culina</span></div>
+      <div class="ing"><b>Greens Salad</b> <span class="note">&mdash; @miestebrangu</span></div>
+      <div class="ing"><b>Magic Chicken Soup</b> <span class="note">&mdash; @dearmama.char</span></div>
+      <div class="ing"><b><a href="#courgettetart">Courgette &amp; Ricotta Tart</a></b> <span class="note">&mdash; @juliusroberts</span></div>
+      <div class="ing"><b><a href="#fermcucumber">Fermented Cucumbers</a></b> <span class="note">&mdash; gut; @simonabandita</span></div>
+      <div class="ing"><b><a href="#ccbake">Cottage Cheese Bake</a></b> <span class="note">&mdash; @martynasla</span></div>
+    </div>
+    <div>
+      <div class="colhead">BREAKFAST, ORGAN &amp; SWEET BITES</div>
+      <div class="ing"><b>Cottage Cheese Pancakes</b> <span class="note">&mdash; @antmedineslenteles</span></div>
+      <div class="ing"><b><a href="#waffles">High-Protein Blueberry Waffles</a></b> <span class="note">&mdash; @thechefoutwest</span></div>
+      <div class="ing"><b>Chicken Heart</b> <span class="note">&mdash; @wildnutritionist</span></div>
+      <div class="ing"><b><a href="#datebark">Kefir Date Bark</a></b> <span class="note">&mdash; gut; @alina_prokuda</span></div>
+      <div class="ing"><b><a href="#fatbombs">Anti-Candida Fat Bombs</a></b> <span class="note">&mdash; @emmaclaire_nutrition</span></div>
+      <div class="ing"><b><a href="#ccbrownie">Choc Cottage Cheese Brownie</a></b> <span class="note">&mdash; @stebuklinga_virtuve</span></div>
+      <div class="ing"><b><a href="#froyo">Anti-Inflammatory Fro-Yo Bites</a></b> <span class="note">&mdash; @clairesharrynroberto</span></div>
+      <div class="ing"><b><a href="#skyr">Frozen Skyr Cookies</a></b> <span class="note">&mdash; @fitfood.fakten</span></div>
+      <div class="ing"><b><a href="#datebites">Date Chocolate Bites</a></b> <span class="note">&mdash; @runningvita</span></div>
+      <div class="ing"><b><a href="#cctruffle">Cottage Cheese Truffle Balls</a></b> <span class="note">&mdash; saved post</span></div>
+    </div>
+  </div>
+  <div class="box box-tight">
+    <span class="lead">Note:</span> tap any card's handle to open the original post. A few creators gate the exact recipe ("comment for the link") &mdash; Magic Chicken Soup, cottage cheese bake, blueberry waffles &amp; the truffle balls are rebuilt as a clearly-labelled <i>my version</i>.
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Community Recipes</div>
+</section>
+
+<!-- ===== Iron Orzo Salad ===== -->
+<section class="page dense">
+  <h1 class="title">Iron Orzo Salad</h1>
+  <div class="subtitle">Serves 2&ndash;3 &nbsp;&bull;&nbsp; ~5mg iron/serving &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DY1t5GJoO_9/">@raquels.pantry &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>120g</b> orzo</div>
+      <div class="ing"><b>1 can</b> black beans, well rinsed</div>
+      <div class="ing"><b>250g</b> corn <span class="note">(2 ears charred, or 1 jar drained)</span></div>
+      <div class="ing"><b>1</b> red bell pepper, finely sliced <span class="note">(vitamin C &mdash; boosts iron)</span></div>
+      <div class="ing"><b>4</b> fresh apricots, quartered</div>
+      <div class="ing"><b>&frac12;</b> red onion, finely sliced <span class="note">(skip if gut-sensitive)</span></div>
+      <div class="ing"><b>1</b> ripe avocado, cubed</div>
+      <div class="subgroup">GREEN IRON SAUCE <span>(makes ~200ml)</span></div>
+      <div class="ing"><b>60ml</b> olive oil &middot; <b>40g</b> pumpkin seeds &middot; <b>20g</b> sunflower seeds</div>
+      <div class="ing"><b>handful</b> parsley + a little cilantro &middot; <b>30g</b> capers</div>
+      <div class="ing">juice ½ orange + zest &middot; zest ½ lime &middot; splash ACV</div>
+      <div class="ing"><b>100ml</b> hot water &middot; salt &amp; pepper</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Orzo.</div><div class="b">Cook to pack instructions, drain, rinse cold.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Corn.</div><div class="b">Char fresh ears in a dry hot pan, then cut off kernels (or drain jarred).</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Sauce.</div><div class="b">Blend all sauce ingredients smooth &amp; creamy; adjust salt, citrus, pepper.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Combine.</div><div class="b">Toss orzo, beans, corn, pepper, onion &amp; apricots in a big bowl.</div></div></div>
+      <div class="step"><div class="badge">5</div><div><div class="h">Dress &amp; fold.</div><div class="b">Pour over the green sauce, toss well, then fold in the avocado last.</div></div></div>
+      <div class="box box-tight"><span class="lead">Iron rule:</span> hold tea, coffee &amp; calcium ~2 hrs from this meal &mdash; the vitamin C in the sauce + red pepper does the opposite and <b>boosts</b> the plant iron.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Iron Orzo Salad</div>
+</section>
+
+<!-- ===== Sardine Tahini Salad ===== -->
+<section class="page dense">
+  <h1 class="title">Sardine Tahini Salad</h1>
+  <div class="subtitle">Serves 2 &nbsp;&bull;&nbsp; Calcium, omega-3 &amp; iodine &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DXuZYaNCBF1/">@raquels.pantry &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="subgroup">TAHINI CREAM</div>
+      <div class="ing"><b>6 tbsp</b> tahini</div>
+      <div class="ing">juice of <b>½</b> orange</div>
+      <div class="ing"><b>1</b> small garlic clove, grated &middot; salt &amp; pepper</div>
+      <div class="ing"><b>3&ndash;5 tbsp</b> ice-cold water</div>
+      <div class="subgroup">THE SALAD</div>
+      <div class="ing"><b>4</b> small cucumbers, lightly smashed</div>
+      <div class="ing"><b>1 bunch</b> radishes, thinly sliced</div>
+      <div class="ing"><b>1&ndash;2 tsp</b> sumac &middot; juice ½ lemon &middot; <b>1&ndash;2 tbsp</b> olive oil</div>
+      <div class="ing">pickled onions</div>
+      <div class="ing"><b>1 tin</b> sardines in olive oil (3&ndash;4)</div>
+      <div class="ing"><b>1&ndash;2 tsp</b> black sesame seeds</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Whip the tahini cream.</div><div class="b">Whisk tahini with orange juice, garlic, salt &amp; pepper. Add the ice-cold water a little at a time, whisking, until it turns pale, thick and airy &mdash; almost doubled, like a light cream.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Dress the veg.</div><div class="b">Combine smashed cucumbers + radishes; season with salt, pepper, sumac, lemon juice and olive oil.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Plate.</div><div class="b">Spread the tahini cream, pile on the veg, then top with pickled onions, sardines and black sesame seeds.</div></div></div>
+      <div class="box box-tight"><span class="lead">Why it's here:</span> calcium from tahini + sardine bones + sesame, omega-3 and iodine from the sardines &mdash; three nutrients most meals miss.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Sardine Tahini Salad</div>
+</section>
+
+<!-- ===== Roasted Chicken & Nectarine Salad ===== -->
+<section class="page dense">
+  <h1 class="title">Roasted Chicken &amp; Nectarine Salad</h1>
+  <div class="subtitle">Protein + iron + colour &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DZcOUdiNiaH/">@nestorasmaistas &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>2</b> chicken breast pieces <span class="note">(+ olive oil, chicken seasoning)</span></div>
+      <div class="ing"><b>1 can</b> white beans <span class="note">(+ olive oil, salt, garlic powder)</span></div>
+      <div class="ing"><b>2 generous handfuls</b> rocket (arugula)</div>
+      <div class="ing"><b>3</b> nectarines</div>
+      <div class="ing"><b>1</b> avocado</div>
+      <div class="ing"><b>3&ndash;4 tbsp</b> pumpkin seeds</div>
+      <div class="ing"><b>~100g</b> feta</div>
+      <div class="subgroup">DRESSING</div>
+      <div class="ing"><b>5 tbsp</b> olive oil &middot; <b>2 tbsp</b> balsamic</div>
+      <div class="ing">juice ½ lemon &middot; <b>1 tbsp</b> maple syrup</div>
+      <div class="ing"><b>2</b> garlic cloves &middot; pinch salt</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Roast chicken. <span class="time">190&deg;C, 25&ndash;30 min</span></div><div class="b">Drizzle the chicken with olive oil, sprinkle with seasoning, roast until cooked through.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Crisp the beans. <span class="time">190&deg;C, ~15 min</span></div><div class="b">Toss beans with olive oil + spices; air-fry or oven-roast, stirring halfway.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Assemble.</div><div class="b">Bed of rocket, then nectarines, avocado, crispy beans and sliced chicken. Top with pumpkin seeds &amp; feta.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Dress.</div><div class="b">Whisk the dressing and pour over just before eating.</div></div></div>
+      <div class="box box-tight"><span class="lead">Good to know:</span> a squeeze of the lemon dressing covers the vitamin C to absorb the iron from the seeds &amp; greens.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Roasted Chicken &amp; Nectarine Salad</div>
+</section>
+
+<!-- ===== Herbed Chickpea Salad ===== -->
+<section class="page dense">
+  <h1 class="title">Herbed Chickpea Salad</h1>
+  <div class="subtitle">Roasted veg, toasted almonds &amp; fresh herbs &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DXtMXrsDWfx/">@anna.culina &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>1</b> zucchini &middot; <b>1</b> red bell pepper</div>
+      <div class="ing"><b>½</b> cucumber &middot; <b>200g</b> cherry tomatoes</div>
+      <div class="ing"><b>400g</b> cooked chickpeas</div>
+      <div class="ing"><b>60g</b> toasted almonds</div>
+      <div class="ing"><b>⅓ bunch each</b> dill, cilantro &amp; parsley</div>
+      <div class="ing"><b>½ block</b> feta <span class="note">(optional)</span></div>
+      <div class="subgroup">DRESSING</div>
+      <div class="ing"><b>1</b> lemon (3 tbsp juice) &middot; <b>3 tbsp</b> olive oil</div>
+      <div class="ing"><b>1</b> small garlic clove &middot; salt &amp; pepper</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Roast. <span class="time">200&deg;C, 20&ndash;25 min</span></div><div class="b">Slice zucchini &amp; pepper, toss with 1 tbsp olive oil, roast until soft and golden.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Prep the rest.</div><div class="b">Meanwhile slice cucumber, halve the tomatoes, chop the herbs &amp; almonds, grate the garlic.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Toss.</div><div class="b">Combine chickpeas, roasted veg, cucumber, tomatoes, herbs, almonds (and feta). Whisk the dressing, pour over and toss.</div></div></div>
+      <div class="box box-tight"><span class="lead">Good for:</span> plant protein + fibre + the lemon's vitamin C to lift the chickpea iron. Lovely warm or room-temp.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Herbed Chickpea Salad</div>
+</section>
+
+<!-- ===== Greens Salad ===== -->
+<section class="page">
+  <h1 class="title">Greens Salad</h1>
+  <div class="subtitle">Mineral-rich greens bowl &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DXASwwLiOzm/">@miestebrangu &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>Green cabbage</b>, shredded</div>
+      <div class="ing"><b>Spinach</b></div>
+      <div class="ing"><b>Cucumber</b></div>
+      <div class="ing"><b>Parsley</b> &amp; <b>chives</b></div>
+      <div class="ing"><b>Broccoli</b> <span class="note">(blanched ~1 min)</span></div>
+      <div class="subgroup">DRESSING <span>(my proportions &mdash; to taste)</span></div>
+      <div class="ing"><b>3 tbsp</b> olive oil &middot; <b>1 tsp</b> honey</div>
+      <div class="ing"><b>1 tsp</b> mustard &middot; juice ½ lemon</div>
+      <div class="ing"><b>1 tsp</b> apple cider vinegar</div>
+      <div class="ing"><b>1</b> small garlic clove &middot; salt &amp; pepper</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Blanch the broccoli. <span class="time">~1 min</span></div><div class="b">Quick-blanch so it stays bright and just-tender; cool.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Toss.</div><div class="b">Combine cabbage, spinach, cucumber, herbs and broccoli in a bowl.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Dress.</div><div class="b">Whisk the dressing and toss through.</div></div></div>
+      <div class="box box-tight"><span class="lead">Note:</span> the post lists the ingredients but not amounts &mdash; the dressing above is my sensible ratio; adjust honey/lemon to taste. A Phase 2+ raw salad (serve a little warm/room-temp in early weeks).</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Greens Salad</div>
+</section>
+
+<!-- ===== Cottage Cheese Pancakes ===== -->
+<section class="page">
+  <h1 class="title">Cottage Cheese Pancakes <span style="font-size:15px;font-weight:600;color:var(--grey);">(var&scaron;k&#279;&#269;iai)</span></h1>
+  <div class="subtitle">Serves 2 &nbsp;&bull;&nbsp; High-protein breakfast &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DZekbLhMqBm/">@antmedineslenteles &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>360g</b> cottage cheese / curd <span class="note">(9% fat)</span></div>
+      <div class="ing"><b>1</b> egg</div>
+      <div class="ing"><b>2 tbsp</b> sugar <span class="note">(or 1 tbsp &mdash; it's plenty sweet)</span></div>
+      <div class="ing"><b>splash</b> vanilla</div>
+      <div class="ing"><b>1 tbsp</b> protein powder</div>
+      <div class="ing"><b>3 tbsp</b> flour <span class="note">(GF: equal parts corn, oat &amp; almond)</span></div>
+      <div class="ing"><b>coconut oil</b> <span class="note">for frying</span></div>
+      <div class="ing"><b>To serve:</b> Greek yoghurt, fresh berries, fruit spread</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Mix.</div><div class="b">Stir the cottage cheese, egg, sugar, vanilla, protein powder and flour together well.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Adjust.</div><div class="b">Exact flour depends on how wet your curd is &mdash; add a little more until it's a soft, shapeable dough.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Fry.</div><div class="b">Shape into small patties. Fry in coconut oil over medium heat until golden on both sides.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Serve.</div><div class="b">With Greek yoghurt and fresh berries (and a little fruit spread if you like).</div></div></div>
+      <div class="box box-tight"><span class="lead">Good to know:</span> casein + egg + protein powder makes this a genuinely high-protein breakfast &mdash; one of your Breakfast page options.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Cottage Cheese Pancakes</div>
+</section>
+
+<!-- ===== Chicken Heart ===== -->
+<section class="page">
+  <h1 class="title">Chicken Heart</h1>
+  <div class="subtitle">A gentle entry to organ meat &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DZGcqesAu-f/">@wildnutritionist &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHY IT EARNS A SPOT</div>
+      <div class="ing"><b>Iron, zinc &amp; B12</b> <span class="note">+ highly absorbable protein</span></div>
+      <div class="ing"><b>Best food source of CoQ10</b> <span class="note">&mdash; cellular energy (mitochondria)</span></div>
+      <div class="ing"><b>Milder than liver</b> <span class="note">&mdash; an easy first organ meat, no daily limit like liver's vitamin A</span></div>
+      <div class="ing"><b>Affordable</b> <span class="note">&mdash; ask a local butcher/farmer</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO USE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Sauté in fat.</div><div class="b">Trim, then quickly sauté in ghee/butter with salt &amp; pepper until just cooked &mdash; tender, not rubbery.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Or hide it.</div><div class="b">Add to broth soups, grill on skewers, or grind into mince for meatballs, burgers or bolognese.</div></div></div>
+      <div class="box box-tight"><span class="lead">How often:</span> 1&ndash;2&times; a week alongside (or instead of) your liver day &mdash; same ferritin benefit, gentler flavour.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Chicken Heart</div>
+</section>
+
+<!-- ===== Magic Chicken Soup ===== -->
+<section class="page">
+  <h1 class="title">Magic Chicken Soup</h1>
+  <div class="subtitle">Cooks in its own juices &mdash; no water, no stock &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DWRc8g-E2-9/">@dearmama.char &rarr;</a></div>
+  <div class="box warn" style="margin-top:14px;">
+    <span class="lead">My version.</span> The original gates the exact recipe ("comment MAGIC for the link"), so the amounts below are my reconstruction of the method it describes &mdash; tweak to taste.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>1</b> whole chicken <span class="note">(or 4&ndash;6 thighs)</span></div>
+      <div class="ing"><b>½ head</b> cabbage (napa or green), chopped</div>
+      <div class="ing"><b>1</b> apple, quartered <span class="note">(natural sweetness)</span></div>
+      <div class="ing"><b>2&ndash;3 slices</b> ginger <span class="note">(optional, warming)</span></div>
+      <div class="ing"><b>Salt</b></div>
+      <div class="ing"><b>A pot with a tight-fitting lid</b></div>
+      <div class="box box-tight"><span class="lead">The sauce ("don't skip it"):</span> a quick ginger-scallion or soy-sesame dipping sauce lifts the whole bowl.</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Layer.</div><div class="b">Put the chopped cabbage in the bottom of the pot, sit the chicken on top, tuck the apple (and ginger) around it, and salt well.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Lid on, low &amp; slow. <span class="time">60&ndash;90 min</span></div><div class="b">Cover tightly and cook on low. The cabbage and chicken release their juices into a naturally sweet broth &mdash; <b>no water or stock needed</b>. Check it isn't catching; the cabbage should melt down.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Shred &amp; serve.</div><div class="b">Lift out the chicken, shred, and return to the broth. Serve warm with the sauce.</div></div></div>
+      <div class="box box-tight"><span class="lead">Perfect for:</span> low-appetite early days &mdash; gentle, sweet, comforting, and a sibling to your bone broth.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Magic Chicken Soup</div>
+</section>
+
+<!-- ===== Chocolate Cottage Cheese Brownie ===== -->
+<section class="page dense" id="ccbrownie">
+  <h1 class="title">Chocolate Cottage Cheese Brownie</h1>
+  <div class="subtitle">16cm tin &nbsp;&bull;&nbsp; No refined sugar, protein + fibre &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DYoatXOKnzb/">@stebuklinga_virtuve &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>2</b> eggs</div>
+      <div class="ing"><b>220g</b> soft cottage cheese / curd</div>
+      <div class="ing"><b>240g</b> Greek yoghurt</div>
+      <div class="ing"><b>120g</b> agave syrup or honey</div>
+      <div class="ing"><b>50g</b> cocoa powder</div>
+      <div class="ing"><b>60g</b> oat flour <span class="note">(ground oats)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Blend.</div><div class="b">Put everything in a blender and blitz to a smooth batter.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Bake. <span class="time">165&deg;C, 40&ndash;45 min</span></div><div class="b">Pour into a lined 16cm tin and bake until set.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Rest overnight.</div><div class="b">Cool in the tin and leave overnight to firm up &mdash; it slices cleanly and the flavour deepens.</div></div></div>
+      <div class="box box-tight"><span class="lead">Good for:</span> a chocolate fix with protein (cottage cheese + yoghurt) and fibre (oats), no refined sugar.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Chocolate Cottage Cheese Brownie</div>
+</section>
+
+<!-- ===== Kefir Date Bark ===== -->
+<section class="page dense" id="datebark">
+  <h1 class="title">Kefir Date Bark</h1>
+  <div class="subtitle">Gut-friendly frozen bark &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DYpsJLYzAro/">@alina_prokuda &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>15</b> Medjool dates, pitted</div>
+      <div class="ing"><b>1 pack</b> farmer cheese <span class="note">(or quark / cottage)</span></div>
+      <div class="ing"><b>&frac12; cup</b> plain kefir</div>
+      <div class="ing"><b>Peanut butter</b></div>
+      <div class="ing"><b>Roasted peanuts</b></div>
+      <div class="ing"><b>Dark or milk chocolate</b>, melted</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Date base.</div><div class="b">Line a tray; press the dates flat into one overlapping layer so they stick together.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Cream layer.</div><div class="b">Blend farmer cheese + kefir smooth; spread evenly over the dates.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Top.</div><div class="b">Spread a layer of peanut butter, scatter peanuts, then pour over melted chocolate and spread.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Freeze.</div><div class="b">Freeze until firm; break into pieces. Soften ~10 min before eating.</div></div></div>
+      <div class="box box-tight"><span class="lead">Gut-friendly:</span> kefir + farmer cheese bring probiotics &mdash; nice alongside gut &amp; candida care.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Kefir Date Bark</div>
+</section>
+
+<!-- ===== Anti-Candida Fat Bombs ===== -->
+<section class="page dense" id="fatbombs">
+  <h1 class="title">Anti-Candida Fat Bombs</h1>
+  <div class="subtitle">Makes ~10 &nbsp;&bull;&nbsp; Low sugar, antifungal MCT &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/C_-HZuBzSXP/">@emmaclaire_nutrition &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>&frac12; cup</b> almond butter</div>
+      <div class="ing"><b>&frac14; cup</b> MCT oil <span class="note">(caprylic acid &mdash; antifungal)</span></div>
+      <div class="ing"><b>30g</b> collagen powder</div>
+      <div class="ing"><b>2 tbsp</b> cocoa powder</div>
+      <div class="ing"><b>&frac12; tsp</b> vanilla &middot; <b>1 tsp</b> cinnamon</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Mix.</div><div class="b">Stir all the ingredients together until smooth.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Set. <span class="time">freezer, 30 min</span></div><div class="b">Pour into silicone moulds or a lined tray; freeze until firm.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Store.</div><div class="b">Cut into squares; keep in the freezer.</div></div></div>
+      <div class="box box-tight"><span class="lead">For gut &amp; candida:</span> little to no sugar, and MCT's caprylic acid is antimicrobial/antifungal &mdash; satisfies a sweet craving without feeding yeast.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Anti-Candida Fat Bombs</div>
+</section>
+
+<!-- ===== Anti-Inflammatory Fro-Yo Bites ===== -->
+<section class="page dense" id="froyo">
+  <h1 class="title">Anti-Inflammatory Fro-Yo Bites</h1>
+  <div class="subtitle">Frozen, low-sugar, blood-sugar friendly &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DY7b0YWMpZq/">@clairesharrynroberto &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>&#8531; cup</b> mixed berries</div>
+      <div class="ing"><b>1 tbsp</b> chia seeds</div>
+      <div class="ing"><b>2 tsp</b> pure maple syrup</div>
+      <div class="ing"><b>1 cup</b> full-fat yoghurt</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Berry core.</div><div class="b">Mash the berries; stir in chia + maple. Let sit a few minutes to swell and thicken.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Swirl.</div><div class="b">Spoon yoghurt into silicone moulds or a lined tray; swirl the berry-chia mix through.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Freeze.</div><div class="b">Freeze until firm; pop out and enjoy straight from the freezer.</div></div></div>
+      <div class="box box-tight"><span class="lead">Good for:</span> the cold-creamy craving without a glucose crash &mdash; berries + chia + full-fat yoghurt keep blood sugar steady.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Anti-Inflammatory Fro-Yo Bites</div>
+</section>
+
+<!-- ===== Frozen Skyr Cookies ===== -->
+<section class="page dense" id="skyr">
+  <h1 class="title">Frozen Skyr Cookies</h1>
+  <div class="subtitle">Makes 6 &nbsp;&bull;&nbsp; ~90 kcal, 4g protein each &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DXPNLyBCobT/">@fitfood.fakten &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>150g</b> skyr</div>
+      <div class="ing"><b>100g</b> frozen raspberries</div>
+      <div class="ing"><b>50g</b> white chocolate <span class="note">(or dark, for less sugar)</span></div>
+      <div class="ing"><b>25g</b> salted pistachios</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Mix.</div><div class="b">Lightly thaw the raspberries, mash, and stir into the skyr.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Shape.</div><div class="b">Spoon into 6 rounds on a sheet of baking paper.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Top &amp; freeze. <span class="time">1&ndash;2 hrs</span></div><div class="b">Drizzle melted chocolate, scatter chopped pistachios, and freeze. Soften briefly before eating if very hard.</div></div></div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Frozen Skyr Cookies</div>
+</section>
+
+<!-- ===== Date Chocolate Bites ===== -->
+<section class="page dense" id="datebites">
+  <h1 class="title">Date Chocolate Bites</h1>
+  <div class="subtitle">Stuffed dates, chocolate-dipped &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DZmt6BmNw5-/">@runningvita &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>6</b> Medjool dates</div>
+      <div class="ing"><b>1&ndash;3 tbsp</b> nut butter <span class="note">(to your texture)</span></div>
+      <div class="ing"><b>150g</b> dark chocolate, melted</div>
+      <div class="ing"><b>1 tsp</b> coconut oil <span class="note">(optional &mdash; thinner coating)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Stuff.</div><div class="b">Slit each date, remove the pit, and fill with nut butter.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Coat.</div><div class="b">Dip in melted dark chocolate (stir in the coconut oil if you want a thin shell).</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Set. <span class="time">freezer, 2 hrs+</span></div><div class="b">Freeze until the chocolate sets firm. Keep chilled.</div></div></div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Date Chocolate Bites</div>
+</section>
+
+<!-- ===== Courgette Tart ===== -->
+<section class="page dense" id="courgettetart">
+  <h1 class="title">Courgette &amp; Ricotta Tart</h1>
+  <div class="subtitle">Crisp puff pastry + whipped lemony ricotta &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DZDVZKzNtiY/">@juliusroberts &rarr;</a></div>
+  <div class="box warn" style="margin-top:14px;">
+    <span class="lead">Amounts are mine.</span> The post gives the method &amp; the crisp-base trick but not quantities &mdash; these are sensible proportions; adjust to taste.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>1 sheet</b> puff pastry</div>
+      <div class="ing"><b>~250g</b> ricotta</div>
+      <div class="ing">zest + juice of <b>½</b> lemon</div>
+      <div class="ing">salt &amp; pepper</div>
+      <div class="ing"><b>2&ndash;3</b> courgettes (green &amp; yellow), sliced thin</div>
+      <div class="ing">olive oil &middot; fresh herbs</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Hot oven. <span class="time">240&deg;C</span></div><div class="b">Heat the oven scorching hot; use a thin metal tray (the trick to a crisp base).</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Whip the ricotta.</div><div class="b">Beat ricotta with lemon zest + juice, salt &amp; pepper until light. Spread over the pastry, leaving a border.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Top.</div><div class="b">Lay the courgette ribbons over; brush with olive oil and season.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Bake. <span class="time">10 min hot, then 180&deg;C</span></div><div class="b">Bake 10 min at 240&deg;C, then drop to 180&deg;C and bake slow until the pastry is crisp and golden. Finish with herbs.</div></div></div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Courgette &amp; Ricotta Tart</div>
+</section>
+
+<!-- ===== Fermented Cucumbers ===== -->
+<section class="page dense" id="fermcucumber">
+  <h1 class="title">Fermented Cucumbers</h1>
+  <div class="subtitle">Natural probiotics for the gut &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DZhEM50IWBH/">@simonabandita &rarr;</a></div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>Small cucumbers</b></div>
+      <div class="subgroup">BRINE <span>(from the post)</span></div>
+      <div class="ing"><b>1 litre</b> water</div>
+      <div class="ing"><b>1 heaped tbsp</b> salt</div>
+      <div class="ing"><b>1 heaped tbsp</b> sugar</div>
+      <div class="subgroup">AROMATICS</div>
+      <div class="ing">dill, garlic <span class="note">(+ horseradish/blackcurrant leaf if you have them)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Pack.</div><div class="b">Pack the cucumbers into a jar with the dill and garlic.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Brine.</div><div class="b">Dissolve the salt + sugar in the water and pour over until the cucumbers are fully covered.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Ferment. <span class="time">2&ndash;3 days</span></div><div class="b">Leave at room temperature, tasting daily, until pleasantly sour; then move to the fridge.</div></div></div>
+      <div class="box box-tight"><span class="lead">Gut + candida:</span> a gentle source of live cultures &mdash; lovely alongside the kefir and probiotic care.</div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Fermented Cucumbers</div>
+</section>
+
+<!-- ===== Cottage Cheese Bake ===== -->
+<section class="page dense" id="ccbake">
+  <h1 class="title">Cottage Cheese Bake <span style="font-size:15px;font-weight:600;color:var(--grey);">(var&scaron;k&#279;s apkepas)</span></h1>
+  <div class="subtitle">High-protein, soft &amp; fluffy &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DXRnHuVjH0a/">@martynasla &rarr;</a></div>
+  <div class="box warn" style="margin-top:14px;">
+    <span class="lead">My version.</span> The post puts the exact recipe in the comments, so the amounts below are a classic var&scaron;k&#279;s apkepas with the post's protein twist &mdash; adjust to taste.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>500g</b> cottage cheese / curd</div>
+      <div class="ing"><b>2</b> eggs</div>
+      <div class="ing"><b>3 tbsp</b> semolina <span class="note">(or oat flour)</span></div>
+      <div class="ing"><b>1 scoop</b> whey protein <span class="note">(the post's twist)</span></div>
+      <div class="ing"><b>2&ndash;3 tbsp</b> sugar or honey</div>
+      <div class="ing"><b>1 tsp</b> vanilla &middot; zest of ½ lemon &middot; pinch salt</div>
+      <div class="ing"><b>Spray oil / butter</b> for the dish</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Oven. <span class="time">180&deg;C</span></div><div class="b">Grease a baking dish well (spray oil stops it sticking).</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Mix.</div><div class="b">Blend or whisk everything into a smooth batter.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Bake. <span class="time">35&ndash;40 min</span></div><div class="b">Pour in; bake until set and golden on top.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Cool.</div><div class="b">Lovely warm, and even better cold the next morning with berries.</div></div></div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Cottage Cheese Bake</div>
+</section>
+
+<!-- ===== High-Protein Blueberry Waffles ===== -->
+<section class="page dense" id="waffles">
+  <h1 class="title">High-Protein Blueberry Waffles</h1>
+  <div class="subtitle">Quick, healthy, protein-packed &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DY2pdDcPaKs/">@thechefoutwest &rarr;</a></div>
+  <div class="box warn" style="margin-top:14px;">
+    <span class="lead">My version.</span> The post gates the recipe ("comment YUM") &mdash; this is a simple high-protein waffle in that spirit; tweak to taste.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>1 cup</b> oat flour</div>
+      <div class="ing"><b>1 scoop</b> vanilla protein powder</div>
+      <div class="ing"><b>1 tsp</b> baking powder &middot; pinch salt</div>
+      <div class="ing"><b>2</b> eggs</div>
+      <div class="ing"><b>&frac12; cup</b> Greek yoghurt or milk</div>
+      <div class="ing"><b>1 tbsp</b> ghee or oil &middot; ½ tsp vanilla</div>
+      <div class="ing"><b>&frac12; cup</b> blueberries</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Batter.</div><div class="b">Whisk the dry ingredients; whisk in eggs, yoghurt, ghee and vanilla. Fold in the blueberries.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Cook.</div><div class="b">Cook in a hot waffle iron until golden and cooked through.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Serve.</div><div class="b">With Greek yoghurt and extra berries.</div></div></div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; High-Protein Blueberry Waffles</div>
+</section>
+
+<!-- ===== Cottage Cheese Truffle Balls ===== -->
+<section class="page dense" id="cctruffle">
+  <h1 class="title">Cottage Cheese Choc Truffle Balls</h1>
+  <div class="subtitle">High-protein no-bake bites &nbsp;&bull;&nbsp; <a href="https://www.instagram.com/p/DX_GledxTIj/">saved post &rarr;</a></div>
+  <div class="box warn" style="margin-top:14px;">
+    <span class="lead">My version.</span> The post gates the recipe ("comment CHOC") &mdash; this is a simple cottage-cheese chocolate truffle in that spirit.
+  </div>
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED</div>
+      <div class="ing"><b>200g</b> cottage cheese, blended smooth</div>
+      <div class="ing"><b>2&ndash;3 tbsp</b> cocoa powder</div>
+      <div class="ing"><b>2&ndash;3</b> soft dates or <b>1 tbsp</b> honey</div>
+      <div class="ing"><b>&frac12; tsp</b> vanilla &middot; pinch salt</div>
+      <div class="ing"><b>To roll:</b> cocoa or desiccated coconut</div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Blend.</div><div class="b">Blend the cottage cheese smooth, then mix with cocoa, dates/honey, vanilla and salt into a thick mixture.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Chill. <span class="time">30 min</span></div><div class="b">Chill so it firms enough to roll.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Roll.</div><div class="b">Roll into balls, coat in cocoa or coconut, and keep chilled.</div></div></div>
+    </div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Cottage Cheese Truffle Balls</div>
+</section>
+
+<!-- ============ GLOSSARY ============ -->
+<section class="page dense" id="glossary">
+  <h1 class="title">New to These? &mdash; Glossary</h1>
+  <div class="subtitle">Every less-familiar ingredient in plain English &mdash; what it is &amp; why it's in your plan</div>
+  <div class="glosswrap">
+    <div class="gloss"><b>Ghee</b> <span class="note">&mdash; clarified butter; the confinement cooking fat. Warming, energy-dense, helps absorb fat-soluble nutrients.</span></div>
+    <div class="gloss"><b>Jaggery (gur)</b> <span class="note">&mdash; unrefined cane sugar; warming, with a little iron. A better sweetener than white sugar.</span></div>
+    <div class="gloss"><b>Amla</b> <span class="note">&mdash; Indian gooseberry; one of the richest vitamin-C foods. Unlocks iron + builds collagen. &frac12;&ndash;1 tsp powder in warm water.</span></div>
+    <div class="gloss"><b>Moringa</b> <span class="note">&mdash; dried leaf powder; iron, calcium &amp; milk support. Stir in off the heat (heat kills it).</span></div>
+    <div class="gloss"><b>Ashwagandha</b> <span class="note">&mdash; calming adaptogen root. <b>After birth only</b>; &frac14; tsp in warm milk at night. <a href="#milk">recipe &rarr;</a></span></div>
+    <div class="gloss"><b>Shatavari</b> <span class="note">&mdash; a root used as a traditional milk-supply herb. After birth only (in the banana bread).</span></div>
+    <div class="gloss"><b>Ajwain (carom)</b> <span class="note">&mdash; thyme-like seed; eases gas &amp; digestion. Goes in broth, dal, flatbread.</span></div>
+    <div class="gloss"><b>Methi (fenugreek)</b> <span class="note">&mdash; seed/leaf; supports milk &amp; digestion. Bitter, so use small amounts.</span></div>
+    <div class="gloss"><b>Saunth</b> <span class="note">&mdash; dried ginger powder; warming &amp; digestive (more concentrated than fresh ginger).</span></div>
+    <div class="gloss"><b>Kesar (saffron)</b> <span class="note">&mdash; flower threads; mood + warmth. Bloom a pinch in warm milk first to release it.</span></div>
+    <div class="gloss"><b>Caraway (kmynai)</b> <span class="note">&mdash; carminative seed; your fennel stand-in for gas/bloating + milk. <a href="#teas">in the teas &rarr;</a></span></div>
+    <div class="gloss"><b>Milk thistle (margainio s&#279;klos)</b> <span class="note">&mdash; seed; liver support + traditional milk tonic. Crush &amp; simmer in tea.</span></div>
+    <div class="gloss"><b>Gond / dink</b> <span class="note">&mdash; edible tree gum that puffs when fried; the warming laddu gum for bones &amp; joints. <b>Not</b> gond katira. <a href="#laddu">recipe &rarr;</a></span></div>
+    <div class="gloss"><b>Gond katira</b> <span class="note">&mdash; the cooling gum that swells in water; for heat + constipation. Always soak, never dry. <a href="#gondkatira">recipe &rarr;</a></span></div>
+    <div class="gloss"><b>Khichdi</b> <span class="note">&mdash; soft rice + lentil one-pot porridge; the gentle recovery meal. <a href="#khichdi">recipe &rarr;</a></span></div>
+    <div class="gloss"><b>Dal</b> <span class="note">&mdash; lentils, and the spiced lentil stew made from them.</span></div>
+    <div class="gloss"><b>Til-gur</b> <span class="note">&mdash; sesame (til) + jaggery (gur); a calcium + iron postpartum bite. <a href="#tilgur">recipe &rarr;</a></span></div>
+    <div class="gloss"><b>Black seed oil (kalonji)</b> <span class="note">&mdash; Nigella sativa oil; anti-inflammatory / immune / milk tonic. <b>Hold in pregnancy;</b> &frac12;&ndash;1 tsp/day unheated after birth.</span></div>
+    <div class="gloss"><b>Longan</b> <span class="note">&mdash; dried sweet fruit; a blood-building tonic that deepens the red-date tea.</span></div>
+    <div class="gloss"><b>Red dates (jujube) &amp; goji</b> <span class="note">&mdash; Chinese blood-building tonics; iron-ish &amp; warming, the base of your daily tea.</span></div>
+    <div class="gloss"><b>Tahini</b> <span class="note">&mdash; sesame seed paste; calcium + healthy fat (black sesame has the most minerals).</span></div>
+  </div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Glossary</div>
+</section>
+
+</body>
+</html>
