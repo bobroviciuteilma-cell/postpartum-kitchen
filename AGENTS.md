@@ -120,8 +120,12 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
      are NOT categories** — specific food types, singletons OK (they grow), split freely (Pancakes≠Waffles).
      **"Treats" is a valid category** (treating yourself = real morale need). Every recipe needs a real
      postpartum "why". `CATS` order matters (catFor = first match wins): sandwiches before breads, drinks
-     before bites. **GF tag**: curated title list in the auto-tagger (`var GF=[...]`) — conservative, wheat/
-     pasta/tortilla recipes left unmarked; `.tag.gf` is green.
+     before bites. **GF tag** (`var GF=[...]`, `.tag.gf` green): ONLY non-obvious cases (breads, bread-
+     sandwich, crackers). Ilma: "obviously teas/drinks/tonics are gf, don't overdo it" — naturally-GF foods
+     NOT tagged. **PP Gold** (`var GOLD=[...]`, `.tag.gold`): fun gold tag on nutrient-dense powerhouses
+     (organ meats, bone broth, ferments, sesame) + a `ppgold` filter chip in `GOALS` (uses `titleOnly:true`
+     in `goalHits` so guidance pages don't pollute it). **Fritters merged into Pancakes** (a fritter is a
+     pancake) → now **18 categories**. Future tag ideas: DF (dairy-free — postpartum-relevant), Veg, Candida-OK.
      Renamed "Plan & Meals" → "The Plan"; added "Sandwiches" (the Zucchini Bread Sandwich = her "tuna melt",
      moved out of Bakes — Sandwiches sits before Bakes in `CATS` so `sandwich` wins routing). Every recipe MUST
      show a **source hyperlink** (`@handle →` in the subtitle). Only add **nutrition / postpartum-appropriate**
