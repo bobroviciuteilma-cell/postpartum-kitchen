@@ -1859,18 +1859,18 @@
     plan:'<circle cx="20" cy="20" r="13"/><path d="M20 9 L23.5 20 L20 31 L16.5 20 Z"/>',
     meals:'<path d="M8 22 a12 11 0 0 0 24 0"/><line x1="6" y1="22" x2="34" y2="22"/><path d="M15 15 c-2 -3 2 -5 0 -8 M20 16 c-2 -3 2 -5 0 -9 M25 15 c-2 -3 2 -5 0 -8"/>',
     drinks:'<path d="M11 18 H27 V22 a8 8 0 0 1 -16 0 Z"/><path d="M27 19 a5 5 0 0 1 0 9"/><path d="M16 13 c-2 -3 2 -4 0 -7 M22 13 c-2 -3 2 -4 0 -7"/><line x1="9" y1="32" x2="29" y2="32"/>',
-    bakes:'<path d="M20 33 V13"/><path d="M20 21 c-5 -1 -8 -5 -7 -10 c5 0 8 4 7 10Z M20 21 c5 -1 8 -5 7 -10 c-5 0 -8 4 -7 10Z"/><path d="M20 14 c-4 -1 -6 -4 -5 -8 M20 14 c4 -1 6 -4 5 -8"/>',
-    community:'<path d="M6 17 a5 4.5 0 0 0 10 0"/><line x1="5" y1="17" x2="17" y2="17"/><path d="M24 17 a5 4.5 0 0 0 10 0"/><line x1="23" y1="17" x2="35" y2="17"/><path d="M15 27 a5 4.5 0 0 0 10 0"/><line x1="14" y1="27" x2="26" y2="27"/>',
+    bakes:'<circle cx="20" cy="20" r="12.5"/><circle cx="16" cy="16" r="1.5" fill="#fff" stroke="none"/><circle cx="24.5" cy="17" r="1.5" fill="#fff" stroke="none"/><circle cx="18.5" cy="24" r="1.5" fill="#fff" stroke="none"/><circle cx="25" cy="24" r="1.3" fill="#fff" stroke="none"/>',
+    community:'<path d="M12 7 H28 V33 L20 27 L12 33 Z"/>',
     reference:'<path d="M20 11 C16 8 10 8 7 9 V30 C10 29 16 29 20 32 C24 29 30 29 33 30 V9 C30 8 24 8 20 11Z"/><line x1="20" y1="11" x2="20" y2="32"/>'
   };
   function svg(k){return '<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">'+(I[k]||I.meals)+'</svg>';}
   var CATS=[
     {key:'plan',name:'Your Plan',color:'#b0481f',match:['recovery plan','your day','recovery timeline']},
-    {key:'meals',name:'Meals & Bowls',color:'#c0633a',match:['breakfast','lunch','dinner','snacks','khichdi','sattvic','vedic porridge']},
+    {key:'meals',name:'Meals',color:'#c0633a',match:['breakfast','lunch','dinner','snacks','khichdi','sattvic','vedic porridge']},
     {key:'drinks',name:'Drinks & Tonics',color:'#3f7d6e',match:['bone broth','postpartum teas','chai','ashwagandha','power smoothie','quick tonics']},
-    {key:'bakes',name:'Bakes & Snacks',color:'#bb8a3a',match:['gond laddu','til-gur','seeded','major milk','keto rolls','banana bread','chicken liver','best foods']},
+    {key:'bakes',name:'Snacks & Bakes',color:'#bb8a3a',match:['gond laddu','til-gur','seeded','major milk','keto rolls','banana bread','chicken liver','best foods']},
     {key:'community',name:'Community Recipes',color:'#a8743a',match:[]},
-    {key:'reference',name:'Reference',color:'#5a6472',match:['glossary','helper','supplement']}
+    {key:'reference',name:'Glossary & Guide',color:'#5a6472',match:['glossary','helper','supplement']}
   ];
   function catFor(t){t=t.toLowerCase(); for(var i=0;i<CATS.length;i++){var m=CATS[i].match;for(var j=0;j<m.length;j++){if(t.indexOf(m[j])>-1)return CATS[i];}} return null;}
   [].slice.call(document.querySelectorAll('section.page')).forEach(function(sec){
