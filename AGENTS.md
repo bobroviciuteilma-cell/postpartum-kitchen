@@ -9,6 +9,9 @@ fast repair, and minimal postpartum hair loss. Currently a single self-contained
 renders to both a **web page** (GitHub Pages) and a **PDF**.
 
 - **Live (public, shareable):** https://bobroviciuteilma-cell.github.io/postpartum-kitchen/
+- **Private full version (unguessable secret-gist link, no login, noindex):**
+  https://gist.githack.com/bobroviciuteilma-cell/4f79377838cb2d3da94912e48ee8eb14/raw/postpartum-kitchen-full.html
+  (secret gist id `4f79377838cb2d3da94912e48ee8eb14`, file `postpartum-kitchen-full.html`)
 - **Repo:** https://github.com/bobroviciuteilma-cell/postpartum-kitchen
 
 ## Two versions
@@ -23,6 +26,9 @@ renders to both a **web page** (GitHub Pages) and a **PDF**.
 1. Edit `master.private.html` (the source of truth).
 2. `cd /Users/Enki/code/postpartum-kitchen && python3 build.py`  → regenerates `index.html`.
 3. `git add index.html build.py && git commit -m "..." && git push` → GitHub Pages updates ~1 min.
+3b. Update the PRIVATE link (re-upload full version to the secret gist):
+    `python3 -c "h=open('master.private.html').read().replace('<meta charset=\"utf-8\">','<meta charset=\"utf-8\">\n<meta name=\"robots\" content=\"noindex, nofollow\">',1); open('/tmp/postpartum-kitchen-full.html','w').write(h)"`
+    `gh gist edit 4f79377838cb2d3da94912e48ee8eb14 /tmp/postpartum-kitchen-full.html`
 4. Personal PDF: render the master with headless Chrome:
    `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
     --no-pdf-header-footer --print-to-pdf=OUT.pdf "file://$PWD/master.private.html"`
