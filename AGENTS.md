@@ -111,6 +111,13 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
    line-art on the hero + dividers. NOTE: in-session AI image generation (nano-banana) is NOT available.
 2. **MCT oil** — add to the Glossary + a "+ ½ tsp MCT" line on the Power Smoothie card (offered, not yet done).
 3. **Swap the 4 gated "My version" cards** for the real recipes once owner fetches them.
+   - ✅ DONE (2026-06-20): added **13 recipes** from the 14 saved IG posts Ilma listed (2 pho posts merged) +
+     new **"Burgers & Patties"** category. Recipe count 46 → **59**. Lithuanian/Spanish captions translated.
+   - **IG scraping:** individual public post URLs → Apify `apify/instagram-scraper` (`directUrls`, `resultsType:posts`)
+     works without a browser. But Ilma's **private saved folder** (`instagram.com/ilmabob/saved/food/...`) is NOT
+     reachable that way — to add "the rest" of her saved collection, need the Claude-in-Chrome extension re-authed
+     (it errored this session) OR Ilma pastes more post URLs. The `Control_Chrome` MCP listed tabs but errored on
+     `get_page_content`/`execute_javascript` ("Chrome is not running").
 4. **Functionality roadmap:**
    - ✅ DONE (2026-06-20): warm app **hero front door**; **goal-filter chips** ("How are you feeling?" →
      keyword filter via `GOALS` array in the app-router script); **Today's rhythm** (tickable daily
@@ -121,9 +128,11 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
      overflow; show via `bar.style.display='grid'` (do NOT use `display:…!important` on `#appBar` — it
      overrides the inline `display:none` used to hide it on home). Goal filter is **keyword-based**, so
      results are approximate (e.g. Glossary can match "iron") — tune `GOALS[].kw` if needed.
-   - Owner GREEN-LIT but NOT yet built (do next): **Night mode** (dim 3am-feed theme), **Phase view**
-     (Week 1–2 / 3–4 / 5–6 emphasis off the Recovery Timeline), **Make-ahead / freezer flags** (ties to
-     Helper Cook List).
+   - ✅ DONE (2026-06-20, batch 2): **Night mode** (dim 3am theme, moon toggle, key `pk_night`, scoped to
+     `@media screen` so the PDF is unaffected — night overrides MUST include the `#appHome`/`#appBar`/
+     `#catList` ID to beat the ID-specificity base rules); **Phase view** ("Where are you?" Week 1–2 / 3–4
+     / 5–6 pills via `PHASES` array, reuses `toggleGoal`/`goalHits`, shows a `.phasefocus` line);
+     **Make-ahead flag** (auto-tagger rule: `freez`/`make ahead`/`meal prep` → `.tag.makeahead`).
    - Still open: Download-PDF button, feedback link for mum testers, per-category recipe icons, servings scaler.
 5. **Commercial strategy session** (DEFERRED by owner until after birth + her own version is finalised):
    the real product = the **personalisation** (a guided "build your postpartum kitchen" quiz → tailored
