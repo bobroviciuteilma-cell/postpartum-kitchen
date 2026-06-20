@@ -159,6 +159,7 @@
   .tag.milk{ background:#f6e3ec; color:#c25a86; }
   .tag.gut{ background:#dbeeee; color:#2f8f8f; }
   .tag.afterbirth{ background:#ececec; color:#777; }
+  .tag.makeahead{ background:#e3e7ef; color:#566a8c; }
   /* ---- category divider pages ---- */
   .page.divider{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:#fff; }
   .page.divider .dicon{ font-size:74px; line-height:1; margin-bottom:16px; }
@@ -207,6 +208,8 @@
     #appHome .lbl h2{ font-family:'Fraunces',serif; font-weight:600; font-size:18px; color:var(--ink); }
     #appHome .lbl span{ font-size:12px; color:var(--grey); }
     #appHome .lbl span.act{ color:var(--rust); cursor:pointer; font-weight:600; }
+    #appHome .phasefocus{ font-size:12.5px; color:var(--grey); margin:-2px 2px 12px; line-height:1.45; }
+    body.app.night #appHome .phasefocus{ color:#a89a8d; }
     #appHome .chips{ display:flex; gap:9px; overflow-x:auto; padding:2px 2px 6px; }
     #appHome .chips::-webkit-scrollbar{ display:none; }
     .gchip{ flex:0 0 auto; display:flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--rule); padding:9px 14px; border-radius:13px; font-size:13px; font-weight:500; color:var(--ink); cursor:pointer; box-shadow:0 2px 6px -3px rgba(60,40,20,.12); transition:transform .1s; white-space:nowrap; }
@@ -284,6 +287,57 @@
     #catList .shopline.muted{ color:var(--grey); font-size:13px; }
   }
   @media print { #appHome, #appBar, #catList { display:none !important; } body.app > section.page { display:block !important; } }
+  /* ---- NIGHT MODE (screen-only, 3am feeds) ---- */
+  @media screen {
+    body.app.night{ background:
+      radial-gradient(120% 55% at 82% -4%, #2a2018 0%, rgba(42,32,24,0) 55%),
+      #1f1a17; }
+    body.app.night .toolbtn{ background:#2b2420; border-color:#3a322c; color:#e8b9a3; }
+    body.app.night .toolbtn .cnt{ box-shadow:0 0 0 2px #1f1a17; }
+    .toolbtn.on svg{ fill:currentColor; }
+    body.app.night #appHome .asearch{ background:#2b2420; border-color:#3a322c; }
+    body.app.night #appHome .asearch input{ color:#ece4db; }
+    body.app.night .gchip{ background:#2b2420; border-color:#3a322c; color:#ddd2c7; }
+    body.app.night #appHome .lbl h2{ color:#ece4db; }
+    body.app.night #appHome .lbl span{ color:#a89a8d; }
+    body.app.night #appHome .today{ background:#2b2420; border-color:#3a322c; }
+    body.app.night #appHome .trow{ border-bottom-color:#39312b; }
+    body.app.night #appHome .twhat{ color:#ece4db; }
+    body.app.night #appHome .twhat small, body.app.night #appHome .twhen{ color:#a89a8d; }
+    body.app.night #appHome .afoot{ color:#8a7d70; }
+    body.app.night #appHome .ri{ border-bottom-color:#39312b; }
+    body.app.night #appHome .ri .rt{ color:#ece4db; }
+    body.app.night #appHome .ri .rs{ color:#a89a8d; }
+    body.app.night #appBar{ background:rgba(31,26,23,.96); border-bottom-color:#3a322c; }
+    body.app.night #appBar .bk{ color:#e8b9a3; }
+    body.app.night #appBar .bt{ color:#ece4db; }
+    body.app.night #appBar .baction{ border-color:#3a322c; color:#e8b9a3; }
+    body.app.night #appBar .baction.on{ background:#3a2a24; border-color:#5a4036; }
+    body.app.night #catList .ch{ color:#ece4db; }
+    body.app.night #catList .ri{ border-bottom-color:#39312b; }
+    body.app.night #catList .ri .rt{ color:#ece4db; }
+    body.app.night #catList .ri .rs{ color:#a89a8d; }
+    body.app.night #catList .empty{ color:#a89a8d; }
+    body.app.night #catList .shophead{ border-bottom-color:#3a322c; }
+    body.app.night #catList .shopline .ig{ color:#ddd2c7; }
+    body.app.night #catList .shopline .cb{ border-color:#4a4039; }
+    body.app.night > section.page.appActive{ background:#1f1a17; color:#ddd2c7; }
+    body.app.night section.page.appActive h1.title{ color:#e07a4f; }
+    body.app.night section.page.appActive .subtitle{ color:#a89a8d; }
+    body.app.night section.page.appActive .subtitle a{ color:#e8a98f; }
+    body.app.night section.page.appActive .colhead{ color:#e8b9a3; border-color:#3a322c; }
+    body.app.night section.page.appActive .subgroup{ color:#e8b9a3; }
+    body.app.night section.page.appActive .ing{ color:#ddd2c7; border-color:#332b27; }
+    body.app.night section.page.appActive .ing b{ color:#ece4db; }
+    body.app.night section.page.appActive .ing .note{ color:#9a8d80; }
+    body.app.night section.page.appActive .subgroup span{ color:#9a8d80; }
+    body.app.night section.page.appActive .box b{ color:#f0e8df; }
+    body.app.night section.page.appActive .step .h{ color:#ece4db; }
+    body.app.night section.page.appActive .step .b{ color:#c3b8ac; }
+    body.app.night section.page.appActive .box{ background:#2b2420; border-color:#3a322c; color:#ddd2c7; }
+    body.app.night section.page.appActive .box .lead{ color:#e8a98f; }
+    body.app.night section.page.appActive .footer{ color:#8a7d70; border-color:#3a322c; }
+  }
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -2276,7 +2330,8 @@
     ['Protein','protein',['protein']],
     ['Milk','milk',['lactation','galactagogue','milk supply','milk-supporting','milk support']],
     ['Gut','gut',['probiotic','candida','ferment','gut-friendly','gut &amp; candida','gut and candida']],
-    ['After birth','afterbirth',['after birth','after-birth']]
+    ['After birth','afterbirth',['after birth','after-birth']],
+    ['Make ahead','makeahead',['freez','make ahead','make-ahead','meal prep']]
   ];
   document.querySelectorAll('section.page').forEach(function(sec){
     if(sec.classList.contains('divider')||sec.classList.contains('hero')||sec.classList.contains('cover')) return;
@@ -2350,6 +2405,11 @@
     {key:'healing',name:'Healing',color:'#5d7d4f',kw:['collagen','bone broth','zinc','vitamin c','repair','heal','recovery','after birth','protein']}
   ];
   function goalHits(g){var out=[];ALL.forEach(function(it){var n=0;for(var i=0;i<g.kw.length;i++){if(it.hay.indexOf(g.kw[i])>-1)n++;}if(n)out.push({it:it,n:n});});out.sort(function(a,b){return b.n-a.n;});return out.map(function(o){return o.it;});}
+  var PHASES=[
+    {key:'p1',name:'Week 1–2',color:'#b0481f',focus:'Rest, warmth & iron — broths, soft, easy to digest.',kw:['broth','soup','khichdi','porridge','liver','iron','collagen','stew','soft','kvass','ferment','congee','pho']},
+    {key:'p2',name:'Week 3–4',color:'#3f7d6e',focus:'Rebuild — protein & milk supply.',kw:['protein','egg','salmon','chicken','beef','lentil','lactation','milk','cutlet','burger','liver','fish','feta','cottage']},
+    {key:'p3',name:'Week 5–6',color:'#bb8a3a',focus:'Energy & hair — snacks, smoothies, good fats.',kw:['smoothie','snack','cookie','laddu','bites','bar','biotin','collagen','hair','omega','bread','bake','cracker','date','nuts']}
+  ];
 
   var PLAN=[
     {when:'Morning',what:'Warm bone broth',sub:'Collagen & minerals to start the day',find:['bone broth']},
@@ -2366,9 +2426,14 @@
 
   var top=el('div','atop'); top.innerHTML='<div class="brandsm">Postpartum Kitchen</div>';
   var tools=el('div','atools');
+  var moonIco='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a6.5 6.5 0 0 0 9.5 9.5z"/></svg>';
   var picksBtn=el('div','toolbtn'); picksBtn.setAttribute('title','My picks'); picksBtn.innerHTML=heartIco+'<span class="cnt"></span>';
   var shopBtn=el('div','toolbtn'); shopBtn.setAttribute('title','Shopping list'); shopBtn.innerHTML=bagIco+'<span class="cnt"></span>';
-  tools.appendChild(picksBtn); tools.appendChild(shopBtn); top.appendChild(tools); home.appendChild(top);
+  var nightBtn=el('div','toolbtn'); nightBtn.setAttribute('title','Night mode'); nightBtn.innerHTML=moonIco;
+  tools.appendChild(picksBtn); tools.appendChild(shopBtn); tools.appendChild(nightBtn); top.appendChild(tools); home.appendChild(top);
+  var NIGHT=LS('pk_night',false);
+  function applyNight(){ document.body.classList.toggle('night',!!NIGHT); nightBtn.classList.toggle('on',!!NIGHT); }
+  nightBtn.addEventListener('click',function(){ NIGHT=!NIGHT; SS('pk_night',NIGHT); applyNight(); });
 
   var h2=el('div','ahero2');
   h2.innerHTML='<svg class="hmotif" viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M18 52 h64 a32 32 0 0 1 -64 0 z"/><path d="M50 20 q-6 8 0 16 q6 -8 0 -16"/><path d="M34 26 q-3 5 0 9 M66 26 q3 5 0 9"/></svg>'+
@@ -2389,6 +2454,10 @@
   var activeGoal=null;
   GOALS.forEach(function(g){ var c=el('div','gchip'); c.innerHTML='<span class="gd" style="background:'+g.color+'"></span>'+g.name; c.addEventListener('click',function(){toggleGoal(g,c);}); chips.appendChild(c); });
   goalSec.appendChild(chips);
+  var plab=el('div','lbl'); plab.innerHTML='<h2>Where are you?</h2><span>recovery phase</span>'; goalSec.appendChild(plab);
+  var phaseRow=el('div','chips');
+  PHASES.forEach(function(p){ var c=el('div','gchip'); c.innerHTML='<span class="gd" style="background:'+p.color+'"></span>'+p.name; c.addEventListener('click',function(){toggleGoal(p,c);}); phaseRow.appendChild(c); });
+  goalSec.appendChild(phaseRow);
   var goalRes=el('div'); goalRes.id='goalRes'; goalRes.style.display='none'; goalSec.appendChild(goalRes);
   home.appendChild(goalSec);
 
@@ -2481,7 +2550,7 @@
     activeGoal={g:g,el:cel}; cel.classList.add('on'); cel.style.background=g.color;
     var q=home.querySelector('#qq'); if(q)q.value=''; sr.style.display='none';
     todaySec.style.display='none'; exploreSec.style.display='none'; goalRes.style.display='block';
-    goalRes.innerHTML='<div class="lbl"><h2 style="color:'+g.color+'">For '+g.name.toLowerCase()+'</h2><span class="act" id="clrGoal">clear</span></div>';
+    goalRes.innerHTML='<div class="lbl"><h2 style="color:'+g.color+'">'+(g.focus?g.name:'For '+g.name.toLowerCase())+'</h2><span class="act" id="clrGoal">clear</span></div>'+(g.focus?'<div class="phasefocus">'+g.focus+'</div>':'');
     goalHits(g).forEach(function(it){ var r=rowFor(it,true); r.addEventListener('click',function(){showRecipe(it,it.cat);}); goalRes.appendChild(r); });
     var cg=document.getElementById('clrGoal'); if(cg)cg.onclick=function(){toggleGoal(g,cel);};
   }
@@ -2516,7 +2585,7 @@
 
   document.body.appendChild(home); document.body.appendChild(bar); document.body.appendChild(list);
   home.querySelector('#qq').addEventListener('input',function(){runSearch(this.value);});
-  document.body.classList.add('app'); updCounts(); showHome();
+  document.body.classList.add('app'); applyNight(); updCounts(); showHome();
 })();
 </script>
 </body>
