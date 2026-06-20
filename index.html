@@ -137,6 +137,33 @@
   #navPanel a{ display:block; padding:7px 18px; color:var(--ink); text-decoration:none; font-size:12.5px; line-height:1.3; }
   #navPanel a:hover{ background:var(--box); color:var(--rust); }
   @media print { #navBtn, #navPanel { display:none !important; } }
+  /* ---- visual system: colour-coded tags ---- */
+  .tagrow{ margin-top:9px; display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{ font-size:9px; font-weight:800; letter-spacing:.4px; padding:3px 9px; border-radius:20px; text-transform:uppercase; }
+  .tag.iron{ background:#f7e3e0; color:#b0392b; }
+  .tag.calcium{ background:#e3efe6; color:#3f7d4f; }
+  .tag.omega{ background:#e1ebf5; color:#3a6ea5; }
+  .tag.protein{ background:#ece3f2; color:#7a5299; }
+  .tag.milk{ background:#f6e3ec; color:#c25a86; }
+  .tag.gut{ background:#dbeeee; color:#2f8f8f; }
+  .tag.afterbirth{ background:#ececec; color:#777; }
+  /* ---- category divider pages ---- */
+  .page.divider{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:#fff; }
+  .page.divider .dicon{ font-size:74px; line-height:1; margin-bottom:16px; }
+  .page.divider .dnum{ font-size:12px; font-weight:700; letter-spacing:4px; opacity:.85; margin-bottom:10px; }
+  .page.divider h2{ font-size:42px; font-weight:800; letter-spacing:-.5px; margin:0; }
+  .page.divider .dsub{ font-size:14px; opacity:.92; margin-top:14px; max-width:400px; line-height:1.5; }
+  .divider.plan{ background:#b0481f; }
+  .divider.meals{ background:#c0633a; }
+  .divider.kitchen{ background:#3f7d6e; }
+  .divider.community{ background:#bb8a3a; }
+  /* ---- intro hero ---- */
+  .page.hero{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:linear-gradient(165deg,#fdf3ea 0%,#f4ddcb 100%); }
+  .hero .htitle{ color:var(--rust); font-size:48px; font-weight:800; letter-spacing:-1px; line-height:1.05; }
+  .hero .htag{ color:#7a5a48; font-size:16.5px; margin-top:14px; max-width:480px; line-height:1.5; }
+  .hero .hpills{ margin-top:28px; display:flex; gap:9px; flex-wrap:wrap; justify-content:center; max-width:540px; }
+  .hero .hpill{ background:#fff; color:var(--rust); border:1px solid var(--box-border); border-radius:20px; padding:7px 15px; font-size:12px; font-weight:600; }
+  .hero .hnote{ margin-top:34px; color:#a98e7e; font-size:11.5px; max-width:440px; line-height:1.5; }
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -158,6 +185,21 @@
 </style>
 </head>
 <body>
+
+<!-- ============ INTRO / WELCOME ============ -->
+<section class="page hero">
+  <div class="htitle">Postpartum Kitchen</div>
+  <div class="htag">Nourishing meals, tonics and recipes for the fourth trimester &mdash; built to restore energy, speed repair and protect your hair, blending Mediterranean food with Eastern confinement wisdom.</div>
+  <div class="hpills">
+    <span class="hpill">&#127858; Warming meals</span>
+    <span class="hpill">&#129749; Daily tonics</span>
+    <span class="hpill">&#129375; Blood-building</span>
+    <span class="hpill">&#129331; Milk support</span>
+    <span class="hpill">&#128170; Iron &amp; protein</span>
+    <span class="hpill">&#10024; Hair &amp; recovery</span>
+  </div>
+  <div class="hnote">Tap the &#9776; button (bottom-right) any time to jump to a section. General educational content &mdash; not medical advice.</div>
+</section>
 
 <!-- ============ COVER ============ -->
 <section class="page cover">
@@ -189,6 +231,14 @@
     </div>
   </div>
   <div class="foot">Keep this in the kitchen. Drinks &amp; tonics work now; meals are built for after birth.</div>
+</section>
+
+<!-- divider: PLAN -->
+<section class="page divider plan">
+  <div class="dnum">PART ONE</div>
+  <div class="dicon">&#129517;</div>
+  <h2>Your Plan</h2>
+  <div class="dsub">The approach, your daily rhythm and the recovery timeline &mdash; start here.</div>
 </section>
 
 <!-- ============ 1. RECOVERY PLAN ============ -->
@@ -310,6 +360,14 @@
   </div>
 
   <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Your Recovery Timeline</div>
+</section>
+
+<!-- divider: MEALS -->
+<section class="page divider meals">
+  <div class="dnum">PART TWO</div>
+  <div class="dicon">&#127869;&#65039;</div>
+  <h2>The Meals</h2>
+  <div class="dsub">Breakfast, lunch, dinner and snacks &mdash; protein-forward, warm and nourishing.</div>
 </section>
 
 <!-- ============ 3. BREAKFAST ============ -->
@@ -461,6 +519,14 @@
     <span class="lead">Batch &amp; freeze before your due date:</span> til-gur, cacao-tahini balls and gond laddu all keep for weeks. A tin of ready snacks by the feeding chair is one of the highest-value things you can prep now.
   </div>
   <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Snacks &amp; Drinks</div>
+</section>
+
+<!-- divider: KITCHEN -->
+<section class="page divider kitchen">
+  <div class="dnum">PART THREE</div>
+  <div class="dicon">&#129749;</div>
+  <h2>Tonics &amp; Recipes</h2>
+  <div class="dsub">Broths, teas, milks and the make-ahead recipes that carry your day.</div>
 </section>
 
 <!-- ============ 7. BONE BROTH ============ -->
@@ -842,6 +908,14 @@
     <span class="lead">Set up the feeding station:</span> a flask of warm tea/broth, a water bottle, and a snack tin (laddu, til-gur, balls, nuts, dates) within arm's reach of where you'll feed &mdash; one-handed nourishment for the 3am sessions.
   </div>
   <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Helper Cook List</div>
+</section>
+
+<!-- divider: COMMUNITY -->
+<section class="page divider community">
+  <div class="dnum">PART FOUR</div>
+  <div class="dicon">&#127757;</div>
+  <h2>Community Recipes</h2>
+  <div class="dsub">Great recipes from around the web, built into cards &mdash; credited to their creators.</div>
 </section>
 
 <!-- ============ FROM YOUR SAVED FEED — INDEX ============ -->
@@ -1439,6 +1513,30 @@
   var btn=document.createElement('button'); btn.id='navBtn'; btn.setAttribute('aria-label','Contents'); btn.innerHTML='&#9776;';
   btn.addEventListener('click',function(){panel.classList.toggle('open');});
   document.body.appendChild(panel); document.body.appendChild(btn);
+})();
+</script>
+<script>
+(function(){
+  var rules=[
+    ['Iron','iron',['iron','ferritin']],
+    ['Calcium','calcium',['calcium']],
+    ['Omega-3','omega',['omega-3','omega 3','dha']],
+    ['Protein','protein',['protein']],
+    ['Milk','milk',['lactation','galactagogue','milk supply','milk-supporting','milk support']],
+    ['Gut','gut',['probiotic','candida','ferment','gut-friendly','gut &amp; candida','gut and candida']],
+    ['After birth','afterbirth',['after birth','after-birth']]
+  ];
+  document.querySelectorAll('section.page').forEach(function(sec){
+    if(sec.classList.contains('divider')||sec.classList.contains('hero')||sec.classList.contains('cover')) return;
+    if(!sec.querySelector('.step') && !sec.querySelector('.var')) return;       // recipe / meal cards only
+    var sub=sec.querySelector('.subtitle'); if(!sub || sec.querySelector('.tagrow')) return;
+    var txt=sec.textContent.toLowerCase();
+    var row=document.createElement('div'); row.className='tagrow'; var n=0;
+    rules.forEach(function(r){ if(n>=5) return;
+      for(var i=0;i<r[2].length;i++){ if(txt.indexOf(r[2][i])>-1){ var t=document.createElement('span'); t.className='tag '+r[1]; t.textContent=r[0]; row.appendChild(t); n++; break; } }
+    });
+    if(n) sub.parentNode.insertBefore(row, sub.nextSibling);
+  });
 })();
 </script>
 </body>
