@@ -55,11 +55,21 @@ it into a commercial product after getting feedback from other mums.
   also renumbers the public copy after removing the Supplement row).
 - Section anchors (`id="..."`) power internal links; `<a>` handles link to original IG posts.
 
-## 6. Self-building JS (two `<script>`s before `</body>`)
-- **Contents nav**: a floating ☰ button → a drawer with a **search box** + the four category groups,
-  built from `section.page` (dividers become group headers), auto-assigns missing ids, smooth-scrolls.
+## 6. Self-building JS (three `<script>`s before `</body>`)
+- **Contents nav**: a floating ☰ button → a drawer with a search box + category groups (legacy; hidden
+  in app mode via `body.app #navBtn,#navPanel{display:none}`).
 - **Auto-tagger**: scans each recipe/meal card's text and injects colour tags after the subtitle.
-- Both run in the BROWSER only (so they appear on the links but NOT in the printed PDF — that's fine).
+- **App router (primary UX, screen-only):** turns the doc into a calm home → category → recipe app.
+  Adds `body.app`; hides all `section.page` and shows `#appHome` (cloned hero + **search bar** + a 2-col
+  tile grid). Tap a tile → `#catList` (recipe list for that category); tap a recipe → that one
+  `section.page.appActive` shows. **Search** (`#qq`) does full-text (`title+sub+textContent`, AND of
+  terms) across a flat `ALL[]`, hides tiles, shows results tagged with their category colour.
+  Categories live in the `CATS` array (7 food-type buckets: Plan & Meals, Salads, Soups & Bowls,
+  Drinks & Tonics, Bakes & Breakfast, Snacks & Sweets, Glossary & Guide); `catFor(title)` matches by
+  keyword, default catch-all is `CATS[5]` (Snacks). **No "Mains"/"Community" buckets — owner rejected
+  source-based & vague labels; keep categories food-type and obvious.** `@media print` shows all
+  sections so the PDF stays full & linear.
+- All three run in the BROWSER only (they appear on the links but NOT in the printed PDF — that's fine).
 
 ## 7. Content map (current order; ~53 public pages, ~55 private)
 Intro hero · Cover · **[Plan divider]** · Recovery Plan · Your Day Top to Bottom · Recovery Timeline ·
@@ -101,10 +111,23 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
    line-art on the hero + dividers. NOTE: in-session AI image generation (nano-banana) is NOT available.
 2. **MCT oil** — add to the Glossary + a "+ ½ tsp MCT" line on the Power Smoothie card (offered, not yet done).
 3. **Swap the 4 gated "My version" cards** for the real recipes once owner fetches them.
-4. **Functionality roadmap:** Download-PDF button, a feedback link for mum testers, per-category recipe
-   icons, favourites (localStorage), shopping-list generator, servings scaler, dark-mode toggle.
-5. **Commercial strategy session** (after mum feedback): the real product = the **personalisation**
-   (a guided "build your postpartum kitchen" quiz → tailored plan, which was done manually via Q&A).
+4. **Functionality roadmap:**
+   - ✅ DONE (2026-06-20): warm app **hero front door**; **goal-filter chips** ("How are you feeling?" →
+     keyword filter via `GOALS` array in the app-router script); **Today's rhythm** (tickable daily
+     checklist, `PLAN` array, saved to `localStorage` key `pk_today_<date>`); **Favourites** (♥, key
+     `pk_favs`); **Shopping list** (bag icon harvests each recipe's `.ing` lines, key `pk_shop`);
+     richer gradient category cards + "Start here" feature tile. Top bar = two icon buttons (heart=Picks,
+     bag=List) with count badges. App bar is a 3-col grid (`auto | 1fr | auto`) so recipe actions never
+     overflow; show via `bar.style.display='grid'` (do NOT use `display:…!important` on `#appBar` — it
+     overrides the inline `display:none` used to hide it on home). Goal filter is **keyword-based**, so
+     results are approximate (e.g. Glossary can match "iron") — tune `GOALS[].kw` if needed.
+   - Owner GREEN-LIT but NOT yet built (do next): **Night mode** (dim 3am-feed theme), **Phase view**
+     (Week 1–2 / 3–4 / 5–6 emphasis off the Recovery Timeline), **Make-ahead / freezer flags** (ties to
+     Helper Cook List).
+   - Still open: Download-PDF button, feedback link for mum testers, per-category recipe icons, servings scaler.
+5. **Commercial strategy session** (DEFERRED by owner until after birth + her own version is finalised):
+   the real product = the **personalisation** (a guided "build your postpartum kitchen" quiz → tailored
+   plan, done manually via Q&A). The goal-filter chips are a lightweight seed of this.
 6. **Cover maintenance:** cover is manually numbered — renumber when adding sections (consider a more
    sustainable approach; print PDF needs static numbers so pure-JS numbering won't show in PDF).
 
