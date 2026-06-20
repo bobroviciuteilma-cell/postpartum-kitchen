@@ -1867,13 +1867,13 @@
   };
   function svg(k){return '<svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">'+(I[k]||I.meals)+'</svg>';}
   var CATS=[
-    {key:'plan',name:'Your Plan',color:'#b0481f',match:['recovery plan','your day','recovery timeline']},
-    {key:'meals',name:'Meals',color:'#c0633a',match:['breakfast','lunch','dinner','khichdi','sattvic','chicken heart','courgette']},
+    {key:'plan',name:'Plan & Meals',color:'#b0481f',match:['recovery plan','your day','recovery timeline','breakfast','lunch','dinner','snacks & drinks']},
+    {key:'meals',name:'Mains',color:'#c0633a',match:['khichdi','sattvic','chicken heart','courgette']},
     {key:'salads',name:'Salads',color:'#5f7d4a',match:['salad']},
     {key:'soups',name:'Soups & Broths',color:'#bf7233',match:['broth','soup']},
     {key:'drinks',name:'Drinks & Tonics',color:'#3f7d6e',match:['postpartum teas','chai','ashwagandha','power smoothie','quick tonics']},
     {key:'bakes',name:'Bakes & Breakfast',color:'#bb8a3a',match:['porridge','pancakes','waffles','seeded','banana bread','keto rolls','cottage cheese bake']},
-    {key:'snacks',name:'Snacks & Sweets',color:'#9a6b3f',match:['snacks & drinks','laddu','til-gur','chicken liver','brownie','bark','fat bombs','fro-yo','skyr','date chocolate','truffle','major milk','fermented']},
+    {key:'snacks',name:'Snacks & Sweets',color:'#9a6b3f',match:['laddu','til-gur','chicken liver','brownie','bark','fat bombs','fro-yo','skyr','date chocolate','truffle','major milk','fermented']},
     {key:'guide',name:'Glossary & Guide',color:'#5a6472',match:['glossary','helper','best foods','supplement']}
   ];
   function catFor(t){t=t.toLowerCase(); for(var i=0;i<CATS.length;i++){var m=CATS[i].match;for(var j=0;j<m.length;j++){if(t.indexOf(m[j])>-1)return CATS[i];}} return null;}
