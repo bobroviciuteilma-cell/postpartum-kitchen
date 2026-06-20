@@ -176,6 +176,8 @@
   .hero .hpills{ margin-top:28px; display:flex; gap:9px; flex-wrap:wrap; justify-content:center; max-width:540px; }
   .hero .hpill{ background:#fff; color:var(--rust); border:1px solid var(--box-border); border-radius:20px; padding:7px 15px; font-size:12px; font-weight:600; }
   .hero .hnote{ margin-top:34px; color:#a98e7e; font-size:11.5px; max-width:440px; line-height:1.5; }
+  .page.divider .dart{ width:82px; height:82px; margin-bottom:18px; }
+  .hero .heroart{ width:230px; height:auto; margin-bottom:6px; }
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -200,6 +202,21 @@
 
 <!-- ============ INTRO / WELCOME ============ -->
 <section class="page hero">
+  <svg class="heroart" viewBox="0 0 220 100" fill="none" stroke="#b0481f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M76 58 a34 30 0 0 0 68 0"/>
+    <line x1="70" y1="58" x2="150" y2="58"/>
+    <path d="M98 47 c-5 -7 5 -10 0 -18"/>
+    <path d="M110 47 c-5 -7 5 -10 0 -20"/>
+    <path d="M122 47 c-5 -7 5 -10 0 -18"/>
+    <path d="M44 84 C44 68 50 58 62 54"/>
+    <path d="M48 72 c-9 -1 -14 -8 -13 -16 c9 0 14 7 13 16"/>
+    <path d="M55 62 c-7 -3 -11 -10 -10 -17"/>
+    <path d="M176 84 C176 68 170 58 158 54"/>
+    <path d="M172 72 c9 -1 14 -8 13 -16 c-9 0 -14 7 -13 16"/>
+    <circle cx="62" cy="86" r="2.6" fill="#b0481f" stroke="none"/>
+    <circle cx="158" cy="86" r="2.6" fill="#b0481f" stroke="none"/>
+    <circle cx="110" cy="90" r="2.6" fill="#b0481f" stroke="none"/>
+  </svg>
   <div class="htitle">Postpartum Kitchen</div>
   <div class="htag">Nourishing meals, tonics and recipes for the fourth trimester &mdash; built to restore energy, speed repair and protect your hair, blending Mediterranean food with Eastern confinement wisdom.</div>
   <div class="hpills">
@@ -248,7 +265,9 @@
 <!-- divider: PLAN -->
 <section class="page divider plan">
   <div class="dnum">PART ONE</div>
-  <div class="dicon">&#129517;</div>
+  <svg class="dart" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="32" cy="32" r="22"/><path d="M32 15 L37.5 32 L32 49 L26.5 32 Z"/><circle cx="32" cy="32" r="2.6" fill="#fff" stroke="none"/>
+  </svg>
   <h2>Your Plan</h2>
   <div class="dsub">The approach, your daily rhythm and the recovery timeline &mdash; start here.</div>
 </section>
@@ -377,7 +396,9 @@
 <!-- divider: MEALS -->
 <section class="page divider meals">
   <div class="dnum">PART TWO</div>
-  <div class="dicon">&#127869;&#65039;</div>
+  <svg class="dart" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13 36 a19 17 0 0 0 38 0"/><line x1="10" y1="36" x2="54" y2="36"/><path d="M25 26 c-3 -4 3 -7 0 -12"/><path d="M32 28 c-3 -4 3 -7 0 -13"/><path d="M39 26 c-3 -4 3 -7 0 -12"/>
+  </svg>
   <h2>The Meals</h2>
   <div class="dsub">Breakfast, lunch, dinner and snacks &mdash; protein-forward, warm and nourishing.</div>
 </section>
@@ -536,7 +557,9 @@
 <!-- divider: KITCHEN -->
 <section class="page divider kitchen">
   <div class="dnum">PART THREE</div>
-  <div class="dicon">&#129749;</div>
+  <svg class="dart" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 30 H42 V35 a13 13 0 0 1 -26 0 Z"/><path d="M42 31 a7.5 7.5 0 0 1 0 14"/><path d="M24 23 c-3 -4 3 -6 0 -11"/><path d="M32 23 c-3 -4 3 -6 0 -11"/><line x1="14" y1="52" x2="46" y2="52"/>
+  </svg>
   <h2>Tonics &amp; Recipes</h2>
   <div class="dsub">Broths, teas, milks and the make-ahead recipes that carry your day.</div>
 </section>
@@ -925,7 +948,9 @@
 <!-- divider: COMMUNITY -->
 <section class="page divider community">
   <div class="dnum">PART FOUR</div>
-  <div class="dicon">&#127757;</div>
+  <svg class="dart" viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 26 a8.5 7.5 0 0 0 17 0"/><line x1="7" y1="26" x2="28" y2="26"/><path d="M38 26 a8.5 7.5 0 0 0 17 0"/><line x1="36" y1="26" x2="57" y2="26"/><path d="M23.5 42 a8.5 7.5 0 0 0 17 0"/><line x1="21.5" y1="42" x2="42.5" y2="42"/>
+  </svg>
   <h2>Community Recipes</h2>
   <div class="dsub">Great recipes from around the web, built into cards &mdash; credited to their creators.</div>
 </section>
