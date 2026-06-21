@@ -1,0 +1,156 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --linen:#efe8d7;--linen2:#f6f0e2;--paper:#faf6ec;
+    --ink:#4a4035;--ink2:#6f6353;--soft:#8a7e6c;
+    --sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;
+    --rule:#d9cdb6;
+  }
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);
+    background:radial-gradient(120% 80% at 80% 0%,#f4eedf 0%,rgba(244,238,223,0) 60%),
+               radial-gradient(100% 70% at 0% 100%,#f1ebda 0%,rgba(241,235,218,0) 55%),var(--linen);
+    -webkit-font-smoothing:antialiased;}
+  body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+    background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px),
+                     repeating-linear-gradient(90deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px);}
+  .wrap{max-width:480px;margin:0 auto;padding:24px 20px 48px;position:relative}
+
+  .brand{text-align:center;margin-bottom:4px}
+  .brand .script{font-family:'Pinyon Script',cursive;font-size:28px;color:var(--sage2);line-height:1}
+  .brand .est{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.34em;color:var(--soft);text-transform:uppercase;margin-top:3px}
+
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:36px;line-height:1.05;text-align:center;color:var(--ink);margin-top:14px}
+  .sub{font-style:italic;font-size:15.5px;text-align:center;color:var(--ink2);margin:9px auto 0;max-width:32ch;line-height:1.45}
+
+  .rule-orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 18px;color:var(--sage)}
+  .rule-orn:before,.rule-orn:after{content:"";height:1px;width:54px;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
+  .rule-orn svg{width:15px;height:15px}
+
+  .card{background:linear-gradient(#fbf8f0,#f7f1e3);border:1px solid var(--rule);border-radius:5px;
+    padding:16px 17px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.6) inset;cursor:pointer}
+  .card.gold{border-color:#e6cf9a;background:linear-gradient(#fcf7e7,#f6ebcd)}
+  .card.gold:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--amber),#dcb964)}
+  .ribbon{position:absolute;top:11px;right:-30px;transform:rotate(45deg);background:linear-gradient(var(--amber),#b88a32);
+    color:#fff7e4;font-family:'Marcellus',serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+    padding:3px 34px;box-shadow:0 1px 2px rgba(120,90,30,.25)}
+
+  .chead{display:flex;align-items:flex-start;gap:13px}
+  .ic{width:48px;height:48px;flex:0 0 48px;border-radius:50%;border:1px solid var(--rule);
+    background:#fbf8ef;display:flex;align-items:center;justify-content:center;color:var(--sage)}
+  .card.gold .ic{border-color:#e6cf9a;color:var(--amber2);background:#fcf6e6}
+  .ic svg{width:27px;height:27px}
+  .ct{flex:1;min-width:0;padding-top:1px}
+  .ct .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1.04;color:var(--ink)}
+  .ct .nm .o{display:block;font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);margin-top:3px;font-weight:400}
+  .bestfor{margin-top:7px;font-size:13.5px;color:var(--sage2);font-style:italic}
+  .bestfor span{font-family:'Marcellus',serif;font-style:normal;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin-right:6px}
+  .card.gold .bestfor{color:var(--amber2)}
+
+  .desc{font-size:15px;color:var(--ink2);line-height:1.5;margin-top:11px}
+
+  .qg{display:flex;gap:8px;margin-top:13px}
+  .q{flex:1;border:1px solid var(--rule);border-radius:4px;background:rgba(255,255,255,.45);padding:8px 6px;text-align:center}
+  .card.gold .q{border-color:#e7d3a6;background:rgba(255,252,242,.55)}
+  .q .ql{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--sage2);display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:5px}
+  .q .ql svg{width:13px;height:13px;color:var(--sage)}
+  .card.gold .q .ql{color:var(--amber2)}.card.gold .q .ql svg{color:var(--amber)}
+  .q .qv{font-size:12.5px;color:var(--ink);line-height:1.3}
+
+  .more{margin-top:0;border-top:1px dotted #ddd0b8;padding-top:0;max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .4s ease,opacity .35s ease,padding .35s ease,margin .35s ease}
+  .card.open .more{max-height:360px;opacity:1;padding-top:13px;margin-top:13px}
+  .more .why b{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage2);display:block;margin-bottom:4px}
+  .more .why{font-size:14.5px;color:var(--ink2);line-height:1.55}
+  .stat{display:flex;gap:11px;align-items:flex-start;margin-top:12px;background:rgba(156,140,182,.1);
+    border-left:2px solid var(--lav);border-radius:0 4px 4px 0;padding:9px 12px}
+  .stat svg{width:17px;height:17px;color:var(--lav);flex:0 0 17px;margin-top:2px}
+  .stat .s{font-size:13.5px;color:#5f5470;line-height:1.45}
+  .stat .s b{color:#4d4360}
+  .stat .src{display:block;font-style:italic;font-size:11.5px;color:var(--soft);margin-top:3px}
+
+  .toggle{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:13px;
+    font-family:'Marcellus',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber2);user-select:none}
+  .toggle svg{width:13px;height:13px;transition:transform .35s ease}
+  .card.open .toggle svg{transform:rotate(180deg)}
+  .toggle .lc{display:none}.card.open .toggle .lo{display:none}.card.open .toggle .lc{display:inline}
+
+  .tip{text-align:center;font-style:italic;font-size:12.5px;color:var(--soft);margin:2px 0 20px}
+  .foot{text-align:center;margin-top:18px;color:var(--soft);font-style:italic;font-size:12.5px}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; fourth trimester</div></div>
+  <h1>The Apothecary</h1>
+  <div class="sub">Your healing foods, and exactly what each one does for you.</div>
+  <div class="rule-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
+  <div class="tip">Tap any food to see why it works</div>
+
+  <!-- RED DATES (open as worked example) -->
+  <div class="card gold open" onclick="this.classList.toggle('open')">
+    <div class="ribbon">PP Gold</div>
+    <div class="chead">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="12" cy="13" rx="5" ry="7.5"/><path d="M12 5.5C12 4 13 3 15 2.5M12 5.5c0-1.2-.8-2.2-2.4-2.6"/><path d="M10 10c.6 2 .6 4 0 6" opacity=".5"/></svg></div>
+      <div class="ct"><div class="nm">Red Dates<span class="o">Jujube &middot; Hong Zao</span></div>
+        <div class="bestfor"><span>Best for</span>Blood, iron &amp; warmth</div></div>
+    </div>
+    <div class="desc">The cornerstone of confinement cooking — sweet, warming, and deeply nourishing to the blood you've just spent.</div>
+    <div class="qg">
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21v-9M12 12c0-3.5 2.5-6.5 6.5-6.5 0 3.5-2.5 6.5-6.5 6.5zM12 13.5C12 10.5 9.5 8 6 8c0 3 2.5 5.5 6 5.5z"/></svg>Use</div><div class="qv">Split into broth, tea or congee</div></div>
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="9" cy="8" rx="4" ry="5"/><path d="M9 13v8"/></svg>Amount</div><div class="qv">5&ndash;7 a day</div></div>
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg>When</div><div class="qv">Weeks 1&ndash;6</div></div>
+    </div>
+    <div class="more">
+      <div class="why"><b>Why it works</b>Traditionally used to "tonify blood" after birth — and they genuinely carry iron, vitamin C and natural sugars that lift energy without a crash. Gentle on a tender gut, and they make everything taste like care.</div>
+      <div class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5M4 19h16M8 16v-4M12 16V8M16 16v-7"/></svg><div class="s"><b>~20mg vitamin C &amp; 0.5mg iron</b> per 5 dried dates — pairs with your iron-rich broth to help absorption.<span class="src">Trad. confinement practice &middot; nutrient values, USDA</span></div></div>
+    </div>
+    <div class="toggle"><span class="lo">Why it works</span><span class="lc">Show less</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  </div>
+
+  <!-- CHICKEN FEET / COLLAGEN (collapsed) -->
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="chead">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 13h16a8 8 0 0 1-16 0z"/><path d="M9 7c-.6-1 .4-2 0-3M12 6.5c-.6-1 .4-2 0-3M15 7c-.6-1 .4-2 0-3"/></svg></div>
+      <div class="ct"><div class="nm">Bone &amp; Chicken Feet<span class="o">Collagen broth</span></div>
+        <div class="bestfor"><span>Best for</span>Tissue repair &amp; gut</div></div>
+    </div>
+    <div class="desc">Slow-simmered bones give up collagen, gelatin and minerals — the building blocks for healing tissue.</div>
+    <div class="qg">
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21v-9M12 12c0-3.5 2.5-6.5 6.5-6.5 0 3.5-2.5 6.5-6.5 6.5zM12 13.5C12 10.5 9.5 8 6 8c0 3 2.5 5.5 6 5.5z"/></svg>Use</div><div class="qv">Simmer 2&ndash;3 hrs</div></div>
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="9" cy="8" rx="4" ry="5"/><path d="M9 13v8"/></svg>Amount</div><div class="qv">A warm cup daily</div></div>
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg>When</div><div class="qv">From day 1</div></div>
+    </div>
+    <div class="more">
+      <div class="why"><b>Why it works</b>Gelatin-rich broth is soothing and easy to digest when solid food feels like too much — and it delivers glycine and minerals that support skin, joints and gut lining as you knit back together.</div>
+      <div class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5M4 19h16M8 16v-4M12 16V8M16 16v-7"/></svg><div class="s"><b>Sets to jelly when chilled</b> — that wobble is the collagen you're after.<span class="src">See the full Chicken Bone Broth recipe &rarr;</span></div></div>
+    </div>
+    <div class="toggle"><span class="lo">Why it works</span><span class="lc">Show less</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  </div>
+
+  <!-- MORINGA (collapsed, gold) -->
+  <div class="card gold" onclick="this.classList.toggle('open')">
+    <div class="ribbon">PP Gold</div>
+    <div class="chead">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V6"/><path d="M12 10c-3 0-5-1.5-5.5-4 3 0 5 1.2 5.5 4zM12 10c3 0 5-1.5 5.5-4-3 0-5 1.2-5.5 4zM12 15c-3 0-5-1.5-5.5-4 3 0 5 1.2 5.5 4zM12 15c3 0 5-1.5 5.5-4-3 0-5 1.2-5.5 4z"/></svg></div>
+      <div class="ct"><div class="nm">Moringa<span class="o">Drumstick leaf</span></div>
+        <div class="bestfor"><span>Best for</span>Milk supply &amp; iron</div></div>
+    </div>
+    <div class="desc">A tiny green spoonful that quietly packs in iron, calcium and vitamin A — a classic gentle galactagogue.</div>
+    <div class="qg">
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21v-9M12 12c0-3.5 2.5-6.5 6.5-6.5 0 3.5-2.5 6.5-6.5 6.5zM12 13.5C12 10.5 9.5 8 6 8c0 3 2.5 5.5 6 5.5z"/></svg>Use</div><div class="qv">Stir into broth or milk</div></div>
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="9" cy="8" rx="4" ry="5"/><path d="M9 13v8"/></svg>Amount</div><div class="qv">&frac12; tsp a day</div></div>
+      <div class="q"><div class="ql"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg>When</div><div class="qv">Once milk is in</div></div>
+    </div>
+    <div class="more">
+      <div class="why"><b>Why it works</b>One of the most nutrient-dense leaves there is — used across South Asia and Africa to rebuild iron stores and support milk supply. Add it at the end so the heat doesn't dull it.</div>
+      <div class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5M4 19h16M8 16v-4M12 16V8M16 16v-7"/></svg><div class="s"><b>Studies link daily moringa to higher milk volume</b> in the early weeks — food first, always.<span class="src">Lactation reviews &middot; food, not medicine</span></div></div>
+    </div>
+    <div class="toggle"><span class="lo">Why it works</span><span class="lc">Show less</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+  </div>
+
+  <div class="foot">— tap to fold away &middot; food, not medicine —</div>
+</div>
+</body></html>
