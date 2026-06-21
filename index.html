@@ -6,6 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -306,6 +307,64 @@
     #catList .shopline.muted{ color:var(--grey); font-size:13px; }
   }
   @media print { #appHome, #appBar, #catList { display:none !important; } body.app > section.page { display:block !important; } }
+  /* ===== PROVENCE theme — scoped to .page.provence only (broth pilot) ===== */
+  .page.provence{
+    --pv-linen:#efe8d7; --pv-ink:#4a4035; --pv-ink2:#6f6353; --pv-soft:#8a7e6c;
+    --pv-sage:#7a895a; --pv-sage2:#5f6e44; --pv-lav:#9c8cb6; --pv-amber:#c39a47; --pv-amber2:#a87f2f; --pv-rule:#d9cdb6;
+    font-family:'EB Garamond',Georgia,serif; color:var(--pv-ink);
+    background:
+      radial-gradient(120% 80% at 80% 0%, #f4eedf 0%, rgba(244,238,223,0) 60%),
+      radial-gradient(100% 70% at 0% 100%, #f1ebda 0%, rgba(241,235,218,0) 55%),
+      var(--pv-linen);
+  }
+  .page.provence .pv-brand{text-align:center;margin-bottom:2px}
+  .page.provence .pv-brand .script{font-family:'Pinyon Script',cursive;font-size:27px;color:var(--pv-sage2);line-height:1}
+  .page.provence .pv-brand .est{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.34em;color:var(--pv-soft);text-transform:uppercase;margin-top:3px}
+  .page.provence .pv-bot{display:flex;justify-content:center;margin:12px 0 4px}
+  .page.provence .pv-bot svg{width:120px;height:auto}
+  .page.provence h1.title{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:38px;line-height:1.05;
+    text-align:center;color:var(--pv-ink);letter-spacing:.01em;border:none}
+  .page.provence h1.title .zh{display:block;font-family:'Marcellus',serif;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--pv-soft);margin-top:8px;font-weight:400}
+  .page.provence .subtitle{font-family:'EB Garamond',serif;font-style:italic;font-size:16px;text-align:center;
+    color:var(--pv-ink2);margin:11px auto 0;max-width:36ch;line-height:1.45}
+  .page.provence .pv-orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 6px;color:var(--pv-sage)}
+  .page.provence .pv-orn:before,.page.provence .pv-orn:after{content:"";height:1px;width:58px;background:linear-gradient(90deg,transparent,var(--pv-rule),transparent)}
+  .page.provence .pv-orn svg{width:15px;height:15px}
+  .page.provence .twocol{display:block;margin-top:8px}
+  .page.provence .colhead{font-family:'Marcellus',serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--pv-sage2);border-bottom:1px solid var(--pv-rule);padding-bottom:6px;margin:26px 0 12px;font-weight:400}
+  .page.provence .ing{font-size:16px;line-height:1.5;padding:5px 0;border-bottom:1px dotted #e0d6c2}
+  .page.provence .ing b{color:var(--pv-ink);font-weight:600}
+  .page.provence .ing .note{color:var(--pv-soft);font-style:italic;font-size:14px}
+  .page.provence .step{display:grid;grid-template-columns:26px 1fr;gap:14px;margin-bottom:0;padding:9px 0}
+  .page.provence .badge{width:auto;height:auto;border-radius:0;background:none;color:var(--pv-amber2);
+    font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;display:block;text-align:center}
+  .page.provence .step .h{font-weight:600;color:var(--pv-ink);font-size:16px}
+  .page.provence .step .h .time{font-style:italic;font-weight:400;color:var(--pv-sage2);font-size:14px;margin-left:6px}
+  .page.provence .step .b{font-size:15.5px;color:var(--pv-ink2);line-height:1.5;margin-top:1px}
+  .page.provence .box.ppgold{margin-top:22px;border:1px solid var(--pv-amber);background:linear-gradient(135deg,#f8efd2,#f1e3bd);border-radius:4px;padding:15px 17px}
+  .page.provence .box.ppgold .ppgold-h{font-family:'Marcellus',serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--pv-amber2)}
+  .page.provence .box.ppgold .ppgold-b{font-style:italic;color:#6e5a2c;font-size:15px;margin:6px 0 8px}
+  .page.provence .box.ppgold .ppgold-i{font-size:15px;color:#5e4d28;padding:2px 0}
+  .page.provence .box.ppgold .ppgold-i b{color:var(--pv-amber2)}
+  .page.provence .box.ppgold .ppgold-i span{color:#8a7340;font-style:italic;font-size:13.5px}
+  .page.provence .box.box-tight{margin-top:18px;border:none;border-top:1px solid var(--pv-rule);border-radius:0;
+    background:none;padding:12px 0 0;font-size:15px;color:var(--pv-ink2);line-height:1.55}
+  .page.provence .box.box-tight .lead{font-family:'Marcellus',serif;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--pv-sage2);display:block;margin-bottom:3px;font-weight:400}
+  .page.provence .goldmark{color:var(--pv-amber2);font-weight:400}
+  .page.provence .footer{font-family:'EB Garamond',serif;font-style:italic;color:var(--pv-soft);font-size:13px}
+  .page.provence .pv-child{margin-top:18px;border:1px solid var(--pv-rule);border-left:3px solid var(--pv-sage);
+    border-radius:0 4px 4px 0;background:rgba(122,137,90,.07);padding:11px 14px;font-size:14.5px;color:var(--pv-ink2);line-height:1.5}
+  .page.provence .pv-child b{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--pv-sage2);display:block;margin-bottom:3px;font-weight:400}
+  .page.provence .tagrow{justify-content:center;gap:8px;margin-top:14px}
+  .page.provence .tag{font-family:'Marcellus',serif;font-size:10px;font-weight:400;letter-spacing:.14em;
+    text-transform:uppercase;padding:5px 12px;border-radius:2px;border:1px solid var(--pv-rule);
+    color:var(--pv-ink2);background:rgba(255,255,255,.4);box-shadow:none}
+  .page.provence .tag.gf{border-color:#a9b78a;color:var(--pv-sage2);background:rgba(255,255,255,.4)}
+  .page.provence .tag.gold{border-color:var(--pv-amber);color:var(--pv-amber2);background:linear-gradient(#f7eccb,#f1e1bb)}
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -701,9 +760,31 @@
 </section>
 
 <!-- ============ 7. BONE BROTH ============ -->
-<section class="page" id="broth">
+<section class="page provence" id="broth">
+  <div class="pv-brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; fourth trimester</div></div>
+  <div class="pv-bot">
+    <svg viewBox="0 0 200 120" fill="none">
+      <g stroke="#6f7d54" stroke-width="1.6" stroke-linecap="round">
+        <path d="M100 112 C100 92 100 70 100 40"/>
+        <path d="M100 100 C90 96 84 90 80 82 M100 100 C110 96 116 90 120 82"/>
+        <path d="M100 86 C89 82 82 76 78 67 M100 86 C111 82 118 76 122 67"/>
+        <path d="M100 70 C90 66 84 60 81 52 M100 70 C110 66 116 60 119 52"/>
+        <path d="M100 54 C92 50 87 45 84 38 M100 54 C108 50 113 45 116 38"/>
+        <path d="M100 40 C95 35 92 30 91 24 M100 40 C105 35 108 30 109 24"/>
+      </g>
+      <g fill="#9c8cb6" opacity=".9">
+        <ellipse cx="100" cy="20" rx="3" ry="4.5"/><ellipse cx="94" cy="24" rx="2.6" ry="4"/><ellipse cx="106" cy="24" rx="2.6" ry="4"/>
+        <ellipse cx="97" cy="14" rx="2.4" ry="3.6"/><ellipse cx="103" cy="14" rx="2.4" ry="3.6"/>
+      </g>
+      <g><circle cx="150" cy="48" r="7" fill="#e7c878"/><circle cx="150" cy="48" r="7" fill="none" stroke="#c39a47" stroke-width="1"/>
+         <circle cx="166" cy="62" r="5" fill="#e7c878"/><circle cx="166" cy="62" r="5" fill="none" stroke="#c39a47" stroke-width="1"/>
+         <circle cx="158" cy="78" r="3.5" fill="#e7c878"/></g>
+      <path d="M44 56 C58 50 70 47 84 47" stroke="#7a895a" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </div>
   <h1 class="title">Chicken Bone Broth</h1>
-  <div class="subtitle">Deep iron &amp; collagen &mdash; sip a cup a day &nbsp;&bull;&nbsp; makes ~3 L</div>
+  <div class="subtitle">Deep iron &amp; collagen &mdash; sip a warm cup a day &nbsp;&bull;&nbsp; makes ~3 L</div>
+  <div class="pv-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
   <div class="twocol">
     <div>
       <div class="colhead">WHAT YOU NEED</div>
@@ -736,6 +817,7 @@
     <div class="ppgold-i"><b>&frac12; tsp moringa</b> <span>&middot; per bowl, off the heat (never boil)</span></div>
   </div>
   <div class="box box-tight" style="margin-top:14px;"><span class="lead">Good to know</span> &mdash; set like jelly when chilled, that's perfect. Sip a warm cup daily or use as a soup base. Keeps 4 days in the fridge, or freezes in portions.</div>
+  <div class="pv-child"><b>For little ones</b> Lovely from ~6 months as a cooking liquid &mdash; use it for baby's congee, purées or to soften grains. Leave the salt out for under-1s (season your own bowl after). The ginger and turmeric are gentle in these small amounts.</div>
   <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Chicken Bone Broth</div>
 </section>
 
@@ -2779,7 +2861,11 @@
   document.body.appendChild(home); document.body.appendChild(bar); document.body.appendChild(list);
   home.querySelector('#qq').addEventListener('input',function(){runSearch(this.value);});
   document.body.classList.add('app'); updCounts(); showHome();
-  if(/^#(helper|prep)$/i.test(location.hash)) showHelper();
+  function deepLinkRecipe(){ var m=/^#r=([\w-]+)$/i.exec(location.hash); if(!m) return false;
+    var id=m[1].toLowerCase(); for(var i=0;i<ALL.length;i++){ if(ALL[i].sec&&ALL[i].sec.id.toLowerCase()===id){ showRecipe(ALL[i],ALL[i].cat); return true; } } return false; }
+  function route(){ if(/^#(helper|prep)$/i.test(location.hash)){ showHelper(); } else if(!deepLinkRecipe()){ showHome(); } }
+  route();
+  window.addEventListener('hashchange',route);
 })();
 </script>
 </body>
