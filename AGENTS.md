@@ -132,6 +132,12 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
      (organ meats, bone broth, ferments, sesame) + a `ppgold` filter chip in `GOALS` (uses `titleOnly:true`
      in `goalHits` so guidance pages don't pollute it). **Fritters merged into Pancakes** (a fritter is a
      pancake) → now **18 categories**. Future tag ideas: DF (dairy-free — postpartum-relevant), Veg, Candida-OK.
+   - **GOLDEN BOOST ✦ (reusable, 2026-06-21):** a recipe = a **standard** version + an optional **postpartum/
+     confinement upgrade**. The PP-only ingredients go under a gold `<div class="subgroup goldgroup">`
+     `<span class="goldmark">&#10022;</span> GOLDEN BOOST</div>` header, and a gold `<div class="box ppboost">`
+     callout explains them. First applied to **Chicken Bone Broth** (renamed from "Postpartum Recovery Bone
+     Broth"): standard broth + Golden Boost = 7 red dates + goji + moringa. Symbol ✦ (`&#10022;`), name
+     "Golden Boost" (ties to the PP Gold tag). Reuse this pattern on any recipe with a confinement upgrade.
      Renamed "Plan & Meals" → "The Plan"; added "Sandwiches" (the Zucchini Bread Sandwich = her "tuna melt",
      moved out of Bakes — Sandwiches sits before Bakes in `CATS` so `sandwich` wins routing). Every recipe MUST
      show a **source hyperlink** (`@handle →` in the subtitle). Only add **nutrition / postpartum-appropriate**
