@@ -425,6 +425,25 @@
   .page.provence details.pv-d summary .chev{width:13px;height:13px;color:var(--pv-amber2);transition:transform .25s}
   .page.provence details.pv-d[open] summary .chev{transform:rotate(180deg)}
   .page.provence details.pv-d .dc{font-size:15px;color:var(--pv-ink2);line-height:1.55;padding:4px 0 8px}
+  /* interactive nutrient -> source strip */
+  .page.provence .nstrip{margin-top:16px;border:1px solid var(--pv-rule);border-radius:5px;background:rgba(122,137,90,.06);overflow:hidden;position:relative}
+  .page.provence .nstrip .nl{font-family:'Marcellus',serif;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--pv-sage2);text-align:center;padding:11px 14px 9px}
+  .page.provence .nstrip input{position:absolute;opacity:0;pointer-events:none}
+  .page.provence .nchips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:0 12px 11px}
+  .page.provence .nchips label{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--pv-rule);border-radius:20px;color:var(--pv-ink2);background:rgba(255,255,255,.6);cursor:pointer;transition:all .15s}
+  .page.provence .nchips label:hover{border-color:var(--pv-sage)}
+  .page.provence .npanel{display:none;padding:2px 18px 15px;font-size:14.5px;color:var(--pv-ink2);line-height:1.55;text-align:center}
+  .page.provence .npanel b{color:var(--pv-sage2)}
+  .page.provence #n-collagen:checked ~ .nchips label[for=n-collagen],
+  .page.provence #n-iron:checked     ~ .nchips label[for=n-iron],
+  .page.provence #n-protein:checked  ~ .nchips label[for=n-protein],
+  .page.provence #n-omega:checked    ~ .nchips label[for=n-omega],
+  .page.provence #n-spice:checked    ~ .nchips label[for=n-spice]{background:linear-gradient(#f7eccb,#f1e1bb);border-color:var(--pv-amber);color:var(--pv-amber2)}
+  .page.provence #n-collagen:checked ~ .npanels .npanel[data-n=collagen],
+  .page.provence #n-iron:checked     ~ .npanels .npanel[data-n=iron],
+  .page.provence #n-protein:checked  ~ .npanels .npanel[data-n=protein],
+  .page.provence #n-omega:checked    ~ .npanels .npanel[data-n=omega],
+  .page.provence #n-spice:checked    ~ .npanels .npanel[data-n=spice]{display:block}
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -2088,7 +2107,7 @@
     </svg>
   </div>
   <h1 class="title">Pho</h1>
-  <div class="subtitle">Pho the easy way &mdash; built on your bone broth, so the long part&rsquo;s already done &nbsp;&bull;&nbsp; iron, collagen &amp; warming spice &nbsp;&bull;&nbsp; serves 4 &nbsp;&bull;&nbsp; 25 min</div>
+  <div class="subtitle">Pho the easy way &mdash; built on your bone broth, so the long part&rsquo;s already done &nbsp;&bull;&nbsp; serves 4 &nbsp;&bull;&nbsp; 25 min</div>
   <div class="pv-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
 
   <a class="pv-base" href="#r=broth">
@@ -2096,6 +2115,29 @@
     <span class="bt">Bone Broth <span class="ar">&rarr; make this first</span></span>
     <span class="bn">Beef is the classic pho base; your chicken bone broth works beautifully too.</span>
   </a>
+
+  <div class="nstrip">
+    <div class="nl">What this bowl gives you &mdash; tap to see where</div>
+    <input type="radio" name="phonut" id="n-collagen" checked>
+    <input type="radio" name="phonut" id="n-iron">
+    <input type="radio" name="phonut" id="n-protein">
+    <input type="radio" name="phonut" id="n-omega">
+    <input type="radio" name="phonut" id="n-spice">
+    <div class="nchips">
+      <label for="n-collagen">Collagen</label>
+      <label for="n-iron">Iron</label>
+      <label for="n-protein">Protein</label>
+      <label for="n-omega">Omega-3</label>
+      <label for="n-spice">Warming spice</label>
+    </div>
+    <div class="npanels">
+      <div class="npanel" data-n="collagen">From the <b>simmered bone broth</b> &mdash; gelatin and collagen for skin, joints and gut repair.</div>
+      <div class="npanel" data-n="iron">From the <b>bone broth</b>, and most of all if you choose <b>beef</b> or <b>liver</b>. The warming spices help you absorb it.</div>
+      <div class="npanel" data-n="protein">From <b>whichever protein you pick</b> below &mdash; beef, chicken, egg, fish, prawns or liver.</div>
+      <div class="npanel" data-n="omega">From <b>salmon or white fish</b>, if that&rsquo;s your pick &mdash; omega-3 for mood and hair.</div>
+      <div class="npanel" data-n="spice">From <b>ginger, star anise, cinnamon &amp; clove</b> &mdash; warmth, circulation and gentle digestion.</div>
+    </div>
+  </div>
 
   <div class="twocol">
     <div>
