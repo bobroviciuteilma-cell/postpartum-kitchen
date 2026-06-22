@@ -3,163 +3,191 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  :root{--linen:#efe8d7;--paper:#f7f1e3;--ink:#403729;--ink2:#6f6353;--soft:#938671;--sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rust:#b0623a;--rule:#dacca f}
-  :root{--rule:#d9cdb6}
-  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);
-    background:radial-gradient(140% 60% at 50% -8%,#f7efdd 0%,rgba(247,239,221,0) 52%),radial-gradient(100% 50% at 100% 100%,#efe6d3 0%,rgba(239,230,211,0) 55%),var(--linen);-webkit-font-smoothing:antialiased}
-  body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px)}
-  .wrap{max-width:462px;margin:0 auto;padding:18px 24px 46px;position:relative}
-  .top{display:flex;align-items:center;justify-content:space-between}
-  .top .script{font-family:'Pinyon Script',cursive;font-size:23px;color:var(--sage2)}
-  .top .moon{width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.45)}
-  .top .moon svg{width:16px;height:16px;color:var(--soft)}
+  :root{--linen:#efe8d7;--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;--sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rust:#b0623a;--rule:#d9cdb6}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:var(--linen);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:462px;margin:0 auto;position:relative;overflow:hidden;
+    background:radial-gradient(120% 40% at 50% 86%,#efe6d3 0%,rgba(239,230,211,0) 50%),var(--linen)}
+  .wrap:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.4;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px)}
+  .pad{padding:0 24px}
 
-  /* HERO */
-  .hero{text-align:center;padding:8px 0 4px}
-  .hero .bot{display:flex;justify-content:center;margin:6px 0 2px}
-  .hero .bot svg{width:184px;height:auto}
-  .kicker{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--soft)}
-  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:46px;line-height:1.0;color:var(--ink);margin:8px 0 0;letter-spacing:.005em}
-  .hero h1 em{display:block;font-style:italic;font-weight:400;font-size:31px;color:var(--sage2);margin-top:7px}
-  .hero .ph{font-style:italic;color:var(--ink2);font-size:15px;margin-top:13px}
+  /* full-bleed hero */
+  .hero{position:relative;height:392px;overflow:hidden;
+    background:linear-gradient(180deg,#f6d9b0 0%,#f1c79a 24%,#eebf8f 40%,#efd3ac 64%,var(--linen) 100%)}
+  .hero svg.scene{position:absolute;inset:0;width:100%;height:100%}
+  .hero .topbar{position:absolute;top:16px;left:24px;right:24px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+  .hero .topbar .script{font-family:'Pinyon Script',cursive;font-size:23px;color:#7a4f2c}
+  .hero .topbar .moon{width:34px;height:34px;border-radius:50%;border:1px solid rgba(122,79,44,.4);display:flex;align-items:center;justify-content:center;background:rgba(255,250,240,.4)}
+  .hero .topbar .moon svg{width:16px;height:16px;color:#7a4f2c}
+  .hero .copy{position:absolute;left:0;right:0;bottom:20px;text-align:center;z-index:3;padding:0 24px}
+  .hero .kick{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:#9a6638}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:43px;line-height:.98;color:#4a3320;margin-top:7px;text-shadow:0 1px 0 rgba(255,245,225,.5)}
+  .hero h1 em{display:block;font-weight:400;font-style:italic;font-size:27px;color:#7a4f2c;margin-top:6px}
 
-  .orn{display:flex;align-items:center;justify-content:center;gap:13px;margin:20px 0 18px;color:var(--sage)}
-  .orn:before,.orn:after{content:"";height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
+  .body{padding:22px 24px 46px;position:relative;z-index:2}
+  .ph{text-align:center;font-style:italic;color:var(--ink2);font-size:15px;margin-bottom:4px}
+
+  .orn{display:flex;align-items:center;justify-content:center;gap:13px;margin:16px 0 16px;color:var(--sage)}
+  .orn:before,.orn:after{content:"";height:1px;width:64px;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
   .orn svg{width:15px;height:15px}
 
-  /* FEELING -> prescription */
-  .ask{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;text-align:center;color:var(--ink)}
-  .asksub{text-align:center;font-style:italic;color:var(--soft);font-size:13px;margin:4px 0 14px}
+  .ask{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;text-align:center}
+  .asksub{text-align:center;font-style:italic;color:var(--soft);font-size:13px;margin:3px 0 14px}
   .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
   .chip{font-size:14.5px;color:var(--ink2);border:1px solid var(--rule);border-radius:22px;padding:8px 16px;background:rgba(255,255,255,.55)}
-  .chip.on{border-color:var(--sage);color:#fff;background:linear-gradient(var(--sage),var(--sage2));box-shadow:0 1px 4px rgba(95,110,68,.25)}
+  .chip.on{border-color:var(--sage);color:#fff;background:linear-gradient(var(--sage),var(--sage2));box-shadow:0 1px 5px rgba(95,110,68,.3)}
 
-  /* the prescription showpiece */
-  .rx{margin-top:18px;border:1px solid var(--amber);border-radius:10px;background:
-      radial-gradient(120% 80% at 100% 0%,#fbf2d8,rgba(251,242,216,0)),linear-gradient(#fdf8ea,#f6ead0);
-      padding:22px 20px 18px;position:relative;box-shadow:0 6px 22px rgba(168,127,47,.13)}
-  .rx .corner{position:absolute;width:42px;height:42px;color:#dcc081;opacity:.8}
-  .rx .corner.tl{top:8px;left:8px}.rx .corner.br{bottom:8px;right:8px;transform:rotate(180deg)}
-  .rx .rxk{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--amber2);text-align:center}
-  .rx h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:33px;text-align:center;color:#5e4d28;line-height:1.05;margin:4px 0 3px}
+  .rx{margin-top:18px;border:1px solid var(--amber);border-radius:11px;background:radial-gradient(120% 80% at 100% 0%,#fbf2d8,rgba(251,242,216,0)),linear-gradient(#fdf8ea,#f5e8cd);padding:24px 21px 18px;position:relative;box-shadow:0 8px 26px rgba(168,127,47,.16)}
+  .rx .seal{position:absolute;top:-15px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:linear-gradient(var(--amber),#a87f2f);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(120,90,30,.3)}
+  .rx .seal svg{width:22px;height:22px;color:#fff7e4}
+  .rx .corner{position:absolute;width:40px;height:40px;color:#dcc081;opacity:.85}
+  .rx .corner.tl{top:9px;left:9px}.rx .corner.tr{top:9px;right:9px;transform:scaleX(-1)}.rx .corner.bl{bottom:9px;left:9px;transform:scaleY(-1)}.rx .corner.br{bottom:9px;right:9px;transform:scale(-1)}
+  .rx .rxk{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--amber2);text-align:center;margin-top:6px}
+  .rx h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:35px;text-align:center;color:#5a481f;line-height:1.02;margin:3px 0 3px}
   .rx .rxsub{text-align:center;font-style:italic;color:#86702f;font-size:13.5px;margin-bottom:13px}
-  .rx .line{display:flex;gap:11px;align-items:flex-start;padding:8px 2px;border-top:1px solid rgba(195,154,71,.28);font-size:14.5px;color:#5e5230;line-height:1.45}
-  .rx .line .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber2);flex:0 0 64px;padding-top:2px}
-  .rx .line b{color:#4a3f22}
-  .rx .line .mult{color:var(--rust);font-style:italic}
-  .rx .cta{display:block;margin-top:15px;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
-    background:linear-gradient(var(--amber),#b6862f);color:#fff8e9;padding:13px;border-radius:7px}
+  .rx .line{display:flex;gap:11px;align-items:flex-start;padding:8px 2px;border-top:1px solid rgba(195,154,71,.3);font-size:14.5px;color:#5a4f2c;line-height:1.45}
+  .rx .line .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber2);flex:0 0 62px;padding-top:2px}
+  .rx .line b{color:#473c1f}.rx .line .mult{color:var(--rust);font-style:italic;font-weight:500}
+  .rx .cta{display:block;margin-top:15px;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.13em;text-transform:uppercase;background:linear-gradient(var(--amber),#b0822c);color:#fff8e9;padding:14px;border-radius:8px;box-shadow:0 3px 10px rgba(168,127,47,.3)}
   .rx .safe{margin-top:11px;font-size:12px;font-style:italic;color:#9a5a3f;text-align:center;line-height:1.45}
 
   .or{text-align:center;margin:18px 0 8px;font-style:italic;color:var(--soft);font-size:13.5px}
-  .feed{display:flex;align-items:center;justify-content:center;gap:11px;border:1px solid var(--sage);border-radius:30px;
-    background:rgba(122,137,90,.08);padding:13px;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--sage2)}
+  .feed{display:flex;align-items:center;justify-content:center;gap:11px;border:1px solid var(--sage);border-radius:30px;background:rgba(122,137,90,.08);padding:14px;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--sage2)}
   .feed svg{width:21px;height:21px}
 
-  /* slim feature strip */
-  .strip{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:24px}
-  .card{border:1px solid var(--rule);border-radius:9px;background:linear-gradient(#fbf8f0,#f6efdf);padding:15px;position:relative;min-height:96px;overflow:hidden}
-  .card .ck{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
-  .card .cn{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;line-height:1.05;margin-top:4px;color:var(--ink)}
-  .card .cd{font-size:12.5px;color:var(--ink2);font-style:italic;margin-top:4px;line-height:1.4}
-  .card.wide{grid-column:1/3;min-height:auto;display:flex;align-items:center;gap:14px}
-  .card.wide .ribbon{display:flex;gap:4px;flex:0 0 auto}
-  .card.wide .wk{width:26px;text-align:center;border:1px solid var(--rule);border-radius:4px;padding:6px 0;font-family:'Marcellus',serif;font-size:8px;color:var(--soft)}
-  .card.wide .wk.now{border-color:var(--amber);background:linear-gradient(#f7eccb,#f1e1bb);color:var(--amber2)}
-  .card.heal{background:linear-gradient(135deg,#eef0e6,#e5ebd7);border-color:#bcc7a3}.card.heal .cn{color:var(--sage2)}
-  .card.gold{background:linear-gradient(135deg,#f8efd2,#f0e1ba);border-color:#e6cf9a}.card.gold .cn{color:var(--amber2)}
-  .card .leaf{position:absolute;right:-8px;bottom:-10px;width:64px;height:64px;color:var(--sage);opacity:.13}
+  /* featured recipe with image slot (real-photo-ready) */
+  .feat{margin-top:24px;border:1px solid var(--rule);border-radius:11px;overflow:hidden;background:#fff;box-shadow:0 4px 16px rgba(120,100,70,.1)}
+  .feat .img{height:150px;position:relative;background:linear-gradient(135deg,#e9cfa0,#d9a86f)}
+  .feat .img svg{position:absolute;inset:0;width:100%;height:100%}
+  .feat .img .tag{position:absolute;top:11px;left:12px;font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(90,72,31,.55);padding:4px 9px;border-radius:3px}
+  .feat .cap{padding:14px 16px 16px}
+  .feat .cap .cn{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600}
+  .feat .cap .cd{font-size:13px;color:var(--ink2);font-style:italic;margin-top:2px}
 
-  .foot{text-align:center;margin-top:26px;color:var(--soft);font-style:italic;font-size:12px}
+  .strip{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
+  .card{border:1px solid var(--rule);border-radius:9px;background:linear-gradient(#fbf8f0,#f6efdf);padding:14px;min-height:84px;position:relative;overflow:hidden}
+  .card .ck{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+  .card .cn{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;margin-top:4px;line-height:1.05}
+  .card .cd{font-size:12px;color:var(--ink2);font-style:italic;margin-top:3px}
+  .card.heal{background:linear-gradient(135deg,#eef0e6,#e4ead5);border-color:#bcc7a3}.card.heal .cn{color:var(--sage2)}
+  .card.gold{background:linear-gradient(135deg,#f8efd2,#efdfb6);border-color:#e6cf9a}.card.gold .cn{color:var(--amber2)}
+  .foot{text-align:center;margin-top:24px;color:var(--soft);font-style:italic;font-size:12px}
 </style></head>
 <body>
 <div class="wrap">
-  <div class="top">
-    <div class="script">Postpartum Kitchen</div>
-    <div class="moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
-  </div>
 
   <div class="hero">
-    <div class="bot">
-      <svg viewBox="0 0 220 150" fill="none">
-        <!-- soft watercolor washes -->
-        <ellipse cx="92" cy="74" rx="60" ry="46" fill="#cdd6b4" opacity=".22"/>
-        <ellipse cx="130" cy="62" rx="42" ry="34" fill="#d7c7e0" opacity=".18"/>
-        <ellipse cx="150" cy="92" rx="34" ry="26" fill="#ecd6a3" opacity=".22"/>
-        <!-- rosemary sprig -->
-        <g stroke="#6f7d54" stroke-width="1.5" stroke-linecap="round" fill="none">
-          <path d="M70 138 C72 110 76 80 86 50"/>
-          <path d="M80 116 C72 112 66 106 62 98 M80 116 C90 113 96 108 100 100"/>
-          <path d="M83 100 C74 96 68 90 65 82 M83 100 C93 97 99 92 102 84"/>
-          <path d="M85 84 C77 80 72 75 69 68 M85 84 C93 81 98 76 101 69"/>
-          <path d="M86 68 C80 63 76 58 74 52 M86 68 C92 63 96 58 98 52"/>
-        </g>
-        <!-- eucalyptus round-leaf branch -->
-        <g>
-          <path d="M150 140 C144 110 140 84 132 58" stroke="#8a9a6a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <g fill="#aeb98c" opacity=".85" stroke="#8a9a6a" stroke-width="1">
-            <ellipse cx="124" cy="64" rx="10" ry="7" transform="rotate(-28 124 64)"/>
-            <ellipse cx="143" cy="74" rx="10" ry="7" transform="rotate(20 143 74)"/>
-            <ellipse cx="129" cy="86" rx="9" ry="6.5" transform="rotate(-24 129 86)"/>
-            <ellipse cx="147" cy="98" rx="9" ry="6.5" transform="rotate(22 147 98)"/>
-            <ellipse cx="135" cy="110" rx="8" ry="6" transform="rotate(-20 135 110)"/>
-          </g>
-        </g>
-        <!-- lavender stems -->
-        <g stroke="#7f8a5d" stroke-width="1.2" stroke-linecap="round">
-          <path d="M108 140 C110 116 110 96 108 76"/>
-          <path d="M120 140 C121 120 120 102 117 86"/>
-        </g>
-        <g fill="#9c8cb6">
-          <ellipse cx="108" cy="70" rx="3" ry="5"/><ellipse cx="103" cy="76" rx="2.5" ry="4"/><ellipse cx="113" cy="76" rx="2.5" ry="4"/><ellipse cx="106" cy="82" rx="2.3" ry="3.6"/><ellipse cx="110" cy="82" rx="2.3" ry="3.6"/>
-          <ellipse cx="117" cy="80" rx="2.7" ry="4.5"/><ellipse cx="113" cy="86" rx="2.2" ry="3.6"/><ellipse cx="121" cy="86" rx="2.2" ry="3.6"/>
-        </g>
-        <!-- amber berries -->
-        <g><circle cx="168" cy="78" r="6.5" fill="#e7c878"/><circle cx="168" cy="78" r="6.5" fill="none" stroke="#c39a47" stroke-width="1"/>
-           <circle cx="180" cy="90" r="5" fill="#e7c878"/><circle cx="180" cy="90" r="5" fill="none" stroke="#c39a47" stroke-width="1"/>
-           <circle cx="172" cy="100" r="3.6" fill="#e7c878"/></g>
-      </svg>
+    <svg class="scene" viewBox="0 0 462 392" preserveAspectRatio="xMidYMax slice" fill="none">
+      <!-- dawn sun glow -->
+      <circle cx="231" cy="150" r="120" fill="#f7e3bf" opacity=".45"/>
+      <circle cx="231" cy="150" r="74" fill="#f8ecd0" opacity=".5"/>
+      <!-- soft botanical washes -->
+      <ellipse cx="70" cy="150" rx="80" ry="120" fill="#bfcba0" opacity=".22"/>
+      <ellipse cx="400" cy="150" rx="80" ry="120" fill="#cdbcd9" opacity=".18"/>
+      <!-- left botanicals -->
+      <g stroke="#6f7d54" stroke-width="2" stroke-linecap="round" fill="none" opacity=".85">
+        <path d="M40 392 C46 300 56 220 84 150"/>
+        <path d="M64 250 C50 244 40 232 34 216 M64 250 C82 244 92 232 98 214"/>
+        <path d="M72 210 C58 204 49 192 44 176 M72 210 C90 204 99 192 104 176"/>
+        <path d="M80 170 C68 164 60 153 56 140 M80 170 C94 164 102 153 106 140"/>
+      </g>
+      <g stroke="#7f8a5d" stroke-width="1.6" stroke-linecap="round" opacity=".9">
+        <path d="M118 392 C122 320 120 250 112 196"/></g>
+      <g fill="#9c8cb6" opacity=".95"><ellipse cx="112" cy="188" rx="5" ry="8"/><ellipse cx="104" cy="200" rx="4" ry="6.5"/><ellipse cx="120" cy="200" rx="4" ry="6.5"/><ellipse cx="108" cy="212" rx="3.6" ry="6"/><ellipse cx="116" cy="212" rx="3.6" ry="6"/></g>
+      <!-- right eucalyptus + berries -->
+      <g><path d="M420 392 C414 320 408 250 392 196" stroke="#8a9a6a" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <g fill="#aeb98c" opacity=".9" stroke="#8a9a6a" stroke-width="1.2">
+          <ellipse cx="378" cy="208" rx="15" ry="10" transform="rotate(-26 378 208)"/>
+          <ellipse cx="406" cy="226" rx="15" ry="10" transform="rotate(22 406 226)"/>
+          <ellipse cx="384" cy="246" rx="13" ry="9" transform="rotate(-22 384 246)"/>
+          <ellipse cx="410" cy="266" rx="13" ry="9" transform="rotate(24 410 266)"/></g></g>
+      <g><circle cx="346" cy="250" r="9" fill="#e7c878"/><circle cx="346" cy="250" r="9" fill="none" stroke="#c39a47" stroke-width="1.3"/>
+         <circle cx="364" cy="270" r="7" fill="#e7c878"/><circle cx="364" cy="270" r="7" fill="none" stroke="#c39a47" stroke-width="1.3"/>
+         <circle cx="352" cy="286" r="5" fill="#e7c878"/></g>
+
+      <!-- STEAM -->
+      <g stroke="#fff" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".5">
+        <path d="M200 250 C188 226 214 214 200 190 C190 172 210 158 200 138"/>
+        <path d="M236 254 C226 230 250 218 238 196 C229 180 247 166 240 148"/>
+        <path d="M268 256 C260 236 280 226 270 206"/>
+      </g>
+      <!-- BOWL -->
+      <g>
+        <ellipse cx="231" cy="376" rx="150" ry="26" fill="#d9c39a" opacity=".5"/>
+        <path d="M96 300 C96 360 150 392 231 392 C312 392 366 360 366 300 Z" fill="#e9ddc6"/>
+        <path d="M96 300 C96 360 150 392 231 392 C312 392 366 360 366 300" fill="none" stroke="#cdbd9d" stroke-width="2"/>
+        <ellipse cx="231" cy="300" rx="135" ry="34" fill="#c98f3e"/>
+        <ellipse cx="231" cy="300" rx="135" ry="34" fill="none" stroke="#b07d34" stroke-width="2"/>
+        <ellipse cx="231" cy="296" rx="120" ry="27" fill="#d8a64a"/>
+        <ellipse cx="225" cy="290" rx="60" ry="12" fill="#e6bd6a" opacity=".6"/>
+        <!-- garnish: herb sprig + goji + egg -->
+        <g stroke="#5f6e44" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M200 296 C214 288 230 286 248 290"/><path d="M210 293 c-2-4 2-6 0-9 M222 291 c-2-4 2-6 0-9 M234 291 c-2-4 2-6 0-9"/></g>
+        <circle cx="262" cy="300" r="5" fill="#b0481f"/><circle cx="274" cy="304" r="4" fill="#b0481f"/>
+        <ellipse cx="196" cy="302" rx="12" ry="9" fill="#fbf4e4"/><circle cx="196" cy="302" r="5" fill="#e8b84a"/>
+      </g>
+    </svg>
+
+    <div class="topbar">
+      <div class="script">Postpartum Kitchen</div>
+      <div class="moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
     </div>
-    <div class="kicker">Natural healing &middot; fourth trimester</div>
-    <h1>Tell us how<br>you feel.<em>We&rsquo;ll tell you what to eat.</em></h1>
+    <div class="copy">
+      <div class="kick">Natural healing &middot; fourth trimester</div>
+      <h1>Tell us how you feel.<em>We&rsquo;ll tell you what to eat.</em></h1>
+    </div>
+  </div>
+
+  <div class="body">
     <div class="ph">Good morning. Let&rsquo;s get something nourishing into you.</div>
-  </div>
+    <div class="orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
 
-  <div class="orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
-
-  <div class="ask">How are you feeling?</div>
-  <div class="asksub">Tap what&rsquo;s true today &mdash; or answer 3 quick questions.</div>
-  <div class="chips">
-    <span class="chip on">Wiped out</span><span class="chip on">Can&rsquo;t sleep</span><span class="chip">Low mood</span><span class="chip">Hair shedding</span><span class="chip">Cramps</span>
-  </div>
-
-  <div class="rx">
-    <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
-    <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
-    <div class="rxk">For you &middot; this week</div>
-    <h2>Iron &amp; Magnesium</h2>
-    <div class="rxsub">&ldquo;Wiped out&rdquo; and not sleeping often point here.</div>
-    <div class="line"><span class="k">Right now</span><div>A few squares of <b>dark chocolate</b>, or a spoon of <b>liver p&acirc;t&eacute;</b> from the freezer.</div></div>
-    <div class="line"><span class="k">Cook</span><div><b>Beef Heart Stew</b> &middot; <b>Creamy Squash Soup</b></div></div>
-    <div class="line"><span class="k">Absorb</span><div>Lemon on the iron &middot; tea an hour apart &mdash; <span class="mult">~3&times; the iron</span>.</div></div>
-    <span class="cta">See your plan &amp; recipes &rarr;</span>
-    <div class="safe">Heavy bleeding or dark thoughts? That&rsquo;s past what food fixes &mdash; please call your midwife. A warm broth while you do.</div>
-  </div>
-
-  <div class="or">&mdash; or, when you can&rsquo;t even think &mdash;</div>
-  <div class="feed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11h14M5 11a7 7 0 0 0 14 0M9 6c-1-1 1-2 0-3M15 6c-1-1 1-2 0-3"/></svg> Feed me now</div>
-
-  <div class="strip">
-    <div class="card wide">
-      <div class="ribbon"><span class="wk">1</span><span class="wk now">2</span><span class="wk">3</span><span class="wk">4</span><span class="wk">5</span><span class="wk">6</span></div>
-      <div><div class="ck">Where your body is &middot; week 2</div><div class="cd" style="margin-top:2px">Blood resettling, iron draining &mdash; we lean into iron &amp; warmth. An arc, not a race.</div></div>
+    <div class="ask">How are you feeling?</div>
+    <div class="asksub">Tap what&rsquo;s true today &mdash; or answer 3 quick questions.</div>
+    <div class="chips">
+      <span class="chip on">Wiped out</span><span class="chip on">Can&rsquo;t sleep</span><span class="chip">Low mood</span><span class="chip">Hair shedding</span><span class="chip">Cramps</span>
     </div>
-    <div class="card heal"><div class="ck">Learn</div><div class="cn">Healing Guide</div><div class="cd">what your body needs &amp; why</div><svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6 18 4 12 6 4c8 0 12 4 12 12 0 4-3 6-6 6z"/></svg></div>
-    <div class="card gold"><div class="ck">Powerhouse</div><div class="cn">PP Gold</div><div class="cd">the most nourishing foods</div></div>
-    <div class="card"><div class="ck">In the house?</div><div class="cn">Cook what you have</div><div class="cd">eggs, broth, greens &rarr; tonight&rsquo;s bowl</div></div>
-    <div class="card heal"><div class="ck">Share</div><div class="cn">For a helper</div><div class="cd">one link &middot; they cook for you</div></div>
-  </div>
 
-  <div class="foot">— food, not medicine · made with care —</div>
+    <div class="rx">
+      <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
+      <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
+      <svg class="corner tr" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
+      <svg class="corner bl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
+      <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
+      <div class="rxk">For you &middot; this week</div>
+      <h2>Iron &amp; Magnesium</h2>
+      <div class="rxsub">&ldquo;Wiped out&rdquo; and not sleeping often point here.</div>
+      <div class="line"><span class="k">Right now</span><div>A few squares of <b>dark chocolate</b>, or a spoon of <b>liver p&acirc;t&eacute;</b> from the freezer.</div></div>
+      <div class="line"><span class="k">Cook</span><div><b>Beef Heart Stew</b> &middot; <b>Creamy Squash Soup</b></div></div>
+      <div class="line"><span class="k">Absorb</span><div>Lemon on the iron &middot; tea an hour apart &mdash; <span class="mult">~3&times; the iron</span>.</div></div>
+      <span class="cta">See your plan &amp; recipes &rarr;</span>
+      <div class="safe">Heavy bleeding or dark thoughts? That&rsquo;s past what food fixes &mdash; please call your midwife. A warm broth while you do.</div>
+    </div>
+
+    <div class="or">&mdash; or, when you can&rsquo;t even think &mdash;</div>
+    <div class="feed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11h14M5 11a7 7 0 0 0 14 0M9 6c-1-1 1-2 0-3M15 6c-1-1 1-2 0-3"/></svg> Feed me now</div>
+
+    <div class="feat">
+      <div class="img">
+        <svg viewBox="0 0 462 150" preserveAspectRatio="xMidYMid slice" fill="none">
+          <rect width="462" height="150" fill="#dcae72"/>
+          <ellipse cx="231" cy="150" rx="150" ry="60" fill="#c98f3e"/>
+          <ellipse cx="231" cy="142" rx="120" ry="42" fill="#d8a64a"/>
+          <g stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".45" fill="none"><path d="M210 120 C200 100 222 90 212 70"/><path d="M244 122 C236 104 256 96 246 78"/></g>
+          <g stroke="#5f6e44" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M205 138 C220 130 238 128 256 132"/></g>
+          <circle cx="265" cy="140" r="5" fill="#b0481f"/><ellipse cx="200" cy="140" rx="11" ry="8" fill="#fbf4e4"/><circle cx="200" cy="140" r="4.5" fill="#e8b84a"/>
+        </svg>
+        <span class="tag">Today&rsquo;s nourishing pick</span>
+      </div>
+      <div class="cap"><div class="cn">Chicken Bone Broth</div><div class="cd">deep iron &amp; collagen &mdash; sip a warm cup today</div></div>
+    </div>
+
+    <div class="strip">
+      <div class="card heal"><div class="ck">Learn</div><div class="cn">Healing Guide</div><div class="cd">what your body needs &amp; why</div></div>
+      <div class="card gold"><div class="ck">Powerhouse</div><div class="cn">PP Gold</div><div class="cd">the most nourishing foods</div></div>
+      <div class="card"><div class="ck">In the house?</div><div class="cn">Cook what you have</div><div class="cd">eggs, broth, greens &rarr; tonight</div></div>
+      <div class="card heal"><div class="ck">Share</div><div class="cn">For a helper</div><div class="cd">one link &middot; they cook</div></div>
+    </div>
+
+    <div class="foot">— food, not medicine · made with care —</div>
+  </div>
 </div>
 </body></html>
