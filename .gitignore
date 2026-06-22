@@ -4,3 +4,9 @@ master.private.html
 
 # PDFs (personal copies)
 *.pdf
+
+# iCloud hub extras (your side — never publish)
+.DS_Store
+References/
+Previews/
+START HERE.md
