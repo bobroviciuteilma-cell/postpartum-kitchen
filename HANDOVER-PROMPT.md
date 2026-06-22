@@ -1,7 +1,7 @@
 # New-session prompt — Postpartum Kitchen
 
 > Paste everything below into a fresh Claude Code session opened with
-> `cwd = /Users/Enki/code/postpartum-kitchen` (so CLAUDE.md → AGENTS.md auto-loads).
+> `cwd = /Users/Enki/Library/Mobile Documents/com~apple~CloudDocs/Postpartum Kitchen` (so CLAUDE.md → AGENTS.md auto-loads).
 
 ---
 
