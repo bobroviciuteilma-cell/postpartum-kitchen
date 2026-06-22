@@ -1,6 +1,6 @@
 # New-session prompt — Postpartum Kitchen: the Presentation & Experience overhaul
 
-> Open a fresh Claude Code session with `cwd = /Users/Enki/Library/Mobile Documents/com~apple~CloudDocs/Postpartum Kitchen`, then paste everything
+> Open a fresh Claude Code session with `cwd = /Users/Enki/code/postpartum-kitchen`, then paste everything
 > below the line. **Ilma will paste example images (printouts of recipe books she loves) at the start —
 > study those before proposing anything.**
 

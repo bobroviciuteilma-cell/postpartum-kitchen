@@ -29,7 +29,7 @@ it into a commercial product after getting feedback from other mums.
 
 ## 4. Workflow (how to change ANYTHING)
 1. Edit `master.private.html`.
-2. `cd "/Users/Enki/Library/Mobile Documents/com~apple~CloudDocs/Postpartum Kitchen" && python3 build.py` → regenerates `index.html`. (Repo lives in iCloud — path has spaces, always quote it.)
+2. `cd /Users/Enki/code/postpartum-kitchen && python3 build.py` → regenerates `index.html`.
 3. `git add index.html [build.py] && git commit -m "..." && git push` → GitHub Pages updates ~1 min.
 4. **Update the PRIVATE link** (re-upload to the secret gist):
    `python3 -c "h=open('master.private.html').read().replace('<meta charset=\"utf-8\">','<meta charset=\"utf-8\">\n<meta name=\"robots\" content=\"noindex, nofollow\">',1); open('/tmp/postpartum-kitchen-full.html','w').write(h)"`
@@ -173,5 +173,5 @@ Fem-Dophilus, + adding Nordic omega-3 and creatine, Plant-D3+K2. Has organic MCT
    sustainable approach; print PDF needs static numbers so pure-JS numbering won't show in PDF).
 
 ## 11. How to resume
-Open a new session with cwd = `"/Users/Enki/Library/Mobile Documents/com~apple~CloudDocs/Postpartum Kitchen"` (auto-loads CLAUDE.md → this file),
+Open a new session with cwd = `/Users/Enki/code/postpartum-kitchen` (auto-loads CLAUDE.md → this file),
 or paste the handover briefing. Then: edit `master.private.html` → `build.py` → push → update gist.
