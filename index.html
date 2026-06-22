@@ -444,6 +444,16 @@
   .page.provence #n-protein:checked  ~ .npanels .npanel[data-n=protein],
   .page.provence #n-omega:checked    ~ .npanels .npanel[data-n=omega],
   .page.provence #n-spice:checked    ~ .npanels .npanel[data-n=spice]{display:block}
+  /* conversions reference */
+  .page.provence .convgroup{margin-top:22px}
+  .page.provence .convgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
+  @media (max-width:520px){ .page.provence .convgrid{grid-template-columns:1fr} }
+  .page.provence .conv{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    border-bottom:1px dotted #e0d6c2;padding:6px 0;font-size:15px}
+  .page.provence .conv .f{color:var(--pv-ink2)}
+  .page.provence .conv .t{font-weight:600;color:var(--pv-ink);white-space:nowrap;font-feature-settings:"tnum"}
+  .page.provence .colhead .convlink{float:right;font-family:'EB Garamond',serif;font-size:12px;font-style:italic;
+    letter-spacing:0;text-transform:none;color:var(--pv-amber2);text-decoration:none;font-weight:400}
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -866,7 +876,7 @@
   <div class="pv-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
   <div class="twocol">
     <div>
-      <div class="colhead">WHAT YOU NEED</div>
+      <div class="colhead">WHAT YOU NEED <a class="convlink" href="#r=conversions">conversions &rarr;</a></div>
       <div class="ing"><b>4 chicken feet</b> <span class="note">(more if they fit)</span></div>
       <div class="ing"><b>2 chicken necks</b></div>
       <div class="ing"><b>3 litres</b> cold water</div>
@@ -2142,7 +2152,7 @@
 
   <div class="twocol">
     <div>
-      <div class="colhead">WHAT YOU NEED</div>
+      <div class="colhead">WHAT YOU NEED <a class="convlink" href="#r=conversions">conversions &rarr;</a></div>
       <div class="ing"><b>2 quarts</b> bone broth <span class="note">(your base &mdash; above)</span></div>
       <div class="ing"><b>2</b> pods star anise</div>
       <div class="ing"><b>1 thumb</b> ginger, sliced</div>
@@ -2661,6 +2671,67 @@
 </section>
 
 <!-- ============ GLOSSARY ============ -->
+<!-- Kitchen Conversions (reference) -->
+<section class="page provence" id="conversions">
+  <div class="pv-brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; fourth trimester</div></div>
+  <h1 class="title">Kitchen Conversions</h1>
+  <div class="subtitle">Quick reference &mdash; cups, grams, &deg;F to &deg;C. Tap it from any recipe.</div>
+  <div class="pv-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
+
+  <div class="convgroup">
+    <div class="colhead">Volume</div>
+    <div class="convgrid">
+      <div class="conv"><span class="f">1 cup</span><span class="t">240 ml</span></div>
+      <div class="conv"><span class="f">&frac12; cup</span><span class="t">120 ml</span></div>
+      <div class="conv"><span class="f">&frac13; cup</span><span class="t">80 ml</span></div>
+      <div class="conv"><span class="f">&frac14; cup</span><span class="t">60 ml</span></div>
+      <div class="conv"><span class="f">1 tablespoon</span><span class="t">15 ml</span></div>
+      <div class="conv"><span class="f">1 teaspoon</span><span class="t">5 ml</span></div>
+    </div>
+  </div>
+
+  <div class="convgroup">
+    <div class="colhead">Weight</div>
+    <div class="convgrid">
+      <div class="conv"><span class="f">8 oz</span><span class="t">225 g</span></div>
+      <div class="conv"><span class="f">1 lb</span><span class="t">454 g (~&frac12; kg)</span></div>
+      <div class="conv"><span class="f">2 lb</span><span class="t">900 g</span></div>
+      <div class="conv"><span class="f">3 lb</span><span class="t">1.36 kg</span></div>
+      <div class="conv"><span class="f">4 lb</span><span class="t">1.8 kg</span></div>
+    </div>
+  </div>
+
+  <div class="convgroup">
+    <div class="colhead">Temperature</div>
+    <div class="convgrid">
+      <div class="conv"><span class="f">200&deg;F</span><span class="t">93&deg;C</span></div>
+      <div class="conv"><span class="f">190&deg;F</span><span class="t">88&deg;C</span></div>
+      <div class="conv"><span class="f">180&deg;F</span><span class="t">82&deg;C</span></div>
+      <div class="conv"><span class="f">&ldquo;Bare simmer&rdquo;</span><span class="t">80&ndash;90&deg;C</span></div>
+    </div>
+  </div>
+
+  <div class="convgroup">
+    <div class="colhead">Common meat-stock amounts</div>
+    <div class="convgrid">
+      <div class="conv"><span class="f">3&ndash;4 lb bones</span><span class="t">1.4&ndash;1.8 kg</span></div>
+      <div class="conv"><span class="f">3 quarts water</span><span class="t">3 litres</span></div>
+    </div>
+  </div>
+
+  <div class="convgroup">
+    <div class="colhead">Oven equivalents</div>
+    <div class="convgrid">
+      <div class="conv"><span class="f">250&deg;F</span><span class="t">120&deg;C</span></div>
+      <div class="conv"><span class="f">300&deg;F</span><span class="t">170&deg;C</span></div>
+      <div class="conv"><span class="f">325&deg;F</span><span class="t">165&deg;C</span></div>
+      <div class="conv"><span class="f">350&deg;F</span><span class="t">175&deg;C</span></div>
+    </div>
+  </div>
+
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Kitchen Conversions</div>
+</section>
+
 <section class="page dense" id="glossary">
   <h1 class="title">New to These? &mdash; Glossary</h1>
   <div class="subtitle">Every less-familiar ingredient in plain English &mdash; what it is &amp; why it's in your plan</div>
@@ -2802,7 +2873,7 @@
     {key:'dips',name:'Dips & Crackers',color:'#7d7a4a',match:['baba ganoush','cracker','dip','hummus']},
     {key:'bakes',name:'Bakes & Tarts',color:'#b07a3a',match:['tart','apkepas','casserole','gratin']},
     {key:'ferments',name:'Ferments',color:'#5f7d6a',match:['ferment','kvass','pickle']},
-    {key:'guide',name:'Glossary & Guide',color:'#5a6472',match:['glossary','helper','best foods','supplement']}
+    {key:'guide',name:'Glossary & Guide',color:'#5a6472',match:['glossary','helper','best foods','supplement','conversion']}
   ];
   function catFor(t){t=t.toLowerCase(); for(var i=0;i<CATS.length;i++){var m=CATS[i].match;for(var j=0;j<m.length;j++){if(t.indexOf(m[j])>-1)return CATS[i];}} return null;}
   var ALL=[];
