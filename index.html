@@ -461,6 +461,10 @@
   .page.provence #m-chicken:checked ~ .ppanels .ppanel[data-p=mchicken],
   .page.provence #m-beef:checked    ~ .ppanels .ppanel[data-p=mbeef],
   .page.provence #m-lamb:checked    ~ .ppanels .ppanel[data-p=mlamb]{display:block}
+  /* education cards (collapsed list w/ teaser) */
+  .page.provence details.pv-d.ed summary{align-items:flex-start}
+  .page.provence details.pv-d.ed .et{display:block;font-family:'EB Garamond',serif;font-style:italic;font-size:13.5px;
+    letter-spacing:0;text-transform:none;color:var(--pv-soft);margin-top:3px;font-weight:400}
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -2791,6 +2795,41 @@
 </section>
 
 <!-- ============ GLOSSARY ============ -->
+<!-- The Healing Guide (education library) -->
+<section class="page provence" id="healingguide">
+  <div class="pv-brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; fourth trimester</div></div>
+  <h1 class="title">The Healing Guide</h1>
+  <div class="subtitle">The why behind the food &mdash; tap any to learn more. <span style="font-style:italic;">Food, not medicine.</span></div>
+  <div class="pv-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
+
+  <details class="pv-d ed"><summary><div><span class="sl">What is leaky gut?</span><span class="et">when the gut lining gets too leaky</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">Your gut wall is meant to be a tight barrier. When the junctions between its cells loosen, undigested food, toxins and proteins slip into the bloodstream &mdash; confusing the immune system and leaving you inflamed and poorly nourished. Modern life is hard on it: sugar, processed food, stress and toxins all play a part.</div></details>
+
+  <details class="pv-d ed"><summary><div><span class="sl">What is GAPS?</span><span class="et">the gut-healing approach behind meat stock</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">GAPS &mdash; Gut and Psychology Syndrome &mdash; is a nutritional approach from <b>Dr. Natasha Campbell-McBride</b>. The idea: heal the gut first, and the rest of the body can follow. Meat stock is its foundational food, sipped daily to soothe and rebuild the gut lining. (Worth discussing any big dietary change with your own practitioner.)</div></details>
+
+  <details class="pv-d ed"><summary><div><span class="sl">Heal &amp; seal &mdash; why stock helps</span><span class="et">what makes stock so restorative</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">A gentle meat stock is rich in <b>gelatin, collagen and easy-to-digest amino acids</b> &mdash; the building blocks your gut lining uses to repair itself. Because it&rsquo;s simmered briefly, it&rsquo;s lighter than long-cooked bone broth and kinder to a tender, tired system. That&rsquo;s why it&rsquo;s the first food in gut healing. <a href="#r=meatstock" style="color:var(--pv-amber2);font-style:italic;">the meat stock recipe &rarr;</a></div></details>
+
+  <details class="pv-d ed"><summary><div><span class="sl">Best salts for cooking</span><span class="et">skip table salt; reach for mineral salt</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">Use an <b>unrefined mineral salt</b> &mdash; it brings trace minerals, not just sodium.<br><br>
+    &bull; <b>Celtic sea salt</b> &mdash; the highest mineral content; a lovely everyday choice.<br>
+    &bull; <b>Redmond Real Salt</b> &mdash; mid-range, from an ancient sea bed.<br>
+    &bull; <b>Pink Himalayan</b> &mdash; lighter mineral content, but fine.<br>
+    Avoid processed table salt.</div></details>
+
+  <details class="pv-d ed"><summary><div><span class="sl">Herbs for your stock</span><span class="et">gentle additions that aid digestion</span></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">All optional, all kind to digestion:<br><br>
+    &bull; <b>Peppercorns</b> &mdash; help you absorb more.<br>
+    &bull; <b>Ginger</b> &mdash; settles nausea.<br>
+    &bull; <b>Sage</b> &mdash; soothing and antioxidant.<br>
+    &bull; <b>Rosemary</b> &mdash; antimicrobial.<br>
+    &bull; <b>Thyme</b> &mdash; vitamin C.<br>
+    &bull; <b>Parsley</b> &mdash; gentle drainage.</div></details>
+
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; The Healing Guide</div>
+</section>
+
 <!-- Kitchen Conversions (reference) -->
 <section class="page provence" id="conversions">
   <div class="pv-brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; fourth trimester</div></div>
@@ -2993,7 +3032,7 @@
     {key:'dips',name:'Dips & Crackers',color:'#7d7a4a',match:['baba ganoush','cracker','dip','hummus']},
     {key:'bakes',name:'Bakes & Tarts',color:'#b07a3a',match:['tart','apkepas','casserole','gratin']},
     {key:'ferments',name:'Ferments',color:'#5f7d6a',match:['ferment','kvass','pickle']},
-    {key:'guide',name:'Glossary & Guide',color:'#5a6472',match:['glossary','helper','best foods','supplement','conversion']}
+    {key:'guide',name:'Glossary & Guide',color:'#5a6472',match:['glossary','helper','best foods','supplement','conversion','healing guide']}
   ];
   function catFor(t){t=t.toLowerCase(); for(var i=0;i<CATS.length;i++){var m=CATS[i].match;for(var j=0;j<m.length;j++){if(t.indexOf(m[j])>-1)return CATS[i];}} return null;}
   var ALL=[];
