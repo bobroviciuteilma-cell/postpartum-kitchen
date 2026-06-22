@@ -1,0 +1,245 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --linen:#efe8d7;--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;
+    --sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;
+    --rust:#b0623a;--rule:#d9cdb6;--line:#e3d9c4}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e7ddc7;padding:40px 30px 60px}
+  .strip{display:flex;gap:26px;align-items:flex-start;width:max-content;margin:0 auto}
+  .ph{width:332px;min-height:710px;border-radius:38px;background:
+      radial-gradient(120% 30% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 44%),var(--paper);
+    border:1px solid #cdbf9f;box-shadow:0 18px 40px rgba(70,55,30,.18);
+    position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .lbl{text-align:center;font-family:'Marcellus',serif;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:#8a7c64;margin-bottom:11px}
+  .pad{padding:26px 26px 24px;position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+  .brand{font-family:'Pinyon Script',cursive;font-size:19px;color:#7a4f2c;text-align:center;margin-bottom:4px}
+  .moonrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .back{font-size:20px;color:#b09a78;line-height:1}
+  .step{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;color:#b0a184;text-transform:uppercase}
+  .q{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:25px;color:#46371f;line-height:1.1}
+  .sub{font-style:italic;color:var(--soft);font-size:13.5px;margin-top:7px;line-height:1.45}
+  .glabel{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#b0a184;margin:20px 0 8px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{font-size:14px;color:var(--ink2);border:1px solid var(--rule);border-radius:22px;padding:8px 14px;background:rgba(255,255,255,.55)}
+  .chip.on{border-color:var(--sage);color:#fff;background:linear-gradient(var(--sage),var(--sage2))}
+  .chip.lav.on{border-color:var(--lav);background:linear-gradient(#a99ac1,#8b79ac)}
+  .chip.amb.on{border-color:var(--amber);background:linear-gradient(var(--amber),#b0822c);color:#fff8e9}
+  .cta{display:block;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.13em;
+    text-transform:uppercase;background:linear-gradient(var(--amber),#b0822c);color:#fff8e9;padding:15px;border-radius:11px;
+    margin-top:auto;box-shadow:0 6px 16px rgba(168,127,47,.22)}
+  .note{font-size:11px;color:#a4977c;font-style:italic;text-align:center;margin-top:13px;line-height:1.45}
+
+  /* check-in result mini (entry screen) */
+  .rxmini{margin-top:6px;border:1px solid var(--rule);border-radius:14px;background:linear-gradient(#fdf8ea,#f6ead0);padding:18px;text-align:center}
+  .rxmini .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber2)}
+  .rxmini h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:27px;color:#5a481f;margin:3px 0 5px}
+  .rxmini p{font-size:13px;font-style:italic;color:#6a5a30;line-height:1.4}
+  .handoff{margin-top:20px;border:1.5px solid var(--sage);border-radius:14px;background:rgba(122,137,90,.09);padding:18px 16px;text-align:center}
+  .handoff .hh{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;color:#46371f;line-height:1.12}
+  .handoff .hs{font-size:12.5px;font-style:italic;color:var(--sage2);margin-top:6px;line-height:1.4}
+  .handoff svg{width:34px;height:34px;color:var(--sage);margin-bottom:6px}
+
+  /* toggles */
+  .seg{display:flex;gap:8px;margin-top:8px}
+  .seg .opt{flex:1;text-align:center;border:1px solid var(--rule);border-radius:11px;padding:11px 6px;font-size:13.5px;color:var(--ink2);background:rgba(255,255,255,.5)}
+  .seg .opt.on{border-color:var(--sage);background:linear-gradient(var(--sage),var(--sage2));color:#fff}
+  .focuschip{display:inline-flex;gap:7px;align-items:center;border:1px solid var(--amber);border-radius:20px;background:rgba(195,154,71,.1);padding:8px 15px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px;color:#8a6f2f;margin-top:8px}
+
+  /* share preview */
+  .cardprev{margin:14px auto 0;width:200px;border-radius:14px;overflow:hidden;border:1px solid #cdbf9f;box-shadow:0 10px 24px rgba(70,55,30,.16);background:#fbf7ee}
+  .cardprev .top{background:linear-gradient(var(--sage),var(--sage2));color:#fff;padding:13px;text-align:center}
+  .cardprev .top .t1{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+  .cardprev .top .t2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;margin-top:2px}
+  .cardprev .body{padding:12px 13px;font-size:10.5px;color:#5a4f3e;line-height:1.6}
+  .cardprev .body b{font-family:'Marcellus',serif;font-weight:400;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber2);display:block;margin-bottom:2px}
+  .privnote{display:flex;gap:9px;align-items:flex-start;margin-top:18px;border-left:3px solid var(--sage);background:rgba(122,137,90,.08);border-radius:0 8px 8px 0;padding:11px 13px;font-size:12.5px;color:var(--sage2);line-height:1.45}
+  .privnote svg{width:16px;height:16px;flex:none;margin-top:2px;color:var(--sage)}
+  .wa{display:block;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    background:linear-gradient(#6f8f4e,#5f6e44);color:#fff;padding:15px;border-radius:11px;margin-top:18px;box-shadow:0 6px 16px rgba(95,110,68,.25)}
+  .wa svg{width:15px;height:15px;vertical-align:-2px;margin-right:7px}
+
+  /* ===== HELPER DASHBOARD — high-contrast utility ===== */
+  .ph.hp{background:#fbf7ee}
+  .hp .pad{padding:0}
+  .hp-head{background:#3a3326;color:#f4ecd9;padding:20px 22px 18px}
+  .hp-head .crumb{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:#c7b48a}
+  .hp-head h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:27px;margin-top:3px;line-height:1.05}
+  .hp-head .focus{display:inline-block;margin-top:10px;background:#c39a47;color:#3a2e12;font-family:'Marcellus',serif;
+    font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:16px}
+  .hp-body{padding:18px 20px 22px}
+  .sec{margin-top:18px}
+  .sec:first-child{margin-top:4px}
+  .sec-h{display:flex;align-items:center;gap:9px;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.13em;
+    text-transform:uppercase;color:#46371f;padding-bottom:7px;border-bottom:2px solid #e0d5bd;margin-bottom:11px}
+  .sec-h .n{width:21px;height:21px;border-radius:50%;background:#3a3326;color:#f4ecd9;display:flex;align-items:center;justify-content:center;font-size:11px;flex:none}
+  .batch{background:#f1e7cf;border:1px solid #e0cfa0;border-radius:12px;padding:14px 15px}
+  .batch .bd{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber2)}
+  .batch .bt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;color:#46371f;margin:2px 0 3px;line-height:1.1}
+  .batch .bx{font-size:13px;color:#6a5c43;font-style:italic;line-height:1.4}
+  .menu{list-style:none}
+  .menu li{display:flex;gap:13px;align-items:baseline;padding:9px 0;border-bottom:1px solid #ece2cb}
+  .menu li:last-child{border-bottom:none}
+  .menu .day{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#a8946a;width:34px;flex:none}
+  .menu .dish{font-size:15px;color:#3c3325}
+  .menu .dish em{font-style:italic;color:#9a8c70;font-size:12.5px}
+  .rule{display:flex;gap:11px;align-items:flex-start;background:#eef2e3;border:1px solid #cdd9b6;border-radius:12px;padding:13px 14px;margin-bottom:9px}
+  .rule svg{width:24px;height:24px;flex:none;color:var(--sage2)}
+  .rule .rt{font-size:14.5px;color:#3c3a2a;line-height:1.35}
+  .rule .rt b{color:var(--sage2)}
+  .shop{display:flex;flex-wrap:wrap;gap:6px 18px}
+  .shopcol{flex:1;min-width:120px}
+  .shopcol .ch{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#a8946a;margin-bottom:5px}
+  .shopcol .it{display:flex;gap:8px;align-items:center;font-size:13.5px;color:#4a4233;padding:3px 0}
+  .shopcol .it .bx{width:14px;height:14px;border:1.5px solid #b9a877;border-radius:3px;flex:none}
+  .sgnote{margin-top:13px;font-size:11.5px;color:#a8946a;font-style:italic;text-align:center}
+</style></head>
+<body>
+<div class="strip">
+
+  <!-- 1 ENTRY (from the free check-in) -->
+  <div>
+  <div class="lbl">1 · From your check-in</div>
+  <div class="ph"><div class="pad">
+    <div class="brand">Postpartum Kitchen</div>
+    <div class="glabel" style="text-align:center;margin-top:2px">Your plan today</div>
+    <div class="rxmini">
+      <div class="k">For you &middot; this week</div>
+      <h2>Iron &amp; Magnesium</h2>
+      <p>&ldquo;Wiped out&rdquo; and not sleeping often point here.</p>
+    </div>
+    <div class="handoff">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h13a3 3 0 0 1 0 6H9m0 0l3 3m-3-3l3-3"/><circle cx="20" cy="6" r="1.5"/></svg>
+      <div class="hh">Don&rsquo;t cook it &mdash;<br>hand it to whoever does.</div>
+      <div class="hs">Turn this week into a simple card for your husband, helper or mum.</div>
+    </div>
+    <div class="note" style="margin-top:auto">Free while we&rsquo;re testing with Sentosa mums.</div>
+    <span class="cta">Make a Cook Card</span>
+  </div></div>
+  </div>
+
+  <!-- 2 SETUP -->
+  <div>
+  <div class="lbl">2 · 30-second setup</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">One quick setup</span></div>
+    <div class="q">A few kitchen basics</div>
+    <div class="sub">We&rsquo;ve carried your focus over from today&rsquo;s check-in.</div>
+    <div class="glabel">This week&rsquo;s focus</div>
+    <span class="focuschip">&#9728; Iron &middot; Magnesium</span>
+    <div class="glabel">Time per meal</div>
+    <div class="seg"><span class="opt">10 min</span><span class="opt">20 min</span><span class="opt on">30 min</span></div>
+    <div class="glabel">Their kitchen</div>
+    <div class="seg"><span class="opt on">Full stove</span><span class="opt">Microwave only</span></div>
+    <div class="glabel">Avoid</div>
+    <div class="chips"><span class="chip">Seafood</span><span class="chip">Dairy</span><span class="chip">Spicy</span><span class="chip">Pork</span></div>
+    <span class="cta">Make my Cook Card</span>
+  </div></div>
+  </div>
+
+  <!-- 3 SHARE -->
+  <div>
+  <div class="lbl">3 · Send it</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Your Cook Card is ready</span></div>
+    <div class="q" style="text-align:center">Ready to hand over</div>
+    <div class="cardprev">
+      <div class="top"><div class="t1">Postpartum Kitchen</div><div class="t2">This week&rsquo;s meals</div></div>
+      <div class="body"><b>Batch Monday</b>Meat stock base<br><b>The menu</b>7 simple dinners<br><b>Golden rule</b>Always add lime</div>
+    </div>
+    <div class="privnote">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 4v5c0 4-3 7-7 9-4-2-7-5-7-9V7z"/></svg>
+      A private link. Your helper sees the meals and the shopping list &mdash; never your symptoms or how you feel.
+    </div>
+    <div class="wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/></svg>Send to your helper</div>
+    <div class="note">Or copy the link &middot; works in any browser, no app to install.</div>
+  </div></div>
+  </div>
+
+  <!-- 4 HELPER DASHBOARD — prep + menu -->
+  <div>
+  <div class="lbl">4 · What the helper opens</div>
+  <div class="ph hp"><div class="pad">
+    <div class="hp-head">
+      <div class="crumb">Postpartum Kitchen &middot; Prep Sheet</div>
+      <h1>Cooking for Ilma<br>this week</h1>
+      <span class="focus">This week: iron-rich meals</span>
+    </div>
+    <div class="hp-body">
+      <div class="sec">
+        <div class="sec-h"><span class="n">1</span>Batch this first</div>
+        <div class="batch">
+          <div class="bd">Monday</div>
+          <div class="bt">Make the Meat Stock base</div>
+          <div class="bx">One big pot &mdash; it becomes the base for most meals this week. Keep it in the fridge.</div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sec-h"><span class="n">2</span>The menu</div>
+        <ul class="menu">
+          <li><span class="day">Mon</span><span class="dish">Meat stock &amp; greens <em>&middot; from the base</em></span></li>
+          <li><span class="day">Tue</span><span class="dish">Beef &amp; beet soup <em>&middot; from the base</em></span></li>
+          <li><span class="day">Wed</span><span class="dish">Beef pho <em>&middot; from the base</em></span></li>
+          <li><span class="day">Thu</span><span class="dish">Lemon chicken soup</span></li>
+          <li><span class="day">Fri</span><span class="dish">Oxtail &amp; heart stew</span></li>
+          <li><span class="day">Sat</span><span class="dish">Clam broth</span></li>
+          <li><span class="day">Sun</span><span class="dish">Borscht <em>&middot; from the base</em></span></li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+  </div>
+
+  <!-- 5 HELPER DASHBOARD — rules + shopping -->
+  <div>
+  <div class="lbl">5 · Golden rules + shopping</div>
+  <div class="ph hp"><div class="pad">
+    <div class="hp-head" style="background:#3a3326">
+      <div class="crumb">Postpartum Kitchen &middot; Prep Sheet</div>
+      <h1>The two rules<br>that matter most</h1>
+    </div>
+    <div class="hp-body">
+      <div class="sec">
+        <div class="sec-h"><span class="n">3</span>Golden rules</div>
+        <div class="rule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="7"/><path d="M9 13a3 3 0 0 1 3-3"/></svg>
+          <div class="rt"><b>Always add a squeeze of lime</b> (or a side of orange) to the iron meals &mdash; it helps her body absorb the iron.</div>
+        </div>
+        <div class="rule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h11v5a5 5 0 0 1-10 0zM16 9h2a2 2 0 0 1 0 4h-2M4 21h13"/></svg>
+          <div class="rt"><b>No tea or coffee within 1 hour</b> of these meals &mdash; it blocks the iron.</div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="sec-h"><span class="n">4</span>Shopping list</div>
+        <div class="shop">
+          <div class="shopcol">
+            <div class="ch">Produce</div>
+            <div class="it"><span class="bx"></span>Ginger</div>
+            <div class="it"><span class="bx"></span>Spring onion</div>
+            <div class="it"><span class="bx"></span>Limes &times; 6</div>
+            <div class="it"><span class="bx"></span>Beetroot</div>
+            <div class="it"><span class="bx"></span>Spinach</div>
+          </div>
+          <div class="shopcol">
+            <div class="ch">Protein</div>
+            <div class="it"><span class="bx"></span>Beef shin</div>
+            <div class="it"><span class="bx"></span>Marrow bones</div>
+            <div class="it"><span class="bx"></span>Chicken</div>
+            <div class="it"><span class="bx"></span>Oxtail</div>
+            <div class="ch" style="margin-top:9px">Pantry</div>
+            <div class="it"><span class="bx"></span>Fish sauce</div>
+            <div class="it"><span class="bx"></span>Rice noodles</div>
+          </div>
+        </div>
+        <div class="sgnote">Tap any item to tick it off &middot; search on NTUC or RedMart</div>
+      </div>
+    </div>
+  </div></div>
+  </div>
+
+</div>
+</body></html>

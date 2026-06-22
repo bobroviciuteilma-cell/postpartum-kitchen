@@ -1,0 +1,375 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --linen:#efe8d7;--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;
+    --sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;
+    --rust:#b0623a;--rule:#d9cdb6;--line:#e3d9c4}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);
+    background:#e7ddc7;padding:40px 30px 60px}
+  .strip{display:flex;gap:26px;align-items:flex-start;width:max-content;margin:0 auto}
+
+  /* phone frame */
+  .ph{width:330px;min-height:690px;border-radius:38px;background:
+      radial-gradient(120% 30% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 44%),var(--paper);
+    border:1px solid #cdbf9f;box-shadow:0 18px 40px rgba(70,55,30,.18);
+    position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .ph:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+    background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.022) 0 1px,transparent 1px 3px),
+      repeating-linear-gradient(90deg,rgba(120,100,70,.022) 0 1px,transparent 1px 3px)}
+  .lbl{text-align:center;font-family:'Marcellus',serif;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:#8a7c64;margin-bottom:11px}
+  .pad{padding:26px 26px 24px;position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+
+  /* shared bits */
+  .brand{font-family:'Pinyon Script',cursive;font-size:19px;color:#7a4f2c;text-align:center;margin-bottom:4px}
+  .moonrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .moon{width:30px;height:30px;border-radius:50%;border:1px solid rgba(122,79,44,.3);
+    display:flex;align-items:center;justify-content:center;background:rgba(255,250,240,.4)}
+  .moon svg{width:14px;height:14px;color:#7a4f2c}
+  .back{font-size:20px;color:#b09a78;line-height:1}
+  .step{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;color:#b0a184;text-transform:uppercase}
+
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.04;color:#4a3320}
+  .q{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:25px;color:#46371f;line-height:1.1}
+  .sub{font-style:italic;color:var(--soft);font-size:13.5px;margin-top:7px;line-height:1.45}
+
+  .bot{display:flex;justify-content:center;margin:6px 0 4px}
+  .bot svg{width:78px;height:auto}
+
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+  .chip{font-size:14.5px;color:var(--ink2);border:1px solid var(--rule);border-radius:22px;
+    padding:9px 15px;background:rgba(255,255,255,.55)}
+  .chip.on{border-color:var(--sage);color:#fff;background:linear-gradient(var(--sage),var(--sage2));
+    box-shadow:0 3px 9px rgba(95,110,68,.25)}
+  .chip.lav.on{border-color:var(--lav);background:linear-gradient(#a99ac1,#8b79ac)}
+  .glabel{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+    color:#b0a184;margin:20px 0 0}
+
+  .cta{display:block;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.13em;
+    text-transform:uppercase;background:linear-gradient(var(--amber),#b0822c);color:#fff8e9;
+    padding:15px;border-radius:11px;margin-top:auto;box-shadow:0 6px 16px rgba(168,127,47,.22)}
+  .cta.ghost{background:transparent;color:#a08a64;box-shadow:none;border:1px solid var(--rule);margin-top:12px}
+  .skip{text-align:center;font-style:italic;color:#a99a7e;font-size:13px;margin-top:14px}
+
+  .note{font-size:11px;color:#a4977c;font-style:italic;text-align:center;margin-top:14px;line-height:1.4}
+
+  /* timeline */
+  .tl{margin-top:18px;position:relative;padding-left:6px}
+  .ev{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .ev:last-child{border-bottom:none}
+  .dot{flex:none;width:11px;height:11px;border-radius:50%;margin-top:5px;
+    background:linear-gradient(var(--sage),var(--sage2));box-shadow:0 0 0 4px rgba(122,137,90,.14)}
+  .dot.amb{background:linear-gradient(var(--amber),var(--amber2));box-shadow:0 0 0 4px rgba(195,154,71,.16)}
+  .dot.lav{background:linear-gradient(#a99ac1,#8b79ac);box-shadow:0 0 0 4px rgba(156,140,182,.16)}
+  .ev .t{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17.5px;color:#46371f;line-height:1.1}
+  .ev .when{font-style:italic;color:var(--sage2);font-size:13px;margin-top:1px}
+  .ev .when.amb{color:var(--amber2)}
+  .ev .why{font-size:12.5px;color:var(--ink2);margin-top:4px;line-height:1.4}
+  .lockrow{filter:blur(3.4px);opacity:.5;pointer-events:none}
+  .lockwrap{position:relative}
+  .lockbadge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:rgba(247,241,227,.9);border:1px solid var(--amber);border-radius:20px;
+    padding:7px 15px;font-family:'Marcellus',serif;font-size:10px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--amber2);white-space:nowrap;box-shadow:0 4px 12px rgba(120,90,30,.16)}
+
+  /* hero forecast card */
+  .fcard{margin-top:16px;border:1px solid var(--amber);border-radius:14px;
+    background:linear-gradient(#fdf8ea,#f6ead0);padding:20px 18px;text-align:center;
+    box-shadow:0 6px 20px rgba(168,127,47,.13);position:relative}
+  .fcard .seal{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:38px;height:38px;
+    border-radius:50%;background:linear-gradient(var(--amber),#a87f2f);display:flex;align-items:center;
+    justify-content:center;box-shadow:0 3px 8px rgba(120,90,30,.3)}
+  .fcard .seal svg{width:19px;height:19px;color:#fff7e4}
+  .fcard .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--amber2);margin-top:7px}
+  .fcard h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;color:#5a481f;margin:3px 0 2px;line-height:1.05}
+  .fcard .big{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:20px;color:var(--rust)}
+  .fcard p{font-size:12.5px;color:#6a5a30;font-style:italic;line-height:1.4;margin-top:6px}
+
+  /* the moment (reveal) */
+  .moment{align-items:center;text-align:center}
+  .m-kick{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--amber2);margin-top:14px}
+  .m-arc{margin:18px 0 6px}
+  .m-arc svg{width:172px;height:auto}
+  .m-lead{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:21px;color:var(--ink2)}
+  .m-date{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:46px;color:#5a481f;line-height:1.02;margin-top:2px}
+  .m-why{font-size:13.5px;font-style:italic;color:#6a5a30;line-height:1.5;margin-top:16px;max-width:250px}
+  .m-more{margin-top:26px;width:100%}
+  .m-line{display:block;width:46px;height:1px;background:var(--rule);margin:0 auto 16px}
+  .m-more-t{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#46371f}
+  .m-more-s{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:#a99a7e;margin-top:5px}
+  .m-src{font-size:10.5px;color:#a89c81;font-style:italic;margin:auto 0 0;padding-top:18px;line-height:1.45;max-width:260px}
+  .m-receipt{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;
+    color:#b0a184;margin-top:11px;line-height:1.7}
+  /* reveal locked rows (dates free, the how is paid) */
+  .rev-rows{width:100%;margin-top:22px}
+  .rrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .rrow .dot{margin:0}
+  .rrow .rt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;color:#46371f;flex:1;text-align:left}
+  .rrow .rw{font-style:italic;color:var(--sage2);font-size:13px}
+  .rrow .rw.lav{color:#8b79ac}
+  .runlock{font-size:12px;font-style:italic;color:var(--amber2);margin-top:13px;text-align:center;line-height:1.45}
+  /* computing reasoning beat */
+  .cline{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--ink2);font-style:italic;margin:9px 0;justify-content:center}
+  .cline svg{width:15px;height:15px;color:var(--sage);flex:none}
+  .cline.dim{opacity:.35}
+  /* sharpen number fields */
+  .nfield{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--rule);
+    border-radius:12px;background:rgba(255,255,255,.55);padding:13px 15px;margin-top:11px}
+  .nfield .nl{font-size:14px;color:var(--ink2)}
+  .nfield .nl small{display:block;font-size:10.5px;color:#a99a7e;font-style:italic;margin-top:1px}
+  .nfield .nv{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#c2b390}
+  .nfield .nv.filled{color:#46371f}
+  /* kitchen-idea sub-line on plan */
+  .kidea{font-size:11px;color:#9a8c70;margin-top:3px}
+  .kidea b{font-family:'Marcellus',serif;font-weight:400;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#a99a7e}
+  /* birth-date picker */
+  .datepick{display:flex;gap:11px;margin-top:18px}
+  .dp-field{flex:1;border:1px solid var(--sage);border-radius:12px;background:rgba(122,137,90,.08);padding:11px 14px;text-align:center}
+  .dp-l{display:block;font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#a99a7e}
+  .dp-v{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;color:#46371f;margin-top:3px;display:block}
+  .dp-echo{font-style:italic;color:var(--sage2);font-size:12.5px;margin-top:10px}
+  /* safety triage strip */
+  .triage{margin-top:16px;border:1px solid #e0cdbb;border-radius:12px;background:#faf2e9;padding:12px 14px}
+  .tg-h{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--rust);margin-bottom:6px}
+  .tg-items{font-size:12px;color:#8a7256;line-height:1.55}
+  .tg-no{margin-top:9px;font-size:12.5px;color:var(--sage2);font-style:italic}
+  /* frosted money-tease */
+  .ftease{width:100%;margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .fpill{border:1px solid var(--amber);border-radius:20px;background:rgba(195,154,71,.1);padding:9px 13px;
+    display:flex;align-items:center;gap:9px;text-align:left}
+  .fpill .lk{flex:none;font-size:12px;filter:none}
+  .fpill .ftxt{font-size:12.5px;color:#8a6f2f;filter:blur(3px);opacity:.8;user-select:none}
+
+  /* paywall */
+  .price{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;color:#46371f;text-align:center;line-height:1}
+  .price small{font-size:15px;font-style:italic;color:var(--soft);font-weight:400}
+  .feats{margin:18px 0 0}
+  .feat{display:flex;gap:11px;align-items:flex-start;padding:8px 0;font-size:13.5px;color:var(--ink2)}
+  .feat svg{flex:none;width:17px;height:17px;color:var(--sage);margin-top:2px}
+
+  /* computing */
+  .comp{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .ring{width:78px;height:78px;border-radius:50%;border:2px solid var(--line);
+    border-top-color:var(--amber);margin-bottom:22px}
+  .comp .t{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:500;color:#46371f}
+
+  /* upload */
+  .drop{margin-top:20px;border:1.5px dashed var(--rule);border-radius:14px;padding:30px 20px;text-align:center;
+    background:rgba(255,255,255,.4)}
+  .drop svg{width:30px;height:30px;color:#c2b390;margin-bottom:10px}
+  .drop .t{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:#46371f}
+  .drop .d{font-size:12.5px;color:var(--soft);font-style:italic;margin-top:4px;line-height:1.4}
+
+  .pinch{margin-top:14px;border-left:3px solid var(--sage);background:rgba(122,137,90,.08);
+    border-radius:0 8px 8px 0;padding:11px 13px;font-size:12.5px;color:var(--sage2);line-height:1.45}
+  .pinch b{font-family:'Marcellus',serif;font-weight:400;font-size:9.5px;letter-spacing:.13em;
+    text-transform:uppercase;display:block;color:var(--sage2);margin-bottom:3px}
+
+  .src{font-size:10.5px;color:#a89c81;font-style:italic;margin-top:13px;line-height:1.45;
+    border-top:1px solid var(--line);padding-top:11px}
+
+  /* offramp */
+  .alert{margin-top:16px;border:1px solid #d8b48f;border-radius:12px;background:#fbf0e3;padding:14px 15px}
+  .alert .h{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--rust);margin-bottom:5px}
+  .alert p{font-size:12.5px;color:#7a5a42;line-height:1.45}
+</style></head>
+<body>
+<div class="strip">
+
+  <!-- 1 WELCOME -->
+  <div>
+  <div class="lbl">1 · Welcome</div>
+  <div class="ph"><div class="pad">
+    <div class="brand">Postpartum Kitchen</div>
+    <div class="bot"><svg viewBox="0 0 120 80" fill="none">
+      <g stroke="#6f7d54" stroke-width="1.5" stroke-linecap="round"><path d="M44 74 C46 56 50 38 58 22"/><path d="M52 56 C45 52 40 47 37 40 M52 56 C61 52 66 47 69 40"/><path d="M55 42 C48 38 43 33 41 27 M55 42 C63 38 67 33 69 27"/></g>
+      <g stroke="#7f8a5d" stroke-width="1.2" stroke-linecap="round"><path d="M68 74 C70 56 70 40 67 28"/></g>
+      <g fill="#9c8cb6"><ellipse cx="67" cy="24" rx="3" ry="5"/><ellipse cx="62" cy="29" rx="2.4" ry="4"/><ellipse cx="72" cy="29" rx="2.4" ry="4"/></g>
+      <g><circle cx="86" cy="36" r="5.5" fill="#e7c878"/><circle cx="86" cy="36" r="5.5" fill="none" stroke="#c39a47" stroke-width="1"/><circle cx="96" cy="46" r="4" fill="#e7c878"/></g></svg></div>
+    <div style="text-align:center;margin-top:10px">
+      <h1 style="font-size:33px">When will I feel<br>like myself again?</h1>
+      <div class="sub" style="margin-top:14px">Tell us how you feel and how far along you are.<br>We&rsquo;ll show you where you are &mdash; and roughly when it eases.</div>
+    </div>
+    <div class="note" style="margin-top:auto">Built on published postpartum research.<br>Food &amp; education &mdash; not medical advice.</div>
+    <span class="cta">Begin &middot; 2 quiet questions</span>
+  </div></div>
+  </div>
+
+  <!-- 2 STAGE -->
+  <div>
+  <div class="lbl">2 · Your stage</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Step 1 of 2</span></div>
+    <div class="q">When was your baby born?</div>
+    <div class="sub">Just the month &mdash; we use it only to estimate timing, and you can change it anytime.</div>
+    <div class="datepick">
+      <div class="dp-field"><span class="dp-l">Month</span><span class="dp-v">February</span></div>
+      <div class="dp-field"><span class="dp-l">Year</span><span class="dp-v">2026</span></div>
+    </div>
+    <div class="dp-echo">&rarr; That puts you at about 4 months postpartum.</div>
+    <div class="glabel">Feeding</div>
+    <div class="chips">
+      <span class="chip lav on">Nursing</span>
+      <span class="chip">Mixed feeding</span>
+      <span class="chip">Not nursing</span>
+    </div>
+    <div class="skip" style="margin-top:16px">I&rsquo;d rather not say &mdash; estimate from a range</div>
+    <span class="cta">Continue</span>
+  </div></div>
+  </div>
+
+  <!-- 3 SYMPTOMS -->
+  <div>
+  <div class="lbl">3 · How you feel</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Step 2 of 2</span></div>
+    <div class="q">What&rsquo;s true today?</div>
+    <div class="sub">Tap all that apply &mdash; there are no wrong answers.</div>
+    <div class="triage">
+      <div class="tg-h">First &mdash; any of these today?</div>
+      <div class="tg-items">Fever &middot; heavy bleeding &middot; chest pain &middot; severe headache &middot; thoughts of harming yourself</div>
+      <div class="tg-no">&check; None of these</div>
+    </div>
+    <div class="glabel">Energy &amp; body</div>
+    <div class="chips">
+      <span class="chip on">Wiped out</span>
+      <span class="chip on">Hair shedding</span>
+      <span class="chip">Night sweats</span>
+      <span class="chip">Cramps</span>
+    </div>
+    <div class="glabel">Mind &amp; mood</div>
+    <div class="chips">
+      <span class="chip">Low mood</span>
+      <span class="chip">Brain fog</span>
+    </div>
+    <div class="glabel">Feeding</div>
+    <div class="chips">
+      <span class="chip lav on">Milk supply dropped</span>
+    </div>
+    <div class="glabel">Something else</div>
+    <div class="nfield" style="margin-top:8px"><span class="nl" style="font-style:italic;color:#a99a7e">In a few words&hellip;</span><span class="nv">+</span></div>
+    <div class="note" style="margin-top:8px;text-align:left">We&rsquo;ll note it in your plan &mdash; but we won&rsquo;t put a date on what we can&rsquo;t source.</div>
+    <span class="cta">See my Recovery Clock</span>
+  </div></div>
+  </div>
+
+  <!-- 4 COMPUTING — the reasoning beat -->
+  <div>
+  <div class="lbl">4 · A quiet moment</div>
+  <div class="ph"><div class="pad">
+    <div class="comp">
+      <div class="t" style="margin-bottom:24px">Reading your recovery&hellip;</div>
+      <div class="cline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Placing you at 4 months postpartum</div>
+      <div class="cline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Weighing nursing &amp; iron demand</div>
+      <div class="cline dim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Matching to AAD &amp; ACOG ranges</div>
+    </div>
+  </div></div>
+  </div>
+
+  <!-- 5 FORECAST REVEAL (free teaser) — the moment -->
+  <div>
+  <div class="lbl">5 · The reveal (free)</div>
+  <div class="ph"><div class="pad moment">
+    <div class="m-kick">Your Recovery Clock</div>
+    <div class="m-arc">
+      <svg viewBox="0 0 200 110" fill="none">
+        <path d="M16 100 A 84 84 0 0 1 184 100" stroke="#e3d4b2" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M16 100 A 84 84 0 0 1 150 38" stroke="#c39a47" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="150" cy="38" r="5" fill="#c39a47"/>
+        <g stroke="#9c8cb6" stroke-width="1.3" stroke-linecap="round" fill="none" opacity=".8">
+          <path d="M100 64 C100 54 100 46 100 38"/><path d="M100 50 C95 47 92 44 90 40 M100 50 C105 47 108 44 110 40"/></g>
+      </svg>
+    </div>
+    <div class="m-lead">Your hair likely settles</div>
+    <div class="m-date">around October</div>
+    <div class="m-receipt">4 months postpartum &middot; nursing &middot; hair shedding</div>
+    <div class="m-why">You&rsquo;re right at the peak now. For most mums at your stage, the shedding eases <i>6&ndash;12 months</i> after birth &mdash; and it grows back.</div>
+
+    <div class="rev-rows">
+      <span class="m-line"></span>
+      <div class="rrow"><span class="dot"></span><span class="rt">Deep fatigue</span><span class="rw">Often shifts ~mid-Aug</span></div>
+      <div class="rrow"><span class="dot lav"></span><span class="rt">Milk supply</span><span class="rw lav">Often within days</span></div>
+      <div class="rrow"><span class="dot"></span><span class="rt">Night sweats</span><span class="rw">Eases ~6&ndash;8 wks</span></div>
+      <div class="ftease">
+        <span class="fpill"><span class="lk">&#128274;</span><span class="ftxt">The 5-minute amber-honey infusion to cool night sweats</span></span>
+        <span class="fpill"><span class="lk">&#128274;</span><span class="ftxt">The iron pairing that supports your energy fastest</span></span>
+      </div>
+      <div class="runlock">The dates are yours, free. Unlock the foods &amp; routines that work alongside them &mdash; your body still recovers on its own timeline.</div>
+    </div>
+
+    <div class="m-src">Ranges from dermatology &amp; postpartum literature (AAD&middot;ACOG) &mdash; not promises. Every mum differs.</div>
+    <span class="cta">Unlock my full clock</span>
+  </div></div>
+  </div>
+
+  <!-- 6 PAYWALL -->
+  <div>
+  <div class="lbl">6 · Unlock</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Your full plan</span></div>
+    <div class="q" style="text-align:center">Your whole Recovery Clock</div>
+    <div class="sub" style="text-align:center">Here&rsquo;s what&rsquo;s waiting inside &mdash; built from what you just told us.</div>
+    <div class="feats">
+      <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12l5 5L20 7"/></svg>Your deep-fatigue shift &mdash; <i>around mid-August</i> &mdash; and the foods that support it</div>
+      <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12l5 5L20 7"/></svg>A milk-supply note that&rsquo;s more hopeful than you expect</div>
+      <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12l5 5L20 7"/></svg>When night sweats ease &mdash; and tonight&rsquo;s no-cook fix</div>
+      <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12l5 5L20 7"/></svg>Re-check anytime as your body shifts</div>
+    </div>
+    <div class="price" style="margin-top:20px">$9<small> / one time</small></div>
+    <div class="note">A week of postpartum supplements &mdash; once, for your whole recovery map.</div>
+    <span class="cta">Unlock my plan</span>
+    <div class="skip">Maybe later</div>
+  </div></div>
+  </div>
+
+  <!-- 7 UNLOCKED PLAN -->
+  <div>
+  <div class="lbl">7 · Your plan</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="brand" style="margin:0">Your Clock</span><span class="step">Ranges &middot; AAD&middot;ACOG</span></div>
+    <div class="tl" style="margin-top:6px">
+      <div class="ev"><span class="dot amb"></span><div>
+        <div class="t">Hair shedding</div><div class="when amb">Eases Sep&ndash;Dec</div>
+        <div class="kidea"><b>Kitchen idea</b> Pumpkin-seed cookies &mdash; zinc &amp; protein</div></div></div>
+      <div class="ev"><span class="dot"></span><div>
+        <div class="t">Deep fatigue</div><div class="when">Often shifts ~mid-Aug</div>
+        <div class="kidea"><b>Kitchen idea</b> If your GP confirms low ferritin &mdash; beef &amp; beet broth (iron + vitamin C)</div></div></div>
+      <div class="ev"><span class="dot lav"></span><div>
+        <div class="t">Milk supply</div><div class="when">Often days &mdash; varies a lot</div>
+        <div class="kidea"><b>Kitchen idea</b> Meat-stock latte &mdash; warm fluids, oats</div></div></div>
+      <div class="ev"><span class="dot"></span><div>
+        <div class="t">Night sweats</div><div class="when">Settling &middot; ~6&ndash;8 wks</div>
+        <div class="kidea"><b>Kitchen idea</b> Magnesium-rich supper for sleep</div></div></div>
+    </div>
+    <div class="pinch"><b>Tonight, in a pinch</b>Too tired to cook? A spoon of liver pâté on toast covers iron &amp; B12 in two minutes.</div>
+    <div class="alert"><div class="h">&#9829; Low mood deserves more than a recipe</div><p>If it lasts beyond two weeks or feels heavy, that&rsquo;s not yours to carry alone &mdash; postpartum low mood affects <b>1 in 7 mums</b>, and your GP or nurse can help. <i>Find support &rarr;</i></p></div>
+    <span class="cta">See this week&rsquo;s recipes</span>
+  </div></div>
+  </div>
+
+  <!-- 8 SHARPEN (optional, anytime) -->
+  <div>
+  <div class="lbl">8 · Sharpen (optional)</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Anytime &middot; optional</span></div>
+    <div class="q">Know your numbers?</div>
+    <div class="sub">Add them and we&rsquo;ll narrow your ranges. We don&rsquo;t diagnose &mdash; your GP reads your bloods.</div>
+    <div class="nfield"><span class="nl">Ferritin <small>iron stores</small></span><span class="nv filled">28</span></div>
+    <div class="nfield"><span class="nl">Vitamin D <small>ng/mL</small></span><span class="nv">add</span></div>
+    <div class="nfield"><span class="nl">B12 <small>pg/mL</small></span><span class="nv">add</span></div>
+    <div class="nfield"><span class="nl">Haemoglobin <small>g/dL</small></span><span class="nv">add</span></div>
+    <div class="pinch" style="margin-top:16px"><b>Why it helps</b>A real ferritin of 28 sharpens &ldquo;a few months&rdquo; into a tighter window &mdash; and tells you how hard to lean on iron-rich meals.</div>
+    <span class="cta">Update my clock</span>
+    <div class="skip">Skip &mdash; estimate from how I feel</div>
+  </div></div>
+  </div>
+
+</div>
+</body></html>
