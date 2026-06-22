@@ -468,6 +468,40 @@
   .page.provence .dc .pinch{display:block;margin-top:11px;padding:9px 12px;background:rgba(195,154,71,.12);
     border-left:2px solid var(--pv-amber);border-radius:0 4px 4px 0;font-size:14px;color:var(--pv-ink2);line-height:1.5}
   .page.provence .dc .pinch b{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pv-amber2)}
+  /* ===== new Provence Home (mum's side) ===== */
+  @media screen{ #appHome{ background:radial-gradient(120% 30% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 42%),#efe8d7 !important; } }
+  #appHome{ font-family:'EB Garamond',Georgia,serif; color:#3c3325; }
+  #appHome .atop .brandsm{ font-family:'Pinyon Script',cursive; font-size:22px; color:#7a4f2c; font-weight:400; letter-spacing:0; }
+  .nh-hero{ text-align:center; padding:8px 6px 2px; }
+  .nh-hero .nh-bot{ display:flex; justify-content:center; margin-bottom:6px; }
+  .nh-hero .nh-bot svg{ width:98px; height:auto; }
+  .nh-hero h1{ font-family:'Cormorant Garamond',serif; font-weight:500; font-size:35px; line-height:1.03; color:#4a3320; margin:0; letter-spacing:0; }
+  .nh-hero h1 em{ display:block; font-style:italic; font-weight:400; font-size:22px; color:#7a4f2c; margin-top:6px; }
+  .nh-hero .nh-g{ font-style:italic; color:#6f6353; font-size:14px; margin-top:11px; }
+  #appHome .asearch{ background:rgba(255,255,255,.55); border:1px solid #d9cdb6; border-radius:24px; margin-top:20px; }
+  #appHome .asearch input{ font-family:'EB Garamond',serif; }
+  #appHome .lbl h2{ font-family:'Marcellus',serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#5f6e44; font-weight:400; }
+  #appHome .lbl span{ color:#938671; font-style:italic; }
+  .nh-ci{ margin-top:26px; text-align:center; }
+  .nh-ci .nh-q{ font-family:'Cormorant Garamond',serif; font-size:25px; font-weight:600; color:#3c3325; }
+  .nh-ci .nh-s{ font-style:italic; color:#938671; font-size:13px; margin:3px 0 14px; }
+  .nh-chips{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .nh-chip{ font-size:14.5px; color:#6f6353; border:1px solid #d9cdb6; border-radius:22px; padding:8px 15px; background:rgba(255,255,255,.6); cursor:pointer; transition:transform .1s,background .15s; }
+  .nh-chip:active{ transform:scale(.96); }
+  .nh-chip.on{ border-color:#7a895a; color:#fff; background:linear-gradient(#7a895a,#5f6e44); }
+  #nhRx{ margin-top:16px; }
+  .nh-ghost{ border:1px dashed #d9cdb6; border-radius:12px; padding:22px 18px; color:#938671; font-style:italic; font-size:14px; }
+  .nh-rx{ border:1px solid #c39a47; border-radius:12px; background:linear-gradient(#fdf8ea,#f6ead0); padding:20px; box-shadow:0 6px 22px rgba(168,127,47,.14); text-align:left; }
+  .nh-rx .nh-rxk{ font-family:'Marcellus',serif; font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:#a87f2f; text-align:center; }
+  .nh-rx h2{ font-family:'Cormorant Garamond',serif; font-weight:600; font-size:30px; color:#5a481f; text-align:center; margin:2px 0 6px; line-height:1.05; }
+  .nh-rx .nh-rxsub{ text-align:center; font-style:italic; color:#86702f; font-size:13.5px; margin-bottom:10px; }
+  .nh-line{ display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-top:1px solid rgba(195,154,71,.28); font-size:14.5px; color:#5a4f2c; line-height:1.45; }
+  .nh-line .k{ font-family:'Marcellus',serif; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:#a87f2f; flex:0 0 58px; padding-top:2px; }
+  .nh-line .mult{ color:#b0623a; font-style:italic; }
+  .nh-cta{ margin-top:14px; text-align:center; font-family:'Marcellus',serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase; background:linear-gradient(#c39a47,#b0822c); color:#fff8e9; padding:13px; border-radius:8px; cursor:pointer; }
+  .nh-recs{ margin-top:14px; text-align:left; }
+  .nh-feed{ margin:20px auto 4px; max-width:260px; display:flex; align-items:center; justify-content:center; gap:9px; border:1px solid #c39a47; border-radius:30px; background:linear-gradient(#f8efd2,#f1e3bd); padding:13px; font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:#5e4d28; cursor:pointer; box-shadow:0 4px 14px rgba(168,127,47,.18); }
+  .nh-feed svg{ width:19px; height:19px; color:#a87f2f; }
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -3373,6 +3407,28 @@
     {key:'healing',name:'Healing',color:'#5d7d4f',kw:['collagen','bone broth','zinc','vitamin c','repair','heal','recovery','after birth','protein']}
   ];
   function goalHits(g){var out=[];ALL.forEach(function(it){var src=g.titleOnly?it.title.toLowerCase():it.hay;var n=0;for(var i=0;i<g.kw.length;i++){if(src.indexOf(g.kw[i])>-1)n++;}if(n)out.push({it:it,n:n});});out.sort(function(a,b){return b.n-a.n;});return out.map(function(o){return o.it;});}
+
+  // ---- symptom -> nutrient -> recipe engine (the feeling-first check-in) ----
+  var NUTRI={
+    iron:{name:'Iron',pinch:'a spoon of liver pâté from the freezer, or pumpkin seeds on yogurt',absorb:'Squeeze lemon over iron-rich meals &amp; keep tea an hour apart — up to ~3× the iron.',find:['liver','heart','clam','borscht','pho','sardine','lentil','beef']},
+    magnesium:{name:'Magnesium',pinch:'a few squares of dark chocolate or a handful of pumpkin seeds before bed',absorb:'It also unlocks vitamin D, calcium &amp; zinc — low magnesium quietly blocks them.',find:['cacao','pumpkin seed','dark chocolate','tonic','chai']},
+    zinc:{name:'Zinc',pinch:'a handful of pumpkin seeds or cashews',absorb:'Animal sources absorb best; pair seeds with a protein.',find:['clam','chicken soup','pumpkin seed','til-gur','liver','oyster']},
+    calcium:{name:'Calcium',pinch:'a bowl of Greek yogurt with chia, or a tin of sardines',absorb:'Vitamin D &amp; magnesium are its teammates for absorption.',find:['yogurt','skyr','sardine','sesame','til-gur']},
+    vitd:{name:'Vitamin D',pinch:'ten minutes of daylight, or a tin of sardines',absorb:'Eat it with fat — it’s fat-soluble.',find:['sardine','egg','salmon','latte']}
+  };
+  var SYMPTOMS=[
+    {name:'Wiped out',nut:['iron','magnesium']},
+    {name:'Can’t sleep',nut:['magnesium']},
+    {name:'Low mood',nut:['iron','vitd','magnesium']},
+    {name:'Hair shedding',nut:['iron','zinc']},
+    {name:'Cramps',nut:['magnesium','calcium']},
+    {name:'Catching colds',nut:['zinc','vitd']},
+    {name:'Brittle nails',nut:['calcium','zinc']},
+    {name:'Brain fog',nut:['iron']},
+    {name:'Restless legs',nut:['magnesium']},
+    {name:'Aches',nut:['vitd','magnesium']}
+  ];
+  function nutRecipes(keys){var seen={},out=[];ALL.forEach(function(it){var h=it.hay,t=it.title.toLowerCase();for(var i=0;i<keys.length;i++){if(h.indexOf(keys[i])>-1||t.indexOf(keys[i])>-1){if(!seen[it.title]){seen[it.title]=1;out.push(it);}break;}}});return out;}
   var PHASES=[
     {key:'p1',name:'Week 1–2',color:'#b0481f',focus:'Rest, warmth & iron — broths, soft, easy to digest.',kw:['broth','soup','khichdi','porridge','liver','iron','collagen','stew','soft','kvass','ferment','congee','pho']},
     {key:'p2',name:'Week 3–4',color:'#3f7d6e',focus:'Rebuild — protein & milk supply.',kw:['protein','egg','salmon','chicken','beef','lentil','lactation','milk','cutlet','burger','liver','fish','feta','cottage']},
@@ -3398,11 +3454,15 @@
   var shopBtn=el('div','toolbtn'); shopBtn.setAttribute('title','Shopping list'); shopBtn.innerHTML=bagIco+'<span class="cnt"></span>';
   tools.appendChild(picksBtn); tools.appendChild(shopBtn); top.appendChild(tools); home.appendChild(top);
 
-  var h2=el('div','ahero2');
-  h2.innerHTML='<svg class="hmotif" viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M18 52 h64 a32 32 0 0 1 -64 0 z"/><path d="M50 20 q-6 8 0 16 q6 -8 0 -16"/><path d="M34 26 q-3 5 0 9 M66 26 q3 5 0 9"/></svg>'+
-    '<div class="eyebrow">Your fourth trimester</div>'+
-    '<h1>Recover like you’re<br>being <em>cared for.</em></h1>'+
-    '<p>Warm meals and tonics to rebuild your energy, protect your iron, and hold your hair — one gentle step at a time.</p>';
+  var h2=el('div','nh-hero');
+  h2.innerHTML='<div class="nh-bot"><svg viewBox="0 0 120 80" fill="none">'+
+    '<g stroke="#6f7d54" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M44 74 C46 56 50 38 58 22"/><path d="M52 56 C45 52 40 47 37 40 M52 56 C61 52 66 47 69 40"/><path d="M55 42 C48 38 43 33 41 27 M55 42 C63 38 67 33 69 27"/></g>'+
+    '<g stroke="#7f8a5d" stroke-width="1.2" stroke-linecap="round"><path d="M68 74 C70 56 70 40 67 28"/></g>'+
+    '<g fill="#9c8cb6"><ellipse cx="67" cy="24" rx="3" ry="5"/><ellipse cx="62" cy="29" rx="2.4" ry="4"/><ellipse cx="72" cy="29" rx="2.4" ry="4"/></g>'+
+    '<g><circle cx="86" cy="36" r="5.5" fill="#e7c878"/><circle cx="86" cy="36" r="5.5" fill="none" stroke="#c39a47" stroke-width="1"/><circle cx="96" cy="46" r="4" fill="#e7c878"/></g>'+
+    '</svg></div>'+
+    '<h1>Tell us how you feel.<em>We’ll tell you what to eat.</em></h1>'+
+    '<div class="nh-g" id="nhGreet">Let’s get something nourishing into you.</div>';
   home.appendChild(h2);
 
   var sb=el('div','asearch');
@@ -3410,19 +3470,51 @@
   home.appendChild(sb);
   var sr=el('div'); sr.id='searchRes'; sr.style.display='none'; home.appendChild(sr);
 
-  // goal section
-  var goalSec=el('div');
-  var glab=el('div','lbl'); glab.innerHTML='<h2>How are you feeling?</h2><span>tap to filter</span>'; goalSec.appendChild(glab);
-  var chips=el('div','chips');
-  var activeGoal=null;
-  GOALS.forEach(function(g){ var c=el('div','gchip'); c.innerHTML='<span class="gd" style="background:'+g.color+'"></span>'+g.name; c.addEventListener('click',function(){toggleGoal(g,c);}); chips.appendChild(c); });
-  goalSec.appendChild(chips);
-  var plab=el('div','lbl'); plab.innerHTML='<h2>Where are you?</h2><span>recovery phase</span>'; goalSec.appendChild(plab);
-  var phaseRow=el('div','chips');
-  PHASES.forEach(function(p){ var c=el('div','gchip'); c.innerHTML='<span class="gd" style="background:'+p.color+'"></span>'+p.name; c.addEventListener('click',function(){toggleGoal(p,c);}); phaseRow.appendChild(c); });
-  goalSec.appendChild(phaseRow);
-  var goalRes=el('div'); goalRes.id='goalRes'; goalRes.style.display='none'; goalSec.appendChild(goalRes);
-  home.appendChild(goalSec);
+  // ---- feeling-first check-in (symptom -> nutrient -> recipes) ----
+  var activeGoal=null;                                   // kept for showHome/toggleGoal compatibility
+  var goalRes=el('div'); goalRes.id='goalRes'; goalRes.style.display='none';
+  var ci=el('div','nh-ci');
+  ci.innerHTML='<div class="nh-q">How are you feeling?</div><div class="nh-s">Tap what’s true today — signs, not a diagnosis.</div>';
+  var nhChips=el('div','nh-chips'); var picked={};
+  SYMPTOMS.forEach(function(s){ var c=el('div','nh-chip'); c.textContent=s.name;
+    c.addEventListener('click',function(){ c.classList.toggle('on'); if(picked[s.name])delete picked[s.name]; else picked[s.name]=s; renderRx(); });
+    nhChips.appendChild(c); });
+  ci.appendChild(nhChips);
+  var rxWrap=el('div'); rxWrap.id='nhRx'; ci.appendChild(rxWrap);
+  home.appendChild(ci); home.appendChild(goalRes);
+
+  var feed=el('div','nh-feed');
+  feed.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11h14M5 11a7 7 0 0 0 14 0M9 6c-1-1 1-2 0-3M15 6c-1-1 1-2 0-3"/></svg> Feed me now';
+  feed.addEventListener('click',function(){ feedMeNow(); });
+  home.appendChild(feed);
+
+  function renderRx(){
+    var tally={}; Object.keys(picked).forEach(function(k){ picked[k].nut.forEach(function(n){ tally[n]=(tally[n]||0)+1; }); });
+    var keys=Object.keys(tally).sort(function(a,b){ return tally[b]-tally[a]; });
+    if(!keys.length){ rxWrap.innerHTML='<div class="nh-ghost">Your plan appears here once you tell us how you feel.</div>'; return; }
+    var top=keys.slice(0,2);
+    var names=top.map(function(k){ return NUTRI[k].name; }).join(' &amp; ');
+    rxWrap.innerHTML='<div class="nh-rx"><div class="nh-rxk">For you · this week</div><h2>'+names+'</h2>'+
+      '<div class="nh-line"><span class="k">Right now</span><div>'+NUTRI[top[0]].pinch+'.</div></div>'+
+      '<div class="nh-line"><span class="k">Absorb</span><div>'+NUTRI[top[0]].absorb+'</div></div>'+
+      '<div class="nh-cta">See your recipes &rarr;</div><div class="nh-recs" style="display:none"></div></div>';
+    var recsBox=rxWrap.querySelector('.nh-recs'), cta=rxWrap.querySelector('.nh-cta');
+    cta.addEventListener('click',function(){
+      if(recsBox.style.display==='none'){
+        var fk=[]; top.forEach(function(k){ fk=fk.concat(NUTRI[k].find); });
+        var recs=nutRecipes(fk).slice(0,8); recsBox.innerHTML='';
+        recs.forEach(function(it){ var r=rowFor(it,true); r.addEventListener('click',function(){ showRecipe(it,it.cat); }); recsBox.appendChild(r); });
+        recsBox.style.display='block'; cta.innerHTML='Hide recipes';
+      } else { recsBox.style.display='none'; cta.innerHTML='See your recipes &rarr;'; }
+    });
+  }
+  function feedMeNow(){
+    var pool=[]; Object.keys(picked).forEach(function(k){ picked[k].nut.forEach(function(n){ pool=pool.concat(NUTRI[n].find); }); });
+    var recs = pool.length ? nutRecipes(pool) : [];
+    var pick = recs.length ? recs[0] : (byTitle(['bone broth'])||ALL[0]);
+    if(pick) showRecipe(pick, pick.cat);
+  }
+  renderRx();
 
   // today section
   var todaySec=el('div');
@@ -3482,7 +3574,8 @@
   function showHome(){ hideAll(); bar.style.display='none'; home.style.display='block';
     var q=home.querySelector('#qq'); if(q)q.value=''; sr.style.display='none'; goalRes.style.display='none';
     if(activeGoal){activeGoal.el.classList.remove('on');activeGoal.el.style.background='';activeGoal=null;}
-    goalSec.style.display='block'; todaySec.style.display='block'; exploreSec.style.display='block';
+    ci.style.display='block'; todaySec.style.display='block'; exploreSec.style.display='block';
+    picked={}; [].forEach.call(nhChips.children,function(c){c.classList.remove('on');}); renderRx();
     updCounts(); updTodayCnt(); window.scrollTo(0,0);
   }
   function showCat(c){ hideAll(); list.style.display='block'; bar.style.display='grid'; showBarActions(false);
@@ -3544,9 +3637,9 @@
   addBtn.addEventListener('click',function(){ if(!curRecipe)return; var id=curRecipe.sec.id; var i=SHOP.indexOf(id); if(i>-1)SHOP.splice(i,1); else SHOP.push(id); SS('pk_shop',SHOP); syncRecipeBtns(); updCounts(); });
 
   function runSearch(q){ q=q.trim().toLowerCase();
-    if(!q){ sr.style.display='none'; goalSec.style.display='block'; todaySec.style.display='block'; exploreSec.style.display='block'; return; }
+    if(!q){ sr.style.display='none'; ci.style.display='block'; todaySec.style.display='block'; exploreSec.style.display='block'; return; }
     if(activeGoal){activeGoal.el.classList.remove('on');activeGoal.el.style.background='';activeGoal=null; goalRes.style.display='none';}
-    goalSec.style.display='none'; todaySec.style.display='none'; exploreSec.style.display='none';
+    ci.style.display='none'; todaySec.style.display='none'; exploreSec.style.display='none';
     sr.style.display='block'; sr.innerHTML='';
     var terms=q.split(/\s+/);
     var hits=ALL.filter(function(it){return terms.every(function(t){return it.hay.indexOf(t)>-1;});});
