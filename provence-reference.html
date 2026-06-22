@@ -1,0 +1,149 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --linen:#efe8d7; --linen2:#f6f0e2; --paper:#faf6ec;
+    --ink:#4a4035; --ink2:#6f6353; --soft:#8a7e6c;
+    --sage:#7a895a; --sage2:#5f6e44; --lav:#9c8cb6; --amber:#c39a47; --amber2:#a87f2f;
+    --rule:#d9cdb6;
+  }
+  body{
+    font-family:'EB Garamond',Georgia,serif; color:var(--ink);
+    background:
+      radial-gradient(120% 80% at 80% 0%, #f4eedf 0%, rgba(244,238,223,0) 60%),
+      radial-gradient(100% 70% at 0% 100%, #f1ebda 0%, rgba(241,235,218,0) 55%),
+      var(--linen);
+    -webkit-font-smoothing:antialiased;
+  }
+  /* faint linen weave */
+  body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+    background-image:repeating-linear-gradient(0deg, rgba(120,100,70,.025) 0 1px, transparent 1px 3px),
+                     repeating-linear-gradient(90deg, rgba(120,100,70,.025) 0 1px, transparent 1px 3px);}
+  .wrap{max-width:480px;margin:0 auto;padding:26px 26px 48px;position:relative}
+
+  .brand{text-align:center;margin-bottom:6px}
+  .brand .script{font-family:'Pinyon Script',cursive;font-size:30px;color:var(--sage2);line-height:1}
+  .brand .est{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.34em;color:var(--soft);text-transform:uppercase;margin-top:3px}
+
+  .botanical{display:flex;justify-content:center;margin:14px 0 6px}
+  .botanical svg{width:128px;height:auto}
+
+  h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:38px;line-height:1.05;text-align:center;color:var(--ink);letter-spacing:.01em}
+  h1 .sm{display:block;font-family:'Marcellus',serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);margin-top:8px;font-weight:400}
+  .hook{font-family:'EB Garamond',serif;font-style:italic;font-size:16px;text-align:center;color:var(--ink2);margin:12px auto 0;max-width:34ch;line-height:1.45}
+
+  .rule-orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 16px;color:var(--sage)}
+  .rule-orn:before,.rule-orn:after{content:"";height:1px;width:58px;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
+  .rule-orn svg{width:16px;height:16px}
+
+  .tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:4px}
+  .tag{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:2px;border:1px solid var(--rule);color:var(--ink2);background:rgba(255,255,255,.4)}
+  .tag.gold{border-color:var(--amber);color:var(--amber2);background:linear-gradient(#f7eccb,#f1e1bb)}
+  .tag.gf{border-color:#a9b78a;color:var(--sage2)}
+
+  .meta{text-align:center;font-size:13px;color:var(--soft);letter-spacing:.04em;margin:14px 0 2px}
+
+  .lbl{font-family:'Marcellus',serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--sage2);
+       border-bottom:1px solid var(--rule);padding-bottom:6px;margin:26px 0 12px;display:flex;align-items:center;gap:9px}
+  .lbl svg{width:13px;height:13px;color:var(--sage)}
+
+  .ing{display:flex;gap:10px;font-size:16px;line-height:1.5;padding:5px 0;border-bottom:1px dotted #e0d6c2}
+  .ing .q{font-weight:600;color:var(--ink);white-space:nowrap;min-width:64px}
+  .ing .n{color:var(--ink2)}
+  .ing .note{color:var(--soft);font-style:italic;font-size:14px}
+
+  .step{display:flex;gap:14px;padding:9px 0}
+  .step .num{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--amber2);line-height:1;min-width:24px;text-align:center}
+  .step .h{font-weight:600;color:var(--ink);font-size:16px}
+  .step .h .t{font-style:italic;font-weight:400;color:var(--sage2);font-size:14px;margin-left:6px}
+  .step .b{font-size:15.5px;color:var(--ink2);line-height:1.5;margin-top:1px}
+
+  .gold-box{margin-top:22px;border:1px solid var(--amber);background:linear-gradient(135deg,#f8efd2,#f1e3bd);border-radius:4px;padding:15px 17px;position:relative}
+  .gold-box .gh{font-family:'Marcellus',serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber2);display:flex;align-items:center;gap:8px}
+  .gold-box .gintro{font-style:italic;color:#6e5a2c;font-size:15px;margin:6px 0 8px}
+  .gold-box .gi{font-size:15px;color:#5e4d28;padding:2px 0}
+  .gold-box .gi b{color:var(--amber2)}
+  .gold-box .gi span{color:#8a7340;font-style:italic;font-size:13.5px}
+
+  .know{margin-top:18px;font-size:15px;color:var(--ink2);line-height:1.55;border-top:1px solid var(--rule);padding-top:12px}
+  .know b{font-family:'Marcellus',serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage2);display:block;margin-bottom:3px}
+
+  .foot{text-align:center;margin-top:26px;color:var(--soft);font-style:italic;font-size:13px}
+</style></head>
+<body>
+<div class="wrap">
+
+  <div class="brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; fourth trimester</div></div>
+
+  <div class="botanical">
+    <!-- rosemary sprig + lavender flowers + amber oil drops -->
+    <svg viewBox="0 0 200 120" fill="none">
+      <g stroke="#6f7d54" stroke-width="1.6" stroke-linecap="round">
+        <path d="M100 112 C100 92 100 70 100 40"/>
+        <path d="M100 100 C90 96 84 90 80 82 M100 100 C110 96 116 90 120 82"/>
+        <path d="M100 86 C89 82 82 76 78 67 M100 86 C111 82 118 76 122 67"/>
+        <path d="M100 70 C90 66 84 60 81 52 M100 70 C110 66 116 60 119 52"/>
+        <path d="M100 54 C92 50 87 45 84 38 M100 54 C108 50 113 45 116 38"/>
+        <path d="M100 40 C95 35 92 30 91 24 M100 40 C105 35 108 30 109 24"/>
+      </g>
+      <!-- little lavender flowers at the tip -->
+      <g fill="#9c8cb6" opacity=".9">
+        <ellipse cx="100" cy="20" rx="3" ry="4.5"/><ellipse cx="94" cy="24" rx="2.6" ry="4"/><ellipse cx="106" cy="24" rx="2.6" ry="4"/>
+        <ellipse cx="97" cy="14" rx="2.4" ry="3.6"/><ellipse cx="103" cy="14" rx="2.4" ry="3.6"/>
+      </g>
+      <!-- amber olive-oil drops -->
+      <g><circle cx="150" cy="48" r="7" fill="#e7c878"/><circle cx="150" cy="48" r="7" fill="none" stroke="#c39a47" stroke-width="1"/>
+         <circle cx="166" cy="62" r="5" fill="#e7c878"/><circle cx="166" cy="62" r="5" fill="none" stroke="#c39a47" stroke-width="1"/>
+         <circle cx="158" cy="78" r="3.5" fill="#e7c878"/></g>
+      <!-- single stray rosemary needle -->
+      <path d="M44 56 C58 50 70 47 84 47" stroke="#7a895a" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <h1>Chicken Bone Broth</h1>
+  <div class="hook">Deep iron &amp; collagen — sip a warm cup a day.</div>
+
+  <div class="rule-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
+
+  <div class="tags">
+    <span class="tag gold">&#10022; PP Gold</span>
+    <span class="tag">Iron</span>
+    <span class="tag">Make-ahead</span>
+  </div>
+  <div class="meta">Makes ~3 litres &middot; 2&frac12; hours</div>
+
+  <div class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11h14M5 11a7 7 0 0 0 14 0M9 6c-1-1 1-2 0-3M15 6c-1-1 1-2 0-3"/></svg> What you need</div>
+  <div class="ing"><span class="q">4</span><span class="n">chicken feet <span class="note">(more if they fit)</span></span></div>
+  <div class="ing"><span class="q">2</span><span class="n">chicken necks</span></div>
+  <div class="ing"><span class="q">3 litres</span><span class="n">cold water</span></div>
+  <div class="ing"><span class="q">2 tbsp</span><span class="n">apple cider vinegar</span></div>
+  <div class="ing"><span class="q">&frac34; tsp</span><span class="n">ginger powder</span></div>
+  <div class="ing"><span class="q">1 tsp</span><span class="n">turmeric powder</span></div>
+  <div class="ing"><span class="q">&frac12; tsp</span><span class="n">black peppercorns</span></div>
+  <div class="ing"><span class="q">4</span><span class="n">garlic cloves, smashed</span></div>
+  <div class="ing"><span class="q">&frac12; tsp</span><span class="n">whole ajwain seeds</span></div>
+  <div class="ing"><span class="q">2</span><span class="n">bay leaves</span></div>
+  <div class="ing"><span class="q">1 + 1</span><span class="n">sprig rosemary &middot; sprig thyme</span></div>
+  <div class="ing"><span class="q">Salt</span><span class="n"><span class="note">to taste</span></span></div>
+
+  <div class="lbl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 19h12l-1-9H7l-1 9zM9 10V7a3 3 0 0 1 6 0v3"/></svg> How to make it</div>
+  <div class="step"><div class="num">1</div><div><div class="h">Soak. <span class="t">30 min</span></div><div class="b">Chicken feet, necks and water in a big pot with the cider vinegar. Sit, no heat, 30 min.</div></div></div>
+  <div class="step"><div class="num">2</div><div><div class="h">Boil &amp; skim. <span class="t">~15 min</span></div><div class="b">Boil hard; scoop off and discard the grey foam.</div></div></div>
+  <div class="step"><div class="num">3</div><div><div class="h">Simmer low. <span class="t">1.5–2.5 hrs</span></div><div class="b">Drop to a bare simmer. Add ginger, turmeric, peppercorns, garlic, ajwain, bay, rosemary and thyme. Skim and top up with hot water now and then.</div></div></div>
+  <div class="step"><div class="num">4</div><div><div class="h">Season, strain &amp; serve.</div><div class="b">Salt to taste; strain off the bones and bits.</div></div></div>
+
+  <div class="gold-box">
+    <div class="gh">&#10022; PP Gold version</div>
+    <div class="gintro">Turn it into the warming confinement broth — just add:</div>
+    <div class="gi"><b>7 red dates</b>, split <span>· with the spices (step 3)</span></div>
+    <div class="gi"><b>1 tbsp goji</b> <span>· last 15 min only</span></div>
+    <div class="gi"><b>&frac12; tsp moringa</b> <span>· per bowl, off the heat (never boil)</span></div>
+  </div>
+
+  <div class="know"><b>Good to know</b> Set like jelly when chilled — that's perfect. Sip a warm cup daily, or use as a soup base. Keeps 4 days in the fridge, or freezes in portions.</div>
+
+  <div class="foot">— a kitchen recipe —</div>
+</div>
+</body></html>
