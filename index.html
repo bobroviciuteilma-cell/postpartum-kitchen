@@ -454,6 +454,13 @@
   .page.provence .conv .t{font-weight:600;color:var(--pv-ink);white-space:nowrap;font-feature-settings:"tnum"}
   .page.provence .colhead .convlink{float:right;font-family:'EB Garamond',serif;font-size:12px;font-style:italic;
     letter-spacing:0;text-transform:none;color:var(--pv-amber2);text-decoration:none;font-weight:400}
+  /* meat-stock cut selector (reuses .psel/.pchips/.ppanels/.ppanel) */
+  .page.provence #m-chicken:checked ~ .pchips label[for=m-chicken],
+  .page.provence #m-beef:checked    ~ .pchips label[for=m-beef],
+  .page.provence #m-lamb:checked    ~ .pchips label[for=m-lamb]{background:linear-gradient(#f7eccb,#f1e1bb);border-color:var(--pv-amber);color:var(--pv-amber2)}
+  .page.provence #m-chicken:checked ~ .ppanels .ppanel[data-p=mchicken],
+  .page.provence #m-beef:checked    ~ .ppanels .ppanel[data-p=mbeef],
+  .page.provence #m-lamb:checked    ~ .ppanels .ppanel[data-p=mlamb]{display:block}
 
   /* ---- screen / responsive (does not affect print/PDF) ---- */
   @media screen {
@@ -910,6 +917,82 @@
   <div class="box box-tight" style="margin-top:10px;"><span class="lead">Reheat by the cup, not the pot</span> &mdash; ladle out just what you want and warm that one portion (a mug in the microwave, or a small pan). Bringing the whole batch back to the boil again and again dulls the flavour, clouds it, and shortens how long it keeps.</div>
   <div class="pv-child"><b>For little ones</b> Lovely from ~6 months as a cooking liquid &mdash; use it for baby's congee, purées or to soften grains. Leave the salt out for under-1s (season your own bowl after). The ginger and turmeric are gentle in these small amounts.</div>
   <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Chicken Bone Broth</div>
+</section>
+
+<!-- Meat Stock (gut-healing base; Regenerative Cooking School) -->
+<section class="page provence" id="meatstock">
+  <div class="pv-brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; fourth trimester</div></div>
+  <div class="pv-bot">
+    <svg viewBox="0 0 200 120" fill="none">
+      <g stroke="#6f7d54" stroke-width="1.6" stroke-linecap="round">
+        <path d="M100 112 C100 92 100 70 100 40"/>
+        <path d="M100 100 C90 96 84 90 80 82 M100 100 C110 96 116 90 120 82"/>
+        <path d="M100 86 C89 82 82 76 78 67 M100 86 C111 82 118 76 122 67"/>
+        <path d="M100 70 C90 66 84 60 81 52 M100 70 C110 66 116 60 119 52"/>
+        <path d="M100 54 C92 50 87 45 84 38 M100 54 C108 50 113 45 116 38"/>
+        <path d="M100 40 C95 35 92 30 91 24 M100 40 C105 35 108 30 109 24"/>
+      </g>
+      <g fill="#9c8cb6" opacity=".9"><ellipse cx="100" cy="20" rx="3" ry="4.5"/><ellipse cx="94" cy="24" rx="2.6" ry="4"/><ellipse cx="106" cy="24" rx="2.6" ry="4"/><ellipse cx="97" cy="14" rx="2.4" ry="3.6"/><ellipse cx="103" cy="14" rx="2.4" ry="3.6"/></g>
+      <g><circle cx="150" cy="48" r="7" fill="#e7c878"/><circle cx="150" cy="48" r="7" fill="none" stroke="#c39a47" stroke-width="1"/><circle cx="166" cy="62" r="5" fill="#e7c878"/><circle cx="166" cy="62" r="5" fill="none" stroke="#c39a47" stroke-width="1"/><circle cx="158" cy="78" r="3.5" fill="#e7c878"/></g>
+      <path d="M44 56 C58 50 70 47 84 47" stroke="#7a895a" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <h1 class="title">Meat Stock</h1>
+  <div class="subtitle">The gut-healing base &mdash; raw meaty bones, a short simmer. Gentle &ldquo;heal &amp; seal&rdquo; nourishment for you and baby &nbsp;&bull;&nbsp; 2&ndash;3 hrs</div>
+  <div class="pv-orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
+
+  <details class="pv-d" open><summary><span class="sl">Meat stock vs bone broth</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">Meat stock is made from a <b>raw joint or bone with the meat still attached</b>, simmered a <b>short</b> time (2&ndash;3 hrs). That makes it gentler and easier to digest than long-cooked bone broth &mdash; it&rsquo;s the classic <b>&ldquo;heal &amp; seal&rdquo;</b> gut food, and a lovely first base in the tender early weeks. (Bone broth = mostly bones, simmered long for deep minerals.)</div></details>
+
+  <div class="twocol">
+    <div>
+      <div class="colhead">WHAT YOU NEED <a class="convlink" href="#r=conversions">conversions &rarr;</a></div>
+      <div class="ing"><b>Raw meaty bones</b> &mdash; a joint or bone with meat attached <span class="note">(see "choose your meat")</span></div>
+      <div class="ing"><b>+ feet or necks</b> <span class="note">every time &mdash; the most collagen</span></div>
+      <div class="ing"><b>Filtered water</b> <span class="note">&mdash; 1 quart per 1 lb meaty bones</span></div>
+      <div class="ing"><b>Sea salt</b>, <b>peppercorns</b> &amp; <b>a few sage leaves</b> <span class="note">(at the start)</span></div>
+      <div class="ing"><b>Nice to add</b> <span class="note">&mdash; carrots, onion, fresh herbs, garlic</span></div>
+      <div class="ing"><b>Leave out</b> <span class="note">&mdash; broccoli, cauliflower, kale (they overtake the flavour)</span></div>
+    </div>
+    <div>
+      <div class="colhead">HOW TO MAKE IT</div>
+      <div class="step"><div class="badge">1</div><div><div class="h">Start raw &amp; cold.</div><div class="b">Raw meaty bones and filtered water in a heavy-bottomed pot &mdash; 1 quart water per 1 lb bones. Add the sea salt, peppercorns and sage now.</div></div></div>
+      <div class="step"><div class="badge">2</div><div><div class="h">Boil briefly. <span class="time">5&ndash;10 min</span></div><div class="b">Bring to a boil for 5&ndash;10 minutes.</div></div></div>
+      <div class="step"><div class="badge">3</div><div><div class="h">Cover &amp; simmer low. <span class="time">2&ndash;3 hrs</span></div><div class="b">Drop to a gentle simmer, cover, and cook until the meat falls off the bone.</div></div></div>
+      <div class="step"><div class="badge">4</div><div><div class="h">Strain &amp; cool.</div><div class="b">Pour through a fine-mesh strainer into a <b>metal or glass</b> bowl &mdash; never hot liquid in plastic. Fridge or freeze once cooled.</div></div></div>
+    </div>
+  </div>
+
+  <div class="psel">
+    <div class="pl">Choose your meat</div>
+    <div class="psub">All gut-healing &mdash; tap one for the cut &amp; ratio.</div>
+    <input type="radio" name="msmeat" id="m-chicken" checked>
+    <input type="radio" name="msmeat" id="m-beef">
+    <input type="radio" name="msmeat" id="m-lamb">
+    <div class="pchips">
+      <label for="m-chicken">Chicken</label>
+      <label for="m-beef">Beef</label>
+      <label for="m-lamb">Lamb</label>
+    </div>
+    <div class="ppanels">
+      <div class="ppanel" data-p="mchicken"><span class="pm pot">~4 qt &middot; 2 hrs</span><h4>Chicken</h4><p><b>1 whole chicken (~4 lb)</b> + <b>~4 qt filtered water</b> (about 1:1 meat-to-water). Add chicken feet or necks for collagen. Boil 5&ndash;10 min, cover and simmer 2 hrs, then strain. Whole bird/carcass, feet, necks &amp; bones all work.</p></div>
+      <div class="ppanel" data-p="mbeef"><span class="pm pot">1 qt / lb &middot; 2&ndash;3 hrs</span><h4>Beef</h4><p>A <b>joint or bone with meat attached</b> &mdash; beef shank, knuckle, or rib &amp; shank. Use 1 quart water per 1 lb. Boil briefly, then simmer 2&ndash;3 hrs. The richest, most collagen-heavy gut-healing stock.</p></div>
+      <div class="ppanel" data-p="mlamb"><span class="pm pot">1 qt &middot; 2&ndash;3 hrs</span><h4>Lamb</h4><p><b>1 lb lamb neck or shank</b> + <b>1 qt filtered water</b>. Boil 5&ndash;10 min, then simmer covered 2&ndash;3 hrs until the meat falls off the bone.</p></div>
+    </div>
+  </div>
+
+  <details class="pv-d"><summary><span class="sl">Why it heals &mdash; gelatin &amp; collagen</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">Meat stock is rich in <b>collagen, elastin, proteoglycans, glycoproteins and hyaluronic acid</b> &mdash; the molecules that build connective tissue (most of your body). The collagen from feet, necks and joints is exactly what supports your own repair postpartum.</div></details>
+
+  <details class="pv-d"><summary><span class="sl">For little ones &mdash; starting baby</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="dc">Meat stock helps <b>heal &amp; seal</b> baby&rsquo;s naturally semi-permeable gut &mdash; the perfect foundation for you both.<br><br>
+    &bull; <b>Plain first:</b> just your cut of meat + filtered water. Add sea salt only after ~10 weeks of solids; veggies one at a time, after salt.<br>
+    &bull; <b>Start:</b> when baby&rsquo;s ready for solids, give <b>1&ndash;2 tsp before nursing for one whole week</b>.<br>
+    &bull; <b>Feed:</b> bottle, cup, spoon, or cold &amp; jelly. <b>No hot liquid in plastic.</b><br>
+    &bull; <b>If baby resists:</b> keep offering &mdash; babies can dislike a flavour up to the <b>8th</b> try. Stay calm &amp; patient.</div></details>
+
+  <div class="box box-tight" style="margin-top:16px;"><span class="lead">Good to know</span> &mdash; it should set like soft jelly when chilled; that wobble is the collagen. Sip it, or use it as the base for soups, pho, congee and porridge. Keeps a few days in the fridge, or freezes in portions.</div>
+  <div class="footer">Postpartum Kitchen &nbsp;&bull;&nbsp; Meat Stock &nbsp;&bull;&nbsp; via Regenerative Cooking School</div>
 </section>
 
 <!-- ============ 8. POSTPARTUM TEAS ============ -->
@@ -2812,7 +2895,7 @@
   // (Drinks, soups, salads, meat, bites etc. are obviously GF — tagging them is noise.)
   var GF=['keto rolls','seeded flax','banana bread','zucchini bread sandwich','seed crackers','buckwheat','millet','red lentil'];
   // PP Gold — the nutrient-dense postpartum powerhouses (organ meats, bone broth, ferments, sesame).
-  var GOLD=['bone broth','liver','chicken heart','beet kvass','laddu','sardine','pho','til-gur','saffron'];
+  var GOLD=['bone broth','meat stock','liver','chicken heart','beet kvass','laddu','sardine','pho','til-gur','saffron'];
   document.querySelectorAll('section.page').forEach(function(sec){
     if(sec.classList.contains('divider')||sec.classList.contains('hero')||sec.classList.contains('cover')) return;
     if(!sec.querySelector('.step') && !sec.querySelector('.var')) return;       // recipe / meal cards only
@@ -2861,7 +2944,7 @@
     {key:'salads',name:'Salads',color:'#5f7d4a',match:['salad','slaw']},
     {key:'burgers',name:'Burgers & Patties',color:'#8c4a4a',match:['burger','cutlet','patty','patties']},
     {key:'organs',name:'Liver & Organs',color:'#7d3b40',match:['liver','heart','organ']},
-    {key:'soups',name:'Soups & Bowls',color:'#c0633a',match:['broth','soup','sattvic','pho','noodle bowl']},
+    {key:'soups',name:'Soups & Bowls',color:'#c0633a',match:['broth','soup','sattvic','pho','noodle bowl','meat stock']},
     {key:'cookies',name:'Cookies',color:'#c98f3e',match:['cookie']},
     {key:'pancakes',name:'Pancakes',color:'#d2a24e',match:['pancake','fritter']},
     {key:'waffles',name:'Waffles',color:'#c79a3f',match:['waffle']},
