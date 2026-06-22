@@ -1,147 +1,165 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  :root{--linen:#efe8d7;--ink:#4a4035;--ink2:#6f6353;--soft:#8a7e6c;--sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rule:#d9cdb6}
-  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:radial-gradient(120% 70% at 80% 0%,#f4eedf 0%,rgba(244,238,223,0) 55%),radial-gradient(100% 60% at 0% 100%,#f1ebda 0%,rgba(241,235,218,0) 50%),var(--linen);-webkit-font-smoothing:antialiased}
-  body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px)}
-  .wrap{max-width:460px;margin:0 auto;padding:20px 22px 44px;position:relative}
-  .top{display:flex;align-items:flex-start;justify-content:space-between}
-  .brand .script{font-family:'Pinyon Script',cursive;font-size:27px;color:var(--sage2);line-height:1}
-  .brand .est{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.32em;color:var(--soft);text-transform:uppercase;margin-top:3px}
-  .modebtns{display:flex;gap:7px}
-  .mb{display:flex;align-items:center;gap:5px;border:1px solid var(--rule);border-radius:20px;padding:5px 10px;font-size:11px;color:var(--ink2);background:rgba(255,255,255,.5)}
-  .mb svg{width:13px;height:13px;color:var(--soft)}
-  .greet{margin-top:16px}
-  .greet .hi{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;line-height:1.1}
-  .greet .sub{font-style:italic;color:var(--ink2);font-size:14.5px;margin-top:3px}
+  :root{--linen:#efe8d7;--paper:#f7f1e3;--ink:#403729;--ink2:#6f6353;--soft:#938671;--sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rust:#b0623a;--rule:#dacca f}
+  :root{--rule:#d9cdb6}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);
+    background:radial-gradient(140% 60% at 50% -8%,#f7efdd 0%,rgba(247,239,221,0) 52%),radial-gradient(100% 50% at 100% 100%,#efe6d3 0%,rgba(239,230,211,0) 55%),var(--linen);-webkit-font-smoothing:antialiased}
+  body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.025) 0 1px,transparent 1px 3px)}
+  .wrap{max-width:462px;margin:0 auto;padding:18px 24px 46px;position:relative}
+  .top{display:flex;align-items:center;justify-content:space-between}
+  .top .script{font-family:'Pinyon Script',cursive;font-size:23px;color:var(--sage2)}
+  .top .moon{width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.45)}
+  .top .moon svg{width:16px;height:16px;color:var(--soft)}
 
-  /* Feed me now -> one meal + reason */
-  .pick{margin:16px 0 6px;border:1px solid var(--amber);border-radius:9px;background:linear-gradient(135deg,#f8efd2,#f1e3bd);padding:16px 17px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(168,127,47,.13)}
-  .pick:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--amber),#dcb964)}
-  .pick .pl{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber2);display:flex;align-items:center;gap:7px}
-  .pick .pl svg{width:14px;height:14px}
-  .pick .pm{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;color:#5e4d28;line-height:1.05;margin:4px 0 3px}
-  .pick .pw{font-style:italic;color:#7a6536;font-size:14px}
-  .pick .pa{display:flex;gap:9px;margin-top:12px}
-  .pick .pa .b{flex:1;text-align:center;font-family:'Marcellus',serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px;border-radius:5px;border:1px solid var(--amber);color:var(--amber2)}
-  .pick .pa .b.fill{background:linear-gradient(var(--amber),#b88a32);color:#fff7e4;border:none}
+  /* HERO */
+  .hero{text-align:center;padding:8px 0 4px}
+  .hero .bot{display:flex;justify-content:center;margin:6px 0 2px}
+  .hero .bot svg{width:184px;height:auto}
+  .kicker{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--soft)}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:46px;line-height:1.0;color:var(--ink);margin:8px 0 0;letter-spacing:.005em}
+  .hero h1 em{display:block;font-style:italic;font-weight:400;font-size:31px;color:var(--sage2);margin-top:7px}
+  .hero .ph{font-style:italic;color:var(--ink2);font-size:15px;margin-top:13px}
 
-  .sec{margin-top:22px}
-  .sec .lbl{font-family:'Marcellus',serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage2);display:flex;align-items:center;gap:9px;margin-bottom:4px}
-  .sec .lbl:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--rule),transparent)}
-  .sec .hint{font-style:italic;color:var(--soft);font-size:12.5px;margin-bottom:10px}
-  .sec .hint a{color:var(--amber2)}
+  .orn{display:flex;align-items:center;justify-content:center;gap:13px;margin:20px 0 18px;color:var(--sage)}
+  .orn:before,.orn:after{content:"";height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
+  .orn svg{width:15px;height:15px}
 
-  .chips{display:flex;flex-wrap:wrap;gap:7px}
-  .chip{font-size:14px;color:var(--ink2);border:1px solid var(--rule);border-radius:20px;padding:7px 13px;background:rgba(255,255,255,.5)}
-  .chip.on{border-color:var(--sage);color:var(--sage2);background:rgba(122,137,90,.12)}
-  .chip.on:after{content:" ✓";color:var(--sage)}
+  /* FEELING -> prescription */
+  .ask{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;text-align:center;color:var(--ink)}
+  .asksub{text-align:center;font-style:italic;color:var(--soft);font-size:13px;margin:4px 0 14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .chip{font-size:14.5px;color:var(--ink2);border:1px solid var(--rule);border-radius:22px;padding:8px 16px;background:rgba(255,255,255,.55)}
+  .chip.on{border-color:var(--sage);color:#fff;background:linear-gradient(var(--sage),var(--sage2));box-shadow:0 1px 4px rgba(95,110,68,.25)}
 
-  .focus{margin-top:13px;border:1px solid var(--amber);border-radius:7px;background:linear-gradient(#fcf7e7,#f6ebcd);padding:14px 15px;position:relative;overflow:hidden}
-  .focus:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--amber),#dcb964)}
-  .focus .fh{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber2)}
-  .focus .ft{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin:2px 0 8px}
-  .focus .row{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-top:1px dotted #e3d4ad;font-size:14px;color:var(--ink2)}
-  .focus .row .ic{width:18px;flex:0 0 18px;text-align:center}
-  .focus .row b{color:var(--ink)}
-  .focus .safe{margin-top:9px;font-size:12.5px;font-style:italic;color:#8a5a4a;background:rgba(176,72,31,.07);border-left:2px solid #b0481f;padding:7px 10px;border-radius:0 4px 4px 0}
+  /* the prescription showpiece */
+  .rx{margin-top:18px;border:1px solid var(--amber);border-radius:10px;background:
+      radial-gradient(120% 80% at 100% 0%,#fbf2d8,rgba(251,242,216,0)),linear-gradient(#fdf8ea,#f6ead0);
+      padding:22px 20px 18px;position:relative;box-shadow:0 6px 22px rgba(168,127,47,.13)}
+  .rx .corner{position:absolute;width:42px;height:42px;color:#dcc081;opacity:.8}
+  .rx .corner.tl{top:8px;left:8px}.rx .corner.br{bottom:8px;right:8px;transform:rotate(180deg)}
+  .rx .rxk{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--amber2);text-align:center}
+  .rx h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:33px;text-align:center;color:#5e4d28;line-height:1.05;margin:4px 0 3px}
+  .rx .rxsub{text-align:center;font-style:italic;color:#86702f;font-size:13.5px;margin-bottom:13px}
+  .rx .line{display:flex;gap:11px;align-items:flex-start;padding:8px 2px;border-top:1px solid rgba(195,154,71,.28);font-size:14.5px;color:#5e5230;line-height:1.45}
+  .rx .line .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber2);flex:0 0 64px;padding-top:2px}
+  .rx .line b{color:#4a3f22}
+  .rx .line .mult{color:var(--rust);font-style:italic}
+  .rx .cta{display:block;margin-top:15px;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    background:linear-gradient(var(--amber),#b6862f);color:#fff8e9;padding:13px;border-radius:7px}
+  .rx .safe{margin-top:11px;font-size:12px;font-style:italic;color:#9a5a3f;text-align:center;line-height:1.45}
 
-  .house{display:flex;align-items:center;gap:9px;border:1px dashed var(--sage);border-radius:8px;background:rgba(122,137,90,.06);padding:11px 14px}
-  .house svg{width:17px;height:17px;color:var(--sage);flex:0 0 17px}
-  .house .ht{font-size:14px;color:var(--ink2)}.house .ht b{color:var(--sage2)}
+  .or{text-align:center;margin:18px 0 8px;font-style:italic;color:var(--soft);font-size:13.5px}
+  .feed{display:flex;align-items:center;justify-content:center;gap:11px;border:1px solid var(--sage);border-radius:30px;
+    background:rgba(122,137,90,.08);padding:13px;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--sage2)}
+  .feed svg{width:21px;height:21px}
 
-  /* week timeline ribbon */
-  .ribbon{display:flex;gap:5px;margin-top:4px}
-  .wk{flex:1;text-align:center;border:1px solid var(--rule);border-radius:5px;padding:8px 2px;background:rgba(255,255,255,.4)}
-  .wk .n{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.05em;color:var(--soft);text-transform:uppercase}
-  .wk.now{border-color:var(--amber);background:linear-gradient(#f7eccb,#f1e1bb)}
-  .wk.now .n{color:var(--amber2)}
-  .wk.done{background:rgba(122,137,90,.1)}
-  .wkbody{margin-top:9px;font-size:13.5px;color:var(--ink2);font-style:italic;line-height:1.5;text-align:center}
-  .wkbody b{font-style:normal;color:var(--sage2)}
+  /* slim feature strip */
+  .strip{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:24px}
+  .card{border:1px solid var(--rule);border-radius:9px;background:linear-gradient(#fbf8f0,#f6efdf);padding:15px;position:relative;min-height:96px;overflow:hidden}
+  .card .ck{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+  .card .cn{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;line-height:1.05;margin-top:4px;color:var(--ink)}
+  .card .cd{font-size:12.5px;color:var(--ink2);font-style:italic;margin-top:4px;line-height:1.4}
+  .card.wide{grid-column:1/3;min-height:auto;display:flex;align-items:center;gap:14px}
+  .card.wide .ribbon{display:flex;gap:4px;flex:0 0 auto}
+  .card.wide .wk{width:26px;text-align:center;border:1px solid var(--rule);border-radius:4px;padding:6px 0;font-family:'Marcellus',serif;font-size:8px;color:var(--soft)}
+  .card.wide .wk.now{border-color:var(--amber);background:linear-gradient(#f7eccb,#f1e1bb);color:var(--amber2)}
+  .card.heal{background:linear-gradient(135deg,#eef0e6,#e5ebd7);border-color:#bcc7a3}.card.heal .cn{color:var(--sage2)}
+  .card.gold{background:linear-gradient(135deg,#f8efd2,#f0e1ba);border-color:#e6cf9a}.card.gold .cn{color:var(--amber2)}
+  .card .leaf{position:absolute;right:-8px;bottom:-10px;width:64px;height:64px;color:var(--sage);opacity:.13}
 
-  .rhythm{border:1px solid var(--rule);border-radius:6px;background:rgba(255,255,255,.4);overflow:hidden}
-  .rhythm .r{display:flex;align-items:center;gap:11px;padding:9px 14px;border-bottom:1px dotted #e0d6c2}.rhythm .r:last-child{border-bottom:none}
-  .rhythm .tick{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--sage);flex:0 0 16px;display:flex;align-items:center;justify-content:center}
-  .rhythm .tick.done{background:var(--sage)}.rhythm .tick.done svg{width:9px;height:9px;color:#fff}
-  .rhythm .rt{font-size:14px}.rhythm .rt .w{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-right:7px}
-
-  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .tile{border:1px solid var(--rule);border-radius:6px;background:linear-gradient(#fbf8f0,#f7f1e3);padding:13px;min-height:70px;display:flex;flex-direction:column;justify-content:space-between}
-  .tile .tn{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;line-height:1.05}
-  .tile .td{font-size:11.5px;color:var(--soft);font-style:italic;margin-top:2px}
-  .tile.feat{background:linear-gradient(135deg,#eef0e6,#e6ebd9);border-color:#bcc7a3}.tile.feat .tn{color:var(--sage2)}
-  .tile.gold{background:linear-gradient(135deg,#f8efd2,#f1e3bd);border-color:#e6cf9a}.tile.gold .tn{color:var(--amber2)}
-  .foot{text-align:center;margin-top:24px;color:var(--soft);font-style:italic;font-size:12px}
+  .foot{text-align:center;margin-top:26px;color:var(--soft);font-style:italic;font-size:12px}
 </style></head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div class="brand"><div class="script">Postpartum Kitchen</div><div class="est">Natural healing &middot; week 2</div></div>
-    <div class="modebtns">
-      <span class="mb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Night</span>
-      <span class="mb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 14c4 0 7-2 7-5s-3-4-7-4-7 1-7 4 3 5 7 5zM12 14v6M9 20h6"/></svg>Taste&rsquo;s off</span>
-    </div>
-  </div>
-  <div class="greet"><div class="hi">Good morning</div><div class="sub">How are you, really?</div></div>
-
-  <div class="pick">
-    <div class="pl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11h14M5 11a7 7 0 0 0 14 0M9 6c-1-1 1-2 0-3M15 6c-1-1 1-2 0-3"/></svg> Feed me now &mdash; today, for you</div>
-    <div class="pm">A cup of bone broth &amp; a soft egg</div>
-    <div class="pw">Week 2 &middot; low iron &middot; morning &mdash; warm, gentle, 10 min.</div>
-    <div class="pa"><span class="b fill">Make this</span><span class="b">Not this &rarr;</span></div>
+    <div class="script">Postpartum Kitchen</div>
+    <div class="moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div>
   </div>
 
-  <div class="sec">
-    <div class="lbl">How are you feeling?</div>
-    <div class="hint">Tap what&rsquo;s true today &mdash; or <a>answer 3 quick questions &rarr;</a> (signs, not a diagnosis).</div>
-    <div class="chips">
-      <span class="chip on">Wiped out</span><span class="chip on">Can&rsquo;t sleep</span><span class="chip">Hair shedding</span><span class="chip">Low mood</span><span class="chip">Cramps</span><span class="chip">Brittle nails</span>
+  <div class="hero">
+    <div class="bot">
+      <svg viewBox="0 0 220 150" fill="none">
+        <!-- soft watercolor washes -->
+        <ellipse cx="92" cy="74" rx="60" ry="46" fill="#cdd6b4" opacity=".22"/>
+        <ellipse cx="130" cy="62" rx="42" ry="34" fill="#d7c7e0" opacity=".18"/>
+        <ellipse cx="150" cy="92" rx="34" ry="26" fill="#ecd6a3" opacity=".22"/>
+        <!-- rosemary sprig -->
+        <g stroke="#6f7d54" stroke-width="1.5" stroke-linecap="round" fill="none">
+          <path d="M70 138 C72 110 76 80 86 50"/>
+          <path d="M80 116 C72 112 66 106 62 98 M80 116 C90 113 96 108 100 100"/>
+          <path d="M83 100 C74 96 68 90 65 82 M83 100 C93 97 99 92 102 84"/>
+          <path d="M85 84 C77 80 72 75 69 68 M85 84 C93 81 98 76 101 69"/>
+          <path d="M86 68 C80 63 76 58 74 52 M86 68 C92 63 96 58 98 52"/>
+        </g>
+        <!-- eucalyptus round-leaf branch -->
+        <g>
+          <path d="M150 140 C144 110 140 84 132 58" stroke="#8a9a6a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <g fill="#aeb98c" opacity=".85" stroke="#8a9a6a" stroke-width="1">
+            <ellipse cx="124" cy="64" rx="10" ry="7" transform="rotate(-28 124 64)"/>
+            <ellipse cx="143" cy="74" rx="10" ry="7" transform="rotate(20 143 74)"/>
+            <ellipse cx="129" cy="86" rx="9" ry="6.5" transform="rotate(-24 129 86)"/>
+            <ellipse cx="147" cy="98" rx="9" ry="6.5" transform="rotate(22 147 98)"/>
+            <ellipse cx="135" cy="110" rx="8" ry="6" transform="rotate(-20 135 110)"/>
+          </g>
+        </g>
+        <!-- lavender stems -->
+        <g stroke="#7f8a5d" stroke-width="1.2" stroke-linecap="round">
+          <path d="M108 140 C110 116 110 96 108 76"/>
+          <path d="M120 140 C121 120 120 102 117 86"/>
+        </g>
+        <g fill="#9c8cb6">
+          <ellipse cx="108" cy="70" rx="3" ry="5"/><ellipse cx="103" cy="76" rx="2.5" ry="4"/><ellipse cx="113" cy="76" rx="2.5" ry="4"/><ellipse cx="106" cy="82" rx="2.3" ry="3.6"/><ellipse cx="110" cy="82" rx="2.3" ry="3.6"/>
+          <ellipse cx="117" cy="80" rx="2.7" ry="4.5"/><ellipse cx="113" cy="86" rx="2.2" ry="3.6"/><ellipse cx="121" cy="86" rx="2.2" ry="3.6"/>
+        </g>
+        <!-- amber berries -->
+        <g><circle cx="168" cy="78" r="6.5" fill="#e7c878"/><circle cx="168" cy="78" r="6.5" fill="none" stroke="#c39a47" stroke-width="1"/>
+           <circle cx="180" cy="90" r="5" fill="#e7c878"/><circle cx="180" cy="90" r="5" fill="none" stroke="#c39a47" stroke-width="1"/>
+           <circle cx="172" cy="100" r="3.6" fill="#e7c878"/></g>
+      </svg>
     </div>
-    <div class="focus">
-      <div class="fh">Your focus this week</div>
-      <div class="ft">Iron &amp; Magnesium</div>
-      <div class="row"><span class="ic">&#9889;</span><div><b>Right now:</b> dark chocolate, or liver p&acirc;t&eacute; from the freezer.</div></div>
-      <div class="row"><span class="ic">&#127858;</span><div><b>Cook:</b> Beef Heart Stew &middot; Creamy Squash Soup</div></div>
-      <div class="row"><span class="ic">&#127807;</span><div><b>Absorb more:</b> lemon on the iron &middot; keep tea an hour apart &mdash; <i>~3&times; the iron</i>.</div></div>
-      <div class="safe">Heavy bleeding, fever or dark thoughts? That&rsquo;s past what food fixes &mdash; please call your midwife or GP. Here&rsquo;s a warm broth while you do.</div>
-    </div>
+    <div class="kicker">Natural healing &middot; fourth trimester</div>
+    <h1>Tell us how<br>you feel.<em>We&rsquo;ll tell you what to eat.</em></h1>
+    <div class="ph">Good morning. Let&rsquo;s get something nourishing into you.</div>
   </div>
 
-  <div class="sec">
-    <div class="lbl">What&rsquo;s in the house?</div>
-    <div class="house"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10l8-6 8 6v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/></svg><div class="ht">eggs, broth, greens &hellip; &nbsp;<b>&rarr; tonight: Lemon &amp; Egg Chicken Soup</b></div></div>
+  <div class="orn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21V9M12 13c-3 0-5-2-5-5 3 0 5 2 5 5zM12 11c3 0 5-2 5-4-3 0-5 2-5 4z"/></svg></div>
+
+  <div class="ask">How are you feeling?</div>
+  <div class="asksub">Tap what&rsquo;s true today &mdash; or answer 3 quick questions.</div>
+  <div class="chips">
+    <span class="chip on">Wiped out</span><span class="chip on">Can&rsquo;t sleep</span><span class="chip">Low mood</span><span class="chip">Hair shedding</span><span class="chip">Cramps</span>
   </div>
 
-  <div class="sec">
-    <div class="lbl">Where your body is, week 2</div>
-    <div class="ribbon">
-      <span class="wk done"><span class="n">1&ndash;2</span></span><span class="wk now"><span class="n">wk 2</span></span><span class="wk"><span class="n">3&ndash;4</span></span><span class="wk"><span class="n">5&ndash;6</span></span><span class="wk"><span class="n">6+</span></span>
-    </div>
-    <div class="wkbody">Your blood volume is resettling and iron stores are draining &mdash; so this week we lean into <b>iron &amp; warmth</b>. It&rsquo;s an arc, not a race.</div>
+  <div class="rx">
+    <svg class="corner tl" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
+    <svg class="corner br" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 18V8a4 4 0 0 1 4-4h10M10 14c4 0 7 3 7 7"/></svg>
+    <div class="rxk">For you &middot; this week</div>
+    <h2>Iron &amp; Magnesium</h2>
+    <div class="rxsub">&ldquo;Wiped out&rdquo; and not sleeping often point here.</div>
+    <div class="line"><span class="k">Right now</span><div>A few squares of <b>dark chocolate</b>, or a spoon of <b>liver p&acirc;t&eacute;</b> from the freezer.</div></div>
+    <div class="line"><span class="k">Cook</span><div><b>Beef Heart Stew</b> &middot; <b>Creamy Squash Soup</b></div></div>
+    <div class="line"><span class="k">Absorb</span><div>Lemon on the iron &middot; tea an hour apart &mdash; <span class="mult">~3&times; the iron</span>.</div></div>
+    <span class="cta">See your plan &amp; recipes &rarr;</span>
+    <div class="safe">Heavy bleeding or dark thoughts? That&rsquo;s past what food fixes &mdash; please call your midwife. A warm broth while you do.</div>
   </div>
 
-  <div class="sec">
-    <div class="lbl">Today&rsquo;s rhythm</div>
-    <div class="rhythm">
-      <div class="r"><span class="tick done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg></span><span class="rt"><span class="w">waking</span>Warm water &amp; a date</span></div>
-      <div class="r"><span class="tick"></span><span class="rt"><span class="w">morning</span>A cup of broth</span></div>
-      <div class="r"><span class="tick"></span><span class="rt"><span class="w">evening</span>Magnesium &mdash; cacao or dark chocolate</span></div>
+  <div class="or">&mdash; or, when you can&rsquo;t even think &mdash;</div>
+  <div class="feed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 11h14M5 11a7 7 0 0 0 14 0M9 6c-1-1 1-2 0-3M15 6c-1-1 1-2 0-3"/></svg> Feed me now</div>
+
+  <div class="strip">
+    <div class="card wide">
+      <div class="ribbon"><span class="wk">1</span><span class="wk now">2</span><span class="wk">3</span><span class="wk">4</span><span class="wk">5</span><span class="wk">6</span></div>
+      <div><div class="ck">Where your body is &middot; week 2</div><div class="cd" style="margin-top:2px">Blood resettling, iron draining &mdash; we lean into iron &amp; warmth. An arc, not a race.</div></div>
     </div>
+    <div class="card heal"><div class="ck">Learn</div><div class="cn">Healing Guide</div><div class="cd">what your body needs &amp; why</div><svg class="leaf" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6 18 4 12 6 4c8 0 12 4 12 12 0 4-3 6-6 6z"/></svg></div>
+    <div class="card gold"><div class="ck">Powerhouse</div><div class="cn">PP Gold</div><div class="cd">the most nourishing foods</div></div>
+    <div class="card"><div class="ck">In the house?</div><div class="cn">Cook what you have</div><div class="cd">eggs, broth, greens &rarr; tonight&rsquo;s bowl</div></div>
+    <div class="card heal"><div class="ck">Share</div><div class="cn">For a helper</div><div class="cd">one link &middot; they cook for you</div></div>
   </div>
 
-  <div class="sec">
-    <div class="lbl">Or browse</div>
-    <div class="tiles">
-      <div class="tile feat"><div class="tn">Healing Guide</div><div class="td">what your body needs &amp; why</div></div>
-      <div class="tile gold"><div class="tn">PP Gold</div><div class="td">powerhouse foods</div></div>
-      <div class="tile"><div class="tn">Soups &amp; Bowls</div><div class="td">broths, stocks, pho</div></div>
-      <div class="tile feat"><div class="tn">For a helper</div><div class="td">send one link &middot; they cook</div></div>
-    </div>
-  </div>
   <div class="foot">— food, not medicine · made with care —</div>
 </div>
 </body></html>
