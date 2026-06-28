@@ -3508,6 +3508,25 @@
   ];
   function goalHits(g){var out=[];ALL.forEach(function(it){var src=g.titleOnly?it.title.toLowerCase():it.hay;var n=0;for(var i=0;i<g.kw.length;i++){if(src.indexOf(g.kw[i])>-1)n++;}if(n)out.push({it:it,n:n});});out.sort(function(a,b){return b.n-a.n;});return out.map(function(o){return o.it;});}
 
+  // ---- "WHAT IT HEALS" — the primary browse (healing-outcome taxonomy from tags.js) ----
+  // Food-based keywords (not raw nutrient words) so each shelf is curated & meaningful;
+  // recipes can sit on more than one shelf (bone broth heals gut AND immunity — by design).
+  var HEALS=[
+    {key:'organs',  name:'Rebuild blood', color:'#b0473f', kw:['liver','heart','beef','borscht','beet','clam','sardine','pho','oxtail','short rib','iron','lentil','spinach','molasses','greens']},
+    {key:'bites',   name:'Energy',        color:'#c47a35', kw:['smoothie','energy','laddu','til-gur','jaggery','banana bread','waffle','pancake','brownie','truffle','date bark','date chocolate','cutlet','burger','fritter','sandwich','wrap','rolls','cracker','tart','apkepas','slaw','spring roll','chickpea','nectarine','orzo','keto','quick tonics']},
+    {key:'drinks',  name:'Calm & sleep',  color:'#5a6e8c', kw:['ashwagandha','chai','bedtime','saffron','tonic','cacao','chamomile','calming','soothing','sattvic','pumpkin seed']},
+    {key:'cookies', name:'Milk supply',   color:'#b87089', kw:['lactation','milk makin','fennel','fenugreek','brewer','shatavari','moringa','nursing','oat','barley','flax','teas','banana bread','bone broth','meat stock','chicken soup','smoothie','porridge']},
+    {key:'ferments',name:'Gut-healing',   color:'#3f7d6e', kw:['bone broth','meat stock','kvass','ferment','pickle','kefir','skyr','khichdi','porridge','cucumber','probiotic','candida','fro-yo']},
+    {key:'treats',  name:'Mood',          color:'#8a6a9a', kw:['salmon','sardine','omega','fermented','chocolate','cacao','brownie','flax','tuna','pumpkin seed']},
+    {key:'soups',   name:'Immunity',      color:'#6b8048', kw:['bone broth','garlic','ginger','mushroom','liver','clam','elderberry','chicken soup','squash']}
+  ];
+  HEALS.forEach(function(h){ h.items=ALL.filter(function(it){
+    if(it.cat.key==='plan'||it.cat.key==='guide')return false;
+    var key=(it.title+' '+(it.sub||'')).toLowerCase();
+    for(var i=0;i<h.kw.length;i++){ if(key.indexOf(h.kw[i])>-1)return true; }
+    return false;
+  }); });
+
   // ---- symptom -> nutrient -> recipe engine (the feeling-first check-in) ----
   var NUTRI={
     iron:{name:'Iron',pinch:'a spoon of liver pâté from the freezer, or pumpkin seeds on yogurt',absorb:'Squeeze lemon over iron-rich meals &amp; keep tea an hour apart — up to ~3× the iron.',find:['liver','heart','clam','borscht','pho','sardine','lentil','beef']},
@@ -3635,17 +3654,30 @@
 
   // explore section
   var exploreSec=el('div');
-  var elab=el('div','lbl'); elab.innerHTML='<h2>Explore the kitchen</h2><span>'+ALL.length+' recipes</span>'; exploreSec.appendChild(elab);
-  var tiles=el('div','tiles');
+  // — two quick-start feature tiles —
+  var tilesTop=el('div','tiles');
   var feat=el('div','tile feat');
   feat.innerHTML='<div class="ft"><h3>Start here</h3><p>Your recovery plan &amp; daily rhythm — read this first.</p></div><div class="go">→</div>';
   feat.addEventListener('click',function(){ var st=byTitle(['recovery plan']); if(st){showRecipe(st,st.cat);} else {showCat(CATS[0]);} });
-  tiles.appendChild(feat);
+  tilesTop.appendChild(feat);
   var feat2=el('div','tile feat'); feat2.style.background='linear-gradient(135deg,#b0481f,#8f3815)';
   feat2.innerHTML='<div class="ft"><h3>For a helper</h3><p>What to batch-cook, freeze &amp; shop — the prep list.</p></div><div class="go">→</div>';
   feat2.addEventListener('click',function(){ showHelper(); });
-  tiles.appendChild(feat2);
-  CATS.forEach(function(c){ if(!c.items||!c.items.length)return;
+  tilesTop.appendChild(feat2);
+  exploreSec.appendChild(tilesTop);
+  // — PRIMARY browse: What it heals —
+  var elabH=el('div','lbl'); elabH.innerHTML='<h2>What it heals</h2><span>start with how you feel</span>'; exploreSec.appendChild(elabH);
+  var tilesH=el('div','tiles');
+  HEALS.forEach(function(h){ if(!h.items||!h.items.length)return;
+    var t=el('div','tile'); t.style.background=h.color;
+    t.innerHTML='<div class="ic">'+svg(h.key)+'</div><div class="tn">'+h.name+'</div><div class="tc">'+h.items.length+' '+(h.items.length===1?'recipe':'recipes')+'</div>';
+    t.addEventListener('click',function(){showCat(h);}); tilesH.appendChild(t);
+  });
+  exploreSec.appendChild(tilesH);
+  // — SECONDARY browse: by dish type —
+  var elabD=el('div','lbl'); elabD.innerHTML='<h2>Browse by dish</h2><span>'+ALL.length+' recipes</span>'; exploreSec.appendChild(elabD);
+  var tiles=el('div','tiles');
+  CATS.forEach(function(c){ if(!c.items||!c.items.length||c.key==='plan')return;
     var t=el('div','tile'); t.style.background=c.color;
     t.innerHTML='<div class="ic">'+svg(c.key)+'</div><div class="tn">'+c.name+'</div><div class="tc">'+c.items.length+' '+(c.items.length===1?'recipe':'recipes')+'</div>';
     t.addEventListener('click',function(){showCat(c);}); tiles.appendChild(t);
