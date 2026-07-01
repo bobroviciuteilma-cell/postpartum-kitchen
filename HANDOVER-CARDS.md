@@ -42,6 +42,35 @@ Do this ONCE up front for your batch, then a quick per-card preview:
 5. **Show a screenshot preview** and confirm: no emoticons · on-brand sprig header · columns balanced (say the measured heights) · spacing checked.
 → **Only after she confirms** do you deploy and send the final `?v=` link.
 
+## 3B. SELF-REVIEW & SELF-FIX (mandatory — do this on YOUR OWN cards before showing Ilma anything)
+This is the exact review Ilma had to do manually for batch A. Do it yourself and **fix everything before surfacing links** — only present cards that already pass. Loop until clean.
+
+**Automated (render each card in the preview + check):**
+- [ ] **No emoji/emoticons** anywhere in the body (grep the body — zero).
+- [ ] Sprig header + "Your Healing Kitchen" present; **sprig→wordmark gap ≥16px**.
+- [ ] Drinks have a **"When to drink"** band; dishes have a **"When to eat"** line.
+- [ ] **Every image embedded** (grep: zero remaining `src="....png"`), and render → **0 broken images** (`img.naturalWidth>0`).
+- [ ] **Columns balanced**: measure `.leftcol` vs `.steps` height; if off by >40px, move/add the "Just for you"/boost note into the right column until they match.
+- [ ] **Step numbers filled** (1,2,3…), not empty badges.
+- [ ] Tabs = Main Meals·Snacks·Drinks·Desserts; the recipe's one highlighted in beet `#9c2b4e` (no tick).
+
+**Content (judgment — fix before presenting):**
+- [ ] **Every amount quantified** (no lone "a crack/pinch/thumb").
+- [ ] **Full recipe, not stripped** — check the original/library (Adrenal needs cream of tartar; Meat Stock Latte needs egg yolks; Morning Waters = amla+ajwain, not lemon).
+- [ ] **MAX-BOOSTED** — pantry beneficials folded into the core, each naming what it adds.
+- [ ] **Each ingredient PHOTO matches the ingredient** — no honey-showing-ghee / lemon-showing-beet mismatches; regenerate any wrong or 0-byte photo.
+
+**Then** redeploy the fixes and present Ilma the `?v=` links with a one-line note: *"self-QA passed: no emoji · balanced · maxed · full recipe · 0 broken images."*
+
+Quick audit snippet (run from repo root, per card):
+```python
+import re; h=open("cook-cards/SLUG.html",encoding="utf-8").read(); b=h.split("</style>")[-1]
+print("emoji:", re.findall(r'[\U0001F000-\U0001FAFF☀-➿]', b) or "none",
+      "| whenband:", "whenband" in h, "| unembedded:", len(re.findall(r'src=\"[^\"]+\.png\"', h)),
+      "| brand:", "Your Healing Kitchen" in h)
+```
+(Balance + broken-images must be checked by rendering in the preview, not from static HTML.)
+
 ## 4. Deploy without collisions (parallel-safe)
 - Each chat owns DISTINCT slugs → no file overlap.
 - `git pull --rebase origin main` → `git add cook-cards/<your-slugs>.html` (ONLY yours; never index.html or others' files) → commit → `git push`.
