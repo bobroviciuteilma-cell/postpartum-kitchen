@@ -26,6 +26,8 @@ You are building **image-led recipe "Cook Cards"** for Ilma's postpartum kitchen
 - **Type scale:** body 16.5px · ingredient name 16.5 · qty 14 · title (h1) 46 · labels 11–12.5. Prominence via the 54px photos, not big text.
 - **Proportional:** two balanced columns — measure that `.leftcol` height ≈ `.steps` height. Sprig→wordmark gap ≥16px. Eyebrow on ONE line.
 - **QUANTIFY every amount** — no vague "a crack/pinch/thumb"; give tsp/tbsp/cup (pepper = ⅛ tsp).
+- **MAX-BOOST by default** (memory: feedback_max_boost) — fold every relevant pantry beneficial into the CORE recipe (protein/collagen, omega-3 seeds, minerals, blood-builders), naming what each adds; don't footnote them. She'd rather subtract than not know.
+- **Don't strip the recipe** — build the FULL traditional version, not a minimal one. Real omissions caught in batch A: Adrenal Cocktail needs **cream of tartar** (potassium); Meat Stock Latte needs **egg yolks** (protein/froth); Morning Waters = **amla + ajwain** waters, not plain lemon. Check the original before simplifying.
 - **Her kit:** 1.6 L clip-top Kilner jar; she uses **beef gelatin**; doesn't mind cold; organic. NOTE: **black pepper is not on her pantry list** (she has cayenne) — flag/confirm.
 - **Bottom tabs:** `Main Meals · Snacks · Drinks · Desserts`; highlight the recipe's one in beet `#9c2b4e` (colour only, no tick).
 - **Drinks MUST have a "When to drink" band.** Dishes: add a short "when to eat" line where useful.
