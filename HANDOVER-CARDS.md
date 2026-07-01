@@ -32,6 +32,12 @@ You are building **image-led recipe "Cook Cards"** for Ilma's postpartum kitchen
 - **Bottom tabs:** `Main Meals · Snacks · Drinks · Desserts`; highlight the recipe's one in beet `#9c2b4e` (colour only, no tick).
 - **Drinks MUST have a "When to drink" band.** Dishes: add a short "when to eat" line where useful.
 - **Postpartum reframe:** "Why this heals you" (verified / tradition tags), "Just for you, Mum", honest note. Footer: *Food, not medical advice · non-diagnostic.*
+- **SOURCE ATTRIBUTION (locked) — every card must say where the recipe came from + what you boosted.** The `.lineage` "Why we say this" note LEADS with provenance so Ilma can see at a glance *what's original, what's sourced, what's boosted*. Rules:
+  - **Evidence only — never invent a source.** Pull it from `index.html` (recipe subtitles carry the creator @handle + IG/blog link), from memory, or from something Ilma has told you. If there is NO source on file, write "your recipe / kitchen" or "traditional [tradition]" — do **not** guess a creator. If genuinely unknown, label it "no source on file" and ask her.
+  - **Label each card as one of:** `From @creator` (external, credit the handle + link if on file) · `Traditional` (classic dish, no single author — e.g. Gond Laddu, Til-Gur, golden milk, CCF tea) · `Your recipe` / `Adapted (yours)` (hers/family/kitchen).
+  - **Name the boost + swaps explicitly:** e.g. "**boosted** with collagen, flax & pumpkin seeds"; "gond & jaggery swapped for dates + gelatin". This is how she tells core-recipe from max-boost additions.
+  - **Format:** `From <b>@handle</b> (<a href="…">link</a>) — [what it is] — <b>boosted</b> with […]. [verified/tradition health-claim framing].` Multi-source ("keep both"): `From <b>@base</b> (the recipe); [technique/idea] from <b>@other</b>.`
+  - **Source of truth for links = `index.html`** subtitles (each recipe's `<div class="subtitle">` has the @handle + URL). Known corrections Ilma has given override it: **Chicken Liver Pâté = @sokoladassiela** (Lithuanian); the Pâté **Pops** freeze-idea = @wildnutritionist (index.html wrongly credited the whole pâté to @wildnutritionist). When Ilma pastes new source links, add them here and to the card.
 
 ## 3. VERIFY before showing Ilma a final link — ASK HER (based on past mistakes)
 Do this ONCE up front for your batch, then a quick per-card preview:
@@ -59,6 +65,7 @@ This is the exact review Ilma had to do manually for batch A. Do it yourself and
 - [ ] **Full recipe, not stripped** — check the original/library (Adrenal needs cream of tartar; Meat Stock Latte needs egg yolks; Morning Waters = amla+ajwain, not lemon).
 - [ ] **MAX-BOOSTED** — pantry beneficials folded into the core, each naming what it adds.
 - [ ] **Each ingredient PHOTO matches the ingredient** — no honey-showing-ghee / lemon-showing-beet mismatches; regenerate any wrong or 0-byte photo.
+- [ ] **Source attribution present + correct** (§2 SOURCE ATTRIBUTION) — the `.lineage` note leads with origin (`From @creator` + link / `Traditional` / `Your recipe`) and names the boost/swaps. Cross-check the handle/link against `index.html`; use evidence only, never a guessed source.
 
 **Then** redeploy the fixes and present Ilma the `?v=` links with a one-line note: *"self-QA passed: no emoji · balanced · maxed · full recipe · 0 broken images."*
 
