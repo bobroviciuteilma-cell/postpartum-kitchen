@@ -1,5 +1,27 @@
 # Cook Cards — Master Audit & Catalogue
 
+## 2026-07-02 (evening) — 11 NEW cards added → the deck is now 49
+
+Built to the **new ✅/◆/🕯️/⚠︎ label standard** (MASTER-PLAN §1a; styled small-caps chips VERIFIED / FACT / TRADITION / BF NOTE — the first cards on it; the original 38 get retrofitted in the fix-pass):
+
+| New card | Tab | Shelf (7-shelf) | Source status |
+|---|---|---|---|
+| [Salmon — the Brain-Food Dinner](cook-cards/salmon-dha.html) | Main | Calm & lift your mood (DHA) | archive permalinks, adapted (yours) |
+| [Sardines, Three Ways](cook-cards/sardines-three-ways.html) | Main | Strengthen bones & repair | archive permalinks |
+| [Liver Cutlets](cook-cards/liver-cutlets.html) | Main | Rebuild your blood | @naturalia_ukis · recipe by @neringa_ka — **permalink to capture** |
+| [Spinach & Egg Wraps](cook-cards/spinach-egg-wraps.html) | Main | Rebuild your blood | archive permalinks |
+| [Khichdi](cook-cards/khichdi.html) | Main | Heal your gut | your library |
+| [Fermented Cucumbers](cook-cards/fermented-cucumbers.html) | Main | Heal your gut | archive permalink (sugar variant noted) |
+| [Iron Dips](cook-cards/iron-dips.html) | Snacks | Rebuild your blood | archive permalinks |
+| [Lactation Balls](cook-cards/lactation-balls.html) | Snacks | Keep your milk flowing (🕯️-honest) | archive permalinks — creator handles unknown |
+| [The Healing Gelatin Set](cook-cards/healing-gelatin-set.html) | Desserts | Calm & lift your mood (glycine ✅) | archive permalinks — creator handles unknown |
+| [Chia Pudding](cook-cards/chia-pudding.html) | Desserts | Steady energy | archive permalinks — creator handles unknown |
+| [Dashamoola Decoction](cook-cards/dashamoola-decoction.html) | Drinks | Calm & lift your mood (all-🕯️) | Purusha Ayurveda (traditional-use ref) |
+
+Tab pages updated: Mains 16→22 · Snacks 5→7 · Drinks 14→15 · Desserts +2. Open captures: Neringa permalink; chia/gelatin/lactation creator handles (links are exact, names unknown — evidence-only rule held).
+
+---
+
 **38 Cook Cards built across parallel chats, audited on 2026-07-02.** This is the single index:
 what's built, whether it passed QA, where each recipe came from (verified), and which "What it
 heals" shelf it lives under. Base URL: `https://bobroviciuteilma-cell.github.io/postpartum-kitchen/cook-cards/`
