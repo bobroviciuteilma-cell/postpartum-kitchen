@@ -142,3 +142,18 @@ The confidence review's weakest dimension is **market/distribution (40%)**: a fa
 market with no installed audience. The mother-only mode + pilot protect the *product*; the funnel is the
 real risk. After the first retention data, the parked **B2B2C confinement channel** (nanny agencies, doulas,
 TCM halls, clinics) is the highest-leverage decision to revisit — it's recorded as parked, not rejected.
+
+## PASTE-READY PROMPTS (one per fresh Fable-5 chat)
+- **A · Tidy:** "Read SESSION-HANDOVER.md, then smart-pantry-map.html. Reorganize this repo: docs→docs/, screenshots→media/, dead files→archive/. CRITICAL: keep live-linked previews + cook-cards at current paths (Pages URLs). Show me the full move plan for approval BEFORE moving anything, then execute, fix internal links, push."
+- **B · Vision:** "Read SESSION-HANDOVER.md, then docs/VISION.md and MASTER-PLAN.md. Rewrite each into ONE tight page (building what, for whom — SG helper-households beachhead, the one loop, the moat — data network effect + verified trust, how it makes money). Use memory project_strategy_decisions. Walk me through the free-model decision (one-loop paywall vs 2-weeks-free; founding-cohort promo recommendation) — I decide, you encode."
+- **C · Unify (after B):** "Read SESSION-HANDOVER.md + HANDOVER-SMART-PANTRY.md + docs/pilot-findings.md if present. Merge the cook-card/helper workstream and smart pantry into ONE product; update docs/prd.md with the four named deliverables in the handover plan (pantry↔Tonight + labels reconcile · Learning Loop spec · network-effect build sheet · money/time-saved in FR-067). Ask me questions as you go."
+- **D1 · Design (after C; attach 4–6 inspiration screenshots):** "Read SESSION-HANDOVER.md. Regenerate product-vision/prd/roadmap from updated VISION.md via the product-planner skill. Then run design-system with my attached images — bar: significantly prettier + more functional; mom-helper-split-preview.html is the soul reference."
+- **D2 · Build:** "Read docs/product-vision.md, docs/prd.md, docs/product-roadmap.md, docs/design.md. Build the full application using the build-mvp skill — task by task, verify each, keep checkboxes updated."
+- **Anytime · New cards:** "Read SESSION-HANDOVER.md. Build Cook Cards for: [links]. Same house method as the last 11 (playbook + 3-label standard + exact permalinks, no creator names, rename coined titles). QA, index, push, give me the live link."
+
+## Own recipes (mom-uploaded) — the locked shape
+Paste/type → a real card in HER library ("Ours" shelf): scalable, helper-sendable, verdict-tracked —
+first-class in the loop. Hard boundary: "Family recipe" mark + NO health badges (our claims are verified,
+hers are hers — the liability line). Photo-of-handwritten + voice-dump capture = V1.5 magic. Sharing her
+card = same beautiful public page, marked Family recipe (the viral doorway). FR-059 (neutral nutrition
+facts on her ingredients) stays founder-gated.
