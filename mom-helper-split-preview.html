@@ -469,7 +469,7 @@
             <img class="askhero" data-img="hero" alt="Beetroot borscht">
             <div class="askname">Beetroot Borscht</div>
             <div class="readyby">Ready by <span id="readyBy">6:30</span></div>
-            <div class="warnband">No sage in this house &middot; Mum&rsquo;s bowl gets extras at the end</div>
+            <div class="warnband" id="warnBand">Mum&rsquo;s bowl gets extras at the end</div>
             <p class="askmeta">About 2&frac12; hours &middot; one big pot</p>
             <div class="masteryband">Rosa has cooked this <b>3 times</b> &mdash; she can take the short road.</div>
             <button class="hbtn" id="startBtn">Start &mdash; gather first</button>
@@ -573,7 +573,7 @@
           <!-- mastered view -->
           <div class="hscreen" id="s-mastered">
             <div class="hkicker">Mastered &middot; the short version</div>
-            <div class="mhead"><span class="mdish">Borscht</span> &middot; ready by <span id="readyBy2">6:30</span> &middot; no sage</div>
+            <div class="mhead"><span class="mdish">Borscht</span> &middot; ready by <span id="readyBy2">6:30</span></div>
             <p style="font-size:15.5px; color:var(--ink2); font-style:italic; margin-bottom:6px;">Third time cooking this &mdash; quantities and timers only. Full steps are one tap away if needed.</p>
             <div class="hkicker" style="margin-top:8px;">Ingredients</div>
             <div id="mlist"></div>
@@ -707,6 +707,7 @@ $$('.tick').forEach(btn=> btn.addEventListener('click', ()=>{
 function rebuildMum(){
   const b = state.boost;
   const any = b.moringa || b.seeds || b.kefirspoon;
+  const wb = $('#warnBand'); if(wb) wb.hidden = !any;
   const tops = [];
   if(b.kefirspoon) tops.push('kefir');
   if(b.seeds) tops.push('1 tbsp pumpkin seeds');
