@@ -63,7 +63,7 @@
   .metarow{font-size:15.5px; color:var(--ink); line-height:1.35;}
   .metarow b{font-family:'Marcellus',serif; font-weight:400; letter-spacing:.09em; text-transform:uppercase; font-size:11px; margin-right:8px;}
   .metarow.time b{color:var(--amber);}
-  .metarow.keeps b{color:var(--sage-d);}
+  .metarow.keeps b{color:var(--amber);}
   .whenband{margin:13px 28px 0; background:var(--sage-soft); border-radius:10px; padding:11px 16px; font-size:15.5px; color:var(--sage-d); line-height:1.35;}
   .whenband b{font-family:'Marcellus',serif; letter-spacing:.09em; text-transform:uppercase; font-size:11px; color:var(--amber); margin-right:8px;}
   .body-pad{padding:16px 28px 6px;}
@@ -109,16 +109,18 @@
   .dial button:hover{background:var(--sage-soft);}
   .dial b{font-family:'Marcellus',serif; font-weight:400; font-size:22px; color:var(--sage-d); min-width:96px; text-align:center;}
   .ctl-hint{font-size:14px; color:var(--ink2); font-style:italic; margin-top:7px; line-height:1.4;}
-  .ctl-sub{font-size:14px; color:var(--ink2); font-style:italic; margin:-2px 0 9px;}
+  .ctl-note{font-size:13.5px; color:var(--ink2); font-style:italic; margin:9px 0 0; line-height:1.45;}
+  .lnk{background:none; border:none; padding:0; font:inherit; color:var(--sage-d); text-decoration:underline; text-underline-offset:2px; cursor:pointer;}
   .tickrow{display:flex; flex-wrap:wrap; gap:8px;}
   .tick{border:1.5px solid var(--sage); border-radius:999px; background:var(--paper2); color:var(--ink);
         font-size:14.5px; line-height:1.2; padding:9px 15px; min-height:44px; text-align:left;
         display:inline-flex; align-items:center; gap:9px; transition:background .2s, border-color .2s;}
   .tick:hover{border-color:var(--sage-d);}
-  .tick .tin{display:none; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
-             color:#fff; background:var(--sage-d); border-radius:7px; padding:2px 8px;}
+  .tick::before{content:""; width:20px; height:20px; flex:none; border:2px solid var(--sage); border-radius:6px;
+             background:#fff center/13px 13px no-repeat; transition:background-color .15s, border-color .15s;}
   .tick.on{background:var(--sage-soft); border-color:var(--sage-d);}
-  .tick.on .tin{display:inline-block;}
+  .tick.on::before{border-color:var(--sage-d); background-color:var(--sage-d);
+             background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6 9 17l-5-5'/></svg>");}
 
   /* ingredients + method */
   .ings-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 22px;}
@@ -349,7 +351,7 @@
 
       <div class="meta">
         <div class="metarow time"><b>Time to cook:</b> 2&frac12; hrs</div>
-        <div class="metarow keeps"><b>Keep in the fridge</b> 4 days / freeze</div>
+        <div class="metarow keeps"><b>Keep in the fridge:</b> 4 days, or freeze &middot; deepens overnight</div>
       </div>
 
       <div class="whenband"><b>When to eat:</b> A warm bowl for lunch or dinner &mdash; especially in the first weeks, when you need iron &amp; comfort together.</div>
@@ -384,20 +386,20 @@
           <div class="ctl-row">
             <div class="ctl-lab">Your bowl &mdash; serve with</div>
             <div class="tickrow">
-              <button class="tick on" data-serve="kefir" aria-pressed="true">a spoon of kefir<span class="tin">In</span></button>
-              <button class="tick" data-serve="sour" aria-pressed="false">cultured sour cream<span class="tin">In</span></button>
-              <button class="tick" data-serve="rye" aria-pressed="false">dark rye or sourdough to dip<span class="tin">In</span></button>
+              <button class="tick on" data-serve="kefir" aria-pressed="true">a spoon of kefir</button>
+              <button class="tick" data-serve="sour" aria-pressed="false">cultured sour cream</button>
+              <button class="tick" data-serve="rye" aria-pressed="false">dark rye or sourdough to dip</button>
             </div>
           </div>
 
           <div class="ctl-row">
             <div class="ctl-lab">Make it PP Gold (for yourself)</div>
-            <p class="ctl-sub">This version is for you, if you like. <button class="tag b" data-ev="moringa">breastfeeding note</button></p>
             <div class="tickrow">
-              <button class="tick on" data-boost="moringa" aria-pressed="true">&frac12; tsp moringa &mdash; off the heat<span class="tin">In</span></button>
-              <button class="tick on" data-boost="seeds" aria-pressed="true">1 tbsp pumpkin seeds &mdash; zinc<span class="tin">In</span></button>
-              <button class="tick on" data-boost="kefirspoon" aria-pressed="true">a spoon of kefir &mdash; probiotics &amp; calcium<span class="tin">In</span></button>
+              <button class="tick on" data-boost="moringa" aria-pressed="true">&frac12; tsp moringa &mdash; off the heat</button>
+              <button class="tick on" data-boost="seeds" aria-pressed="true">1 tbsp pumpkin seeds &mdash; zinc</button>
+              <button class="tick on" data-boost="kefirspoon" aria-pressed="true">a spoon of kefir &mdash; probiotics &amp; calcium</button>
             </div>
+            <p class="ctl-note">Moringa is a traditional milk-support herb &mdash; <button class="lnk" data-ev="moringa">read the breastfeeding note</button>.</p>
           </div>
 
           <div class="ctl-row last">
@@ -441,15 +443,6 @@
         <div class="step"><div class="n">2</div><img class="img" data-img="step2" alt="Vegetables softening in a pan"><div><span class="ic">Soften the veg &middot; 8 min</span><p>In another pan soften the <b>onion, carrot &amp; beet</b> with the <b><span data-base="1" data-unit="tbsp">1 tbsp</span> tomato paste</b> until glossy and sweet.</p></div></div>
         <div class="step"><div class="n">3</div><img class="img" data-img="step3" alt="Soup simmering"><div><span class="ic">Simmer together &middot; 20 min</span><p>Add the beet mixture, <b><span data-base="3" data-unit="int" data-suffix=" cloves">3 cloves</span> garlic</b> and <b><span data-base="0.25" data-unit="count8" data-suffix=" small">&frac14; small</span> shredded cabbage</b> to the pot. Simmer <b>20 min</b> until everything is soft.</p></div></div>
         <div class="step"><div class="n">4</div><img class="img" data-img="step4" alt="Finished borscht with kefir and dill"><div><span class="ic">Finish &amp; serve</span><p>Stir in the <b><span data-base="2" data-unit="tbsp">2 tbsp</span> vinegar</b> (keeps it ruby) and most of the <b>dill</b>. Salt to taste. Ladle out, top with <b>kefir</b> and the rest of the dill.</p></div></div>
-        <div class="stepnote"><p><b>Tip:</b> use bone broth as the base for extra collagen.</p></div>
-      </div>
-
-      <div class="foot">
-        <div class="nutri">
-          <div class="blockh">Good to know</div>
-          <div class="row"><b>Store</b><span>Fridge ~4 days; freeze in jars. Flavour deepens overnight.</span></div>
-          <div class="row"><b>Colour</b><span>The splash of vinegar keeps it bright ruby, not brown.</span></div>
-        </div>
       </div>
 
       <div class="disc">Food, not medical advice &middot; non-diagnostic &middot; made for this season of motherhood</div>
