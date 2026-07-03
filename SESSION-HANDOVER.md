@@ -60,6 +60,39 @@ her phone or WhatsApps to her helper. Watch-fors: does the helper open the link,
 finish button, what confused her. Under-60%-cooked = redesign kitchen-mode. (Roadmap Phase −1 also adds a
 mother-side check-in arm; Phase −1b is the acquisition workstream, proxy-ownable.)
 
+## Second workstream — the Smart Pantry (built in a parallel chat)
+A separate chat built the **smart pantry** feature. Its brief is **HANDOVER-SMART-PANTRY.md** (read it
+alongside this). Live previews: `pantry-preview.html` (steady state) + `pantry-onboarding-preview.html`;
+file map: `smart-pantry-map.html`. Locked pantry standards there: Apothecary naming, 4 evidence labels
+(note: THIS chat later simplified card labels to **3** — reconcile the two in the Unify session),
+notify-never-order, she-picks, the date model. Data facts: amla is 1-of-49 (a hook), a base64-grep gotcha,
+torbangun. **These two workstreams (cook-card/helper kitchen-mode + smart pantry) are two halves of ONE
+product and must be merged — see the plan below.**
+
+## Strategy decisions locked 2026-07-03 (full detail in memory `project_strategy_decisions`)
+- **Pantry scope = DURABLE ONLY** (spices/powders/grains/gelatin — track; fresh meat/fish/veg — do NOT
+  inventory, handle via shopping list + "what do you have tonight?" quick-pick). Whole-kitchen value,
+  pantry-only effort.
+- **The moat = a data network effect**: every check-in/Cooked✓/verdict makes the kitchen smarter per
+  household AND across households ("mums at week 3 with low energy cooked X"). This is the answer to the
+  network-effect question.
+- **Beat overwhelm with progressive disclosure**, not fewer features: ship the ONE loop beautifully, reveal
+  smart features as she uses them. Postpartum = the wedge, not the ceiling.
+- **Money + time made visible** in the weekly recap (meals handled, waste avoided). Revenue follows the
+  loop working, not feature count. 2-weeks-free → Season Pass S$168 (locked).
+
+## THE 4-SESSION ACTION PLAN (de-overwhelm — one fresh Fable-5 chat each, in order, don't look ahead)
+Paste THIS file first in every one.
+- **A · Tidy the house** — reorg repo per `smart-pantry-map.html`, BUT keep pantry + card previews at their
+  current root paths (moving them breaks live Pages URLs); docs→docs/, screenshots→media/, dead→archive/.
+- **B · Nail the vision** — rewrite VISION.md + MASTER-PLAN.md into ONE tight page each (they feel
+  repetitive/unfinished). The antidote to "messy in my head."
+- **C · Unify the product** — merge the cook-card/helper kitchen-mode + smart pantry into one 3-tab app
+  picture (pantry → Tonight's cards, the data-learning loop, durable-vs-fresh scope, reconcile 3-vs-4
+  labels); update the PRD.
+- **D · Build** — run `design-system` first (bring 4–6 inspiration screenshots → docs/design.md), then
+  `build-mvp`. Spend the Fable budget HERE — the one-shot build is where Fable pays off.
+
 ## Immediate next steps (the board)
 1. **Run tonight's pilot** (cards being generated — links will be on Pages under `/pilot/`).
 2. **Ilma's line-by-line review** of the four docs/ spec files.
