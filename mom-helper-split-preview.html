@@ -182,6 +182,12 @@
   .askname{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:29px; color:var(--ink); margin-top:12px; line-height:1.05;}
   .readyby{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:42px; color:var(--sage-d); line-height:1.05; margin:2px 0 10px;}
   .warnband{background:var(--amber-soft); color:#7c531f; border-radius:11px; padding:11px 14px; font-size:15.5px; line-height:1.4;}
+  .masteryband{margin-top:10px; background:#fff; border:1px solid var(--line); border-left:4px solid var(--amber); border-radius:0 11px 11px 0; padding:10px 13px; font-size:14.5px; color:var(--ink2); line-height:1.4;}
+  .masteryband b{color:var(--amber); font-weight:600;}
+  .hbtn2{display:block; width:100%; min-height:50px; background:transparent; color:var(--sage-d); border:2px solid var(--sage-d); border-radius:14px; font-family:'EB Garamond',serif; font-size:17.5px; margin-top:10px; cursor:pointer;}
+  .hbtn2:active{background:var(--sage-soft);}
+  .mhead{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:21px; color:var(--sage-d); margin:2px 0 8px;}
+  .mhead .mdish{font-size:23px;}
   .askmeta{font-size:15px; color:var(--ink2); margin-top:10px;}
 
   /* gather screen */
@@ -466,7 +472,7 @@
       <div class="pscreen">
         <div class="pbar">
           <span class="pbrand">Your Healing Kitchen</span>
-          <button class="masterbtn" id="masterBtn" aria-pressed="false">Mastered view</button>
+          <button class="masterbtn" id="masterBtn" aria-pressed="false">Short version</button>
         </div>
         <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
 
@@ -479,7 +485,9 @@
             <div class="readyby">Ready by <span id="readyBy">6:30</span></div>
             <div class="warnband">No sage in this house &middot; Mum&rsquo;s bowl gets extras at the end</div>
             <p class="askmeta">Serves <span data-serves>4&ndash;5</span> &middot; about 2&frac12; hours &middot; one big pot</p>
+            <div class="masteryband">Rosa has cooked this <b>3 times</b> &mdash; she can take the short road.</div>
             <button class="hbtn" id="startBtn">Start &mdash; gather first</button>
+            <button class="hbtn2" id="masterEntryBtn">Short version &mdash; just the numbers</button>
             <p class="hcap">Screen stays on while you cook</p>
           </div>
 
@@ -577,7 +585,8 @@
           <!-- mastered view -->
           <div class="hscreen" id="s-mastered">
             <div class="hkicker">Mastered &middot; the short version</div>
-            <p style="font-size:15.5px; color:var(--ink2); font-style:italic; margin-bottom:6px;">Third time cooking this &mdash; just the numbers.</p>
+            <div class="mhead"><span class="mdish">Borscht</span> &middot; ready by <span id="readyBy2">6:30</span> &middot; no sage</div>
+            <p style="font-size:15.5px; color:var(--ink2); font-style:italic; margin-bottom:6px;">Third time cooking this &mdash; quantities and timers only. Full steps are one tap away if needed.</p>
             <div id="mlist"></div>
             <div class="mtimer"><span>Brown the beef</span><button class="timerbtn" id="mt1" data-min="10">10 min</button></div>
             <div class="mtimer"><span>Simmer the beef</span><button class="timerbtn" id="mt2" data-min="90">1&frac12; hr</button></div>
@@ -689,7 +698,7 @@ $('#tabHelper').addEventListener('click', ()=>setView('helper'));
 
 /* ================= send to helper ================= */
 function fmtReady(val){ const [h,m]=val.split(':').map(Number); return (h%12||12)+':'+String(m).padStart(2,'0'); }
-function syncReady(){ $('#readyBy').textContent = fmtReady($('#timeSel').value); }
+function syncReady(){ const t = fmtReady($('#timeSel').value); $('#readyBy').textContent = t; const r2=$('#readyBy2'); if(r2) r2.textContent = t; }
 $('#timeSel').addEventListener('change', syncReady);
 $('#sendBtn').addEventListener('click', ()=>{
   const b=$('#sendBtn'); b.textContent='Sent — Rosa’s phone'; b.classList.add('sent');
@@ -873,6 +882,11 @@ $('#mCookedBtn').addEventListener('click', ()=>{ $('#masterBtn').setAttribute('a
 $('#photoBtn').addEventListener('click', ()=>{ $('#photoBtn').hidden=true; $('#camrow').hidden=false; });
 
 /* ================= mastered toggle ================= */
+$('#masterEntryBtn').addEventListener('click', ()=>{
+  state.mastered=true; state.prev='ask';
+  $('#masterBtn').setAttribute('aria-pressed','true');
+  show('mastered');
+});
 $('#masterBtn').addEventListener('click', ()=>{
   state.mastered=!state.mastered;
   $('#masterBtn').setAttribute('aria-pressed', String(state.mastered));
