@@ -81,17 +81,37 @@ product and must be merged — see the plan below.**
 - **Money + time made visible** in the weekly recap (meals handled, waste avoided). Revenue follows the
   loop working, not feature count. 2-weeks-free → Season Pass S$168 (locked).
 
-## THE 4-SESSION ACTION PLAN (de-overwhelm — one fresh Fable-5 chat each, in order, don't look ahead)
-Paste THIS file first in every one.
+## THE ACTION PLAN (revised 2026-07-03 after Fable's review against Ilma's concerns)
+Paste THIS file first in every session. Parallelism: **A∥B on day one → C (needs B) → D (needs C)**;
+Track 0 runs throughout.
+
+- **Track 0 · Real-world, alongside everything (NOT a Claude chat):** (1) tonight's helper-pilot debrief —
+  findings go to `docs/pilot-findings.md` and feed Session C's kitchen-mode decisions; (2) **start
+  Phase −1b acquisition NOW** (roadmap ACQ-01..04: 10 partner conversations, group seeding with live
+  cards + waitlist, gift pre-sale page, capped ad test) — proxy-ownable (husband/friend), time-sensitive,
+  and it is THE growth answer (market/distribution = the review's weakest dimension, 40%). No chat
+  session replaces this.
 - **A · Tidy the house** — reorg repo per `smart-pantry-map.html`, BUT keep pantry + card previews at their
   current root paths (moving them breaks live Pages URLs); docs→docs/, screenshots→media/, dead→archive/.
-- **B · Nail the vision** — rewrite VISION.md + MASTER-PLAN.md into ONE tight page each (they feel
-  repetitive/unfinished). The antidote to "messy in my head."
-- **C · Unify the product** — merge the cook-card/helper kitchen-mode + smart pantry into one 3-tab app
-  picture (pantry → Tonight's cards, the data-learning loop, durable-vs-fresh scope, reconcile 3-vs-4
-  labels); update the PRD.
-- **D · Build** — run `design-system` first (bring 4–6 inspiration screenshots → docs/design.md), then
-  `build-mvp`. Spend the Fable budget HERE — the one-shot build is where Fable pays off.
+- **B · Nail the vision** — rewrite VISION.md + MASTER-PLAN.md into ONE tight page each (repetitive/
+  unfinished today). **Also DECIDE the free-model conflict** (currently unresolved): spec says free = one
+  full loop then paywall; Ilma said "first two weeks free." Recommendation on the table: keep the
+  one-loop paywall as the permanent model + make "2 weeks free" a founding-cohort launch promo (first N
+  households, code, end date). One decision, then C and D build one thing.
+- **C · Unify the product** — four NAMED deliverables (not just a merge): (1) pantry ↔ Tonight's-cards
+  wiring + durable-vs-fresh scope + reconcile 3-vs-4 evidence labels; (2) **Learning Loop spec** — Ilma's
+  "unique feature": exact V1 signals (check-ins, Cooked✓, verdicts, flags, pantry deltas — already in
+  schema), which insights surface to HER in V1 (the weekly recap), what waits for scale (cross-household
+  patterns); (3) **network-effect build sheet** — aggregate-data design, PDPA answer, cold-start plan
+  ("every mum makes the kitchen smarter for the next" must be a feature, not a slide); (4) **money/time-
+  saved metrics into the recap spec (FR-067)** — "meals handled · waste avoided · $ saved," the visible
+  number people renew for. Update the PRD with all four.
+- **D · Build — the BuilderOS completion map** (his sequence: idea✓ → validate✓ → plan✓ → design → build →
+  launch): (1) after B+C, tell the chat **"regenerate the three docs from the updated VISION.md"**
+  (product-planner regeneration = the "files need updating" step); (2) run **design-system** with Ilma's
+  4–6 inspiration screenshots → docs/design.md; (3) fresh chat: **"build the full app using the build-mvp
+  skill"**; (4) run **launch-checklist** when built. Spend the Fable budget on (3) — the one-shot build is
+  where Fable pays off.
 
 ## Immediate next steps (the board)
 1. **Run tonight's pilot** (cards being generated — links will be on Pages under `/pilot/`).
