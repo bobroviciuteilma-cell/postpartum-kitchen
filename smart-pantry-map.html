@@ -1,0 +1,218 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Apothecary — session file map & cleanup plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital@0;1&family=Marcellus&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--paper:#f5efe0;--paper2:#fcf8ef;--ink:#3a3020;--ink2:#6e6250;--soft:#9a8d73;
+    --sage:#7c8a5c;--sage2:#5d6a42;--amber:#c39a45;--amber2:#a67c2c;--rust:#b0623a;--rule:#dccfb2;--line:#ece2cd;
+    --mine:#5d6a42;--mineBg:rgba(124,138,92,.12);--ref:#a67c2c;--refBg:rgba(195,154,71,.12);--mess:#b0623a;--messBg:rgba(176,98,58,.08)}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e3d9c2;-webkit-font-smoothing:antialiased;padding:40px 20px 90px}
+  .wrap{max-width:1080px;margin:0 auto}
+  a{color:var(--amber2);text-decoration:none;border-bottom:1px dotted var(--amber)}
+  .kj{font-family:'Pinyon Script',cursive;font-size:30px;color:#7a4f2c;text-align:center}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;color:#33291a;text-align:center;line-height:1.05;margin-top:2px}
+  .lede{text-align:center;font-size:15px;color:var(--ink2);max-width:640px;margin:10px auto 0;line-height:1.55}
+  .sec{margin-top:34px}
+  .sh{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--rule);padding-bottom:7px;margin-bottom:16px}
+  .sh .n{font-family:'Marcellus',serif;font-size:13px;color:#fff;background:var(--amber);width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .sh h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:25px;color:#33291a}
+  .sh .sub{margin-left:auto;font-size:12px;color:var(--soft);font-style:italic}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:14px 16px}
+  .card.mine{border-color:var(--mine);background:var(--mineBg)}
+  .card .ttl{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#33291a;display:flex;align-items:center;gap:8px}
+  .pill{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:6px;flex:none}
+  .pill.live{background:var(--mine);color:#fff}
+  .pill.doc{background:var(--refBg);color:var(--amber2);border:1px solid var(--amber)}
+  .card .path{font-family:'Marcellus',serif;font-size:11px;color:var(--soft);margin-top:3px;word-break:break-all}
+  .card p{font-size:13px;color:var(--ink2);line-height:1.5;margin-top:7px}
+  .card .lk{display:inline-block;margin-top:8px;font-size:12.5px}
+
+  .reflist{display:flex;flex-wrap:wrap;gap:8px}
+  .ref{border:1px solid var(--amber);background:var(--refBg);border-radius:9px;padding:7px 11px;font-size:13px;color:var(--ink)}
+  .ref b{color:var(--amber2)}
+  .ref span{color:var(--soft);font-size:11px;display:block;font-style:italic}
+
+  .messbox{border:1px solid #d9b98a;border-radius:14px;background:var(--messBg);padding:18px 18px 6px}
+  .messstat{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+  .messstat .s{text-align:center;padding:6px 16px}
+  .messstat .s b{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;color:var(--rust);display:block;line-height:1}
+  .messstat .s span{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+  .catgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media(max-width:720px){.catgrid{grid-template-columns:1fr}}
+  .cat{background:var(--paper2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+  .cat h4{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);margin-bottom:5px}
+  .cat ul{list-style:none;font-size:12px;color:var(--ink2);line-height:1.65}
+  .cat li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cat li.mine{color:var(--mine);font-weight:600}
+
+  .tree{background:#2b2419;border-radius:14px;padding:20px 22px;overflow-x:auto}
+  .tree pre{font-family:'Marcellus','SF Mono',monospace;font-size:12.5px;line-height:1.85;color:#e6dcc4;white-space:pre}
+  .tree .dir{color:#e0b866;font-weight:600}
+  .tree .keep{color:#a9c07e}
+  .tree .cmt{color:#8f836b;font-style:italic}
+  .tree .new{color:#f0d68a}
+
+  .warn{border-left:4px solid var(--rust);background:rgba(176,98,58,.08);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:16px}
+  .warn h4{font-family:'Marcellus',serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--rust);margin-bottom:5px}
+  .warn p{font-size:13.5px;color:var(--ink);line-height:1.55}
+  .warn code{font-family:'Marcellus',monospace;font-size:12px;background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px}
+
+  .legend{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--ink2)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:block}
+  .foot{text-align:center;font-size:12px;color:var(--soft);font-style:italic;margin-top:30px}
+</style></head>
+<body><div class="wrap">
+
+<div class="kj">the session, mapped</div>
+<h1>Smart Apothecary — file map &amp; cleanup plan</h1>
+<p class="lede">Everything built on 2026-07-03, what it was built from, and a proposed home for it — because the repo root is holding <b>31 HTML</b> and <b>22 Markdown</b> files loose.</p>
+
+<div class="legend">
+  <span><i style="background:var(--mine)"></i> made this session</span>
+  <span><i style="background:var(--amber)"></i> reference I read</span>
+  <span><i style="background:var(--rust)"></i> the loose pile</span>
+</div>
+
+<!-- 1 · made this session -->
+<div class="sec">
+  <div class="sh"><span class="n">1</span><h2>What I made this session</h2><span class="sub">4 files · all in repo root</span></div>
+  <div class="grid">
+    <div class="card mine">
+      <div class="ttl">pantry-preview.html <span class="pill live">live · pages</span></div>
+      <div class="path">/postpartum-kitchen/pantry-preview.html</div>
+      <p>The steady-state Apothecary — 4 phones: two doors, jar detail, helper view, add-what-you-have.</p>
+      <a class="lk" href="https://bobroviciuteilma-cell.github.io/postpartum-kitchen/pantry-preview.html" target="_blank">open live link →</a>
+    </div>
+    <div class="card mine">
+      <div class="ttl">pantry-onboarding-preview.html <span class="pill live">live · pages</span></div>
+      <div class="path">/postpartum-kitchen/pantry-onboarding-preview.html</div>
+      <p>The first-setup date flow — 3 phones: estimate landing, helper precision pass, self-sharpening payoff.</p>
+      <a class="lk" href="https://bobroviciuteilma-cell.github.io/postpartum-kitchen/pantry-onboarding-preview.html" target="_blank">open live link →</a>
+    </div>
+    <div class="card mine">
+      <div class="ttl">HANDOVER-SMART-PANTRY.md <span class="pill doc">handover</span></div>
+      <div class="path">/postpartum-kitchen/HANDOVER-SMART-PANTRY.md</div>
+      <p>The portable brief — paste into the next chat. Locked standards, data facts, insights, mistakes, open backlog, wiring.</p>
+    </div>
+    <div class="card mine">
+      <div class="ttl">smart-pantry-map.html <span class="pill doc">this page</span></div>
+      <div class="path">/postpartum-kitchen/smart-pantry-map.html</div>
+      <p>This map — session output + the proposed clean folder structure below.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 2 · references -->
+<div class="sec">
+  <div class="sh"><span class="n">2</span><h2>What I built it from</h2><span class="sub">read, not modified</span></div>
+  <div class="reflist">
+    <div class="ref"><b>memory</b> · project_ilma_pantry<span>her real 35-item pantry</span></div>
+    <div class="ref"><b>memory</b> · project_app_structure<span>3-tab app, ghost-pantry ban</span></div>
+    <div class="ref"><b>MASTER-PLAN.md</b><span>the ✅/◆/🕯️ label standard</span></div>
+    <div class="ref"><b>TAXONOMY-SYNERGY.md</b><span>§B.2 — the 7 verb-led shelves</span></div>
+    <div class="ref"><b>cook-cards/*.html</b> ×49<span>every ingredient count</span></div>
+    <div class="ref"><b>spice-scan-preview.html</b><span>the prototype this extends</span></div>
+    <div class="ref"><b>cook-cards/adrenal-cocktail</b><span>verified cream-of-tartar</span></div>
+  </div>
+</div>
+
+<!-- 3 · the mess -->
+<div class="sec">
+  <div class="sh"><span class="n">3</span><h2>The current root — the mess</h2><span class="sub">why it feels chaotic</span></div>
+  <div class="messbox">
+    <div class="messstat">
+      <div class="s"><b>31</b><span>.html at root</span></div>
+      <div class="s"><b>22</b><span>.md at root</span></div>
+      <div class="s"><b>7</b><span>folders (underused)</span></div>
+      <div class="s"><b>76</b><span>files tracked total</span></div>
+    </div>
+    <div class="catgrid">
+      <div>
+        <div class="cat"><h4>Prototypes · pantry</h4><ul>
+          <li class="mine">pantry-preview.html ◆</li>
+          <li class="mine">pantry-onboarding-preview ◆</li>
+          <li>apothecary-preview.html</li>
+          <li>spice-scan-preview.html</li>
+          <li>vision-cart-preview.html</li>
+          <li>order-screen-preview.html</li>
+        </ul></div>
+        <div class="cat"><h4>Prototypes · cards</h4><ul>
+          <li>cook-card-preview.html</li>
+          <li>recipe-card-preview.html</li>
+          <li>helper-card-preview.html</li>
+          <li>onepot-preview.html</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="cat"><h4>Prototypes · app flow</h4><ul>
+          <li>front-door-v2 / v3 / v4</li>
+          <li>welcome · home-preview</li>
+          <li>app-journey · app-showcase</li>
+          <li>biome-read · add-one-thing</li>
+          <li>depletion-receipt v1/v2</li>
+          <li>night-mode · recovery-clock</li>
+          <li>mom-helper-split · voice-dump</li>
+        </ul></div>
+        <div class="cat"><h4>Prototypes · pitch</h4><ul>
+          <li>pitch-deck.html</li>
+          <li>pitch-screens.html</li>
+          <li>product-map.html</li>
+          <li>provence-reference.html</li>
+        </ul></div>
+      </div>
+      <div>
+        <div class="cat"><h4>Docs · entry &amp; plans</h4><ul>
+          <li class="keep">README · AGENTS · CLAUDE</li>
+          <li>START HERE · MASTER-PLAN</li>
+          <li>TAXONOMY-SYNERGY</li>
+          <li>RECIPE-CATALOG / -CONSOLIDATION</li>
+          <li>CARDS-AUDIT · FAMILY-FOOD-OS</li>
+          <li>*-SPEC.md ×2</li>
+        </ul></div>
+        <div class="cat"><h4>Docs · handovers</h4><ul>
+          <li class="mine">HANDOVER-SMART-PANTRY ◆</li>
+          <li>HANDOVER-CARDS / -PROMPT</li>
+          <li>HANDOVER-RECIPE-AUDIT</li>
+          <li>HANDOVER-SOURCE-VERIFY</li>
+          <li>HANDOVER-CARD-REVIEW</li>
+          <li>HELPER- / PRESENTATION-</li>
+          <li>AYURVEDA- ×2</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4 · proposed structure -->
+<div class="sec">
+  <div class="sh"><span class="n">4</span><h2>Proposed clean structure</h2><span class="sub">for your cleanup session</span></div>
+  <div class="tree"><pre><span class="dir">postpartum-kitchen/</span>
+├── <span class="keep">README.md  AGENTS.md  CLAUDE.md  START HERE.md</span>      <span class="cmt"># entry points — keep at root</span>
+├── <span class="dir">app/</span>                          <span class="cmt"># the real app (unchanged)</span>
+├── <span class="dir">cook-cards/</span>                    <span class="cmt"># 49 live recipes — DO NOT MOVE (Pages serves these)</span>
+├── <span class="dir">previews/</span>                     <span class="cmt"># all *-preview.html, grouped</span>
+│   ├── <span class="dir">pantry/</span>   <span class="new">← pantry-preview, pantry-onboarding, spice-scan, vision-cart</span>
+│   ├── <span class="dir">app-flow/</span> <span class="cmt">front-door*, welcome, home, journey, night-mode, receipts…</span>
+│   ├── <span class="dir">cards/</span>    <span class="cmt">cook-card, recipe-card, helper-card, onepot</span>
+│   └── <span class="dir">pitch/</span>    <span class="cmt">pitch-deck, pitch-screens, product-map</span>
+├── <span class="dir">docs/</span>                         <span class="cmt"># specs + plans: MASTER-PLAN, TAXONOMY, *-SPEC, catalogs</span>
+│   └── <span class="dir">handovers/</span> <span class="new">← every HANDOVER-*.md  (incl. SMART-PANTRY)</span>
+├── <span class="dir">business/</span>                     <span class="cmt"># existing</span>
+├── <span class="dir">References/</span>                   <span class="cmt"># existing — source material (clinical-spine, shop-smart…)</span>
+├── <span class="dir">media/</span>                        <span class="cmt"># rename of Previews/ — it holds SCREENSHOTS, not previews (confusing)</span>
+└── <span class="dir">recipe-catalog-data/</span>          <span class="cmt"># existing</span></pre></div>
+
+  <div class="warn">
+    <h4>⚠︎ One caveat before you move anything</h4>
+    <p>GitHub Pages serves files at their <b>path</b>. Moving <code>pantry-preview.html</code> into <code>previews/pantry/</code> changes its live URL to <code>…/previews/pantry/pantry-preview.html</code> — so the links in this handover would break. The recipe links <i>inside</i> the previews are absolute and survive a move; only the preview's own address changes. <b>Fix:</b> do the move, then update the two URLs in the handover — or keep the pantry previews at root and only tidy the docs. Your call in the cleanup session.</p>
+  </div>
+</div>
+
+<p class="foot">Generated 2026-07-03 · companion to HANDOVER-SMART-PANTRY.md · all links go live once pushed to <b>main</b>.</p>
+
+</div></body></html>

@@ -1,0 +1,793 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Apothecary — the smart pantry, two doors</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Marcellus&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--paper:#f5efe0;--paper2:#fcf8ef;--ink:#3a3020;--ink2:#6e6250;--soft:#9a8d73;
+    --sage:#7c8a5c;--sage2:#5d6a42;--lav:#9a8ab4;--amber:#c39a45;--amber2:#a67c2c;--rust:#b0623a;--rule:#dccfb2;--line:#ece2cd}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e3d9c2;display:flex;justify-content:center;align-items:flex-start;gap:28px;flex-wrap:wrap;padding:46px 18px 80px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+
+  .stepwrap{display:flex;flex-direction:column;align-items:center;width:330px}
+  .cap{display:flex;align-items:baseline;gap:8px;margin-bottom:9px;align-self:flex-start;width:100%}
+  .cap .no{font-family:'Marcellus',serif;font-size:10px;color:#fff;background:var(--amber);width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .cap .tt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:19px;color:#46371f}
+  .cap .ar{margin-left:auto;color:var(--soft);font-style:italic;font-size:12px}
+
+  .ph{width:330px;height:702px;border-radius:42px;background:#251e13;padding:8px;box-shadow:0 26px 60px rgba(55,42,20,.3)}
+  .scr{width:100%;height:100%;border-radius:35px;overflow:hidden;position:relative;background:var(--paper)}
+  .scr .bg{position:absolute;inset:0;background:radial-gradient(130% 24% at 50% 0%,#f6e8c7,rgba(246,232,199,0)),var(--paper)}
+  .scr:before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px);z-index:1}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:114px;height:21px;background:#251e13;border-radius:0 0 14px 14px;z-index:6}
+  .in{position:absolute;inset:0;z-index:2;padding:44px 20px 16px;display:flex;flex-direction:column;overflow:hidden}
+  .h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:#33291a;text-align:center;line-height:1.05}
+  .kick{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber2);text-align:center}
+
+  .doors{display:flex;background:rgba(120,100,70,.1);border-radius:11px;padding:3px;margin-top:11px}
+  .doors button{flex:1;border:0;background:transparent;font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:7px 4px;border-radius:9px;cursor:pointer}
+  .doors button.on{background:var(--paper2);color:#46371f;box-shadow:0 1px 4px rgba(55,42,20,.18)}
+
+  .j{position:relative;width:24px;height:23px;border-radius:4px 4px 9px 9px;flex:none;border:1px solid rgba(58,48,32,.18);box-shadow:inset 0 -3px 0 rgba(0,0,0,.08)}
+  .j:before{content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:15px;height:4px;border-radius:2px;background:rgba(58,48,32,.5)}
+  .sprig{width:24px;height:26px;flex:none}
+
+  .shelves{flex:1;overflow-y:auto;margin-top:8px;padding-bottom:4px}
+  .shelf{margin-top:12px}
+  .shelf:first-child{margin-top:4px}
+  .shf{display:flex;align-items:baseline;gap:7px;border-bottom:1px solid var(--rule);padding-bottom:4px}
+  .shf .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16.5px;color:#46371f}
+  .shf .nu{font-size:10.5px;color:var(--soft);font-style:italic;margin-left:auto;text-align:right}
+  .row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .row .tx{flex:1;min-width:0}
+  .row .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#46371f;line-height:1.05}
+  .row .cc{font-size:11px;color:var(--ink2);margin-top:1px}
+  .row .cc b{color:#7a4f2c;font-weight:500}
+  .st{flex:none;display:flex;gap:3px;align-items:center}
+  .st i{width:7px;height:7px;border-radius:50%;background:var(--line);display:block}
+  .st.full i{background:var(--sage)}
+  .st.low i:nth-child(1){background:var(--amber)}
+  .st.low i:nth-child(2){background:var(--amber);opacity:.45}
+  .st.out i{background:var(--rust);opacity:.85}
+  .st.out i:nth-child(2),.st.out i:nth-child(3){opacity:.2}
+  .more{font-size:11px;color:var(--amber2);font-style:italic;padding:7px 0 2px;cursor:pointer}
+
+  .miniboxes{flex:none}
+  .restock{margin-top:9px;border:1px solid #d9b98a;border-radius:12px;background:rgba(176,98,58,.07);padding:9px 12px}
+  .restock .tk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--rust)}
+  .restock .rr{display:flex;align-items:baseline;gap:7px;padding-top:5px;cursor:pointer}
+  .restock .rr b{font-size:12.5px;color:#46371f;font-weight:500}
+  .restock .rr span{font-size:10.5px;color:var(--ink2);font-style:italic;margin-left:auto;flex:none}
+  .restock .rr .ord{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:#fdf6e7;background:linear-gradient(#caa14b,#a87c2c);border-radius:7px;padding:3px 8px;font-style:normal}
+  .hintbox{margin-top:8px;border:1px solid #e6d3a4;border-radius:12px;background:rgba(195,154,71,.1);padding:9px 12px;cursor:pointer}
+  .hintbox .tk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--amber2);margin-bottom:3px;display:flex;justify-content:space-between;align-items:center}
+  .hintbox p{font-size:12px;color:#46371f;line-height:1.4;min-height:34px}
+  .hintbox p b{color:#7a4f2c}
+  .dots{display:flex;gap:4px}
+  .dots i{width:5px;height:5px;border-radius:50%;background:var(--rule);display:block;cursor:pointer}
+  .dots i.on{background:var(--amber2)}
+
+  .sheet{position:absolute;left:0;right:0;bottom:0;top:9%;background:var(--paper2);border-radius:22px 22px 0 0;box-shadow:0 -12px 40px rgba(55,42,20,.28);z-index:5;transform:translateY(104%);transition:transform .32s ease;display:flex;flex-direction:column;padding:14px 18px 16px}
+  .sheet.open{transform:translateY(0)}
+  .sheet .grab{width:36px;height:4px;border-radius:3px;background:var(--rule);margin:0 auto 8px;flex:none}
+  .sheet .x{position:absolute;top:12px;right:14px;font-family:'Marcellus',serif;font-size:11px;color:var(--soft);cursor:pointer;padding:4px}
+  .dbody{flex:1;overflow-y:auto}
+  .dtop{display:flex;gap:12px;align-items:center}
+  .dtop .j{width:38px;height:36px;border-radius:6px 6px 13px 13px}
+  .dtop .j:before{width:22px;height:5px;top:-6px}
+  .dtop .sprig{width:38px;height:40px}
+  .dtop .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:23px;color:#33291a;line-height:1}
+  .dtop .sub{font-family:'Pinyon Script',cursive;font-size:15px;color:#7a4f2c;margin-top:2px}
+  .dsec{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage2);margin:13px 0 5px}
+  .cl{display:flex;gap:8px;align-items:flex-start;padding:5px 0}
+  .cl p{font-size:12.5px;color:var(--ink);line-height:1.45}
+  .lbl{display:inline-block;font-family:'Marcellus',serif;font-size:7.5px;letter-spacing:.07em;text-transform:uppercase;border-radius:5px;padding:2px 6px;margin-left:6px;vertical-align:1px}
+  .lbl.v{background:rgba(124,138,92,.16);color:var(--sage2)}
+  .lbl.n{background:rgba(195,154,71,.16);color:var(--amber2)}
+  .lbl.t{background:rgba(154,138,180,.16);color:#6f5f8c}
+  .lbl.w{background:rgba(176,98,58,.13);color:var(--rust)}
+  .rl{color:#7a4f2c;border-bottom:1px dotted #b08a52;cursor:pointer}
+  .uses .u{font-size:12.5px;color:var(--ink);padding:4px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}
+  .uses .u span{color:var(--soft);font-style:italic;font-size:11px;flex:none}
+  .could{font-size:12.5px;color:var(--ink);line-height:1.6}
+  .dose{font-size:12.5px;color:var(--ink);line-height:1.45}
+  .dnote{font-size:10.5px;color:var(--soft);font-style:italic;margin-top:3px}
+
+  .stockrow{display:flex;gap:6px;margin-top:2px}
+  .stockrow button{flex:1;border:1px solid var(--rule);background:var(--paper);font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:9px 2px;border-radius:10px;cursor:pointer}
+  .stockrow button.on.s-full{background:rgba(124,138,92,.16);border-color:var(--sage);color:var(--sage2)}
+  .stockrow button.on.s-low{background:rgba(195,154,71,.16);border-color:var(--amber);color:var(--amber2)}
+  .stockrow button.on.s-out{background:rgba(176,98,58,.13);border-color:var(--rust);color:var(--rust)}
+
+  .buy{margin-top:12px;border:1px solid #e6d3a4;border-radius:12px;background:rgba(195,154,71,.09);padding:10px 12px}
+  .buy .tk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--amber2)}
+  .buy .it{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:5px}
+  .buy .it .l b{font-size:13px;color:#46371f;font-weight:500}
+  .buy .it .l span{font-size:10.5px;color:var(--ink2);display:block}
+  .buy .it .pr{font-family:'Marcellus',serif;font-size:11.5px;color:#7a4f2c;flex:none;text-align:right}
+  .buy .sm{font-size:10.5px;color:var(--soft);font-style:italic;margin-top:5px}
+
+  .boostcard{position:absolute;left:14px;right:14px;bottom:14px;background:#3b2f1c;color:#f3e8d0;border-radius:14px;padding:12px 14px;z-index:8;box-shadow:0 10px 30px rgba(0,0,0,.35);display:none}
+  .boostcard.show{display:block}
+  .boostcard .tk{font-family:'Marcellus',serif;font-size:7.5px;letter-spacing:.13em;text-transform:uppercase;color:#e8c983;margin-bottom:4px}
+  .boostcard .bnm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px;color:#fdf6e7}
+  .boostcard p{font-size:12px;line-height:1.45;margin-top:3px;color:#efe3c8}
+  .boostcard .acts{display:flex;gap:14px;margin-top:8px;font-family:'Marcellus',serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+  .boostcard .acts a,.boostcard .acts span{color:#e8c983;cursor:pointer}
+
+  .langs{display:flex;gap:5px;justify-content:center;margin-top:7px}
+  .langs span{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.1em;color:var(--ink2);border:1px solid var(--rule);border-radius:6px;padding:2px 7px;cursor:pointer}
+  .langs span.on{background:#46371f;color:#f3e8d0;border-color:#46371f}
+  .hrow{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .hrow .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14.5px;color:#46371f;flex:1;line-height:1.05;min-width:0}
+  .seg3{display:flex;gap:0;border:1px solid var(--rule);border-radius:9px;overflow:hidden;flex:none}
+  .seg3 button{border:0;background:var(--paper);font-family:'Marcellus',serif;font-size:8px;letter-spacing:.03em;text-transform:uppercase;color:var(--soft);padding:6px 6px;cursor:pointer;border-left:1px solid var(--line)}
+  .seg3 button:first-child{border-left:0}
+  .seg3 button.on.s-full{background:var(--sage);color:#fff}
+  .seg3 button.on.s-low{background:var(--amber);color:#fff}
+  .seg3 button.on.s-out{background:var(--rust);color:#fff}
+
+  .elsebox{margin-top:9px;border:1px solid var(--rule);border-radius:12px;background:var(--paper2);padding:9px 12px;flex:none}
+  .elsebox .tk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--rust)}
+  .elsebox .frm{display:flex;gap:6px;margin-top:6px}
+  .elsebox input{flex:1;border:1px solid var(--rule);border-radius:9px;background:var(--paper);font-family:'EB Garamond',serif;font-size:12.5px;color:var(--ink);padding:7px 9px;outline:none;min-width:0}
+  .elsebox button{border:0;font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(#caa14b,#a87c2c);color:#fdf6e7;border-radius:9px;padding:7px 10px;cursor:pointer;flex:none}
+  .told{margin-top:8px;border:1px solid var(--rule);border-radius:12px;background:var(--paper2);padding:8px 12px;flex:none}
+  .told .tk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--sage2)}
+  .told .items{font-size:12px;color:#46371f;margin-top:3px;line-height:1.5}
+  .told .items b{color:#7a4f2c;font-weight:500}
+  .told .items i{color:var(--soft)}
+
+  .toast{position:absolute;left:16px;right:16px;bottom:88px;background:#3b2f1c;color:#f3e8d0;border-radius:12px;padding:10px 13px;font-size:12.5px;line-height:1.4;z-index:9;opacity:0;transform:translateY(8px);transition:all .3s ease;pointer-events:none;text-align:center}
+  .toast.show{opacity:1;transform:translateY(0)}
+  .toast b{color:#e8c983}
+
+  /* add-flow phone */
+  .modes{display:flex;background:rgba(120,100,70,.1);border-radius:11px;padding:3px;margin-top:11px}
+  .modes button{flex:1;border:0;background:transparent;font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);padding:7px 4px;border-radius:9px;cursor:pointer}
+  .modes button.on{background:var(--paper2);color:#46371f;box-shadow:0 1px 4px rgba(55,42,20,.18)}
+  .pane{flex:1;overflow-y:auto;margin-top:10px}
+  .view{position:relative;height:190px;border-radius:14px;overflow:hidden;background:linear-gradient(155deg,#b08a52,#7c5a30 45%,#9a7340)}
+  .view:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.12) 0 30px,rgba(255,255,255,.05) 30px 33px),repeating-linear-gradient(0deg,rgba(0,0,0,.1) 0 48px,transparent 48px 52px)}
+  .br{position:absolute;width:20px;height:20px;border:2px solid rgba(255,255,255,.85);z-index:2}
+  .br.tl{top:12px;left:12px;border-right:none;border-bottom:none}.br.tr{top:12px;right:12px;border-left:none;border-bottom:none}
+  .br.bl{bottom:12px;left:12px;border-right:none;border-top:none}.br.brc{bottom:12px;right:12px;border-left:none;border-top:none}
+  .det{position:absolute;z-index:3;font-family:'Marcellus',serif;font-size:8px;letter-spacing:.03em;background:rgba(37,30,19,.85);color:#f3e8d0;padding:3px 7px;border-radius:5px;white-space:nowrap}
+  .det.new{background:rgba(124,138,92,.95)}
+  .scanls{margin-top:10px}
+  .scanls .u{font-size:12.5px;padding:5px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+  .scanls .u span{font-size:10px;font-family:'Marcellus',serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);flex:none}
+  .scanls .u span.new{color:var(--sage2)}
+  .gobtn{display:block;width:100%;text-align:center;margin-top:12px;border:0;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(#caa14b,#a87c2c);color:#fdf6e7;padding:13px;border-radius:12px;cursor:pointer}
+  .mic{width:74px;height:74px;border-radius:50%;margin:14px auto 8px;background:radial-gradient(circle at 35% 30%,#d8b262,#a87c2c);box-shadow:0 8px 24px rgba(166,124,44,.4);position:relative}
+  .mic:after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(166,124,44,.35)}
+  .quote{font-style:italic;text-align:center;font-size:13px;color:var(--ink2);line-height:1.5;padding:0 10px}
+  .parse{margin-top:12px}
+  .parse .u{font-size:12.5px;padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+  .parse .u b{font-weight:500;color:#46371f}
+  .parse .u span{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.08em;text-transform:uppercase;flex:none}
+  .parse .u span.o{color:var(--rust)} .parse .u span.p{color:var(--sage2)} .parse .u span.a{color:var(--amber2)}
+
+  .note{max-width:300px;align-self:center}
+  .note h3{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:#33291a;margin-bottom:4px}
+  .note .s{font-size:13px;color:var(--ink2);margin-bottom:16px;line-height:1.5}
+  .note .it{border-left:2px solid var(--sage);padding-left:12px;margin-bottom:14px}
+  .note .it h4{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--sage2);margin-bottom:3px}
+  .note .it p{font-size:12.5px;color:var(--ink2);line-height:1.5}
+  .note .it b{color:#46371f}
+</style></head>
+<body>
+
+<!-- 1 · her apothecary -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">1</span><span class="tt">Your Apothecary</span><span class="ar">tap any jar →</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="h1">Your Apothecary</div>
+    <div class="doors">
+      <button id="doorPhys" class="on">Where it lives</button>
+      <button id="doorHeal">What it does</button>
+    </div>
+    <div class="shelves" id="shelves1"></div>
+    <div class="miniboxes">
+      <div class="restock" id="restock"></div>
+      <div class="hintbox" id="hintbox">
+        <div class="tk"><span id="insK"></span><span class="dots" id="insDots"></span></div>
+        <p id="insT" onclick="insAct()"></p>
+      </div>
+    </div>
+    <div class="sheet" id="sheet1"><div class="grab"></div><span class="x" onclick="closeSheet()">close</span><div class="dbody" id="sheetBody"></div></div>
+    <div class="boostcard" id="boost-p1"></div>
+  </div></div></div>
+</div>
+
+<!-- 2 · a jar, opened -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">2</span><span class="tt">A jar, opened</span><span class="ar">explain · empower · buy</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in" style="padding-top:40px">
+    <div class="dbody" id="amlaBody" style="background:var(--paper2);border-radius:18px;padding:14px 16px;margin-top:6px"></div>
+    <div class="boostcard" id="boost-p2"></div>
+  </div></div></div>
+</div>
+
+<!-- 3 · helper view -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">3</span><span class="tt">Helper&rsquo;s view</span><span class="ar">one tap = Ma&rsquo;am knows</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="h1">Ma&rsquo;am&rsquo;s Apothecary</div>
+    <div class="langs" id="langs"></div>
+    <div class="shelves" id="shelves3"></div>
+    <div class="elsebox">
+      <div class="tk" id="elseTk"></div>
+      <div class="frm"><input id="elseIn" placeholder=""><button id="elseBtn" onclick="tellElse()"></button></div>
+    </div>
+    <div class="told" id="told"></div>
+    <div class="toast" id="toast"></div>
+  </div></div></div>
+</div>
+
+<!-- 4 · add what you have -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">4</span><span class="tt">Add what you have</span><span class="ar">photo · voice · type</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="h1">Add to your Apothecary</div>
+    <div class="kick" style="margin-top:4px">MUM OR HELPER &middot; 20 SECONDS</div>
+    <div class="modes">
+      <button id="mPhoto" class="on" onclick="setMode('photo')">Photo</button>
+      <button id="mVoice" onclick="setMode('voice')">Voice</button>
+      <button id="mType" onclick="setMode('type')">Type</button>
+    </div>
+    <div class="pane" id="pane"></div>
+    <div class="toast" id="toast4"></div>
+  </div></div></div>
+</div>
+
+<div class="note">
+  <h3>Why this lands</h3>
+  <div class="s">Every jar, count and label is real — pulled from her pantry list and her 49 built recipes. Recipe links open the live cook cards.</div>
+  <div class="it"><h4>Not the ghost pantry</h4><p>State only changes when a <b>human declares it</b> — a tap, a photo, a voice note. Never AI guessing. Three states, no counts, nothing to rot.</p></div>
+  <div class="it"><h4>Boost is bidirectional</h4><p>&ldquo;Could also boost&rdquo; opens the suggestion card you&rsquo;d also meet <i>inside</i> that recipe — same graph, both doors. One tap through to the live recipe.</p></div>
+  <div class="it"><h4>Today&rsquo;s insight, computed</h4><p>Rotates nightly from her data: <b>under-used jar</b> (amla, 1 of 49) · <b>synergy she owns</b> (turmeric + black pepper) · <b>running low vs. recipes</b> · <b>what&rsquo;s on her sill</b> (Cuban oregano = torbangun). Each one opens the jar.</p></div>
+  <div class="it"><h4>Notify, never order</h4><p>Helper taps — or types anything else, apothecary or not — and it lands in <b>mum&rsquo;s Restock list, one place</b> — with <b>amount, retailer + price</b>, and only direct-order links (walk-in finds are marked, never linked). Helper chrome speaks EN &middot; BM &middot; TA &middot; MY.</p></div>
+  <div class="it"><h4>Free vs Pass</h4><p>Jar pages + taps + add-flow ship <b>free</b>. AI price-hunting, voice-parse and &ldquo;could also boost&rdquo; are the <b>Season Pass magic</b>.</p></div>
+</div>
+
+<script>
+var GH = "https://bobroviciuteilma-cell.github.io/postpartum-kitchen/cook-cards/";
+var HEAL = [
+  {nm:"Rebuild your blood", nu:"iron · B12 · folate"},
+  {nm:"Heal your gut", nu:"broth · collagen · ferments"},
+  {nm:"Steady energy", nu:"protein · slow carbs"},
+  {nm:"Keep your milk flowing", nu:"galactagogues · hydration"},
+  {nm:"Strengthen bones & repair", nu:"calcium · collagen"},
+  {nm:"Calm & lift your mood", nu:"magnesium · omega-3"},
+  {nm:"Steady immunity", nu:"vitamin C · zinc"}
+];
+var PHYS = [
+  {nm:"Spice drawer", nu:"the little pharmacy"},
+  {nm:"Potted fresh herbs", nu:"fresh from your pots"},
+  {nm:"Powders & adaptogens", nu:"the healing powders"},
+  {nm:"Tea tin", nu:"steep & sip"},
+  {nm:"Seeds, nuts & butters", nu:"the mineral shelf"},
+  {nm:"Sweet & blood-builders", nu:"dates · berries · honey"},
+  {nm:"Grains, flours & pasta", nu:"the slow carbs"},
+  {nm:"Fats & oils", nu:"the carriers"},
+  {nm:"Protein & collagen", nu:"the repair tubs"},
+  {nm:"Ferments & vinegars", nu:"alive in jars"}
+];
+// recipe counts are REAL — measured across the 49 built recipes
+var ITEMS = [
+  {id:"amla", nm:"Amla", phys:2, heal:6, cards:1, col:"#a3af54", hl:"One of the richest vitamin-C sources — unlocks iron.", shop:"iHerb SG", price:"≈S$9", wt:"227 g", fresh:"restocked 2 months ago · powders keep ~18 months"},
+  {id:"turmeric", nm:"Turmeric", phys:0, heal:6, cards:4, col:"#d4a125", hl:"Calms inflammation as you heal.", shop:"Little Farms", price:"≈S$8", wt:"70 g"},
+  {id:"blackpepper", nm:"Black pepper", phys:0, heal:0, cards:5, col:"#4a4238", hl:"The absorption key — unlocks turmeric and iron.", shop:"RedMart", price:"≈S$5", wt:"100 g"},
+  {id:"cinnamon", nm:"Ceylon cinnamon", phys:0, heal:2, cards:15, col:"#b77a4a", hl:"Steadies blood sugar; gently warming.", shop:"RedMart", price:"≈S$6", wt:"80 g"},
+  {id:"cinnsticks", nm:"Cinnamon sticks", phys:0, heal:2, cards:3, col:"#a06a3e", hl:"Whole warmth for teas and pho.", shop:"RedMart", price:"≈S$5", wt:"50 g"},
+  {id:"cardamom", nm:"Cardamom", phys:0, heal:1, cards:6, col:"#b3d093", hl:"Warming; settles the stomach.", shop:"RedMart", price:"≈S$7", wt:"50 g"},
+  {id:"cumin", nm:"Cumin", phys:0, heal:1, cards:7, col:"#a8874f", hl:"The first C in CCF tea — the digestion classic.", shop:"RedMart", price:"≈S$4", wt:"100 g"},
+  {id:"coriander", nm:"Coriander seeds", phys:0, heal:1, cards:4, col:"#c2b06a", hl:"The second C in CCF tea — cooling, gentle.", shop:"RedMart", price:"≈S$4", wt:"100 g"},
+  {id:"ajwain", nm:"Ajwain", phys:0, heal:3, cards:3, col:"#948c59", hl:"The confinement seed — digestion and warmth.", shop:"RedMart", price:"≈S$4", wt:"100 g"},
+  {id:"fennel", nm:"Fennel seeds", phys:0, heal:3, cards:3, col:"#93c4a9", hl:"Soothes digestion; traditionally for milk.", shop:"RedMart", price:"≈S$6", wt:"100 g"},
+  {id:"caraway", nm:"Caraway seeds", phys:0, heal:3, cards:3, col:"#7d774a", hl:"Fennel&rsquo;s sister seed — the same gentle tradition.", shop:"RedMart", price:"≈S$5", wt:"100 g"},
+  {id:"saffron", nm:"Saffron", phys:0, heal:5, cards:2, col:"#cc6229", hl:"The golden mood thread of confinement kitchens.", shop:"RedMart", price:"≈S$12", wt:"1 g"},
+  {id:"nutmeg", nm:"Nutmeg", phys:0, heal:5, cards:2, col:"#93683f", hl:"A pinch warms evening milk toward sleep.", shop:"RedMart", price:"≈S$5", wt:"50 g"},
+  {id:"staranise", nm:"Star anise", phys:0, heal:6, cards:2, col:"#5c4a34", hl:"The pho spice — warm depth for broths.", shop:"RedMart", price:"≈S$5", wt:"50 g"},
+  {id:"cloves", nm:"Cloves", phys:0, heal:6, cards:1, col:"#6e4a2e", hl:"Aromatic warmth — the chai constant.", shop:"RedMart", price:"≈S$4", wt:"50 g"},
+  {id:"cayenne", nm:"Cayenne", phys:0, heal:6, cards:7, col:"#b24726", hl:"Heat that moves — circulation and flavour.", shop:"RedMart", price:"≈S$4", wt:"70 g"},
+  {id:"bay", nm:"Bay leaves", phys:0, heal:1, cards:5, col:"#7a8a5a", hl:"Quiet depth for every broth.", shop:"RedMart", price:"≈S$4", wt:"25 g"},
+  {id:"sumac", nm:"Sumac", phys:0, heal:6, cards:1, col:"#8e3a2c", hl:"Bright, lemony finish for dips and salads.", shop:"RedMart", price:"≈S$5", wt:"100 g"},
+  {id:"oregano", nm:"Dried oregano", phys:0, heal:6, cards:1, col:"#8a9a6a", hl:"Mediterranean depth for patties and dressings.", shop:"RedMart", price:"≈S$4", wt:"25 g", fresh:"added 14 months ago · past its best — refresh"},
+  {id:"rosemary", nm:"Rosemary", phys:1, heal:5, cards:2, col:"#5f7a52", sprig:"needle", hl:"Clarity and warmth, straight off the sill.", shop:"Cold Storage", price:"≈S$5", wt:"per pot"},
+  {id:"thyme", nm:"Thyme", phys:1, heal:6, cards:3, col:"#7a8f5e", sprig:"needle", hl:"Gentle antimicrobial tradition for broths.", shop:"Cold Storage", price:"≈S$5", wt:"per pot"},
+  {id:"cuban", nm:"Cuban oregano", phys:1, heal:3, cards:0, col:"#6f9a5c", sprig:"round", hl:"Torbangun — Southeast Asia&rsquo;s milk herb.", shop:"Far East Flora", price:"≈S$8", wt:"per pot"},
+  {id:"mint", nm:"Mint", phys:1, heal:1, cards:3, col:"#4e8a4e", sprig:"round", hl:"Cools digestion; brightens water.", shop:"Cold Storage", price:"≈S$4", wt:"per pot"},
+  {id:"moringa", nm:"Moringa", phys:2, heal:3, cards:6, col:"#739454", hl:"Iron-and-calcium-dense leaf; milk tradition.", shop:"iHerb SG", price:"≈S$12", wt:"200 g"},
+  {id:"ashwagandha", nm:"Ashwagandha", phys:2, heal:5, cards:2, col:"#b49f72", hl:"The calming adaptogen — honest read inside.", shop:"iHerb SG", price:"≈S$14", wt:"200 g"},
+  {id:"dashamoola", nm:"Dashamoola", phys:2, heal:5, cards:1, col:"#85684b", hl:"Ten-root Ayurvedic decoction, powder form.", shop:"Lazada", price:"≈S$12", wt:"100 g"},
+  {id:"gingerpow", nm:"Ginger", phys:2, heal:1, cards:12, col:"#d5b477", hl:"Warming; eases digestion and circulation.", shop:"RedMart", price:"≈S$5", wt:"100 g"},
+  {id:"nettle", nm:"Nettle tea", phys:3, heal:3, cards:2, col:"#698a4e", hl:"Iron, calcium & magnesium — a top postpartum tea.", shop:"iHerb SG", price:"≈S$11", wt:"100 g"},
+  {id:"blacktea", nm:"Black tea", phys:3, heal:2, cards:1, col:"#5a4232", hl:"The chai base — brew it away from iron-rich meals.", shop:"RedMart", price:"≈S$6", wt:"100 g"},
+  {id:"chia", nm:"Chia seeds", phys:4, heal:2, cards:6, col:"#746f62", hl:"The omega seed that sets puddings overnight.", shop:"Scoop Wholefoods", price:"≈S$9", wt:"375 g"},
+  {id:"hemp", nm:"Hemp seeds", phys:4, heal:5, cards:11, col:"#9da26d", hl:"Complete protein + omega-3 in a sprinkle.", shop:"Scoop Wholefoods", price:"≈S$12", wt:"250 g"},
+  {id:"flax", nm:"Flax seeds", phys:4, heal:5, cards:13, col:"#987749", hl:"Omega-3 that grinds invisibly into bakes.", shop:"Scoop Wholefoods", price:"≈S$6", wt:"375 g"},
+  {id:"pumpkin", nm:"Pumpkin seeds", phys:4, heal:0, cards:14, col:"#6b8544", hl:"Iron and zinc in a handful.", shop:"Scoop Wholefoods", price:"≈S$8", wt:"375 g"},
+  {id:"almonds", nm:"Almonds", phys:4, heal:2, cards:3, col:"#b98d5e", hl:"The snack-ball backbone.", shop:"Scoop Wholefoods", price:"≈S$10", wt:"500 g"},
+  {id:"walnuts", nm:"Walnuts", phys:4, heal:5, cards:3, col:"#8d6a48", hl:"The omega-3 nut — brain food by shape and fact.", shop:"Scoop Wholefoods", price:"≈S$11", wt:"375 g"},
+  {id:"tahini", nm:"Tahini, white & black", phys:4, heal:4, cards:10, col:"#c9b489", hl:"Among the richest everyday calcium foods.", shop:"Scoop Wholefoods", price:"≈S$13", wt:"454 g"},
+  {id:"sesame", nm:"Sesame, black & white", phys:4, heal:4, cards:8, col:"#b5a98a", hl:"Calcium seeds — the til tradition.", shop:"RedMart", price:"≈S$7", wt:"250 g"},
+  {id:"goji", nm:"Goji berries", phys:5, heal:0, cards:9, col:"#bc4a2c", hl:"Iron + vitamin C in one berry.", shop:"RedMart", price:"≈S$12", wt:"250 g", fresh:"restocked last month · berries keep ~1 year"},
+  {id:"dates", nm:"Dates & red dates", phys:5, heal:0, cards:14, col:"#734829", hl:"Iron and quick warmth; they bind and sweeten.", shop:"RedMart", price:"≈S$15", wt:"500 g"},
+  {id:"honey", nm:"Honey", phys:5, heal:2, cards:16, col:"#d5a943", hl:"Raw sweetness that carries the medicine.", shop:"Little Farms", price:"≈S$14", wt:"500 g"},
+  {id:"maple", nm:"Maple", phys:5, heal:2, cards:5, col:"#a06830", hl:"Mineral sweetener for the bakes.", shop:"RedMart", price:"≈S$12", wt:"375 ml"},
+  {id:"oats", nm:"Oats", phys:6, heal:2, cards:9, col:"#c9ac74", hl:"Slow carbs + milk tradition — the soaked base.", shop:"RedMart", price:"≈S$7", wt:"1 kg"},
+  {id:"rice", nm:"Rice", phys:6, heal:2, cards:5, col:"#e3d9be", hl:"The khichdi base — gentle, warm, easy.", shop:"RedMart", price:"≈S$9", wt:"2 kg"},
+  {id:"lentils", nm:"Lentils & dal", phys:6, heal:0, cards:2, col:"#c07a3e", hl:"Plant iron + folate — the dal of confinement.", shop:"RedMart", price:"≈S$5", wt:"500 g"},
+  {id:"orzo", nm:"Orzo", phys:6, heal:2, cards:4, col:"#d9c48e", hl:"Comfort carbs that carry greens and lemon.", shop:"RedMart", price:"≈S$6", wt:"500 g"},
+  {id:"pasta", nm:"Pasta", phys:6, heal:2, cards:2, col:"#e0cf9e", hl:"Quick comfort — grain bowls and sardine nights.", shop:"RedMart", price:"≈S$4", wt:"500 g"},
+  {id:"ricenoodles", nm:"Rice noodles", phys:6, heal:2, cards:2, col:"#ece2c6", hl:"The pho bowl&rsquo;s gentle base.", shop:"RedMart", price:"≈S$3", wt:"400 g"},
+  {id:"buckwheat", nm:"Buckwheat", phys:6, heal:2, cards:1, col:"#9a7e56", hl:"Mineral-rich groat — waffles and porridge.", shop:"Scoop Wholefoods", price:"≈S$7", wt:"500 g"},
+  {id:"quinoa", nm:"Quinoa", phys:6, heal:2, cards:0, col:"#d1b98a", hl:"The complete-protein grain, waiting its turn.", shop:"RedMart", price:"≈S$8", wt:"500 g"},
+  {id:"almondflour", nm:"Almond flour", phys:6, heal:2, cards:1, col:"#e3cfa8", hl:"Grain-free binder for the veggie patties.", shop:"Scoop Wholefoods", price:"≈S$14", wt:"500 g"},
+  {id:"semolina", nm:"Semolina", phys:6, heal:2, cards:1, col:"#ecd9a8", hl:"The zapekanka secret — tender cheese bakes.", shop:"RedMart", price:"≈S$4", wt:"500 g"},
+  {id:"plainflour", nm:"Plain flour", phys:6, heal:2, cards:1, col:"#efe7d2", hl:"The pancake fallback. Waffle flour? Blitz your oats.", shop:"RedMart", price:"≈S$3", wt:"1 kg"},
+  {id:"ghee", nm:"Ghee", phys:7, heal:1, cards:19, col:"#e2b954", hl:"The healing fat — carries the fat-soluble good.", shop:"Little Farms", price:"≈S$18", wt:"500 ml"},
+  {id:"evoo", nm:"Olive oil, extra-virgin", phys:7, heal:2, cards:9, col:"#a0a249", hl:"Cold-pressed backbone of every salad.", shop:"Little Farms", price:"≈S$16", wt:"750 ml"},
+  {id:"coconutmilk", nm:"Coconut milk", phys:7, heal:2, cards:6, col:"#eee6d4", hl:"Canned cream for golden milk and chia.", shop:"RedMart", price:"≈S$3", wt:"400 ml"},
+  {id:"mct", nm:"MCT oil", phys:7, heal:2, cards:2, col:"#d6cdb2", hl:"Fast fuel for the 3am stretch.", shop:"iHerb SG", price:"≈S$22", wt:"473 ml"},
+  {id:"cocobutter", nm:"Coconut butter", phys:7, heal:2, cards:1, col:"#dfd3ba", hl:"Whole-coconut richness for bites and bakes.", shop:"Scoop Wholefoods", price:"≈S$12", wt:"500 g"},
+  {id:"gelatin", nm:"Beef gelatin", phys:8, heal:1, cards:12, state:"low", col:"#c99e52", hl:"Glycine-rich repair protein — your gelling agent.", shop:"iHerb SG", price:"≈S$25", wt:"450 g", fresh:"restocked 5 months ago · keeps ~2 years"},
+  {id:"collagen", nm:"Collagen (Needed)", phys:8, heal:1, cards:29, col:"#d1c09b", hl:"Your hardest-working jar — repair peptides.", shop:"your brand", price:"re-order", wt:""},
+  {id:"whey", nm:"Whey (Momentous)", phys:8, heal:2, cards:6, col:"#ded5bd", hl:"Fast protein for smoothies.", shop:"your brand", price:"re-order", wt:""},
+  {id:"acv", nm:"Apple cider vinegar", phys:9, heal:1, cards:3, col:"#c29a52", hl:"Wakes up broths and dressings.", shop:"RedMart", price:"≈S$9", wt:"946 ml"}
+];
+ITEMS.forEach(function(it){ if(!it.state) it.state = "full"; });
+var CUSTOM = [];
+
+var LBL = {v:'<span class="lbl v">verified</span>', n:'<span class="lbl n">nutrient fact</span>',
+           t:'<span class="lbl t">tradition</span>', w:'<span class="lbl w">bf note</span>'};
+
+var DETAILS = {
+  amla:{sub:"Indian gooseberry · the vitamin-C berry", claims:[
+      {l:"n", t:"One of the richest natural sources of vitamin C."},
+      {l:"v", t:"Vitamin C lifts iron absorption — it unlocks your blood-building foods."},
+      {l:"t", t:"Ayurveda&rsquo;s daily rasayana — the classic postpartum rejuvenative."}],
+    uses:[["Amla Water","Morning Waters","morning-waters.html"]],
+    could:[["Power Smoothie","power-smoothie.html","Stir ½ tsp in with the berries — its vitamin C unlocks the greens&rsquo; iron."],
+           ["Chia Pudding","chia-pudding.html","Whisk a pinch into the coconut milk before it sets overnight."],
+           ["Jujube & Goji Tea","jujube-goji-tea.html","A pinch into the warm steep — vitamin C meets the berries&rsquo; iron."]],
+    dose:"½–1 tsp a day, stirred into cool water or a smoothie — honey rounds the sourness.",
+    dnote:"Food amounts — not a medicinal dose.",
+    buyname:"Amla powder",
+    alt:{shop:"Mustafa Centre", price:"≈S$3", wt:"100 g"}},
+  gelatin:{sub:"grass-fed · your go-to gelling agent", claims:[
+      {l:"n", t:"Nearly pure protein, rich in glycine + proline — the collagen builders."},
+      {l:"v", t:"Glycine supports deeper sleep."},
+      {l:"t", t:"The confinement kitchen&rsquo;s repair food — set, sipped or stirred."}],
+    uses:[["Healing Gelatin Set","Desserts","healing-gelatin-set.html"],["Meat-Stock Latte","Drinks","meat-stock-latte.html"],["Cottage Cheese Set","Desserts","cottage-cheese-set.html"]],
+    dose:"1 tbsp — bloom in cold liquid first, then dissolve warm.",
+    buyname:"Beef gelatin, grass-fed"},
+  goji:{sub:"the confinement blood berry", claims:[
+      {l:"n", t:"Iron and vitamin C in the same berry — the pairing that absorbs."},
+      {l:"t", t:"Zuo yuezi&rsquo;s classic blood-builder, steeped or scattered."}],
+    uses:[["Jujube & Goji Tea","Drinks","jujube-goji-tea.html"],["Magic Chicken Soup","Mains","magic-chicken-soup.html"],["Healing Gelatin Set","Desserts","healing-gelatin-set.html"]],
+    dose:"A small handful — steep in teas, soups or soaking oats.",
+    buyname:"Goji berries",
+    alt:{shop:"Chinese medical hall", price:"≈S$8", wt:"250 g"}},
+  nettle:{sub:"the mineral tea", claims:[
+      {l:"n", t:"Rich in iron, calcium & magnesium — longer steep, more minerals."},
+      {l:"t", t:"Traditional milk support, cup by cup."}],
+    uses:[["Nettle Tea","Drinks","nettle-tea-card.html"],["Lactation Balls","Snacks","lactation-balls.html"]],
+    dose:"Steep covered 5–15 min — lovely warm or cool.",
+    buyname:"Nettle leaf"},
+  ashwagandha:{sub:"the calming adaptogen", claims:[
+      {l:"t", t:"Tradition for stress and sleep — warm milk&rsquo;s oldest companion."},
+      {l:"w", t:"The honest read: breastfeeding evidence is thin — your recipe carries the judgment call."}],
+    uses:[["Ashwagandha Milk","Drinks","ashwagandha-milk.html"],["Golden Milk","Drinks","golden-milk-card.html"]],
+    dose:"¼–½ tsp in warm milk, evenings.",
+    buyname:"Ashwagandha root"},
+  dashamoola:{sub:"ten roots · the vata calmer", claims:[
+      {l:"t", t:"Ayurveda&rsquo;s ten-root decoction for the postpartum weeks."},
+      {l:"w", t:"Powder only while breastfeeding — the bottled liquid (Dashmularishta) is fermented."}],
+    uses:[["Dashamoola Decoction","Drinks","dashamoola-decoction.html"]],
+    dose:"Simmer 1 tsp in water 10 min; sip warm.",
+    buyname:"Dashamoola powder"},
+  cuban:{sub:"torbangun · the milk herb", claims:[
+      {l:"t", t:"Torbangun (Coleus amboinicus) — Southeast Asia&rsquo;s postpartum milk herb; Batak mothers eat it daily for a month."},
+      {l:"n", t:"A fleshy herb rich in minerals; thrives on a Singapore windowsill."}],
+    uses:[],
+    could:[["Magic Chicken Soup","magic-chicken-soup.html","The traditional way: a handful of leaves simmered into chicken soup for new mothers."],
+           ["Lemon-Egg Chicken Soup","lemon-egg-chicken-soup.html","Tear leaves in at the end, like basil — soft herb, gentle heat."]],
+    dose:"A few leaves, torn into hot soup at the end.",
+    buyname:"Cuban oregano pot"},
+  tahini:{sub:"white & black · the bones paste", claims:[
+      {l:"n", t:"Among the richest everyday calcium foods."},
+      {l:"t", t:"Sesame&rsquo;s til tradition — strength food for new mothers."}],
+    uses:[["Sardine & Tahini Salad","Mains","sardine-tahini-salad.html"],["Iron Dips","Snacks","iron-dips.html"],["Lactation Balls","Snacks","lactation-balls.html"]],
+    dose:"A spoon into dressings, dips and date balls.",
+    buyname:"Tahini"},
+  moringa:{sub:"the iron leaf", claims:[
+      {l:"n", t:"Leaf powder dense in iron and calcium."},
+      {l:"t", t:"Milk tradition across cultures, from malunggay soup to tea."}],
+    uses:[["Borscht","Mains","borscht.html"],["Chicken Bone Broth","Mains","chicken-bone-broth-card.html"],["Lactation Balls","Snacks","lactation-balls.html"]],
+    dose:"1 tsp into soups and smoothies — heat-gentle, add late.",
+    buyname:"Moringa powder"},
+  collagen:{sub:"the hardest-working jar", claims:[
+      {l:"n", t:"Glycine + proline peptides — the raw material of repair."},
+      {l:"t", t:"In 29 of your 49 recipes — already folded in, never a footnote."}],
+    uses:[["Power Smoothie","Drinks","power-smoothie.html"],["Chia Pudding","Desserts","chia-pudding.html"],["Blueberry Waffles","Mains","blueberry-waffles.html"]],
+    dose:"1–2 scoops — dissolves warm or cold.",
+    buyname:"Needed collagen"},
+  dates:{sub:"dates & red dates (jujube)", claims:[
+      {l:"n", t:"Iron and quick warmth in the same bite."},
+      {l:"t", t:"The first food after birth across many cultures."}],
+    uses:[["Jujube & Goji Tea","Drinks","jujube-goji-tea.html"],["Date-Oat Bites","Snacks","date-oat-bites.html"],["Nut & Date Balls","Snacks","nut-date-balls.html"]],
+    dose:"They bind and sweeten — your jaggery-and-gond stand-in.",
+    buyname:"Medjool + red dates"},
+  turmeric:{sub:"the golden root", claims:[
+      {l:"n", t:"Curcumin on its own is poorly absorbed."},
+      {l:"v", t:"With black pepper, absorption multiplies — the pairing is the medicine."},
+      {l:"t", t:"Golden milk — the warm yellow constant of confinement."}],
+    uses:[["Golden Milk","Drinks","golden-milk-card.html"],["Khichdi","Mains","khichdi.html"],["Chicken Bone Broth","Mains","chicken-bone-broth-card.html"]],
+    dose:"½ tsp with a crack of black pepper and a fat.",
+    buyname:"Turmeric powder"},
+  blackpepper:{sub:"the absorption key", claims:[
+      {l:"v", t:"Piperine multiplies curcumin absorption — pepper makes turmeric work."},
+      {l:"n", t:"A crack over iron-rich plates helps the whole meal land."}],
+    uses:[["Golden Milk","Drinks","golden-milk-card.html"],["Khichdi","Mains","khichdi.html"],["Magic Chicken Soup","Mains","magic-chicken-soup.html"]],
+    dose:"Always fresh-cracked, always with turmeric.",
+    buyname:"Black peppercorns"},
+  fennel:{sub:"the milk seed", claims:[
+      {l:"t", t:"Traditionally for milk and gentle digestion — the F in CCF tea."}],
+    uses:[["Fennel Tea","Drinks","fennel-tea-card.html"],["CCF Tea","Drinks","ccf-tea.html"],["Caraway Tea","Drinks","caraway-tea-card.html"]],
+    dose:"1 tsp steeped covered — or chew a pinch after meals.",
+    buyname:"Fennel seeds"},
+  blacktea:{sub:"the chai base", claims:[
+      {l:"n", t:"Tea&rsquo;s tannins blunt iron absorption — enjoy chai between meals, not with your liver or lentils."},
+      {l:"t", t:"The warm backbone of every chai."}],
+    uses:[["Chai Tea","Drinks","chai-tea.html"]],
+    dose:"Brew 3–4 min; take it away from iron-rich meals.",
+    buyname:"Black tea, loose leaf"}
+};
+
+var stateWord = {full:"Plenty", low:"Low", out:"Out"};
+var WALKIN = {"Mustafa Centre":1, "Little India":1, "Chinese medical hall":1};
+var openId = null, expanded = {};
+
+/* ---------- translations (demo-grade — native check before ship) ---------- */
+var LANGS = ["EN","BM","TA","MY"];
+var T = {
+  EN:{states:{full:"Plenty",low:"Low",out:"Out"}, told:"Ma&rsquo;am has been told", allgood:"Every shelf is stocked.",
+      toast:"Ma&rsquo;am has been told.", toastFull:"Updated — thank you.", elseTk:"Something else finished?", ph:"type it here", btn:"Tell Ma&rsquo;am",
+      shelves:["Spice drawer","Potted fresh herbs","Powders & adaptogens","Tea tin","Seeds, nuts & butters","Sweet & blood-builders","Grains, flours & pasta","Fats & oils","Protein & collagen","Ferments & vinegars"]},
+  BM:{states:{full:"Cukup",low:"Sikit",out:"Habis"}, told:"Ma&rsquo;am sudah diberitahu", allgood:"Semua rak cukup.",
+      toast:"Ma&rsquo;am sudah tahu.", toastFull:"Dikemas kini — terima kasih.", elseTk:"Barang lain habis?", ph:"taip nama barang", btn:"Beritahu Ma&rsquo;am",
+      shelves:["Laci rempah","Pokok herba segar","Serbuk & adaptogen","Tin teh","Biji, kacang & mentega","Manisan & penambah darah","Beras, tepung & pasta","Minyak & lemak","Protein & kolagen","Cuka & jeruk"]},
+  TA:{states:{full:"நிறைய",low:"குறைவு",out:"தீர்ந்தது"}, told:"மேடத்திற்கு தெரிவிக்கப்பட்டது", allgood:"எல்லாம் நிறைவாக உள்ளது.",
+      toast:"மேடத்திற்கு சொல்லிவிட்டோம்.", toastFull:"புதுப்பிக்கப்பட்டது — நன்றி.", elseTk:"வேறு ஏதாவது தீர்ந்ததா?", ph:"இங்கே எழுதுங்கள்", btn:"மேடத்திடம் சொல்",
+      shelves:["மசாலா அலமாரி","புதிய மூலிகை செடிகள்","பொடிகள் & மூலிகைகள்","தேநீர் டப்பா","விதைகள் & கொட்டைகள்","இனிப்பு & இரத்த ஊட்டம்","அரிசி, மாவு & பாஸ்தா","எண்ணெய் & நெய்","புரதம் & கொலாஜன்","ஊறல் & வினிகர்"]},
+  MY:{states:{full:"လုံလောက်",low:"နည်း",out:"ကုန်ပြီ"}, told:"မမကို အကြောင်းကြားပြီးပါပြီ", allgood:"အားလုံး ပြည့်စုံပါသည်။",
+      toast:"မမ သိပါပြီ။", toastFull:"ပြင်ဆင်ပြီးပါပြီ — ကျေးဇူးတင်ပါသည်။", elseTk:"တခြားပစ္စည်း ကုန်လား?", ph:"ဒီမှာရိုက်ပါ", btn:"မမကို ပြောမည်",
+      shelves:["ဟင်းခတ်အံဆွဲ","ဟင်းရွက်ပင်စိမ်းများ","အမှုန့်များ","လက်ဖက်ဘူး","အစေ့နှင့် အခွံမာသီး","အချိုနှင့် သွေးဆေး","ဆန်၊ ဂျုံနှင့် ခေါက်ဆွဲ","ဆီနှင့် အဆီများ","ပရိုတိန်းနှင့် ကော်လာဂျင်","ချဉ်ဖတ်နှင့် ရှာလကာရည်"]}
+};
+var lang = "EN";
+
+/* ---------- visuals ---------- */
+function sprigSVG(col, kind, big){
+  var s = big ? 38 : 24;
+  if(kind === "needle"){
+    return '<svg class="sprig" style="width:'+s+'px;height:'+(s+2)+'px" viewBox="0 0 26 28"><path d="M13 26 C13 18 13 9 13 3" stroke="'+col+'" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M13 22 L7.5 18 M13 22 L18.5 18 M13 17 L7.5 13 M13 17 L18.5 13 M13 12 L8.5 8.5 M13 12 L17.5 8.5 M13 7 L10 4.5 M13 7 L16 4.5" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  }
+  return '<svg class="sprig" style="width:'+s+'px;height:'+(s+2)+'px" viewBox="0 0 26 28"><path d="M13 26 C13 18 13 10 13 4" stroke="'+col+'" stroke-width="1.6" fill="none" stroke-linecap="round"/><ellipse cx="8" cy="19" rx="4" ry="2.7" fill="'+col+'" transform="rotate(-28 8 19)"/><ellipse cx="18" cy="19" rx="4" ry="2.7" fill="'+col+'" transform="rotate(28 18 19)"/><ellipse cx="7.6" cy="12" rx="3.7" ry="2.5" fill="'+col+'" transform="rotate(-30 7.6 12)"/><ellipse cx="18.4" cy="12" rx="3.7" ry="2.5" fill="'+col+'" transform="rotate(30 18.4 12)"/><ellipse cx="13" cy="4.6" rx="2.6" ry="3.4" fill="'+col+'"/></svg>';
+}
+function visual(it, big){
+  if(it.sprig) return sprigSVG(it.col, it.sprig, big);
+  return '<span class="j" style="background:'+it.col+'"></span>';
+}
+function stDots(st){ return '<span class="st '+st+'"><i></i><i></i><i></i></span>'; }
+function ccLine(it){
+  if(it.cards === 0) return 'not in a recipe yet';
+  if(it.cards === -1) return 'just added';
+  return 'in <b>'+it.cards+'</b> of 49 recipes';
+}
+
+/* ---------- her door ---------- */
+function rowsFor(shelfIdx, key){
+  return ITEMS.filter(function(it){ return it[key] === shelfIdx; })
+              .sort(function(a,b){ return b.cards - a.cards; });
+}
+function renderShelves1(){
+  var key = door === "heal" ? "heal" : "phys";
+  var defs = door === "heal" ? HEAL : PHYS;
+  var h = "";
+  defs.forEach(function(s, i){
+    var rows = rowsFor(i, key);
+    if(!rows.length) return;
+    var cap = expanded[key+i] ? rows.length : 4;
+    h += '<div class="shelf"><div class="shf"><span class="nm">'+s.nm+'</span><span class="nu">'+s.nu+'</span></div>';
+    rows.slice(0, cap).forEach(function(it){
+      h += '<div class="row" onclick="openSheet(\''+it.id+'\')">'+visual(it)+
+        '<div class="tx"><div class="nm">'+it.nm+'</div>'+
+        '<div class="cc">'+ccLine(it)+'</div></div>'+stDots(it.state)+'</div>';
+    });
+    if(rows.length > cap) h += '<div class="more" onclick="expandShelf(\''+key+i+'\')">+ '+(rows.length-cap)+' more</div>';
+    h += '</div>';
+  });
+  document.getElementById("shelves1").innerHTML = h;
+}
+function expandShelf(k){ expanded[k] = true; renderShelves1(); }
+
+/* ---------- jar detail ---------- */
+function rlink(name, href){ return '<a class="rl" href="'+GH+href+'?v=apo1" target="_blank">'+name+'</a>'; }
+
+function detailHTML(it, ctx){
+  var d = DETAILS[it.id];
+  var h = '<div class="dtop">'+visual(it, true)+'<div><div class="nm">'+it.nm+'</div>'+
+          '<div class="sub">'+(d && d.sub ? d.sub : "from your apothecary")+'</div></div></div>';
+  h += '<div class="dsec">What it does for you</div>';
+  if(d){ d.claims.forEach(function(c){ h += '<div class="cl"><p>'+c.t+LBL[c.l]+'</p></div>'; }); }
+  else { h += '<div class="cl"><p>'+it.hl+'</p></div>'; }
+  if(!(it.cards === 0 || it.cards === -1)){
+    h += '<div class="dsec">In your recipes · '+it.cards+' of 49</div><div class="uses">';
+    if(d && d.uses && d.uses.length){
+      d.uses.forEach(function(u){ h += '<div class="u">'+rlink(u[0], u[2])+'<span>'+u[1]+'</span></div>'; });
+      if(it.cards > d.uses.length) h += '<div class="u">'+rlink("See all "+it.cards+" recipes","index.html")+'</div>';
+    } else {
+      h += '<div class="u">'+rlink("See all "+it.cards+" recipes","index.html")+'</div>';
+    }
+    h += '</div>';
+  }
+  if(d && d.could){
+    h += '<div class="dsec">Could also boost</div><div class="could">';
+    h += d.could.map(function(c, i){ return '<span class="rl" onclick="showBoost(\''+ctx+'\',\''+it.id+'\','+i+')">'+c[0]+'</span>'; }).join(' &middot; ');
+    h += '</div>';
+  }
+  if(d && d.dose){ h += '<div class="dsec">How much</div><div class="dose">'+d.dose+'</div>'; }
+  if(d && d.dnote) h += '<div class="dnote">'+d.dnote+'</div>';
+  h += '<div class="dsec">On the shelf</div><div class="stockrow">';
+  ["full","low","out"].forEach(function(s){
+    h += '<button class="s-'+s+(it.state===s?' on':'')+'" onclick="setState(\''+it.id+'\',\''+s+'\',false)">'+stateWord[s]+'</button>';
+  });
+  h += '</div>';
+  if(it.fresh) h += '<div class="dnote">'+it.fresh+'</div>';
+  var bn = d && d.buyname ? d.buyname : it.nm;
+  h += '<div class="buy"><div class="tk">Find &amp; buy in Singapore</div>';
+  if(it.price === "re-order"){
+    h += '<div class="it"><div class="l"><b>'+bn+'</b><span>your usual brand</span></div><span class="pr">one-tap re-order</span></div>';
+    h += '<div class="sm">kept to the brand you already trust</div>';
+  } else {
+    h += '<div class="it"><div class="l"><b>Organic '+bn.toLowerCase()+'</b><span>'+it.wt+'</span></div><span class="pr">'+it.shop+'<br>'+it.price+'</span></div>';
+    if(d && d.alt) h += '<div class="it"><div class="l"><b>Non-organic</b><span>'+d.alt.wt+(WALKIN[d.alt.shop]?' · walk-in, no link':'')+'</span></div><span class="pr">'+d.alt.shop+'<br>'+d.alt.price+'</span></div>';
+    h += '<div class="sm">organic or everyday — you pick · direct order · re-checked monthly</div>';
+  }
+  h += '</div>';
+  return h;
+}
+
+function openSheet(id){
+  openId = id;
+  var it = ITEMS.find(function(x){ return x.id === id; });
+  document.getElementById("sheetBody").innerHTML = detailHTML(it, "p1");
+  document.getElementById("sheet1").classList.add("open");
+}
+function closeSheet(){ document.getElementById("sheet1").classList.remove("open"); openId = null; hideBoost("p1"); }
+
+/* ---------- boost popover ---------- */
+function showBoost(ctx, itemId, i){
+  var d = DETAILS[itemId]; if(!d || !d.could) return;
+  var c = d.could[i];
+  var it = ITEMS.find(function(x){ return x.id === itemId; });
+  var el = document.getElementById("boost-"+ctx);
+  el.innerHTML = '<div class="tk">Suggested boost — you&rsquo;ll meet this inside the recipe too</div>'+
+    '<div class="bnm">'+c[0]+' + '+it.nm+'</div><p>'+c[2]+'</p>'+
+    '<div class="acts"><a href="'+GH+c[1]+'?v=apo1" target="_blank">Open recipe</a><span onclick="hideBoost(\''+ctx+'\')">Close</span></div>';
+  el.classList.add("show");
+}
+function hideBoost(ctx){ document.getElementById("boost-"+ctx).classList.remove("show"); }
+
+/* ---------- insights ---------- */
+var INSIGHTS = [
+  {k:"Today&rsquo;s insight · under-used", t:"<b>Amla</b> is in just 1 of your 49 recipes — yet it unlocks the iron in the rest. Tap to open.", act:"amla"},
+  {k:"Today&rsquo;s insight · synergy you own", t:"<b>Turmeric + black pepper</b> — together, absorption multiplies. Both are on your shelf.", act:"turmeric"},
+  {k:"Today&rsquo;s insight · running low", t:"<b>Beef gelatin</b> is low and 12 recipes lean on it — it&rsquo;s already on your restock list.", act:"gelatin"},
+  {k:"Today&rsquo;s insight · your fresh herbs", t:"<b>Cuban oregano</b> in your pots is torbangun — Southeast Asia&rsquo;s milk herb. Not in a recipe yet.", act:"cuban"},
+  {k:"Today&rsquo;s insight · freshness", t:"<b>Dried oregano</b> went in 14 months ago — ground herbs fade after a year. Time to refresh.", act:"oregano"}
+];
+var insIdx = 0, insTimer = null;
+function renderInsight(){
+  document.getElementById("insK").innerHTML = INSIGHTS[insIdx].k;
+  document.getElementById("insT").innerHTML = INSIGHTS[insIdx].t;
+  var dots = "";
+  INSIGHTS.forEach(function(_, i){ dots += '<i class="'+(i===insIdx?'on':'')+'" onclick="setIns('+i+');event.stopPropagation()"></i>'; });
+  document.getElementById("insDots").innerHTML = dots;
+}
+function setIns(i){ insIdx = i; renderInsight(); restartIns(); }
+function insAct(){ openSheet(INSIGHTS[insIdx].act); }
+function restartIns(){ clearInterval(insTimer); insTimer = setInterval(function(){ insIdx = (insIdx+1)%INSIGHTS.length; renderInsight(); }, 6000); }
+
+/* ---------- helper door ---------- */
+function renderLangs(){
+  document.getElementById("langs").innerHTML = LANGS.map(function(l){
+    return '<span class="'+(l===lang?'on':'')+'" onclick="setLang(\''+l+'\')">'+l+'</span>';
+  }).join('');
+}
+function setLang(l){ lang = l; renderLangs(); renderShelves3(); renderTold(); renderElse(); }
+
+function renderShelves3(){
+  var t = T[lang];
+  var h = "";
+  PHYS.forEach(function(s, i){
+    var rows = rowsFor(i, "phys");
+    if(!rows.length) return;
+    h += '<div class="shelf"><div class="shf"><span class="nm">'+t.shelves[i]+'</span></div>';
+    rows.forEach(function(it){
+      h += '<div class="hrow">'+visual(it)+'<div class="nm">'+it.nm+'</div><div class="seg3">';
+      ["full","low","out"].forEach(function(st){
+        h += '<button class="s-'+st+(it.state===st?' on':'')+'" onclick="setState(\''+it.id+'\',\''+st+'\',true)">'+t.states[st]+'</button>';
+      });
+      h += '</div></div>';
+    });
+    h += '</div>';
+  });
+  document.getElementById("shelves3").innerHTML = h;
+}
+function renderElse(){
+  var t = T[lang];
+  document.getElementById("elseTk").innerHTML = t.elseTk;
+  document.getElementById("elseIn").placeholder = t.ph;
+  document.getElementById("elseBtn").innerHTML = t.btn;
+}
+function tellElse(){
+  var inp = document.getElementById("elseIn");
+  var v = inp.value.trim();
+  if(!v) return;
+  CUSTOM.push({nm: v.charAt(0).toUpperCase()+v.slice(1)});
+  inp.value = "";
+  renderRestock(); renderTold();
+  toast3(T[lang].toast);
+}
+
+function flagged(){ return ITEMS.filter(function(it){ return it.state !== "full"; }); }
+
+function renderRestock(){
+  var el = document.getElementById("restock");
+  var need = flagged();
+  if(!need.length && !CUSTOM.length){ el.style.display = "none"; return; }
+  el.style.display = "block";
+  var h = '<div class="tk">Restock · from your helper ('+(need.length+CUSTOM.length)+')</div>';
+  need.forEach(function(it){
+    var meta = it.price === "re-order" ? "your usual brand" : (it.wt ? it.wt+" — " : "")+it.shop+" · "+it.price;
+    var walk = it.price !== "re-order" && WALKIN[it.shop];
+    var act = it.price === "re-order" ? "re-order" : (walk ? "walk-in" : "order");
+    h += '<div class="rr" onclick="openSheet(\''+it.id+'\')"><b>'+it.nm+'</b><span>'+meta+'</span><span class="ord"'+(walk?' style="background:none;color:var(--soft);border:1px solid var(--rule)"':'')+'>'+act+'</span></div>';
+  });
+  CUSTOM.forEach(function(c){
+    h += '<div class="rr"><b>'+c.nm+'</b><span>new — finding best price…</span><span class="ord">find</span></div>';
+  });
+  el.innerHTML = h;
+}
+function renderTold(){
+  var t = T[lang];
+  var el = document.getElementById("told");
+  var need = flagged();
+  if(!need.length && !CUSTOM.length){
+    el.innerHTML = '<div class="tk">&#183;</div><div class="items">'+t.allgood+'</div>';
+    return;
+  }
+  var rows = need.map(function(it){ return '<b>'+it.nm+'</b> <i>· '+t.states[it.state].toLowerCase()+'</i>'; });
+  CUSTOM.forEach(function(c){ rows.push('<b>'+c.nm+'</b> <i>· +</i>'); });
+  el.innerHTML = '<div class="tk">'+t.told+'</div><div class="items">'+rows.join('<br>')+'</div>';
+}
+
+var toastTimer3 = null;
+function toast3(msg){
+  var t = document.getElementById("toast");
+  t.innerHTML = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer3);
+  toastTimer3 = setTimeout(function(){ t.classList.remove("show"); }, 2200);
+}
+var toastTimer4 = null;
+function toast4(msg){
+  var t = document.getElementById("toast4");
+  t.innerHTML = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer4);
+  toastTimer4 = setTimeout(function(){ t.classList.remove("show"); }, 2400);
+}
+
+function setState(id, st, fromHelper){
+  var it = ITEMS.find(function(x){ return x.id === id; });
+  it.state = st;
+  renderAll();
+  if(openId === id) document.getElementById("sheetBody").innerHTML = detailHTML(it, "p1");
+  if(fromHelper){
+    toast3(st === "full" ? T[lang].toastFull : T[lang].toast);
+  }
+}
+
+/* ---------- add-flow (phone 4) ---------- */
+var mode = "photo";
+function setMode(m){
+  mode = m;
+  ["Photo","Voice","Type"].forEach(function(n){
+    document.getElementById("m"+n).classList.toggle("on", n.toLowerCase() === m);
+  });
+  renderPane();
+}
+var photoAdded = false, voiceApplied = false;
+function renderPane(){
+  var el = document.getElementById("pane");
+  if(mode === "photo"){
+    el.innerHTML =
+      '<div class="view"><span class="br tl"></span><span class="br tr"></span><span class="br bl"></span><span class="br brc"></span>'+
+      '<span class="det" style="top:30px;left:18px">turmeric</span>'+
+      '<span class="det" style="top:60px;right:22px">star anise</span>'+
+      '<span class="det new" style="top:100px;left:34px">cream of tartar</span>'+
+      '<span class="det" style="bottom:48px;right:30px">cardamom</span>'+
+      '<span class="det" style="bottom:22px;left:22px">fennel</span></div>'+
+      '<div class="scanls">'+
+      '<div class="u">Turmeric · Star anise · Cardamom · Fennel<span>already in</span></div>'+
+      '<div class="u">Cream of tartar<span class="new">new jar found</span></div>'+
+      '</div>'+
+      '<div class="dnote" style="margin-top:8px">Best-before dates are read off the labels as you scan — freshness tracked automatically, nothing to type.</div>'+
+      (photoAdded ? '<div class="dnote" style="text-align:center;margin-top:12px">Added — it&rsquo;s on your spice shelf now.</div>'
+                  : '<button class="gobtn" onclick="photoAdd()">Add 1 new jar</button>');
+  } else if(mode === "voice"){
+    el.innerHTML =
+      '<div class="mic"></div>'+
+      '<div class="quote">&ldquo;Ghee is finished... I bought new sumac, and two bags of red lentils.&rdquo;</div>'+
+      '<div class="parse">'+
+      '<div class="u"><b>Ghee</b><span class="o">→ out</span></div>'+
+      '<div class="u"><b>Sumac</b><span class="p">→ restocked</span></div>'+
+      '<div class="u"><b>Lentils & dal</b><span class="p">→ restocked</span></div>'+
+      '</div>'+
+      (voiceApplied ? '<div class="dnote" style="text-align:center;margin-top:12px">Applied — ghee is on the restock list.</div>'
+                    : '<button class="gobtn" onclick="voiceApply()">Apply 3 updates</button>');
+  } else {
+    el.innerHTML =
+      '<div class="dsec" style="margin-top:4px">Type it in</div>'+
+      '<div class="elsebox" style="margin-top:2px;border:0;background:transparent;padding:0"><div class="frm">'+
+      '<input id="typeIn" placeholder="e.g. barley, dried figs…"><button onclick="typeAdd()">Add</button></div></div>'+
+      '<div class="dnote" style="margin-top:10px">New jars land on the right shelf automatically — with their story, recipes and a Singapore buy link filled in.</div>';
+  }
+}
+function photoAdd(){
+  if(!photoAdded){
+    photoAdded = true;
+    ITEMS.push({id:"cream", nm:"Cream of tartar", phys:0, heal:2, cards:-1, col:"#efe9dc", hl:"Potassium in a pinch — the adrenal cocktail&rsquo;s quiet third.", shop:"RedMart", price:"≈S$5", wt:"100 g", state:"full"});
+    renderAll(); renderPane();
+    toast4("1 jar added to your Apothecary.");
+  }
+}
+function voiceApply(){
+  if(!voiceApplied){
+    voiceApplied = true;
+    ITEMS.find(function(x){ return x.id === "ghee"; }).state = "out";
+    ITEMS.find(function(x){ return x.id === "sumac"; }).state = "full";
+    ITEMS.find(function(x){ return x.id === "lentils"; }).state = "full";
+    renderAll(); renderPane();
+    toast4("3 updates — ghee joined the restock list.");
+  }
+}
+var typeN = 0;
+function typeAdd(){
+  var inp = document.getElementById("typeIn");
+  var v = inp.value.trim();
+  if(!v) return;
+  typeN++;
+  ITEMS.push({id:"custom"+typeN, nm:v.charAt(0).toUpperCase()+v.slice(1), phys:6, heal:2, cards:-1, col:"#d8c9a6", hl:"Just added — story and recipes coming.", shop:"RedMart", price:"…", wt:"", state:"full"});
+  inp.value = "";
+  renderAll();
+  toast4("Added — shelf, story and buy link on the way.");
+}
+
+/* ---------- boot ---------- */
+var door = "phys";
+document.getElementById("doorPhys").onclick = function(){ door="phys"; this.classList.add("on"); document.getElementById("doorHeal").classList.remove("on"); renderShelves1(); };
+document.getElementById("doorHeal").onclick = function(){ door="heal"; this.classList.add("on"); document.getElementById("doorPhys").classList.remove("on"); renderShelves1(); };
+
+function renderAll(){
+  renderShelves1(); renderShelves3(); renderRestock(); renderTold();
+  document.getElementById("amlaBody").innerHTML = detailHTML(ITEMS.find(function(x){ return x.id === "amla"; }), "p2");
+}
+renderLangs(); renderElse(); renderAll(); renderInsight(); restartIns(); renderPane();
+</script>
+</body></html>

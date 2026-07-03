@@ -1,0 +1,290 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>First setup — dates, done the gentle way</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Marcellus&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--paper:#f5efe0;--paper2:#fcf8ef;--ink:#3a3020;--ink2:#6e6250;--soft:#9a8d73;
+    --sage:#7c8a5c;--sage2:#5d6a42;--lav:#9a8ab4;--amber:#c39a45;--amber2:#a67c2c;--rust:#b0623a;--rule:#dccfb2;--line:#ece2cd}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e3d9c2;display:flex;justify-content:center;align-items:flex-start;gap:28px;flex-wrap:wrap;padding:46px 18px 80px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+
+  .stepwrap{display:flex;flex-direction:column;align-items:center;width:330px}
+  .cap{display:flex;align-items:baseline;gap:8px;margin-bottom:9px;align-self:flex-start;width:100%}
+  .cap .no{font-family:'Marcellus',serif;font-size:10px;color:#fff;background:var(--amber);width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .cap .tt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:19px;color:#46371f}
+  .cap .ar{margin-left:auto;color:var(--soft);font-style:italic;font-size:12px}
+
+  .ph{width:330px;height:702px;border-radius:42px;background:#251e13;padding:8px;box-shadow:0 26px 60px rgba(55,42,20,.3)}
+  .scr{width:100%;height:100%;border-radius:35px;overflow:hidden;position:relative;background:var(--paper)}
+  .scr .bg{position:absolute;inset:0;background:radial-gradient(130% 24% at 50% 0%,#f6e8c7,rgba(246,232,199,0)),var(--paper)}
+  .scr:before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px);z-index:1}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:114px;height:21px;background:#251e13;border-radius:0 0 14px 14px;z-index:6}
+  .in{position:absolute;inset:0;z-index:2;padding:44px 20px 16px;display:flex;flex-direction:column;overflow:hidden}
+  .kj{font-family:'Pinyon Script',cursive;font-size:18px;color:#7a4f2c;text-align:center}
+  .kick{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber2);text-align:center;margin-top:3px}
+  .h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:25px;color:#33291a;text-align:center;line-height:1.05;margin-top:2px}
+
+  .j{position:relative;width:23px;height:22px;border-radius:4px 4px 9px 9px;flex:none;border:1px solid rgba(58,48,32,.18);box-shadow:inset 0 -3px 0 rgba(0,0,0,.08)}
+  .j:before{content:"";position:absolute;top:-5px;left:50%;transform:translateX(-50%);width:14px;height:4px;border-radius:2px;background:rgba(58,48,32,.5)}
+  .sprig{width:23px;height:25px;flex:none}
+
+  .reassure{margin-top:12px;border:1px solid #e6d3a4;border-radius:13px;background:rgba(195,154,71,.11);padding:12px 14px;flex:none}
+  .reassure .qi{font-family:'Pinyon Script',cursive;font-size:22px;color:#7a4f2c;line-height:.9}
+  .reassure p{font-size:13px;color:#46371f;line-height:1.5;margin-top:2px}
+  .reassure p b{color:#7a4f2c}
+
+  .sumline{display:flex;gap:6px;margin-top:11px;flex:none}
+  .sumline .chip{flex:1;text-align:center;border:1px solid var(--rule);border-radius:10px;padding:7px 3px;background:var(--paper2)}
+  .sumline .chip b{font-family:'Cormorant Garamond',serif;font-size:19px;color:#46371f;display:block;line-height:1}
+  .sumline .chip span{font-family:'Marcellus',serif;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+
+  .list{flex:1;overflow-y:auto;margin-top:11px}
+  .lbl-sec{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin:8px 0 2px}
+  .row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+  .row .tx{flex:1;min-width:0}
+  .row .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14.5px;color:#46371f;line-height:1.05}
+  .row .sub{font-size:10.5px;color:var(--soft);margin-top:1px}
+  .conf{text-align:right;flex:none}
+  .conf b{font-size:11.5px;font-weight:500;line-height:1.1;display:block}
+  .conf small{font-family:'Marcellus',serif;font-size:7px;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:1px}
+  .conf.est b{color:var(--soft);font-style:italic} .conf.est small{color:var(--soft)}
+  .conf.known b{color:var(--sage2)} .conf.known small{color:var(--sage2)}
+
+  .offer{margin-top:9px;border:1px solid #d9b98a;border-radius:13px;background:rgba(176,98,58,.06);padding:12px 14px;flex:none}
+  .offer .tk{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--rust);margin-bottom:4px}
+  .offer p{font-size:12px;color:#46371f;line-height:1.45}
+  .offer p b{color:#7a4f2c}
+  .offer .btns{display:flex;gap:8px;margin-top:9px}
+  .offer .btns button{flex:1;border:0;font-family:'Marcellus',serif;font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:9px;border-radius:10px;cursor:pointer}
+  .offer .ask{background:linear-gradient(#caa14b,#a87c2c);color:#fdf6e7}
+  .offer .no{background:transparent;border:1px solid var(--rule);color:var(--ink2)}
+  .offer.sent{background:rgba(124,138,92,.1);border-color:var(--sage)}
+  .offer.sent .tk{color:var(--sage2)}
+
+  /* helper phone */
+  .langs{display:flex;gap:5px;justify-content:center;margin-top:6px}
+  .langs span{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.1em;color:var(--ink2);border:1px solid var(--rule);border-radius:6px;padding:2px 7px}
+  .langs span.on{background:#46371f;color:#f3e8d0;border-color:#46371f}
+  .prog{display:flex;align-items:center;gap:8px;margin-top:10px;flex:none}
+  .prog .bar{flex:1;height:6px;border-radius:4px;background:var(--line);overflow:hidden}
+  .prog .bar i{display:block;height:100%;background:linear-gradient(90deg,#8aa05e,#6b7d44);transition:width .35s ease}
+  .prog .n{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--sage2);flex:none}
+  .hlist{flex:1;overflow-y:auto;margin-top:10px}
+  .hrow{padding:9px 0;border-bottom:1px solid var(--line)}
+  .hrow .top{display:flex;align-items:center;gap:9px}
+  .hrow .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14.5px;color:#46371f;flex:1;line-height:1.05}
+  .hrow .got{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.05em;text-transform:uppercase;color:var(--sage2);flex:none}
+  .ctrl{display:flex;gap:5px;margin-top:7px;padding-left:33px}
+  .ctrl button{flex:1;border:1px solid var(--rule);background:var(--paper);font-family:'Marcellus',serif;font-size:8px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2);padding:7px 3px;border-radius:8px;cursor:pointer;line-height:1.2}
+  .ctrl button.scan{flex:1.4;color:var(--amber2);border-color:#e0c485}
+  .ctrl button.on{background:rgba(124,138,92,.16);border-color:var(--sage);color:var(--sage2)}
+  .ctrl.herb button.on{background:rgba(124,138,92,.16);border-color:var(--sage);color:var(--sage2)}
+  .done-tag{padding-left:33px;margin-top:5px;font-size:11px;color:var(--sage2)}
+  .done-tag b{font-weight:500}
+  .send{margin-top:9px;border:0;width:100%;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:13px;border-radius:12px;cursor:pointer;flex:none;background:var(--line);color:var(--soft)}
+  .send.ready{background:linear-gradient(#caa14b,#a87c2c);color:#fdf6e7}
+
+  /* phone 3 */
+  .tally{margin-top:12px;border:1px solid var(--rule);border-radius:13px;background:var(--paper2);padding:12px 14px;flex:none}
+  .tally .tk{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--sage2);display:flex;justify-content:space-between}
+  .tally .bar{height:8px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:7px;position:relative}
+  .tally .bar i{display:block;height:100%;background:linear-gradient(90deg,#8aa05e,#6b7d44)}
+  .tally .bar em{position:absolute;top:0;bottom:0;border-left:2px dashed rgba(122,79,44,.5)}
+  .tally .sub{font-size:11px;color:var(--ink2);margin-top:6px;font-style:italic;line-height:1.4}
+
+  .exwrap{flex:1;overflow-y:auto;margin-top:11px}
+  .ex{border:1px solid var(--line);border-radius:13px;padding:11px 13px;margin-bottom:10px;background:var(--paper2)}
+  .ex .eh{display:flex;align-items:center;gap:9px}
+  .ex .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;color:#46371f;flex:1;line-height:1}
+  .ex .tag{font-family:'Marcellus',serif;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:6px;flex:none}
+  .tag.known{background:rgba(124,138,92,.16);color:var(--sage2)}
+  .tag.est{background:rgba(154,138,120,.16);color:var(--soft)}
+  .ex p{font-size:12px;line-height:1.45;margin-top:7px;color:var(--ink)}
+  .ex.alert{border-color:#e0b57a;background:rgba(195,154,71,.09)}
+  .ex .rlink{display:inline-block;margin-top:8px;font-family:'Marcellus',serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fdf6e7;background:linear-gradient(#caa14b,#a87c2c);padding:8px 12px;border-radius:9px;cursor:pointer}
+  .ex .quiet{font-size:11px;color:var(--soft);font-style:italic;margin-top:6px}
+  .principle{margin-top:4px;font-size:12px;color:var(--ink2);font-style:italic;text-align:center;line-height:1.5;flex:none;padding:0 6px}
+  .principle b{color:#7a4f2c;font-style:normal}
+
+  .toast{position:absolute;left:16px;right:16px;bottom:80px;background:#3b2f1c;color:#f3e8d0;border-radius:12px;padding:10px 13px;font-size:12.5px;line-height:1.4;z-index:9;opacity:0;transform:translateY(8px);transition:all .3s ease;pointer-events:none;text-align:center}
+  .toast.show{opacity:1;transform:translateY(0)}
+  .toast b{color:#e8c983}
+
+  .note{max-width:300px;align-self:center}
+  .note h3{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:#33291a;margin-bottom:4px}
+  .note .s{font-size:13px;color:var(--ink2);margin-bottom:16px;line-height:1.5}
+  .note .it{border-left:2px solid var(--sage);padding-left:12px;margin-bottom:14px}
+  .note .it h4{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--sage2);margin-bottom:3px}
+  .note .it p{font-size:12.5px;color:var(--ink2);line-height:1.5}
+  .note .it b{color:#46371f}
+</style></head>
+<body>
+
+<!-- 1 · first upload → estimate landing -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">1</span><span class="tt">Just get it all in</span><span class="ar">the gentle default</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="kj">first setup</div>
+    <div class="h1">It&rsquo;s all in.</div>
+    <div class="reassure">
+      <span class="qi">&ldquo;</span>
+      <p>Everything&rsquo;s in — <b>I&rsquo;ve estimated ages for now</b> and I&rsquo;ll sharpen up every time you restock. I&rsquo;ll only warn you about something turning <b>once I&rsquo;m actually sure.</b></p>
+    </div>
+    <div class="sumline">
+      <div class="chip"><b>34</b><span>items in</span></div>
+      <div class="chip"><b>8</b><span>dates on labels</span></div>
+      <div class="chip"><b>26</b><span>estimated</span></div>
+    </div>
+    <div class="list">
+      <div class="lbl-sec">Sealed — date read for you</div>
+      <div class="row"><span class="j" style="background:#d1c09b"></span><div class="tx"><div class="nm">Collagen (Needed)</div><div class="sub">Protein &amp; collagen</div></div><div class="conf known"><b>best before Aug &rsquo;26</b><small>✓ from label</small></div></div>
+      <div class="row"><span class="j" style="background:#c99e52"></span><div class="tx"><div class="nm">Beef gelatin</div><div class="sub">Protein &amp; collagen</div></div><div class="conf known"><b>best before 2027</b><small>✓ from label</small></div></div>
+      <div class="lbl-sec">Estimated — quiet until I&rsquo;m sure</div>
+      <div class="row"><span class="j" style="background:#d4a125"></span><div class="tx"><div class="nm">Turmeric</div><div class="sub">Spice drawer</div></div><div class="conf est"><b>~1 yr</b><small>estimate</small></div></div>
+      <div class="row"><span class="j" style="background:#a3af54"></span><div class="tx"><div class="nm">Amla</div><div class="sub">Powders &amp; adaptogens</div></div><div class="conf est"><b>~6 mo</b><small>estimate</small></div></div>
+      <div class="row"><span class="j" style="background:#e3d9be"></span><div class="tx"><div class="nm">Rice</div><div class="sub">Grains, flours &amp; pasta</div></div><div class="conf est"><b>~3 mo</b><small>estimate</small></div></div>
+    </div>
+    <div class="offer" id="offer">
+      <div class="tk">want dates spot-on?</div>
+      <p>Just the <b>8 things that actually spoil</b> — oils, ghee, tahini, fresh herbs. Ask your helper to check them; everything else I&rsquo;ll happily estimate.</p>
+      <div class="btns">
+        <button class="ask" onclick="askHelper()">Ask my helper</button>
+        <button class="no" onclick="notNow()">Not now</button>
+      </div>
+    </div>
+    <div class="toast" id="toast1"></div>
+  </div></div></div>
+</div>
+
+<!-- 2 · helper's scoped date pass -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">2</span><span class="tt">Your helper&rsquo;s date check</span><span class="ar">only what spoils</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="kj">from Ma&rsquo;am</div>
+    <div class="h1">Just the fresh things</div>
+    <div class="langs"><span class="on">EN</span><span>BM</span><span>TA</span><span>MY</span></div>
+    <div class="prog"><div class="bar"><i id="pbar" style="width:0%"></i></div><span class="n" id="pn">0 of 8</span></div>
+    <div class="hlist" id="hlist"></div>
+    <button class="send" id="send" onclick="sendBack()">Send to Ma&rsquo;am</button>
+    <div class="toast" id="toast2"></div>
+  </div></div></div>
+</div>
+
+<!-- 3 · it sharpens itself -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">3</span><span class="tt">It sharpens itself</span><span class="ar">a few weeks on</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="kj">three weeks later</div>
+    <div class="h1">It sharpened itself</div>
+    <div class="tally">
+      <div class="tk"><span>Dates I&rsquo;m sure of</span><span>22 of 34</span></div>
+      <div class="bar"><i style="width:65%"></i><em style="left:24%"></em></div>
+      <div class="sub">Started at 8 — climbed as the helper checked the spoilers and you restocked. No data-entry session, ever.</div>
+    </div>
+    <div class="exwrap">
+      <div class="ex alert">
+        <div class="eh"><span class="j" style="background:#e2b954"></span><span class="nm">Ghee</span><span class="tag known">known · helper</span></div>
+        <p>Opened ~5 weeks ago — it&rsquo;s got about <b>a week of peak freshness left.</b> Tonight&rsquo;s Golden Milk uses it up.</p>
+        <span class="rlink" onclick="window.open('https://bobroviciuteilma-cell.github.io/postpartum-kitchen/cook-cards/golden-milk-card.html?v=apo','_blank')">Open recipe</span>
+      </div>
+      <div class="ex">
+        <div class="eh"><span class="j" style="background:#d4a125"></span><span class="nm">Turmeric</span><span class="tag est">still an estimate</span></div>
+        <p class="quiet">~13 months old (estimate) · a gentle &ldquo;refresh when you can&rdquo; — never an alarm, because I&rsquo;m not certain. Exact dates wouldn&rsquo;t change a thing here.</p>
+      </div>
+      <div class="ex">
+        <div class="eh"><span class="j" style="background:#bc4a2c"></span><span class="nm">Goji berries</span><span class="tag known">known · restock</span></div>
+        <p>You restocked last week — so I upgraded it to a <b>real date</b> on my own. Fresh, good for about a year.</p>
+      </div>
+    </div>
+    <div class="principle">I never show a date I don&rsquo;t have — and I <b>never cry wolf on an estimate.</b></div>
+  </div></div></div>
+</div>
+
+<div class="note">
+  <h3>Why this lands</h3>
+  <div class="s">The honest answer to &ldquo;how would you know the dates?&rdquo; — mostly you don&rsquo;t at first, so the design says so instead of faking it.</div>
+  <div class="it"><h4>Effortless by default</h4><p>She just gets everything in. No date field at the one moment it&rsquo;d be most annoying — a 40-item dump. Items land as <b>&ldquo;on hand · estimated,&rdquo;</b> and freshness alerts stay <b>silent</b> until a real signal arrives.</p></div>
+  <div class="it"><h4>Precision is a delegation</h4><p>&ldquo;Ask my helper&rdquo; sends a list of <b>only the ~8 spoilers</b> — where a real date saves a jar. Not a 40-item marathon. The helper reads labels where they exist, eyeballs the herbs where no date does.</p></div>
+  <div class="it"><h4>No false precision</h4><p>Sealed goods show the scanned best-before; decanted Kilner jars stay honest estimates. We never claim &ldquo;100%&rdquo; — the ceiling is <b>&ldquo;exact where the label still shows it.&rdquo;</b></p></div>
+  <div class="it"><h4>It self-corrects</h4><p>Every restock upgrades an estimate to a known date — so the pantry sharpens over a few weeks with zero effort. Confidence is visible and climbing.</p></div>
+  <div class="it"><h4>The alert earns its keep</h4><p>Only known-date spoilers trigger a warning — and it&rsquo;s framed as <b>a recipe to cook tonight</b>, not guilt. Freshness becomes a reason to cook, and quietly saves the money.</p></div>
+</div>
+
+<script>
+/* ---------- phone 1 ---------- */
+function askHelper(){
+  var o = document.getElementById("offer");
+  o.classList.add("sent");
+  o.innerHTML = '<div class="tk">sent to your helper</div><p>I&rsquo;ve asked her to check the 8 spoilers. You&rsquo;ll get a note when she&rsquo;s done — <b>nothing for you to do.</b></p>';
+  toast("toast1", "Sent — your helper has the list. →");
+}
+function notNow(){
+  var o = document.getElementById("offer");
+  o.classList.add("sent");
+  o.innerHTML = '<div class="tk">no problem</div><p>I&rsquo;ll estimate for now and sharpen up as you restock. Turn this on <b>any time</b> from a jar.</p>';
+  toast("toast1", "Easy mode it is.");
+}
+
+/* ---------- phone 2 ---------- */
+var SPOIL = [
+  {id:"ghee", nm:"Ghee", kind:"oil", col:"#e2b954"},
+  {id:"evoo", nm:"Olive oil, extra-virgin", kind:"oil", col:"#a0a249"},
+  {id:"tahini", nm:"Tahini", kind:"oil", col:"#c9b489"},
+  {id:"coco", nm:"Coconut butter", kind:"oil", col:"#dfd3ba"},
+  {id:"rosemary", nm:"Rosemary", kind:"herb", col:"#5f7a52", sprig:"needle"},
+  {id:"thyme", nm:"Thyme", kind:"herb", col:"#7a8f5e", sprig:"needle"},
+  {id:"mint", nm:"Mint", kind:"herb", col:"#4e8a4e", sprig:"round"},
+  {id:"cuban", nm:"Cuban oregano", kind:"herb", col:"#6f9a5c", sprig:"round"}
+];
+var HERB_OPTS = ["Fresh","Ageing","Replant"];
+var state2 = {};
+
+function sprigSVG(col, kind){
+  if(kind === "needle") return '<svg class="sprig" viewBox="0 0 26 28"><path d="M13 26 C13 18 13 9 13 3" stroke="'+col+'" stroke-width="1.7" fill="none" stroke-linecap="round"/><path d="M13 22 L7.5 18 M13 22 L18.5 18 M13 17 L7.5 13 M13 17 L18.5 13 M13 12 L8.5 8.5 M13 12 L17.5 8.5 M13 7 L10 4.5 M13 7 L16 4.5" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  return '<svg class="sprig" viewBox="0 0 26 28"><path d="M13 26 C13 18 13 10 13 4" stroke="'+col+'" stroke-width="1.6" fill="none" stroke-linecap="round"/><ellipse cx="8" cy="19" rx="4" ry="2.7" fill="'+col+'" transform="rotate(-28 8 19)"/><ellipse cx="18" cy="19" rx="4" ry="2.7" fill="'+col+'" transform="rotate(28 18 19)"/><ellipse cx="7.6" cy="12" rx="3.7" ry="2.5" fill="'+col+'" transform="rotate(-30 7.6 12)"/><ellipse cx="18.4" cy="12" rx="3.7" ry="2.5" fill="'+col+'" transform="rotate(30 18.4 12)"/><ellipse cx="13" cy="4.6" rx="2.6" ry="3.4" fill="'+col+'"/></svg>';
+}
+function vis(it){ return it.sprig ? sprigSVG(it.col, it.sprig) : '<span class="j" style="background:'+it.col+'"></span>'; }
+
+function renderHelper(){
+  var h = "";
+  SPOIL.forEach(function(it){
+    var s = state2[it.id];
+    h += '<div class="hrow"><div class="top">'+vis(it)+'<div class="nm">'+it.nm+'</div>'+(s?'<span class="got">✓ got it</span>':'')+'</div>';
+    if(s){
+      h += '<div class="done-tag">'+s.t+'</div>';
+    } else if(it.kind === "oil"){
+      h += '<div class="ctrl"><button class="scan" onclick="scanOil(\''+it.id+'\')">Scan best-before</button><button onclick="fuzzyOil(\''+it.id+'\')">Opened a while ago</button></div>';
+    } else {
+      h += '<div class="ctrl herb">'+HERB_OPTS.map(function(o){ return '<button onclick="setHerb(\''+it.id+'\',\''+o+'\')">'+o+'</button>'; }).join('')+'</div>';
+    }
+    h += '</div>';
+  });
+  document.getElementById("hlist").innerHTML = h;
+  var done = Object.keys(state2).length;
+  document.getElementById("pbar").style.width = (done/8*100)+"%";
+  document.getElementById("pn").textContent = done+" of 8";
+  document.getElementById("send").classList.toggle("ready", done === 8);
+}
+var OILDATE = {ghee:"Jun 2026", evoo:"Mar 2026", tahini:"Nov 2025", coco:"Feb 2026"};
+function scanOil(id){ state2[id] = {t:'<b>Best before '+OILDATE[id]+'</b> — read off the bottle', exact:true}; renderHelper(); }
+function fuzzyOil(id){ state2[id] = {t:'Opened a while ago — I&rsquo;ll estimate from there', exact:false}; renderHelper(); }
+function setHerb(id, v){ state2[id] = {t:'Looks <b>'+v.toLowerCase()+'</b>', exact:false}; renderHelper(); }
+function sendBack(){
+  if(Object.keys(state2).length < 8){ toast("toast2","Tap through all 8 first — takes 20 seconds."); return; }
+  var exact = 0; for(var k in state2){ if(state2[k].exact) exact++; }
+  toast("toast2","Sent to Ma&rsquo;am — 8 checked, "+exact+" exact from labels. 🌿");
+}
+
+/* ---------- shared ---------- */
+var tt = {};
+function toast(id, msg){
+  var t = document.getElementById(id);
+  t.innerHTML = msg; t.classList.add("show");
+  clearTimeout(tt[id]);
+  tt[id] = setTimeout(function(){ t.classList.remove("show"); }, 2400);
+}
+
+renderHelper();
+</script>
+</body></html>
