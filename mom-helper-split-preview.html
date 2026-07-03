@@ -51,19 +51,19 @@
   .sprig{display:block; margin:0 auto 13px;}
   .brandmark{font-family:'Pinyon Script',cursive; font-size:38px; color:var(--sage-d); line-height:1;}
   .brandtag{font-family:'Marcellus',serif; letter-spacing:.24em; text-transform:uppercase; font-size:10px; color:var(--amber); margin-top:6px;}
+  .brandeyebrow{font-family:'Marcellus',serif; letter-spacing:.16em; text-transform:uppercase; font-size:10.5px; color:var(--ink2); margin-top:5px;}
+  .brandeyebrow .dot{color:var(--amber);}
   .brandrule{width:66px; height:1px; background:var(--line); margin:10px auto 2px;}
   .head{padding:10px 28px 4px; display:flex; gap:20px; align-items:center;}
   .head .htext{flex:1; min-width:0;}
-  .eyebrow{font-family:'Marcellus',serif; letter-spacing:.14em; text-transform:uppercase; font-size:11px; color:var(--sage-d);}
-  .eyebrow .dot{color:var(--amber);}
   .card h1{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:36px; line-height:1.04; color:var(--sage-d); margin:5px 0 4px;}
   .sub{font-style:italic; font-size:16.5px; color:var(--ink2); line-height:1.35;}
   .hero{width:148px; height:148px; border-radius:13px; object-fit:cover; flex:none; box-shadow:0 10px 24px rgba(60,50,30,.24);}
-  .meta{display:flex; gap:8px; padding:10px 28px 0; flex-wrap:wrap;}
-  .pill{background:var(--sage-soft); color:var(--sage-d); border-radius:20px; padding:6px 13px; font-size:13.5px;
-        font-family:'Marcellus',serif; letter-spacing:.02em;}
-  .pill b{font-weight:400;}
-  .pill.her{background:var(--amber-soft); color:#7c531f;}
+  .meta{display:flex; flex-direction:column; gap:5px; padding:12px 28px 0;}
+  .metarow{font-size:15.5px; color:var(--ink); line-height:1.35;}
+  .metarow b{font-family:'Marcellus',serif; font-weight:400; letter-spacing:.09em; text-transform:uppercase; font-size:11px; margin-right:8px;}
+  .metarow.time b{color:var(--amber);}
+  .metarow.keeps b{color:var(--sage-d);}
   .whenband{margin:13px 28px 0; background:var(--sage-soft); border-radius:10px; padding:11px 16px; font-size:15.5px; color:var(--sage-d); line-height:1.35;}
   .whenband b{font-family:'Marcellus',serif; letter-spacing:.09em; text-transform:uppercase; font-size:11px; color:var(--amber); margin-right:8px;}
   .body-pad{padding:16px 28px 6px;}
@@ -76,16 +76,16 @@
        padding:2px 9px; border-radius:6px; vertical-align:middle; margin-left:4px; transform:translateY(-1px); border:1px solid transparent;}
   button.tag{cursor:pointer; min-height:22px;}
   button.tag:hover{border-color:currentColor;}
-  .tag.v{background:#dfeada; color:#3f6a45;}
+  .tag.rb{background:#dfeada; color:#3f6a45;}
   .tag.t{background:#efe2cb; color:#8a6326;}
-  .tag.f{background:#e3e8ec; color:#48596a;}
   .tag.b{background:#f3dee5; color:#8d3a5c;}
   .whykey{font-size:12.5px; color:#a59c8a; font-style:italic; margin-top:6px;}
 
   /* control layer */
   .controls{margin-top:16px; background:#fff; border:1.5px solid var(--sage); border-radius:14px; padding:16px 18px 14px;
             box-shadow:0 8px 22px rgba(79,106,84,.10);}
-  .controls .blockh{color:var(--sage-d);}
+  .controls .blockh{color:var(--sage-d); margin-bottom:3px;}
+  .panel-sub{font-size:14px; color:var(--ink2); font-style:italic; margin-bottom:6px;}
   .ctl-row{padding:11px 0; border-bottom:1px dashed var(--line);}
   .ctl-row.last{border-bottom:none; padding-bottom:2px;}
   .ctl-lab{font-family:'Marcellus',serif; letter-spacing:.08em; text-transform:uppercase; font-size:11.5px; color:var(--ink2); margin-bottom:8px;}
@@ -109,13 +109,16 @@
   .dial button:hover{background:var(--sage-soft);}
   .dial b{font-family:'Marcellus',serif; font-weight:400; font-size:22px; color:var(--sage-d); min-width:96px; text-align:center;}
   .ctl-hint{font-size:14px; color:var(--ink2); font-style:italic; margin-top:7px; line-height:1.4;}
-  .verdicts{display:flex; gap:8px;}
-  .vbtn{flex:1; min-height:48px; border:1px solid var(--line); border-radius:12px; background:var(--paper2);
-        font-family:'Marcellus',serif; font-size:14px; letter-spacing:.05em; color:var(--ink2);}
-  .vbtn:hover{border-color:var(--sage);}
-  .vbtn.on{background:var(--sage-d); border-color:var(--sage-d); color:#fff;}
-  .memline{margin-top:9px; font-size:14.5px; color:var(--sage-d); font-style:italic;}
-  .boostline{font-size:15.5px; line-height:1.45;}
+  .ctl-sub{font-size:14px; color:var(--ink2); font-style:italic; margin:-2px 0 9px;}
+  .tickrow{display:flex; flex-wrap:wrap; gap:8px;}
+  .tick{border:1.5px solid var(--sage); border-radius:999px; background:var(--paper2); color:var(--ink);
+        font-size:14.5px; line-height:1.2; padding:9px 15px; min-height:44px; text-align:left;
+        display:inline-flex; align-items:center; gap:9px; transition:background .2s, border-color .2s;}
+  .tick:hover{border-color:var(--sage-d);}
+  .tick .tin{display:none; font-family:'Marcellus',serif; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+             color:#fff; background:var(--sage-d); border-radius:7px; padding:2px 8px;}
+  .tick.on{background:var(--sage-soft); border-color:var(--sage-d);}
+  .tick.on .tin{display:inline-block;}
 
   /* ingredients + method */
   .ings-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 22px;}
@@ -124,9 +127,6 @@
   .ing .q{font-family:'Marcellus',serif; font-size:13px; color:var(--sage-d); width:82px; flex:none; line-height:1.25;}
   .ing .n{font-size:15px; line-height:1.25;}
   .ing .n i{font-size:12.5px; color:#a59c8a; font-style:normal; display:block;}
-  .servewith{margin-top:12px; background:var(--paper2); border:1px solid var(--line); border-radius:12px; padding:12px 15px;
-             font-size:14.5px; color:var(--ink2); line-height:1.45;}
-  .servewith b{color:var(--sage-d); font-weight:500;}
   .step{display:flex; gap:12px; margin-bottom:14px; align-items:flex-start;}
   .step .img{width:82px; height:82px; border-radius:11px; object-fit:cover; flex:none; box-shadow:0 4px 12px rgba(60,50,30,.16);}
   .step .n{width:24px; height:24px; border-radius:50%; background:var(--sage-d); color:#fff; flex:none;
@@ -134,20 +134,12 @@
   .step p{font-size:15.5px; line-height:1.36;}
   .step .ic{font-size:12px; color:var(--amber); font-family:'Marcellus',serif; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:2px;}
   .stepnote{margin-top:4px; background:linear-gradient(#fbf3e4,#f7ecd6); border:1px solid var(--amber-soft); border-radius:12px; padding:13px 16px;}
-  .stepnote h4{font-family:'Marcellus',serif; letter-spacing:.1em; text-transform:uppercase; font-size:11.5px; color:#7c531f; margin-bottom:3px;}
   .stepnote p{font-size:15.5px; line-height:1.4;}
-  .foot{display:grid; grid-template-columns:1fr 1fr; gap:18px; padding:14px 28px 8px; align-items:stretch;}
+  .foot{display:grid; grid-template-columns:1fr; gap:18px; padding:14px 28px 8px; align-items:stretch;}
   .nutri{background:var(--paper2); border:1px solid var(--line); border-radius:12px; padding:12px 16px;}
   .nutri .row{display:flex; gap:10px; border-bottom:1px dotted var(--line); padding:5px 0; font-size:14.5px; line-height:1.35;}
   .nutri .row:last-child{border-bottom:none;}
   .nutri .row b{font-family:'Marcellus',serif; font-weight:400; color:var(--sage-d); flex:none; width:58px;}
-  .lineage{font-size:13.5px; line-height:1.42; color:var(--ink2);}
-  .lineage .chip{display:inline-block; background:var(--sage-soft); color:var(--sage-d); font-family:'Marcellus',serif;
-                 font-size:11px; letter-spacing:.06em; padding:2px 9px; border-radius:7px; margin-bottom:6px;}
-  .cattabs{display:flex; margin-top:12px;}
-  .cattabs div{flex:1; text-align:center; padding:12px 4px; font-family:'Marcellus',serif; letter-spacing:.04em; font-size:11.5px; color:#fff;}
-  .ct1{background:#8a978a;} .ct2{background:#b98a4f;} .ct3{background:#7d9a7e;} .ct4{background:#c0a24e;}
-  .cattabs .on{background:var(--beet); font-weight:600;}
   .disc{padding:10px 28px 18px; font-size:12.5px; color:#a59c8a; font-style:italic; text-align:center;}
 
   /* =============================================================
@@ -216,6 +208,8 @@
   .stepdetail{font-size:17.5px; line-height:1.45; color:var(--ink);}
   .stepdetail b{font-weight:500; color:var(--sage-d);}
   .doneline{font-size:15px; font-style:italic; color:var(--sage-d); margin-top:8px;}
+  .stepcap{font-size:13.5px; color:#a5722e; font-style:italic; margin-top:6px;}
+  .serveline{font-size:15px; color:var(--ink2); margin-top:6px;}
   .timerow{display:flex; gap:9px; margin-top:12px; flex-wrap:wrap;}
   .timerbtn{min-height:52px; flex:1; min-width:130px; border:1.5px solid var(--sage-d); color:var(--sage-d); background:#fff;
             border-radius:12px; font-family:'Marcellus',serif; font-size:16.5px; letter-spacing:.03em; padding:8px 12px;}
@@ -282,10 +276,10 @@
   .evsrc ul{list-style:none;}
   .evsrc li{font-size:14.5px; line-height:1.4; padding-left:13px; position:relative; margin-bottom:4px;}
   .evsrc li::before{content:"·"; position:absolute; left:1px; color:var(--sage); font-size:18px; top:-2px;}
+  .evsrc a{color:var(--sage-d); text-decoration:underline; text-underline-offset:2px;}
   .evver{font-size:13.5px; color:var(--sage-d); font-style:italic; margin-top:10px;}
   .evkey{margin-top:14px; border-top:1px dashed var(--line); padding-top:11px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
   .evkey .kx{font-size:12.5px; color:var(--ink2); margin-right:2px;}
-  .evnote{font-size:12.5px; color:#a59c8a; font-style:italic; margin-top:10px;}
   .evclose{display:block; width:100%; min-height:48px; margin-top:14px; border:1.5px solid var(--sage-d); color:var(--sage-d);
            border-radius:12px; font-family:'Marcellus',serif; letter-spacing:.08em; text-transform:uppercase; font-size:13px; background:#fff;}
 
@@ -341,12 +335,12 @@
         <svg class="sprig" width="64" height="41" viewBox="0 0 120 80" aria-hidden="true"><g stroke="#6f7d54" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M60 74 C62 56 60 34 60 20"/><path d="M60 52 C52 48 46 42 43 35 M60 52 C68 48 74 42 77 35"/><path d="M60 38 C53 34 48 29 46 23 M60 38 C67 34 72 29 74 23"/></g><g fill="#9c8cb6"><ellipse cx="60" cy="16" rx="3" ry="5"/><ellipse cx="54" cy="22" rx="2.4" ry="4"/><ellipse cx="66" cy="22" rx="2.4" ry="4"/></g><g><circle cx="86" cy="34" r="5" fill="#e7c878"/><circle cx="95" cy="42" r="3.6" fill="#e7c878"/></g></svg>
         <div class="brandmark">Your Healing Kitchen</div>
         <div class="brandtag">Natural healing &middot; Fourth trimester</div>
+        <div class="brandeyebrow">Beet soup <span class="dot">&middot;</span> Postpartum recovery <span class="dot">&middot;</span> Blood-building</div>
         <div class="brandrule"></div>
       </div>
 
       <div class="head">
         <div class="htext">
-          <div class="eyebrow">Beet soup <span class="dot">&bull;</span> Postpartum recovery <span class="dot">&bull;</span> Blood-building</div>
           <h1>Beetroot Borscht</h1>
           <div class="sub">A ruby, iron-rich beef &amp; beet soup &mdash; blood-building warmth in a bowl, finished with kefir &amp; dill.</div>
         </div>
@@ -354,32 +348,59 @@
       </div>
 
       <div class="meta">
-        <div class="pill"><b>Serves</b> <span data-serves>4&ndash;5</span></div>
-        <div class="pill"><b>Time</b> 2&frac12; hrs</div>
-        <div class="pill"><b>Keeps</b> fridge 4 days / freeze</div>
-        <div class="pill her">For you &middot; a warm bowl, kefir on top</div>
+        <div class="metarow time"><b>Time to cook:</b> 2&frac12; hrs</div>
+        <div class="metarow keeps"><b>Keep in the fridge</b> 4 days / freeze</div>
       </div>
 
-      <div class="whenband"><b>When to eat</b> A warm bowl for lunch or dinner &mdash; especially in the first weeks, when you want iron &amp; comfort together.</div>
+      <div class="whenband"><b>When to eat:</b> A warm bowl for lunch or dinner &mdash; especially in the first weeks, when you need iron &amp; comfort together.</div>
 
       <div class="body-pad">
         <div class="why">
           <div class="blockh">Why this heals you</div>
           <ul>
-            <li>Beetroot &mdash; folate &amp; iron to rebuild the blood you gave to birth <button class="tag v" data-ev="beet">verified &times;2</button></li>
-            <li>Beef short rib &mdash; heme iron, protein &amp; deep collagen <button class="tag v" data-ev="beef">verified &times;2</button></li>
+            <li>Beetroot &mdash; folate &amp; iron to rebuild the blood you gave to birth <button class="tag rb" data-ev="beet">research-backed</button></li>
+            <li>Beef short rib &mdash; heme iron, protein &amp; deep collagen <button class="tag rb" data-ev="beef">research-backed</button></li>
             <li>Cabbage &amp; carrot &mdash; gentle fibre, vitamin C to unlock the iron <button class="tag t" data-ev="cabbage">tradition</button></li>
-            <li>Kefir on top &mdash; a spoon of living probiotics for a healing gut <button class="tag v" data-ev="kefir">verified &times;2</button></li>
+            <li>Kefir on top &mdash; a spoon of living probiotics for a healing gut <button class="tag rb" data-ev="kefir">research-backed</button></li>
           </ul>
           <p class="whykey">Tap a label to see the evidence sheet behind it.</p>
         </div>
 
-        <!-- CONTROL LAYER -->
+        <!-- YOUR INSTRUCTIONS -->
         <div class="controls" id="controls">
-          <div class="blockh">Your controls</div>
+          <div class="blockh">Your instructions</div>
+          <p class="panel-sub">Your helper&rsquo;s card adjusts to this.</p>
 
           <div class="ctl-row">
-            <div class="ctl-lab">Hand tonight to Rosa</div>
+            <div class="ctl-lab">What you have &mdash; beef short rib</div>
+            <div class="dial">
+              <button id="scaleMinus" aria-label="Less beef">&minus;</button>
+              <b id="scaleVal">500 g</b>
+              <button id="scalePlus" aria-label="More beef">+</button>
+            </div>
+            <p class="ctl-hint">Every quantity rescales live &mdash; on this card and on Rosa&rsquo;s phone.</p>
+          </div>
+
+          <div class="ctl-row">
+            <div class="ctl-lab">Your bowl &mdash; serve with</div>
+            <div class="tickrow">
+              <button class="tick on" data-serve="kefir" aria-pressed="true">a spoon of kefir<span class="tin">In</span></button>
+              <button class="tick" data-serve="sour" aria-pressed="false">cultured sour cream<span class="tin">In</span></button>
+              <button class="tick" data-serve="rye" aria-pressed="false">dark rye or sourdough to dip<span class="tin">In</span></button>
+            </div>
+          </div>
+
+          <div class="ctl-row">
+            <div class="ctl-lab">Make it PP Gold (for yourself)</div>
+            <p class="ctl-sub">This version is for you, if you like. <button class="tag b" data-ev="moringa">breastfeeding note</button></p>
+            <div class="tickrow">
+              <button class="tick on" data-boost="moringa" aria-pressed="true">&frac12; tsp moringa &mdash; off the heat<span class="tin">In</span></button>
+              <button class="tick on" data-boost="seeds" aria-pressed="true">1 tbsp pumpkin seeds &mdash; zinc<span class="tin">In</span></button>
+              <button class="tick on" data-boost="kefirspoon" aria-pressed="true">a spoon of kefir &mdash; probiotics &amp; calcium<span class="tin">In</span></button>
+            </div>
+          </div>
+
+          <div class="ctl-row last">
             <div class="sendrow">
               <label class="bywhen">Ready by
                 <select id="timeSel" aria-label="Ready by time">
@@ -392,31 +413,6 @@
               <div class="sig-lab">From the kitchen</div>
               <ul id="signalList"></ul>
             </div>
-          </div>
-
-          <div class="ctl-row">
-            <div class="ctl-lab">What you have &mdash; beef short rib</div>
-            <div class="dial">
-              <button id="scaleMinus" aria-label="Less beef">&minus;</button>
-              <b id="scaleVal">500 g</b>
-              <button id="scalePlus" aria-label="More beef">+</button>
-            </div>
-            <p class="ctl-hint">Every quantity rescales live &mdash; on this card and on Rosa&rsquo;s phone. Serves <span data-serves>4&ndash;5</span>.</p>
-          </div>
-
-          <div class="ctl-row">
-            <div class="ctl-lab">Household verdict &mdash; how did it land?</div>
-            <div class="verdicts">
-              <button class="vbtn" data-w="Loved">Loved</button>
-              <button class="vbtn" data-w="Fine">Fine</button>
-              <button class="vbtn" data-w="Tricky">Tricky</button>
-            </div>
-            <p class="memline" id="memline" hidden></p>
-          </div>
-
-          <div class="ctl-row last">
-            <div class="ctl-lab">Mum&rsquo;s bowl</div>
-            <p class="boostline">Moringa + pumpkin seeds + kefir &mdash; from your pantry, stirred in at the end. Rosa gets this as her final step. <button class="tag b" data-ev="moringa">bf note</button></p>
           </div>
         </div>
       </div>
@@ -437,7 +433,6 @@
           <div class="ing"><img data-img="dill" alt="Fresh dill"><span class="q">1 small bunch</span><span class="n">Fresh dill<i>to finish</i></span></div>
           <div class="ing"><img data-img="kefir" alt="Kefir"><span class="q">to serve</span><span class="n">Kefir<i>or cultured sour cream</i></span></div>
         </div>
-        <div class="servewith"><b>Serve with</b> a spoon of kefir or cultured sour cream, and dark rye or sourdough to dip. <b>Tip:</b> beetroot stains &mdash; grate it in an apron. Add the vinegar early to keep the soup a bright ruby, not brown.</div>
       </div>
 
       <div class="body-pad">
@@ -446,19 +441,17 @@
         <div class="step"><div class="n">2</div><img class="img" data-img="step2" alt="Vegetables softening in a pan"><div><span class="ic">Soften the veg &middot; 8 min</span><p>In another pan soften the <b>onion, carrot &amp; beet</b> with the <b><span data-base="1" data-unit="tbsp">1 tbsp</span> tomato paste</b> until glossy and sweet.</p></div></div>
         <div class="step"><div class="n">3</div><img class="img" data-img="step3" alt="Soup simmering"><div><span class="ic">Simmer together &middot; 20 min</span><p>Add the beet mixture, <b><span data-base="3" data-unit="int" data-suffix=" cloves">3 cloves</span> garlic</b> and <b><span data-base="0.25" data-unit="count8" data-suffix=" small">&frac14; small</span> shredded cabbage</b> to the pot. Simmer <b>20 min</b> until everything is soft.</p></div></div>
         <div class="step"><div class="n">4</div><img class="img" data-img="step4" alt="Finished borscht with kefir and dill"><div><span class="ic">Finish &amp; serve</span><p>Stir in the <b><span data-base="2" data-unit="tbsp">2 tbsp</span> vinegar</b> (keeps it ruby) and most of the <b>dill</b>. Salt to taste. Ladle out, top with <b>kefir</b> and the rest of the dill.</p></div></div>
-        <div class="stepnote"><h4>Make it PP Gold (for mum)</h4><p>Use <b>bone broth</b> as the base for extra collagen. Stir <b>&frac12; tsp moringa</b> into your bowl <b>off the heat</b>, and scatter <b>1 tbsp pumpkin seeds</b> on top for zinc. A spoon of <b>kefir</b> adds probiotics &amp; calcium. <i>This version is for you.</i></p></div>
+        <div class="stepnote"><p><b>Tip:</b> use bone broth as the base for extra collagen.</p></div>
       </div>
 
       <div class="foot">
         <div class="nutri">
           <div class="blockh">Good to know</div>
           <div class="row"><b>Store</b><span>Fridge ~4 days; freeze in jars. Flavour deepens overnight.</span></div>
-          <div class="row"><b>Colour</b><span>The splash of vinegar keeps it bright ruby, not brown. <button class="tag f" data-ev="colour">fact</button></span></div>
+          <div class="row"><b>Colour</b><span>The splash of vinegar keeps it bright ruby, not brown.</span></div>
         </div>
-        <div class="lineage"><span class="chip">Why we say this</span><br>Iron &amp; folate in beetroot, and heme iron / collagen from long-simmered beef, are corroborated by &ge;2 dated sources in the Knowledge Bank. The warming, blood-building framing is honestly labelled tradition.</div>
       </div>
 
-      <div class="cattabs"><div class="ct1 on">Main Meals</div><div class="ct2">Snacks</div><div class="ct3">Drinks</div><div class="ct4">Desserts</div></div>
       <div class="disc">Food, not medical advice &middot; non-diagnostic &middot; made for this season of motherhood</div>
     </div>
     <div class="toast" id="mtoast" role="status"></div>
@@ -484,7 +477,7 @@
             <div class="askname">Beetroot Borscht</div>
             <div class="readyby">Ready by <span id="readyBy">6:30</span></div>
             <div class="warnband">No sage in this house &middot; Mum&rsquo;s bowl gets extras at the end</div>
-            <p class="askmeta">Serves <span data-serves>4&ndash;5</span> &middot; about 2&frac12; hours &middot; one big pot</p>
+            <p class="askmeta">About 2&frac12; hours &middot; one big pot</p>
             <div class="masteryband">Rosa has cooked this <b>3 times</b> &mdash; she can take the short road.</div>
             <button class="hbtn" id="startBtn">Start &mdash; gather first</button>
             <button class="hbtn2" id="masterEntryBtn">Short version &mdash; just the numbers</button>
@@ -522,6 +515,7 @@
             <img class="stepimg" data-img="step2" alt="Onion, carrot and beet softening">
             <h2 class="stepverb">Soften onion, carrot and beetroot &mdash; 8 min</h2>
             <p class="stepdetail">Second pan: <b><span data-base="1" data-unit="count">1</span> onion</b>, <b><span data-base="1" data-unit="count">1</span> carrot</b>, <b><span data-base="3" data-unit="count" data-suffix=" medium">3 medium</span> beetroot</b>, with <b><span data-base="1" data-unit="tbsp">1 tbsp</span> tomato paste</b>.</p>
+            <p class="stepcap">Beetroot stains &mdash; apron on.</p>
             <p class="doneline">Done looks like: onions glossy and sweet.</p>
             <div class="timerow"><button class="timerbtn" id="t-soften" data-min="8">Start &middot; 8 min</button></div>
             <p class="timerdone" hidden>Timer finished &mdash; have a look at the pan.</p>
@@ -550,7 +544,7 @@
             <p class="stepdetail">Stir in <b><span data-base="2" data-unit="tbsp">2 tbsp</span> apple cider vinegar</b> and most of the dill. Salt to taste.</p>
             <p class="doneline">Done looks like: bright ruby, not brown.</p>
             <button class="confused" data-step="4">Confused by this step?</button>
-            <div class="stepnav"><button class="hbtn ghost" data-nav="step3">Back</button><button class="hbtn" data-nav="mum">Next &mdash; Mum&rsquo;s bowl</button></div>
+            <div class="stepnav"><button class="hbtn ghost" data-nav="step3">Back</button><button class="hbtn" id="step4Next" data-nav="mum">Next &mdash; Mum&rsquo;s bowl</button></div>
             <p class="hcap">Screen stays on while you cook</p>
           </div>
 
@@ -558,10 +552,10 @@
           <div class="hscreen" id="s-mum">
             <div class="mumcard">
               <div class="hkicker">The last minute &mdash; for Mum only</div>
-              <p class="mumline">Stir &frac12; tsp moringa into her bowl &mdash; off the heat.</p>
-              <p class="mumline">Top with kefir and 1 tbsp pumpkin seeds.</p>
+              <p class="mumline" id="mumLine1">Stir &frac12; tsp moringa into her bowl &mdash; off the heat.</p>
+              <p class="mumline" id="mumLine2">Top with kefir and 1 tbsp pumpkin seeds.</p>
               <p class="mumsub">Her healing bowl. The family pot stays as it is.</p>
-              <button class="listen" hidden style="margin-top:10px" data-say="For Mum only. Stir half a teaspoon of moringa into her bowl, off the heat. Top with kefir and one tablespoon of pumpkin seeds.">Listen</button>
+              <button class="listen" id="mumListen" hidden style="margin-top:10px" data-say="For Mum only. Stir half a teaspoon of moringa into her bowl, off the heat. Top with kefir and one tablespoon of pumpkin seeds.">Listen</button>
             </div>
             <div class="stepnav"><button class="hbtn ghost" data-nav="step4">Back</button><button class="hbtn" data-nav="done">Done &mdash; serve up</button></div>
           </div>
@@ -570,6 +564,7 @@
           <div class="hscreen" id="s-done">
             <div class="hkicker">Last thing</div>
             <h2 class="stepverb" style="margin-top:4px">All served?</h2>
+            <p class="serveline" id="serveLine">Serve with: kefir</p>
             <button class="cookedbtn" id="cookedBtn">Cooked</button>
             <div class="aftercooked" id="afterCooked" hidden>
               <h3>Beautiful.</h3>
@@ -579,7 +574,7 @@
               <textarea class="notefield" rows="2" placeholder="Add a note for Mum (optional)"></textarea>
               <p class="thanks" id="thanks">From Mum: &ldquo;Thank you, Rosa.&rdquo;</p>
             </div>
-            <div class="stepnav"><button class="hbtn ghost" data-nav="mum">Back</button></div>
+            <div class="stepnav"><button class="hbtn ghost" id="doneBack" data-nav="mum">Back</button></div>
           </div>
 
           <!-- mastered view -->
@@ -594,7 +589,7 @@
             <div class="mtimer"><span>Simmer the beef</span><button class="timerbtn" id="mt2" data-min="90">1&frac12; hr</button></div>
             <div class="mtimer"><span>Soften the veg</span><button class="timerbtn" id="mt3" data-min="8">8 min</button></div>
             <div class="mtimer"><span>Simmer together</span><button class="timerbtn" id="mt4" data-min="20">20 min</button></div>
-            <div class="mmum">Mum&rsquo;s bowl: &frac12; tsp moringa off the heat &middot; kefir + 1 tbsp pumpkin seeds on top.</div>
+            <div class="mmum" id="mmumLine">Mum&rsquo;s bowl: &frac12; tsp moringa off the heat &middot; kefir + 1 tbsp pumpkin seeds on top.</div>
             <button class="hbtn" id="mCookedBtn">Cooked</button>
           </div>
 
@@ -613,16 +608,15 @@
   <div class="evback" id="evBack"></div>
   <div class="evsheet" role="dialog" aria-modal="true" aria-labelledby="evTitle" id="evSheet" tabindex="-1">
     <div class="evgrab"></div>
-    <span class="tag v" id="evChip">verified &times;2</span>
+    <span class="tag rb" id="evChip">research-backed</span>
     <h3 id="evTitle"></h3>
     <p class="evmeaning" id="evMeaning"></p>
-    <div class="evsrc"><div class="sl">Behind this line</div><ul id="evSources"></ul></div>
+    <div class="evsrc"><div class="sl">Sources</div><ul id="evSources"></ul></div>
     <p class="evver" id="evVer">Verified 2026-07-02 &middot; re-checked with every release</p>
     <div class="evkey">
       <span class="kx">Labels:</span>
-      <span class="tag v">verified &times;2</span><span class="tag t">tradition</span><span class="tag f">fact</span><span class="tag b">bf note</span>
+      <span class="tag rb">research-backed</span><span class="tag t">tradition</span><span class="tag b">breastfeeding note</span>
     </div>
-    <p class="evnote">Sample sheet &mdash; preview copy. In the app this opens the two dated Knowledge Bank entries in full.</p>
     <button class="evclose" id="evClose">Close</button>
   </div>
 </div>
@@ -661,16 +655,11 @@ function fmtQty(base, unit){
   return {t:'',a:false};
 }
 function rescale(){
-  const f = state.g/500;
   $$('[data-base]').forEach(el=>{
     const r = fmtQty(parseFloat(el.dataset.base), el.dataset.unit);
     el.textContent = (r.a?'≈':'') + r.t + (el.dataset.suffix||'');
   });
   $$('[data-beef]').forEach(el=>{ el.textContent = state.g+' g'; });
-  $$('[data-serves]').forEach(el=>{
-    const lo = Math.max(1, Math.round(4*f)), hi = Math.max(lo, Math.round(5*f));
-    el.textContent = lo===hi ? String(lo) : lo+'–'+hi;
-  });
   $('#scaleVal').textContent = state.g+' g';
 }
 $('#scaleMinus').addEventListener('click', ()=>{ state.g = Math.max(200, state.g-50); rescale(); });
@@ -710,33 +699,70 @@ $('#sendBtn').addEventListener('click', ()=>{
   if(isMobile()) setTimeout(()=>setView('helper'), 700);
 });
 
-/* ================= verdict ================= */
-$$('.vbtn').forEach(b=> b.addEventListener('click', ()=>{
-  $$('.vbtn').forEach(x=>x.classList.remove('on')); b.classList.add('on');
-  toastM('Family verdict saved');
-  const w=b.dataset.w; const n = w==='Loved' ? 3 : 1;
-  const mem=$('#memline'); mem.hidden=false; mem.textContent = w+' ×'+n+' · last cooked Tue';
+/* ================= your instructions — ticks drive the helper card ================= */
+state.serve = { kefir:true, sour:false, rye:false };
+state.boost = { moringa:true, seeds:true, kefirspoon:true };
+const SERVE_NAMES = { kefir:'kefir', sour:'cultured sour cream', rye:'rye bread' };
+$$('.tick').forEach(btn=> btn.addEventListener('click', ()=>{
+  const on = !btn.classList.contains('on');
+  btn.classList.toggle('on', on);
+  btn.setAttribute('aria-pressed', String(on));
+  if(btn.dataset.serve) state.serve[btn.dataset.serve] = on;
+  if(btn.dataset.boost) state.boost[btn.dataset.boost] = on;
+  rebuildMum();
 }));
+function rebuildMum(){
+  const b = state.boost;
+  const any = b.moringa || b.seeds || b.kefirspoon;
+  const tops = [];
+  if(b.kefirspoon) tops.push('kefir');
+  if(b.seeds) tops.push('1 tbsp pumpkin seeds');
+  /* mum's-bowl step lines */
+  $('#mumLine1').hidden = !b.moringa;
+  const l2 = $('#mumLine2');
+  l2.hidden = tops.length===0;
+  if(tops.length) l2.textContent = 'Top with '+tops.join(' and ')+'.';
+  const say = ['For Mum only.'];
+  if(b.moringa) say.push('Stir half a teaspoon of moringa into her bowl, off the heat.');
+  if(tops.length) say.push('Top with '+tops.map(t=>t.replace('1 tbsp pumpkin seeds','one tablespoon of pumpkin seeds')).join(' and ')+'.');
+  $('#mumListen').dataset.say = say.join(' ');
+  /* mastered short line */
+  const parts = [];
+  if(b.moringa) parts.push('½ tsp moringa off the heat');
+  if(tops.length) parts.push(tops.join(' + ')+' on top');
+  const mm = $('#mmumLine');
+  mm.hidden = !any;
+  if(any) mm.textContent = 'Mum’s bowl: '+parts.join(' · ')+'.';
+  /* hide or restore the whole mum's-bowl step */
+  const nxt = $('#step4Next'), back = $('#doneBack');
+  if(any){ nxt.dataset.nav='mum'; nxt.textContent='Next — Mum’s bowl'; back.dataset.nav='mum'; }
+  else{
+    nxt.dataset.nav='done'; nxt.textContent='Next — serve up'; back.dataset.nav='step4';
+    if(state.screen==='mum') show('step4');
+  }
+  /* finish-screen serve-with line */
+  const sw = Object.keys(SERVE_NAMES).filter(k=>state.serve[k]).map(k=>SERVE_NAMES[k]);
+  const sl = $('#serveLine');
+  sl.hidden = sw.length===0;
+  if(sw.length) sl.textContent = 'Serve with: '+sw.join(' · ');
+}
 
 /* ================= evidence sheet ================= */
 const EV = {
-  beet:   { cls:'v', chip:'verified ×2', title:'Beetroot — folate & iron to rebuild the blood you gave to birth',
-            meaning:'Verified ×2 — this line is corroborated by two independent, dated entries in the Knowledge Bank before it is allowed on a card.',
+  beet:   { cls:'rb', chip:'research-backed', title:'Beetroot — folate & iron to rebuild the blood you gave to birth',
+            meaning:'Research-backed — this line is corroborated by two independent, dated entries in the Knowledge Bank before it is allowed on a card.',
             src:['USDA FoodData Central — beetroot, raw: folate & iron values','NIH Office of Dietary Supplements — iron & folate needs after birth'] },
-  beef:   { cls:'v', chip:'verified ×2', title:'Beef short rib — heme iron, protein & deep collagen',
-            meaning:'Verified ×2 — heme iron is the form your body absorbs best, and slow-simmered rib releases gelatine & collagen.',
-            src:['USDA FoodData Central — beef short ribs, braised','Knowledge Bank — collagen from long-simmered cuts (2 dated entries)'] },
+  beef:   { cls:'rb', chip:'research-backed', title:'Beef short rib — heme iron, protein & deep collagen',
+            meaning:'Research-backed — heme iron is the form your body absorbs best, and slow-simmered rib releases gelatine & collagen.',
+            src:['USDA FoodData Central — beef short ribs, braised','Knowledge Bank — collagen from long-simmered cuts (in-app)'] },
   cabbage:{ cls:'t', chip:'tradition', title:'Cabbage & carrot — gentle fibre, vitamin C to unlock the iron',
             meaning:'Tradition — the Eastern-European postpartum kitchen has served borscht this way for generations. Labelled honestly: passed down, not clinical.',
             src:['Eastern-European confinement kitchens — borscht as a recovery staple','Kitchen practice: vitamin C alongside iron-rich food'] },
-  kefir:  { cls:'v', chip:'verified ×2', title:'Kefir on top — a spoon of living probiotics for a healing gut',
-            meaning:'Verified ×2 — fermented dairy carries live cultures; added off the heat so they stay alive.',
-            src:['NIH — probiotics & fermented dairy fact sheet','Knowledge Bank — kefir cultures survive when added off heat'] },
-  colour: { cls:'f', chip:'fact', title:'A splash of vinegar keeps borscht ruby, not brown',
-            meaning:'Fact — plain kitchen chemistry, no health claim. Acid steadies the beet pigment (betalain) so the soup keeps its colour.',
-            src:['Food-science reference — acid stabilises beet pigment'] },
-  moringa:{ cls:'b', chip:'bf note', title:'Moringa in Mum’s bowl',
-            meaning:'BF note — a breastfeeding-specific flag. Moringa is used traditionally to support supply; the evidence is still emerging, so we label it rather than sell it.',
+  kefir:  { cls:'rb', chip:'research-backed', title:'Kefir on top — a spoon of living probiotics for a healing gut',
+            meaning:'Research-backed — fermented dairy carries live cultures; added off the heat so they stay alive.',
+            src:['<a href="https://ods.od.nih.gov/factsheets/Probiotics-HealthProfessional/" target="_blank" rel="noopener">NIH — probiotics &amp; fermented dairy fact sheet</a>','Knowledge Bank — kefir cultures survive when added off heat (in-app)'] },
+  moringa:{ cls:'b', chip:'breastfeeding note', title:'Moringa in Mum’s bowl',
+            meaning:'Breastfeeding note — a care flag, not an evidence grade. Moringa is used traditionally to support supply; the evidence is still emerging, so we label it rather than sell it.',
             src:['Labelled tradition + emerging evidence — never dosed, always your call','Added off the heat, ½ tsp — gentle by design'] }
 };
 function openEv(id){
@@ -899,6 +925,7 @@ $('#masterBtn').addEventListener('click', ()=>{
 /* ================= init ================= */
 syncReady();
 rescale();
+rebuildMum();
 </script>
 </body>
 </html>
