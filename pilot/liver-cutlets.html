@@ -301,16 +301,13 @@
 
       <!-- 4 · finish -->
       <div class="hscreen" id="s-done">
-        <div class="hkicker">Last thing</div>
-        <h2 class="stepverb" style="margin-top:4px">All served?</h2>
-        <p class="serveline">Serve with: lemon wedges &amp; sliced tomato &mdash; the vitamin C helps the iron absorb.</p>
+        <h2 class="stepverb" id="doneAsk" style="margin-top:8px">All served?</h2>
         <button class="cookedbtn" id="cookedBtn">Cooked</button>
         <div class="aftercooked" id="afterCooked" hidden>
           <h3>Beautiful.</h3>
-          <p class="big">Mum&rsquo;s phone just heard the good news.</p>
-          <button class="hbtn ghost" id="photoBtn">Add a photo &mdash; she loves seeing it</button>
+          <button class="hbtn ghost" id="photoBtn">Add a photo</button>
           <div class="camrow" id="camrow" hidden><img data-img="hero" alt="Photo of the finished cutlets"><span>Photo added &mdash; on its way to Mum.</span></div>
-          <textarea class="notefield" rows="2" placeholder="Add a note for Mum (optional)"></textarea>
+          <textarea class="notefield" rows="2" placeholder="Note for Mum"></textarea>
           <p class="thanks" id="thanks">From Mum: &ldquo;Thank you.&rdquo;</p>
         </div>
         <div class="stepnav"><button class="hbtn ghost" data-nav="step5">Back</button></div>
@@ -474,7 +471,7 @@ if('speechSynthesis' in window){
 /* cooked */
 function cooked(){
   state.cooked=true; show('done');
-  $('#cookedBtn').hidden=true; $('#afterCooked').hidden=false;
+  $('#cookedBtn').hidden=true; $('#doneAsk').hidden=true; $('#afterCooked').hidden=false;
   setTimeout(()=>$('#thanks').classList.add('show'),1400);
 }
 $('#cookedBtn').addEventListener('click', cooked);
