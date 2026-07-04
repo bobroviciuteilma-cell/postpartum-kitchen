@@ -77,7 +77,9 @@
                font-size:26px; line-height:1; font-family:'EB Garamond',serif; background:var(--paper2); flex:none;}
   .dial button:active{background:var(--sage-soft);}
   .dial b{font-family:'Marcellus',serif; font-weight:400; font-size:20px; color:var(--sage-d); min-width:62px; text-align:center;}
-  .ovscale-hint{font-size:13px; color:var(--ink2); font-style:italic; margin-top:10px; line-height:1.35;}
+  .ovscale-hint{font-size:13px; color:var(--ink2); font-style:italic; margin-top:10px; line-height:1.4;}
+  .ovscale-hint.off{color:#8a6326; font-style:normal;}
+  .matchbtn{background:none; border:none; padding:0; font:inherit; color:var(--sage-d); text-decoration:underline; text-underline-offset:2px; cursor:pointer; white-space:nowrap;}
 
   /* gather */
   .gcount{font-size:14.5px; color:var(--ink2); margin:2px 0 10px;}
@@ -211,7 +213,7 @@
               <button id="liverPlus" aria-label="More liver">+</button>
             </div>
           </div>
-          <p class="ovscale-hint">Set each to what&rsquo;s in the fridge &mdash; the rest of the recipe rescales to match.</p>
+          <p class="ovscale-hint" id="balanceLine">Balanced to the recipe &mdash; twice as much mince as liver.</p>
         </div>
 
         <div class="hkicker" style="margin-top:16px;">Ingredients</div>
@@ -381,6 +383,22 @@ function rescale(){
     const g=document.getElementById('gq-'+it.k); if(g) g.textContent=q;
   });
   $$('[data-base]').forEach(el=>{ el.textContent=fmt(valFor(parseFloat(el.dataset.base), el.dataset.drive), el.dataset.unit); });
+  updateBalance();
+}
+function updateBalance(){
+  const el=$('#balanceLine'); if(!el) return;
+  const target=state.mince/2;               // recipe balance = twice as much mince as liver
+  if(state.liver===target){
+    el.classList.remove('off');
+    el.innerHTML='Balanced to the recipe &mdash; twice as much mince as liver.';
+  } else {
+    el.classList.add('off');
+    const which = state.liver>target
+      ? 'More liver than the recipe &mdash; extra iron, harder to hide.'
+      : 'Less liver than the recipe &mdash; milder, a little less iron.';
+    el.innerHTML = which+' <button class="matchbtn" id="matchBtn">Match the recipe</button>';
+    $('#matchBtn').addEventListener('click', ()=>{ state.liver=Math.max(100,Math.min(400,state.mince/2)); rescale(); });
+  }
 }
 const ggrid=$('#ggrid');
 ING.forEach(it=>{
@@ -429,11 +447,13 @@ function renderGather(){
 }
 renderGather();
 
-/* what-you-have dials — mince + liver, set independently */
-$('#minceMinus').addEventListener('click',()=>{ state.mince=Math.max(200,state.mince-100); rescale(); });
-$('#mincePlus').addEventListener('click', ()=>{ state.mince=Math.min(800,state.mince+100); rescale(); });
-$('#liverMinus').addEventListener('click',()=>{ state.liver=Math.max(100,state.liver-50);  rescale(); });
-$('#liverPlus').addEventListener('click', ()=>{ state.liver=Math.min(400,state.liver+50);  rescale(); });
+/* what-you-have dials — mince sets the batch, liver auto-follows at 2:1;
+   liver can still be nudged up/down for extra iron (shows an off-balance note) */
+function setMince(v){ state.mince=Math.max(200,Math.min(800,v)); state.liver=Math.max(100,Math.min(400,state.mince/2)); rescale(); }
+$('#minceMinus').addEventListener('click',()=>setMince(state.mince-100));
+$('#mincePlus').addEventListener('click', ()=>setMince(state.mince+100));
+$('#liverMinus').addEventListener('click',()=>{ state.liver=Math.max(100,state.liver-50); rescale(); });
+$('#liverPlus').addEventListener('click', ()=>{ state.liver=Math.min(400,state.liver+50); rescale(); });
 rescale();
 
 /* flow */
