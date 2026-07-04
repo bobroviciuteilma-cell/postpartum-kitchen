@@ -60,6 +60,16 @@ her phone or WhatsApps to her helper. Watch-fors: does the helper open the link,
 finish button, what confused her. Under-60%-cooked = redesign kitchen-mode. (Roadmap Phase −1 also adds a
 mother-side check-in arm; Phase −1b is the acquisition workstream, proxy-ownable.)
 
+## ACTIVE THREAD 2 — card format finalized on the pilot pair (2026-07-04)
+The mom+helper Cook-Card format went through 8 rounds of Ilma's live feedback on the liver-cutlets
+pilot pair (`pilot/liver-cutlets.html` = helper, `pilot/liver-cutlets-mum.html` = mum) — these are now
+the **living template**, superseding mom-helper-split-preview.html (pending her confirm). Entry point
+for finishing + rolling out: **HANDOVER-CARD-CASCADE.md** (the locked standard, the before-FINAL
+checklist — kvass pair, index, claims pass — and the 49-card cascade plan awaiting her approval).
+New locked law: *the ratio that defines a recipe must survive scaling — never two free dials*
+(memory `feedback_recipe_scaling_proportion`). New visual rule: all generated cookware = Le Creuset
+look (memory `feedback_cook_cards_visual`).
+
 ## Second workstream — the Smart Pantry (built in a parallel chat)
 A separate chat built the **smart pantry** feature. Its brief is **HANDOVER-SMART-PANTRY.md** (read it
 alongside this). Live previews: `pantry-preview.html` (steady state) + `pantry-onboarding-preview.html`;
