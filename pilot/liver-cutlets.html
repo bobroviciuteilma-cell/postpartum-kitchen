@@ -123,10 +123,15 @@
   .stepcap{font-size:13.5px; color:#a5722e; font-style:italic; margin-top:6px;}
   .serveline{font-size:16px; color:var(--ink2); margin-top:6px; line-height:1.4;}
   .timerow{display:flex; gap:9px; margin-top:12px; flex-wrap:wrap;}
-  .timerbtn{min-height:52px; flex:1; min-width:140px; border:1.5px solid var(--sage-d); color:var(--sage-d); background:#fff;
+  .timerunit{flex:1; min-width:140px; display:flex; flex-direction:column; gap:5px;}
+  .timerlab{font-family:'Marcellus',serif; letter-spacing:.08em; text-transform:uppercase; font-size:11px; color:var(--ink2); text-align:center;}
+  .timerbtn{width:100%; min-height:52px; border:1.5px solid var(--sage-d); color:var(--sage-d); background:#fff;
             border-radius:12px; font-family:'Marcellus',serif; font-size:16.5px; letter-spacing:.03em; padding:8px 12px;}
   .timerbtn.run{background:var(--sage-d); color:#fff;}
+  .timerbtn.paused{background:var(--amber-soft); border-color:var(--amber); color:#7c531f;}
   .timerbtn.tdone{background:var(--beet); border-color:var(--beet); color:#fff;}
+  .timerreset{min-height:34px; font-size:12.5px; color:var(--amber); font-style:italic; letter-spacing:.02em;}
+  .timerhint{font-size:12px; color:#a59c8a; font-style:italic; margin-top:8px;}
   .timerdone{font-size:14.5px; color:var(--beet); font-style:italic; margin-top:7px;}
   .confused{display:block; margin:12px 0 0 auto; font-size:13.5px; color:var(--amber); font-style:italic; padding:8px 2px; min-height:34px;}
   .stepnav{display:flex; gap:10px; margin-top:8px;}
@@ -285,9 +290,18 @@
         <h2 class="stepverb">Cook through &mdash; 8 min a side</h2>
         <p class="stepdetail">Pan-fry in <b><span data-base="1" data-unit="tbsp">1 tbsp</span> ghee</b> over <b>medium heat</b>, about <b>8 min each side</b> &mdash; until cooked through. Or bake at <b>190&deg;C for 25 min</b>.</p>
         <div class="timerow">
-          <button class="timerbtn" id="t-side1" data-min="8">Side 1 &middot; start 8 min</button>
-          <button class="timerbtn" id="t-side2" data-min="8">Side 2 &middot; start 8 min</button>
+          <div class="timerunit">
+            <div class="timerlab">Side 1</div>
+            <button class="timerbtn" id="t-side1" data-min="8">Start &middot; 8 min</button>
+            <button class="timerreset" hidden>Reset</button>
+          </div>
+          <div class="timerunit">
+            <div class="timerlab">Side 2</div>
+            <button class="timerbtn" id="t-side2" data-min="8">Start &middot; 8 min</button>
+            <button class="timerreset" hidden>Reset</button>
+          </div>
         </div>
+        <p class="timerhint">Tap a running timer to pause &middot; Reset starts it over.</p>
         <p class="timerdone" hidden>Timer finished &mdash; check the cutlets.</p>
         <div class="cookwarn"><b>No pink in the middle.</b> Cut one open to check &mdash; the inside should be brown all the way through before you serve.</div>
         <p class="doneline">Done looks like: golden outside, brown all through, juices run clear.</p>
@@ -475,18 +489,27 @@ $('#startBtn').addEventListener('click', ()=>show('gather'));
 $('#cookStartBtn').addEventListener('click', ()=>show('step1'));
 $$('[data-nav]').forEach(b=> b.addEventListener('click', ()=>show(b.dataset.nav)));
 
-/* timers (real countdown on the cook step) */
+/* timers — tap to start, tap to pause, tap to resume; Reset runs the minutes over */
 $$('.timerbtn').forEach(btn=>{
   const secs0=Math.round(parseFloat(btn.dataset.min)*60);
-  const o={ rem:secs0, iv:null, done:false,
-    render(){ const m=Math.floor(o.rem/60), s=o.rem%60; btn.textContent=m+':'+String(s).padStart(2,'0'); },
-    finish(){ clearInterval(o.iv); o.iv=null; o.done=true; o.rem=0;
-      btn.classList.remove('run'); btn.classList.add('tdone'); btn.textContent='Done — check it';
-      const scr=btn.closest('.hscreen'); const dl=scr && scr.querySelector('.timerdone'); if(dl) dl.hidden=false; },
-    start(){ if(o.iv||o.done) return; btn.classList.add('run'); o.render();
-      o.iv=setInterval(()=>{ o.rem--; (o.rem<=0)?o.finish():o.render(); },1000); }
+  const idle=btn.textContent;
+  const unit=btn.closest('.timerunit');
+  const resetBtn=unit&&unit.querySelector('.timerreset');
+  const scr=btn.closest('.hscreen'); const dl=scr&&scr.querySelector('.timerdone');
+  const o={ rem:secs0, iv:null, running:false, paused:false, done:false,
+    fmt(){ const m=Math.floor(o.rem/60), s=o.rem%60; return m+':'+String(s).padStart(2,'0'); },
+    tick(){ o.rem--; if(o.rem<=0) o.finish(); else btn.textContent=o.fmt(); },
+    start(){ o.running=true; o.paused=false; btn.classList.add('run'); btn.classList.remove('paused');
+      if(resetBtn) resetBtn.hidden=false; btn.textContent=o.fmt(); o.iv=setInterval(o.tick,1000); },
+    pause(){ clearInterval(o.iv); o.iv=null; o.running=false; o.paused=true;
+      btn.classList.remove('run'); btn.classList.add('paused'); btn.textContent='Paused · '+o.fmt(); },
+    finish(){ clearInterval(o.iv); o.iv=null; o.running=false; o.paused=false; o.done=true; o.rem=0;
+      btn.classList.remove('run','paused'); btn.classList.add('tdone'); btn.textContent='Done — check it'; if(dl) dl.hidden=false; },
+    reset(){ clearInterval(o.iv); o.iv=null; o.rem=secs0; o.running=false; o.paused=false; o.done=false;
+      btn.classList.remove('run','paused','tdone'); btn.textContent=idle; if(resetBtn) resetBtn.hidden=true; }
   };
-  btn.addEventListener('click', ()=>o.start());
+  btn.addEventListener('click', ()=>{ if(o.done) o.reset(); else if(o.running) o.pause(); else o.start(); });
+  if(resetBtn) resetBtn.addEventListener('click', ()=>o.reset());
 });
 
 /* confused */
