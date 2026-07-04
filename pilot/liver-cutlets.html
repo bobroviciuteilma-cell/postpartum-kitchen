@@ -80,22 +80,28 @@
   .gcount{font-size:14.5px; color:var(--ink2); margin:2px 0 10px;}
   .ggrid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
   .gtile{position:relative; background:var(--paper2); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
-  .gmain{display:flex; flex-direction:column; align-items:center; gap:5px; width:100%; padding:12px 8px 6px; min-height:124px; text-align:center;}
+  .gmain{display:flex; flex-direction:column; align-items:center; gap:5px; width:100%; padding:12px 8px 8px; min-height:112px; text-align:center;}
   .gmain img{width:52px; height:52px; border-radius:50%; object-fit:cover; box-shadow:0 2px 8px rgba(60,50,30,.14);}
   .gname{font-size:14px; line-height:1.15;}
   .gqty{font-family:'Marcellus',serif; font-size:15px; color:var(--sage-d); background:var(--sage-soft); border-radius:8px; padding:2px 10px;}
-  .gout{display:block; width:100%; min-height:32px; font-size:12px; color:#a5722e; font-family:'Marcellus',serif; letter-spacing:.05em; padding:4px 6px 8px;}
-  .gcheck{position:absolute; top:8px; left:8px; width:24px; height:24px; border-radius:7px; border:2px solid var(--sage);
-          background:#fff center/15px 15px no-repeat; pointer-events:none;}
-  .gtile.got .gcheck{border-color:var(--sage-d); background-color:var(--sage-d);
-          background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6 9 17l-5-5'/></svg>");}
-  .gflag{position:absolute; top:7px; right:7px; font-family:'Marcellus',serif; font-size:10px; letter-spacing:.06em; text-transform:uppercase;
-         color:#fff; background:var(--amber); border-radius:7px; padding:3px 8px; pointer-events:none;}
+  /* primary tick — worded so it reads as "tap to add" */
+  .gtick{display:flex; align-items:center; justify-content:center; gap:8px; width:100%; min-height:46px;
+         border-top:1px solid var(--line); background:#fff;
+         font-family:'Marcellus',serif; letter-spacing:.03em; font-size:12.5px; color:var(--sage-d); padding:7px 8px; text-align:center;}
+  .gtickbox{width:22px; height:22px; flex:none; border:2px solid var(--sage); border-radius:6px;
+            background:#fff center/14px 14px no-repeat;}
+  .gticklabel{line-height:1.12;}
+  /* secondary — clearly quieter than the tick */
+  .gout{display:block; width:100%; min-height:30px; font-size:11.5px; color:#a79e8c; font-style:italic; letter-spacing:.01em; padding:5px 6px 8px;}
   .gtile.got{border-color:var(--sage-d);}
   .gtile.got .gmain{background:var(--sage-soft);}
+  .gtile.got .gtick{background:var(--sage-d); color:#fff; border-top-color:var(--sage-d);}
+  .gtile.got .gtickbox{border-color:#fff; background-color:#fff;
+          background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F6A54' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6 9 17l-5-5'/></svg>");}
   .gtile.flag{border-color:var(--amber);}
   .gtile.flag .gmain{background:#f2e3c8;}
-  .gtile.flag .gcheck{border-color:var(--amber); background-color:transparent; background-image:none;}
+  .gtile.flag .gtick{opacity:.35;}
+  .gtile.flag .gout{color:var(--amber); font-style:normal; font-family:'Marcellus',serif; letter-spacing:.04em;}
 
   /* steps */
   .stephead{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px;}
@@ -213,7 +219,7 @@
         <p class="gcount" id="gcount">0 of 10 in</p>
         <div class="ggrid" id="ggrid"></div>
         <button class="hbtn" id="cookStartBtn" disabled>All gathered &rarr; Start cooking</button>
-        <p class="hcap">Tap a tile when it&rsquo;s on the counter &middot; &ldquo;out of this&rdquo; tells Mum</p>
+        <p class="hcap">Tick each one as you find it &middot; tap &ldquo;out of this&rdquo; if there&rsquo;s none left</p>
       </div>
 
       <!-- 3 · steps -->
@@ -358,20 +364,21 @@ const ggrid=$('#ggrid');
 ING.forEach(it=>{
   const tile=document.createElement('div'); tile.className='gtile'; tile.id='gt-'+it.k;
   tile.innerHTML =
-    '<span class="gcheck" aria-hidden="true"></span>'+
-    '<button class="gmain" aria-label="Gathered: '+it.n+'">'+
+    '<button class="gmain" aria-label="I have '+it.n+'">'+
       '<img src="'+(IMGS[it.img]||'')+'" alt="">'+
       '<span class="gname">'+it.n+'</span>'+
       '<span class="gqty" id="gq-'+it.k+'">'+qtyOf(it)+'</span>'+
     '</button>'+
-    '<button class="gout">out of this</button>'+
-    '<span class="gflag" hidden>Flagged</span>';
+    '<button class="gtick"><span class="gtickbox" aria-hidden="true"></span><span class="gticklabel">Tap when you have it</span></button>'+
+    '<button class="gout">Out of this</button>';
   ggrid.appendChild(tile);
-  tile.querySelector('.gmain').addEventListener('click', ()=>{
+  const toggle=()=>{
     if(state.flagged.has(it.k)) state.flagged.delete(it.k);
     state.gathered.has(it.k) ? state.gathered.delete(it.k) : state.gathered.add(it.k);
     renderGather();
-  });
+  };
+  tile.querySelector('.gmain').addEventListener('click', toggle);
+  tile.querySelector('.gtick').addEventListener('click', toggle);
   tile.querySelector('.gout').addEventListener('click',(e)=>{
     e.stopPropagation();
     state.gathered.delete(it.k);
@@ -391,9 +398,8 @@ function renderGather(){
   ING.forEach(it=>{
     const tile=$('#gt-'+it.k), got=state.gathered.has(it.k), fl=state.flagged.has(it.k);
     tile.classList.toggle('got',got); tile.classList.toggle('flag',fl);
-    tile.querySelector('.gflag').hidden=!fl;
-    tile.querySelector('.gout').textContent = fl ? 'never mind — found it' : 'out of this';
-    const mr=$('#mr-'+it.k); if(mr) mr.classList.toggle('got',got);
+    const lbl=tile.querySelector('.gticklabel'); if(lbl) lbl.textContent = got ? 'Got it' : 'Tap when you have it';
+    tile.querySelector('.gout').textContent = fl ? 'Never mind — found it' : 'Out of this';
   });
   const got = state.gathered.size;
   $('#gcount').textContent = got+' of '+REQUIRED+' in'+(state.flagged.size?' · '+state.flagged.size+' flagged to Mum':'');
