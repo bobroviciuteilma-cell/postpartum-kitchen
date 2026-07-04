@@ -235,8 +235,11 @@
         <div class="hkicker">Ingredients &middot; gather everything first</div>
         <p class="gcount" id="gcount">0 of 10 in</p>
         <div class="ggrid" id="ggrid"></div>
-        <button class="hbtn" id="cookStartBtn" disabled>All gathered &rarr; Start cooking</button>
-        <p class="hcap">Tick each one as you find it &middot; tap &ldquo;out of this&rdquo; if there&rsquo;s none left</p>
+        <div class="stepnav">
+          <button class="hbtn ghost" data-nav="overview">Back</button>
+          <button class="hbtn" id="cookStartBtn" disabled>Start cooking</button>
+        </div>
+        <p class="hcap">Tick each one as you find it &middot; Start cooking opens once they&rsquo;re in</p>
       </div>
 
       <!-- 3 · steps -->
