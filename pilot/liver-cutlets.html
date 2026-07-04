@@ -130,10 +130,11 @@
   .cookwarn b{color:var(--beet); font-weight:500;}
 
   /* finish */
-  .cookedbtn{display:block; width:100%; min-height:76px; background:var(--sage-d); color:#fff; border-radius:18px;
-             font-family:'Cormorant Garamond',serif; font-weight:600; font-size:30px; margin-top:16px; box-shadow:0 10px 24px rgba(79,106,84,.3);}
-  .aftercooked h3{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:30px; color:var(--sage-d); margin:14px 0 4px;}
+  .cookedbtn{display:block; width:100%; min-height:70px; background:var(--sage-d); color:#fff; border-radius:18px;
+             font-family:'Cormorant Garamond',serif; font-weight:600; font-size:26px; margin-top:16px; box-shadow:0 10px 24px rgba(79,106,84,.3);}
+  .aftercooked h3{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:30px; color:var(--sage-d); margin:14px 0 6px;}
   .aftercooked .big{font-size:17.5px; line-height:1.45;}
+  .donesent{font-size:17px; color:var(--ink2); line-height:1.42; margin-bottom:2px;}
   .camrow{display:flex; align-items:center; gap:10px; margin-top:14px;}
   .camrow img{width:58px; height:58px; border-radius:12px; object-fit:cover;}
   .camrow span{font-size:15px; color:var(--sage-d); font-style:italic;}
@@ -301,16 +302,20 @@
 
       <!-- 4 · finish -->
       <div class="hscreen" id="s-done">
-        <h2 class="stepverb" id="doneAsk" style="margin-top:8px">All served?</h2>
-        <button class="cookedbtn" id="cookedBtn">Cooked</button>
+        <div id="doneForm">
+          <h2 class="stepverb" style="margin-top:8px">All served?</h2>
+          <button class="hbtn ghost" id="photoBtn">Add a photo</button>
+          <div class="camrow" id="camrow" hidden><img data-img="hero" alt="Photo of the finished cutlets"><span>Photo added</span></div>
+          <textarea class="notefield" id="noteField" rows="2" placeholder="Note for Mum"></textarea>
+          <button class="cookedbtn" id="cookedBtn">Cooked &mdash; tell Mum</button>
+          <p class="hcap">Mum gets a note on her phone that dinner&rsquo;s ready.</p>
+          <div class="stepnav"><button class="hbtn ghost" data-nav="step5">Back</button></div>
+        </div>
         <div class="aftercooked" id="afterCooked" hidden>
           <h3>Beautiful.</h3>
-          <button class="hbtn ghost" id="photoBtn">Add a photo</button>
-          <div class="camrow" id="camrow" hidden><img data-img="hero" alt="Photo of the finished cutlets"><span>Photo added &mdash; on its way to Mum.</span></div>
-          <textarea class="notefield" rows="2" placeholder="Note for Mum"></textarea>
+          <p class="donesent">Sent to Mum &mdash; she knows dinner&rsquo;s ready.</p>
           <p class="thanks" id="thanks">From Mum: &ldquo;Thank you.&rdquo;</p>
         </div>
-        <div class="stepnav"><button class="hbtn ghost" data-nav="step5">Back</button></div>
       </div>
 
     </div><!-- /screens -->
@@ -471,7 +476,7 @@ if('speechSynthesis' in window){
 /* cooked */
 function cooked(){
   state.cooked=true; show('done');
-  $('#cookedBtn').hidden=true; $('#doneAsk').hidden=true; $('#afterCooked').hidden=false;
+  $('#doneForm').hidden=true; $('#afterCooked').hidden=false;
   setTimeout(()=>$('#thanks').classList.add('show'),1400);
 }
 $('#cookedBtn').addEventListener('click', cooked);
