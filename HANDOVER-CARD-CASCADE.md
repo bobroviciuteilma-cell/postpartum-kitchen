@@ -16,8 +16,9 @@ the recipes. Priorities are FLIPPED — usefulness today beats finalization:
 3. **Template polish only when it blocks cooking. Photo pass background-only** — anchors v2 steer:
    delicate Provençal porcelain (fluted/scalloped rims), much less herby, sparse wildflower posy
    (lavender/chamomile), cream+sage cast iron stays, golden-brown oval cutlets. Generator script ready:
-   `<session-scratchpad>/gen_anchors_v2.py`; key expected at `~/.config/healing-kitchen/.env`
-   (moved from /tmp — macOS reaped it). v1 anchors live at `photo-anchors-preview.html`.
+   `<session-scratchpad>/gen_anchors_v2.py` (reads key from **macOS Keychain**, service
+   `healing-kitchen-openai`, via `security find-generic-password -w`; no GUI prompt, verified).
+   v1 anchors live at `photo-anchors-preview.html`.
 4. The pre-birth "before-FINAL checklist" below still applies, but AFTER the above.
 
 **Paste-ready prompt (URGENT version — supersedes the one at the bottom):**
@@ -27,7 +28,7 @@ the recipes. Priorities are FLIPPED — usefulness today beats finalization:
 > (1) build pilot/week1.html per the block above and give me the link to WhatsApp my helper;
 > (2) cascade the 15 DRINKS to the finalized mum+helper format (vessel-bound = no dial), per-card
 > QA, fresh ?v links per batch; (3) gentle recovery mains next; (4) photo pass background-only,
-> key at ~/.config/healing-kitchen/.env; (5) my feedback wins, never name creators, every health
+> key in macOS Keychain (service healing-kitchen-openai); (5) my feedback wins, never name creators, every health
 > line keeps its 3-label chips + real sources.
 
 ## What this is
