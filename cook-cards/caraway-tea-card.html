@@ -55,6 +55,20 @@
   .ovmeta{font-size:14.5px; color:var(--ink2); margin-top:8px; line-height:1.4;}
   .ovmeta b{font-family:'Marcellus',serif; font-weight:400; letter-spacing:.03em; color:var(--sage-d);}
   .ovlist .mrow{min-height:0; padding:6px 2px;}
+  /* what-you-have dial (ratio-law scaling — only on batch-driver recipes) */
+  .ovscale{margin:14px 0 4px; background:#fff; border:1.5px solid var(--sage); border-radius:14px; padding:12px 14px 13px; box-shadow:0 6px 16px rgba(79,106,84,.08);}
+  .ovscale-lab{font-family:'Marcellus',serif; letter-spacing:.08em; text-transform:uppercase; font-size:11.5px; color:var(--sage-d); margin-bottom:10px;}
+  .dialrow{display:flex; align-items:center; justify-content:space-between; gap:8px; margin:0 0 11px;}
+  .dialrow:last-of-type{margin-bottom:0;}
+  .dialname{font-family:'Marcellus',serif; letter-spacing:.02em; font-size:13.5px; color:var(--ink); flex:none;}
+  .dial{display:flex; align-items:center; gap:8px;}
+  .dial button{width:48px; height:48px; border-radius:50%; border:1.5px solid var(--sage-d); color:var(--sage-d);
+               font-size:26px; line-height:1; font-family:'EB Garamond',serif; background:var(--paper2); flex:none;}
+  .dial button:active{background:var(--sage-soft);}
+  .dial b{font-family:'Marcellus',serif; font-weight:400; font-size:20px; color:var(--sage-d); min-width:74px; text-align:center;}
+  .ovscale-hint{font-size:13px; color:var(--ink2); font-style:italic; margin-top:10px; line-height:1.4;}
+  .ovscale-hint.off{color:#8a6326; font-style:normal;}
+  .matchbtn{background:none; border:none; padding:0; font:inherit; color:var(--sage-d); text-decoration:underline; text-underline-offset:2px; cursor:pointer; white-space:nowrap;}
 
   .gcount{font-size:14.5px; color:var(--ink2); margin:2px 0 10px;}
   .ggrid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
@@ -241,10 +255,14 @@
 <p class="backlink"><a href="drinks.html">&larr; All drinks</a> &middot; <a href="index.html">Everything</a></p>
 
 <script>
-const ING = [{"k": "seeds", "n": "Caraway seeds", "q": "1 tsp", "img": "img/caraway-tea-card/ing-01-caraway-seeds.jpg", "opt": false}, {"k": "water", "n": "Just-boiled water", "q": "1 cup", "img": "img/caraway-tea-card/ing-02-just-boiled-water.jpg", "opt": false}, {"k": "honey", "n": "Honey", "q": "a little", "img": "img/caraway-tea-card/ing-03-a-little-honey.jpg", "opt": true}];
+const ING = window.ING = [{"k": "seeds", "n": "Caraway seeds", "q": "1 tsp", "img": "img/caraway-tea-card/ing-01-caraway-seeds.jpg", "opt": false}, {"k": "water", "n": "Just-boiled water", "q": "1 cup", "img": "img/caraway-tea-card/ing-02-just-boiled-water.jpg", "opt": false}, {"k": "honey", "n": "Honey", "q": "a little", "img": "img/caraway-tea-card/ing-03-a-little-honey.jpg", "opt": true}];
 const state = { gathered:new Set(), flagged:new Set(), screen:'overview' };
 const $  = (s,c)=>(c||document).querySelector(s);
 const $$ = (s,c)=>Array.from((c||document).querySelectorAll(s));
+
+function qtyOf(it){ return it.q; }
+function rescale(){}
+function wireDial(){}
 
 let hT=null;
 function toastH(m){ const el=$('#htoast'); el.textContent=m; el.classList.add('show'); clearTimeout(hT); hT=setTimeout(()=>el.classList.remove('show'),2300); }
@@ -253,7 +271,7 @@ function toastH(m){ const el=$('#htoast'); el.textContent=m; el.classList.add('s
 const mlist=$('#mlist');
 ING.forEach(it=>{
   const row=document.createElement('div'); row.className='mrow';
-  row.innerHTML='<span>'+it.n+'</span><span class="mq">'+it.q+'</span>';
+  row.innerHTML='<span>'+it.n+'</span><span class="mq" id="mq-'+it.k+'">'+qtyOf(it)+'</span>';
   mlist.appendChild(row);
 });
 
@@ -265,7 +283,7 @@ ING.forEach(it=>{
     '<button class="gmain" aria-label="I have '+it.n+'">'+
       '<img src="'+it.img+'" alt="">'+
       '<span class="gname">'+it.n+'</span>'+
-      '<span class="gqty">'+it.q+'</span>'+
+      '<span class="gqty" id="gq-'+it.k+'">'+qtyOf(it)+'</span>'+
     '</button>'+
     '<button class="gtick"><span class="gtickbox" aria-hidden="true"></span><span class="gticklabel">Tap when you have it</span></button>'+
     '<button class="gout">Out of this</button>';
@@ -353,6 +371,9 @@ $('#cookedBtn').addEventListener('click', ()=>{
   $('#doneForm').hidden=true; $('#afterCooked').hidden=false;
   setTimeout(()=>$('#thanks').classList.add('show'),1400);
 });
+
+/* dial (ratio law) — no-op on vessel-bound cards */
+wireDial(); rescale();
 
 /* screen awake */
 let wakeLock=null;

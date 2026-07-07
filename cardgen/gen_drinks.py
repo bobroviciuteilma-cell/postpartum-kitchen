@@ -74,6 +74,20 @@ HELPER_CSS = """<style>
   .ovmeta{font-size:14.5px; color:var(--ink2); margin-top:8px; line-height:1.4;}
   .ovmeta b{font-family:'Marcellus',serif; font-weight:400; letter-spacing:.03em; color:var(--sage-d);}
   .ovlist .mrow{min-height:0; padding:6px 2px;}
+  /* what-you-have dial (ratio-law scaling — only on batch-driver recipes) */
+  .ovscale{margin:14px 0 4px; background:#fff; border:1.5px solid var(--sage); border-radius:14px; padding:12px 14px 13px; box-shadow:0 6px 16px rgba(79,106,84,.08);}
+  .ovscale-lab{font-family:'Marcellus',serif; letter-spacing:.08em; text-transform:uppercase; font-size:11.5px; color:var(--sage-d); margin-bottom:10px;}
+  .dialrow{display:flex; align-items:center; justify-content:space-between; gap:8px; margin:0 0 11px;}
+  .dialrow:last-of-type{margin-bottom:0;}
+  .dialname{font-family:'Marcellus',serif; letter-spacing:.02em; font-size:13.5px; color:var(--ink); flex:none;}
+  .dial{display:flex; align-items:center; gap:8px;}
+  .dial button{width:48px; height:48px; border-radius:50%; border:1.5px solid var(--sage-d); color:var(--sage-d);
+               font-size:26px; line-height:1; font-family:'EB Garamond',serif; background:var(--paper2); flex:none;}
+  .dial button:active{background:var(--sage-soft);}
+  .dial b{font-family:'Marcellus',serif; font-weight:400; font-size:20px; color:var(--sage-d); min-width:74px; text-align:center;}
+  .ovscale-hint{font-size:13px; color:var(--ink2); font-style:italic; margin-top:10px; line-height:1.4;}
+  .ovscale-hint.off{color:#8a6326; font-style:normal;}
+  .matchbtn{background:none; border:none; padding:0; font:inherit; color:var(--sage-d); text-decoration:underline; text-underline-offset:2px; cursor:pointer; white-space:nowrap;}
 
   .gcount{font-size:14.5px; color:var(--ink2); margin:2px 0 10px;}
   .ggrid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
@@ -166,6 +180,97 @@ HELPER_CSS = """<style>
 """
 
 
+def dial_block(d):
+    """The what-you-have dial (ratio law: anchor drives, follower auto-follows)."""
+    dl = d.get("dial")
+    if not dl:
+        return ""
+    return f"""
+        <div class="ovscale">
+          <div class="ovscale-lab">What you have</div>
+          <div class="dialrow">
+            <span class="dialname">{dl['anchor']['label']}</span>
+            <div class="dial">
+              <button id="anchorMinus" aria-label="Less {dl['anchor']['label'].lower()}">&minus;</button>
+              <b id="anchorVal"></b>
+              <button id="anchorPlus" aria-label="More {dl['anchor']['label'].lower()}">+</button>
+            </div>
+          </div>
+          <div class="dialrow">
+            <span class="dialname">{dl['follow']['label']}</span>
+            <div class="dial">
+              <button id="followMinus" aria-label="Less {dl['follow']['label'].lower()}">&minus;</button>
+              <b id="followVal"></b>
+              <button id="followPlus" aria-label="More {dl['follow']['label'].lower()}">+</button>
+            </div>
+          </div>
+          <p class="ovscale-hint" id="balanceLine"></p>
+        </div>"""
+
+
+def scaling_js(d):
+    """Shared scaling engine for dial cards; a no-op stub for vessel-bound cards."""
+    dl = d.get("dial")
+    if not dl:
+        return """
+function qtyOf(it){ return it.q; }
+function rescale(){}
+function wireDial(){}"""
+    cfg = json.dumps(dl, ensure_ascii=False)
+    return f"""
+const DIAL = {cfg};
+let anchorV = DIAL.anchor.base, followV = DIAL.follow.base;
+const BASE_TOTAL = DIAL.anchor.base + DIAL.follow.base;
+const FRAC={{'0.25':'¼','0.5':'½','0.75':'¾'}};
+function frac(v){{ const q=Math.round(v*4)/4, w=Math.floor(q+1e-9), rem=+(q-w).toFixed(2), fx=FRAC[String(rem)]||''; return (w===0&&fx)?fx:(fx?w+fx:String(w)); }}
+function totalF(){{ return (anchorV+followV)/BASE_TOTAL; }}
+function valFor(base,drive){{ if(drive==='anchor') return anchorV; if(drive==='follow') return followV; return base*totalF(); }}
+function fmt(v,unit){{
+  if(unit==='g')    return Math.round(v/10)*10+' g';
+  if(unit==='int')  return String(Math.max(1,Math.round(v)));
+  if(unit==='tbsp') return frac(v)+' tbsp';
+  if(unit==='tsp')  return frac(v)+' tsp';
+  if(unit==='cup')  {{ const f=frac(v); return f+(v>1.001?' cups':' cup'); }}
+  if(unit==='handful') {{ const n=Math.max(1,Math.round(v)); return '~'+n+(n>1?' handfuls':' handful'); }}
+  return '';
+}}
+function qtyOf(it){{ return (it.base!==undefined && it.base!==null) ? fmt(valFor(it.base,it.drive),it.unit) : it.q; }}
+function clampA(v){{ return Math.max(DIAL.anchor.min, Math.min(DIAL.anchor.max, v)); }}
+function clampF(v){{ return Math.max(DIAL.follow.min, Math.min(DIAL.follow.max, v)); }}
+function rescale(){{
+  const a=document.getElementById('anchorVal'); if(a) a.textContent=fmt(anchorV,DIAL.anchor.unit);
+  const f=document.getElementById('followVal'); if(f) f.textContent=fmt(followV,DIAL.follow.unit);
+  const mk=document.getElementById('makesN'); if(mk) mk.textContent=String(Math.max(1,Math.round(DIAL.makes_base*totalF())));
+  (window.ING||[]).forEach(it=>{{
+    const q=qtyOf(it);
+    const m=document.getElementById('mq-'+it.k); if(m) m.textContent=q;
+    const g=document.getElementById('gq-'+it.k); if(g) g.textContent=q;
+  }});
+  document.querySelectorAll('[data-base]').forEach(el=>{{ el.textContent=fmt(valFor(parseFloat(el.dataset.base), el.dataset.drive), el.dataset.unit); }});
+  updateBalance();
+}}
+function updateBalance(){{
+  const el=document.getElementById('balanceLine'); if(!el) return;
+  const target=clampF(anchorV*DIAL.ratio);
+  if(Math.abs(followV-target)<1e-9){{
+    el.classList.remove('off');
+    el.innerHTML=DIAL.balanced_line;
+  }} else {{
+    el.classList.add('off');
+    el.innerHTML=(followV>target ? DIAL.more_line : DIAL.less_line)+' <button class="matchbtn" id="matchBtn">Match the recipe</button>';
+    document.getElementById('matchBtn').addEventListener('click', ()=>{{ followV=clampF(anchorV*DIAL.ratio); rescale(); }});
+  }}
+}}
+function wireDial(){{
+  const step=DIAL.anchor.step, fstep=DIAL.follow.step;
+  const on=(id,fn)=>{{ const el=document.getElementById(id); if(el) el.addEventListener('click',fn); }};
+  on('anchorMinus',()=>{{ anchorV=clampA(anchorV-step); followV=clampF(anchorV*DIAL.ratio); rescale(); }});
+  on('anchorPlus', ()=>{{ anchorV=clampA(anchorV+step); followV=clampF(anchorV*DIAL.ratio); rescale(); }});
+  on('followMinus',()=>{{ followV=clampF(followV-fstep); rescale(); }});
+  on('followPlus', ()=>{{ followV=clampF(followV+fstep); rescale(); }});
+}}"""
+
+
 def helper_card(d):
     steps = d["method"]
     n = len(steps)
@@ -184,7 +289,7 @@ def helper_card(d):
       <div class="hscreen on" id="s-overview">
         <img class="askhero" src="img/{d['slug']}/hero.jpg" alt="{d['hero_alt']}">
         <div class="askname">{d['name']}</div>
-        <p class="ovmeta">{d['meta_line']}</p>
+        <p class="ovmeta">{d['meta_line']}</p>{dial_block(d)}
         <div class="hkicker" style="margin-top:16px;">Ingredients</div>
         <div id="mlist" class="ovlist">{ov_ings}</div>
         <div class="hkicker" style="margin-top:14px;">Method</div>
@@ -271,7 +376,10 @@ def helper_card(d):
       </div>""")
 
     ing_js = json.dumps([
-        {"k": it["k"], "n": it["n"], "q": it["q"], "img": it["img"], "opt": bool(it.get("opt"))}
+        {k2: v for k2, v in {
+            "k": it["k"], "n": it["n"], "q": it["q"], "img": it["img"], "opt": bool(it.get("opt")),
+            "base": it.get("base"), "unit": it.get("unit"), "drive": it.get("drive"),
+        }.items() if v is not None}
         for it in d["ings"]
     ], ensure_ascii=False)
 
@@ -280,6 +388,7 @@ def helper_card(d):
         dotmap[f"step{i}"] = i + 1
     dotmap["done"] = n + 1
     dot_js = json.dumps(dotmap)
+    scale_js = scaling_js(d)
 
     return (HEAD.format(title=f"{d['name']} — kitchen card · Your Healing Kitchen")
             + HELPER_CSS + f"""</head>
@@ -305,10 +414,11 @@ def helper_card(d):
 <p class="backlink"><a href="drinks.html">&larr; All drinks</a> &middot; <a href="index.html">Everything</a></p>
 
 <script>
-const ING = {ing_js};
+const ING = window.ING = {ing_js};
 const state = {{ gathered:new Set(), flagged:new Set(), screen:'overview' }};
 const $  = (s,c)=>(c||document).querySelector(s);
 const $$ = (s,c)=>Array.from((c||document).querySelectorAll(s));
+{scale_js}
 
 let hT=null;
 function toastH(m){{ const el=$('#htoast'); el.textContent=m; el.classList.add('show'); clearTimeout(hT); hT=setTimeout(()=>el.classList.remove('show'),2300); }}
@@ -317,7 +427,7 @@ function toastH(m){{ const el=$('#htoast'); el.textContent=m; el.classList.add('
 const mlist=$('#mlist');
 ING.forEach(it=>{{
   const row=document.createElement('div'); row.className='mrow';
-  row.innerHTML='<span>'+it.n+'</span><span class="mq">'+it.q+'</span>';
+  row.innerHTML='<span>'+it.n+'</span><span class="mq" id="mq-'+it.k+'">'+qtyOf(it)+'</span>';
   mlist.appendChild(row);
 }});
 
@@ -329,7 +439,7 @@ ING.forEach(it=>{{
     '<button class="gmain" aria-label="I have '+it.n+'">'+
       '<img src="'+it.img+'" alt="">'+
       '<span class="gname">'+it.n+'</span>'+
-      '<span class="gqty">'+it.q+'</span>'+
+      '<span class="gqty" id="gq-'+it.k+'">'+qtyOf(it)+'</span>'+
     '</button>'+
     '<button class="gtick"><span class="gtickbox" aria-hidden="true"></span><span class="gticklabel">Tap when you have it</span></button>'+
     '<button class="gout">Out of this</button>';
@@ -418,6 +528,9 @@ $('#cookedBtn').addEventListener('click', ()=>{{
   setTimeout(()=>$('#thanks').classList.add('show'),1400);
 }});
 
+/* dial (ratio law) — no-op on vessel-bound cards */
+wireDial(); rescale();
+
 /* screen awake */
 let wakeLock=null;
 async function keepAwake(){{ try{{ if('wakeLock' in navigator){{ wakeLock=await navigator.wakeLock.request('screen'); }} }}catch(e){{}} }}
@@ -499,6 +612,17 @@ MUM_CSS = """<style>
   .ctl-row{padding:14px 0; border-bottom:1px solid var(--line);}
   .ctl-row.last{border-bottom:none; padding-bottom:2px;}
   .ctl-lab{font-family:'Marcellus',serif; letter-spacing:.06em; text-transform:uppercase; font-size:11.5px; color:var(--ink2); margin-bottom:10px;}
+  .dialrow{display:flex; align-items:center; justify-content:space-between; gap:8px; margin:0 0 12px;}
+  .dialrow:last-of-type{margin-bottom:0;}
+  .dialname{font-family:'Marcellus',serif; letter-spacing:.02em; font-size:14px; color:var(--ink); flex:none;}
+  .dial{display:flex; align-items:center; gap:9px;}
+  .dial button{width:46px; height:46px; border-radius:50%; border:1.5px solid var(--sage-d); color:var(--sage-d);
+               font-size:25px; line-height:1; font-family:'EB Garamond',serif; background:var(--paper2); flex:none;}
+  .dial button:active{background:var(--sage-soft);}
+  .dial b{font-family:'Marcellus',serif; font-weight:400; font-size:21px; color:var(--sage-d); min-width:76px; text-align:center;}
+  .balance{margin-top:11px; font-size:13.5px; color:var(--ink2); font-style:italic; line-height:1.4;}
+  .balance.off{color:#8a6326; font-style:normal; background:var(--amber-soft); border-radius:10px; padding:9px 12px;}
+  .matchbtn{background:none; border:none; padding:0; font:inherit; color:var(--sage-d); text-decoration:underline; text-underline-offset:2px; cursor:pointer; white-space:nowrap;}
 
   .tickrow{display:flex; flex-wrap:wrap; gap:9px;}
   .tick{border:1.5px solid var(--sage); border-radius:999px; background:var(--paper2); color:var(--ink);
@@ -643,10 +767,35 @@ def mum_card(d):
         f'<option{" selected" if o == d["when_opts"]["sel"] else ""}>{o}</option>'
         for o in d["when_opts"]["opts"])
 
+    dial_row = ""
+    if d.get("dial"):
+        dl = d["dial"]
+        dial_row = f"""
+      <div class="ctl-row">
+        <div class="ctl-lab">What you have</div>
+        <div class="dialrow">
+          <span class="dialname">{dl['anchor']['label']}</span>
+          <div class="dial">
+            <button id="anchorMinus" aria-label="Less {dl['anchor']['label'].lower()}">&minus;</button>
+            <b id="anchorVal"></b>
+            <button id="anchorPlus" aria-label="More {dl['anchor']['label'].lower()}">+</button>
+          </div>
+        </div>
+        <div class="dialrow">
+          <span class="dialname">{dl['follow']['label']}</span>
+          <div class="dial">
+            <button id="followMinus" aria-label="Less {dl['follow']['label'].lower()}">&minus;</button>
+            <b id="followVal"></b>
+            <button id="followPlus" aria-label="More {dl['follow']['label'].lower()}">+</button>
+          </div>
+        </div>
+        <p class="balance" id="balanceLine"></p>
+      </div>"""
+
     ings = ""
     for it in d["ings"]:
         prep = f"<i>{it['prep']}</i>" if it.get("prep") else ""
-        ings += f'      <div class="ing"><img src="{it["img"]}" alt="{it["n"]}"><span class="q">{it["q"]}</span><span class="n">{it["n"]}{prep}</span></div>\n'
+        ings += f'      <div class="ing"><img src="{it["img"]}" alt="{it["n"]}"><span class="q" id="mq-{it["k"]}">{it["q"]}</span><span class="n">{it["n"]}{prep}</span></div>\n'
 
     steps = ""
     for i, s in enumerate(d["method"]):
@@ -661,6 +810,15 @@ def mum_card(d):
         for c in d["nutri"])
 
     ev_js = json.dumps(d["ev"], ensure_ascii=False)
+    ing_js = json.dumps([
+        {k2: v for k2, v in {
+            "k": it["k"], "n": it["n"], "q": it["q"],
+            "base": it.get("base"), "unit": it.get("unit"), "drive": it.get("drive"),
+        }.items() if v is not None}
+        for it in d["ings"]
+    ], ensure_ascii=False)
+    scale_js = scaling_js(d)
+    boost_prefix = d.get("boost_prefix", "In your cup")
     serve_js = json.dumps({it["k"]: it["label"] for it in (d.get("serve", {}) or {}).get("items", [])}, ensure_ascii=False)
     serve_state = json.dumps({it["k"]: bool(it.get("on")) for it in (d.get("serve", {}) or {}).get("items", [])})
     boost_js = json.dumps({it["k"]: it["label"] for it in (d.get("boost", {}) or {}).get("items", [])}, ensure_ascii=False)
@@ -711,7 +869,7 @@ def mum_card(d):
     <div class="controls">
       <div class="blockh">Your instructions</div>
       <p class="panel-sub">{d['instr_note']}</p>
-{serve_row}{boost_row}
+{dial_row}{serve_row}{boost_row}
       <div class="ctl-row last">
         <div class="sendrow">
           <label class="bywhen">{d['when_opts']['label']}
@@ -771,6 +929,9 @@ def mum_card(d):
 <script>
 const $=(s,c)=>(c||document).querySelector(s);
 const $$=(s,c)=>Array.from((c||document).querySelectorAll(s));
+const ING = window.ING = {ing_js};
+{scale_js}
+wireDial(); rescale();
 
 /* ---------- ticks ---------- */
 const state={{ serve:{serve_state}, boost:{boost_state} }};
@@ -787,8 +948,9 @@ $('#sendBtn').addEventListener('click',()=>{{
   const b=$('#sendBtn'); b.textContent='Sent to your helper'; b.classList.add('sent');
   const items=[];
   items.push('For: <b>'+$('#timeSel').value+'</b>');
+  if(typeof DIAL!=='undefined') items.push('Serves ~<b>'+Math.max(1,Math.round(DIAL.makes_base*totalF()))+'</b> &middot; '+fmt(anchorV,DIAL.anchor.unit)+' '+DIAL.anchor.label.toLowerCase()+' + '+fmt(followV,DIAL.follow.unit)+' '+DIAL.follow.label.toLowerCase());
   const sv=Object.keys(SERVE).filter(k=>state.serve[k]).map(k=>SERVE[k]); if(sv.length) items.push('With: '+sv.join(', '));
-  const bo=Object.keys(BOOST).filter(k=>state.boost[k]).map(k=>BOOST[k]); if(bo.length) items.push('In your cup: '+bo.join(', '));
+  const bo=Object.keys(BOOST).filter(k=>state.boost[k]).map(k=>BOOST[k]); if(bo.length) items.push('{boost_prefix}: '+bo.join(', '));
   items.push('<a href="{slug}.html">Open the helper&rsquo;s card &rarr;</a>');
   $('#sentList').innerHTML=items.map(t=>'<li>'+t+'</li>').join('');
   $('#sentCard').classList.add('show');
@@ -827,8 +989,8 @@ def defaults(d):
 
 def main(only=None):
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import data_teas, data_milks, data_mineral
-    drinks = data_teas.DRINKS + data_milks.DRINKS + data_mineral.DRINKS
+    import data_teas, data_milks, data_mineral, data_mains
+    drinks = data_teas.DRINKS + data_milks.DRINKS + data_mineral.DRINKS + data_mains.DRINKS
     for d in drinks:
         if only and d["slug"] not in only:
             continue

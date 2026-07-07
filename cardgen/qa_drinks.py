@@ -9,7 +9,9 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CC = os.path.join(REPO, "cook-cards")
 SLUGS = ["jujube-goji-tea","nettle-tea-card","caraway-tea-card","fennel-tea-card","ccf-tea","chai-tea",
          "golden-milk-card","almond-date-saffron","ashwagandha-milk","dashamoola-decoction",
-         "morning-waters","adrenal-cocktail","power-smoothie","meat-stock-latte","beet-kvass-card"]
+         "morning-waters","adrenal-cocktail","power-smoothie","meat-stock-latte","beet-kvass-card",
+         "chicken-bone-broth-card","magic-chicken-soup","khichdi"]
+DIAL_SLUGS = {"khichdi"}  # ratio-law dial cards; all others are vessel/unit-bound
 
 CREATORS = ["@wildnutritionist","@thislifewithkels","@sokoladassielai","@dearmama","@raquels",
             "@reallifefamilykitchen","@delight.fuel","@naturalia_ukis","@neringa","Kate Pope","Neringa",
@@ -54,8 +56,12 @@ for slug in SLUGS:
             # every screen except overview has a Back
             for m in re.finditer(r'id="s-(step\d+|gather|done)"(.*?)(?=<div class="hscreen"|<!-- /screens -->)', doc, re.S):
                 check(">Back<" in m.group(2), name, f"screen {m.group(1)} has no Back")
-            # no dial anywhere (vessel-bound)
-            check("ovscale" not in doc and "dialrow" not in doc, name, "a dial leaked into a vessel-bound card")
+            # ratio law: dial markup only on dial cards; vessel-bound cards get none
+            if slug in DIAL_SLUGS:
+                check('id="anchorVal"' in doc, name, "dial card is missing its dial")
+                check('Match the recipe' in doc, name, "dial card missing the match-the-recipe balance line")
+            else:
+                check('id="anchorVal"' not in doc, name, "a dial leaked into a vessel-bound card")
         else:
             # mum: chips limited to the 3 labels; every chip opens an EV entry with a real link or explicit tradition text
             labels = set(re.findall(r'class="tag (\w+)"', doc))

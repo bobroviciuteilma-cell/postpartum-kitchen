@@ -82,6 +82,17 @@
   .ctl-row{padding:14px 0; border-bottom:1px solid var(--line);}
   .ctl-row.last{border-bottom:none; padding-bottom:2px;}
   .ctl-lab{font-family:'Marcellus',serif; letter-spacing:.06em; text-transform:uppercase; font-size:11.5px; color:var(--ink2); margin-bottom:10px;}
+  .dialrow{display:flex; align-items:center; justify-content:space-between; gap:8px; margin:0 0 12px;}
+  .dialrow:last-of-type{margin-bottom:0;}
+  .dialname{font-family:'Marcellus',serif; letter-spacing:.02em; font-size:14px; color:var(--ink); flex:none;}
+  .dial{display:flex; align-items:center; gap:9px;}
+  .dial button{width:46px; height:46px; border-radius:50%; border:1.5px solid var(--sage-d); color:var(--sage-d);
+               font-size:25px; line-height:1; font-family:'EB Garamond',serif; background:var(--paper2); flex:none;}
+  .dial button:active{background:var(--sage-soft);}
+  .dial b{font-family:'Marcellus',serif; font-weight:400; font-size:21px; color:var(--sage-d); min-width:76px; text-align:center;}
+  .balance{margin-top:11px; font-size:13.5px; color:var(--ink2); font-style:italic; line-height:1.4;}
+  .balance.off{color:#8a6326; font-style:normal; background:var(--amber-soft); border-radius:10px; padding:9px 12px;}
+  .matchbtn{background:none; border:none; padding:0; font:inherit; color:var(--sage-d); text-decoration:underline; text-underline-offset:2px; cursor:pointer; white-space:nowrap;}
 
   .tickrow{display:flex; flex-wrap:wrap; gap:9px;}
   .tick{border:1.5px solid var(--sage); border-radius:999px; background:var(--paper2); color:var(--ink);
@@ -254,10 +265,10 @@
   <div class="section">
     <div class="blockh">Ingredients</div>
     <div class="ings-grid">
-      <div class="ing"><img src="img/adrenal-cocktail/ing-01-orange-juice.jpg" alt="Orange juice"><span class="q">½ cup</span><span class="n">Orange juice<i>fresh is best</i></span></div>
-      <div class="ing"><img src="img/adrenal-cocktail/ing-02-coconut-water.jpg" alt="Coconut water"><span class="q">½ cup</span><span class="n">Coconut water</span></div>
-      <div class="ing"><img src="img/adrenal-cocktail/ing-03-cream-of-tartar.jpg" alt="Cream of tartar"><span class="q">⅛ tsp</span><span class="n">Cream of tartar</span></div>
-      <div class="ing"><img src="img/adrenal-cocktail/ing-04-sea-salt.jpg" alt="Sea salt"><span class="q">a pinch</span><span class="n">Sea salt</span></div>
+      <div class="ing"><img src="img/adrenal-cocktail/ing-01-orange-juice.jpg" alt="Orange juice"><span class="q" id="mq-oj">½ cup</span><span class="n">Orange juice<i>fresh is best</i></span></div>
+      <div class="ing"><img src="img/adrenal-cocktail/ing-02-coconut-water.jpg" alt="Coconut water"><span class="q" id="mq-coconut">½ cup</span><span class="n">Coconut water</span></div>
+      <div class="ing"><img src="img/adrenal-cocktail/ing-03-cream-of-tartar.jpg" alt="Cream of tartar"><span class="q" id="mq-tartar">⅛ tsp</span><span class="n">Cream of tartar</span></div>
+      <div class="ing"><img src="img/adrenal-cocktail/ing-04-sea-salt.jpg" alt="Sea salt"><span class="q" id="mq-salt">a pinch</span><span class="n">Sea salt</span></div>
     </div>
   </div>
 
@@ -304,6 +315,12 @@
 <script>
 const $=(s,c)=>(c||document).querySelector(s);
 const $$=(s,c)=>Array.from((c||document).querySelectorAll(s));
+const ING = window.ING = [{"k": "oj", "n": "Orange juice", "q": "½ cup"}, {"k": "coconut", "n": "Coconut water", "q": "½ cup"}, {"k": "tartar", "n": "Cream of tartar", "q": "⅛ tsp"}, {"k": "salt", "n": "Sea salt", "q": "a pinch"}];
+
+function qtyOf(it){ return it.q; }
+function rescale(){}
+function wireDial(){}
+wireDial(); rescale();
 
 /* ---------- ticks ---------- */
 const state={ serve:{}, boost:{"fresh": true, "ice": true} };
@@ -320,6 +337,7 @@ $('#sendBtn').addEventListener('click',()=>{
   const b=$('#sendBtn'); b.textContent='Sent to your helper'; b.classList.add('sent');
   const items=[];
   items.push('For: <b>'+$('#timeSel').value+'</b>');
+  if(typeof DIAL!=='undefined') items.push('Serves ~<b>'+Math.max(1,Math.round(DIAL.makes_base*totalF()))+'</b> &middot; '+fmt(anchorV,DIAL.anchor.unit)+' '+DIAL.anchor.label.toLowerCase()+' + '+fmt(followV,DIAL.follow.unit)+' '+DIAL.follow.label.toLowerCase());
   const sv=Object.keys(SERVE).filter(k=>state.serve[k]).map(k=>SERVE[k]); if(sv.length) items.push('With: '+sv.join(', '));
   const bo=Object.keys(BOOST).filter(k=>state.boost[k]).map(k=>BOOST[k]); if(bo.length) items.push('In your cup: '+bo.join(', '));
   items.push('<a href="adrenal-cocktail.html">Open the helper&rsquo;s card &rarr;</a>');

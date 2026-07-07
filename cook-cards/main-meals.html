@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Your Healing Kitchen — Main Meals</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +32,12 @@
   .tile .when{font-size:14.5px;color:var(--ink2);margin-top:2px;}
   .tile .when b{font-family:'Marcellus',serif;font-weight:400;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-right:6px;}
   .tile .go{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--sage);flex:none;}
+  div.tile{background:var(--paper2);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:all .15s;}
+  div.tile:hover{border-color:var(--sage);box-shadow:0 4px 14px rgba(60,50,30,.1);}
+  a.tmain{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;padding:14px 18px 10px;}
+  .views{display:flex;gap:16px;padding:0 18px 11px;font-size:13px;font-style:italic;}
+  .views a{color:var(--sage-d);text-decoration:underline;text-underline-offset:2px;}
+  .views a.k{color:var(--amber);}
   .foot{padding:18px 40px 30px;text-align:center;font-size:12.5px;color:#a59c8a;font-style:italic;}
   .tabbar{display:flex;margin-top:20px;}
   .tabbar a{flex:1;text-align:center;padding:12px 0;font-family:'Marcellus',serif;letter-spacing:.06em;font-size:12.5px;color:#fff;text-decoration:none;transition:filter .15s;}
@@ -60,9 +69,18 @@
 
   <div class="sec">
     <div class="sech">Broths &amp; gut-healing</div>
-    <a class="tile" href="chicken-bone-broth-card.html"><div class="txt"><div class="nm">Chicken Bone Broth</div><div class="when"><b>Collagen</b> Feet &amp; necks — your daily base</div></div><div class="go">&rarr;</div></a>
-    <a class="tile" href="magic-chicken-soup.html"><div class="txt"><div class="nm">No-Water Magic Chicken Soup</div><div class="when"><b>Gut</b> Cooks in its own juices, no water</div></div><div class="go">&rarr;</div></a>
-    <a class="tile" href="khichdi.html"><div class="txt"><div class="nm">Khichdi</div><div class="when"><b>Gut</b> The gentle one-pot — rice + red lentils</div></div><div class="go">&rarr;</div></a>
+    <div class="tile">
+      <a class="tmain" href="chicken-bone-broth-card-mum.html?v=c1"><div class="txt"><div class="nm">Chicken Bone Broth</div><div class="when"><b>Collagen</b> Feet &amp; necks — your daily base</div></div><div class="go">&rarr;</div></a>
+      <div class="views"><a href="chicken-bone-broth-card-mum.html?v=c1">Your card</a><a class="k" href="chicken-bone-broth-card.html?v=c1">Helper&rsquo;s kitchen card</a></div>
+    </div>
+    <div class="tile">
+      <a class="tmain" href="magic-chicken-soup-mum.html?v=c1"><div class="txt"><div class="nm">No-Water Magic Chicken Soup</div><div class="when"><b>Gut</b> Cooks in its own juices, no water</div></div><div class="go">&rarr;</div></a>
+      <div class="views"><a href="magic-chicken-soup-mum.html?v=c1">Your card</a><a class="k" href="magic-chicken-soup.html?v=c1">Helper&rsquo;s kitchen card</a></div>
+    </div>
+    <div class="tile">
+      <a class="tmain" href="khichdi-mum.html?v=c1"><div class="txt"><div class="nm">Khichdi</div><div class="when"><b>Gut</b> The gentle one-pot — rice + red lentils</div></div><div class="go">&rarr;</div></a>
+      <div class="views"><a href="khichdi-mum.html?v=c1">Your card</a><a class="k" href="khichdi.html?v=c1">Helper&rsquo;s kitchen card</a></div>
+    </div>
     <a class="tile" href="fermented-cucumbers.html"><div class="txt"><div class="nm">Fermented Cucumbers</div><div class="when"><b>Gut</b> Kilner-jar ferment — start a jar this week</div></div><div class="go">&rarr;</div></a>
   </div>
 
