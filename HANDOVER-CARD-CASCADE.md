@@ -2,6 +2,27 @@
 *Written 2026-07-04 by the cards/mom+helper session (8 feedback rounds + Fable review).
 Paste SESSION-HANDOVER.md first, then this. **Ilma's live feedback always wins over any doc, including this one.***
 
+## ✅ STATUS — 2026-07-07 evening (items 1–3 of the urgent list DONE, live-verified)
+1. **`pilot/week1.html` is LIVE** — the WhatsApp door. Hand the helper:
+   `https://bobroviciuteilma-cell.github.io/postpartum-kitchen/pilot/week1.html?v=w1`
+2. **All 15 DRINKS cascaded** to the mum+helper pair format (per-card QA clean; `drinks.html`
+   offers Your card / Helper's kitchen card per recipe, `?v=c1`). Claims corrections per
+   TAXONOMY-SYNERGY carried (fennel dose note, ashwagandha honest rewrite, Mineral Refresher
+   rename, golden-milk 20× dropped, kvass folate-first + safety…) — full list in CARDS-AUDIT.md.
+3. **Gentle mains cascaded**: bone broth (collagen-honest reframe) · magic soup · **khichdi with
+   the first ratio-law dial** (rice anchors, lentils follow 1:1, Match-the-recipe balance line).
+   `main-meals.html` updated for those three tiles only. **18/49 recipes are now pairs.**
+   Build system: `cardgen/` (generator + per-drink data + QA script) — extend `data_*.py` for
+   the remaining batches; khichdi is the dial reference.
+4. **Photo pass BLOCKED on the OpenAI key**: Keychain service `healing-kitchen-openai` is EMPTY
+   on this machine and the old `.env` is gone. Script rescued to `cardgen/gen_anchors_v2.py`
+   (already Keychain-aware). Ilma: add the key with
+   `security add-generic-password -s healing-kitchen-openai -a ilma -w '<KEY>'` and any session
+   can run the pass.
+5. Old pilot cards remain live but `week1.html` now points the kvass tile at the NEW
+   `cook-cards/beet-kvass-card.html` (upgraded, ferment-shaped). `pilot/kvass.html` +
+   `pilot/index.html` upgrades stay on the before-FINAL checklist.
+
 ## ⚡ REALITY CHANGE — 2026-07-07
 **Emil was born 2026-07-05.** Ilma is week-1 postpartum NOW and could not yet cook/delegate from
 the recipes. Priorities are FLIPPED — usefulness today beats finalization:

@@ -1,5 +1,18 @@
 # Cook Cards — Master Audit & Catalogue
 
+## 2026-07-07 (later) — GENTLE MAINS: bone broth · magic soup · khichdi cascaded
+
+Same pair format as the drinks (below). **Khichdi carries the first generator dial** — the ratio
+law live: rice anchors, red lentils auto-follow 1:1, nudge → balance line + "Match the recipe",
+supporting cast + serves scale off the total. Broth & soup = pot/unit-bound, no dial.
+Broth got the audit's highest-value fix (collagen/glycine framing, NO mineral-rebuild claims,
+star-anise culinary BF note); magic soup lost its public creator mention; khichdi got the 3-label
+retrofit + yolk-freshness step warning. `main-meals.html` shows Your card / Helper's kitchen card
+on the three converted tiles (`?v=c1`); the other 19 mains await their batch.
+**Deck status: 18 of 49 recipes are now mum+helper pairs** (15 drinks + 3 gentle mains).
+Photo pass v2: script ready at `cardgen/gen_anchors_v2.py` — **blocked on the OpenAI key**
+(Keychain service `healing-kitchen-openai` is empty and the old .env is gone).
+
 ## 2026-07-07 — DRINKS CASCADE: all 15 drinks on the finalized mum+helper pair format
 
 Every drink is now a **pair**: `<slug>.html` = the helper kitchen-mode card (overview → gather →
