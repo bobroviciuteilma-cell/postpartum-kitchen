@@ -2,6 +2,34 @@
 *Written 2026-07-04 by the cards/mom+helper session (8 feedback rounds + Fable review).
 Paste SESSION-HANDOVER.md first, then this. **Ilma's live feedback always wins over any doc, including this one.***
 
+## ⚡ REALITY CHANGE — 2026-07-07
+**Emil was born 2026-07-05.** Ilma is week-1 postpartum NOW and could not yet cook/delegate from
+the recipes. Priorities are FLIPPED — usefulness today beats finalization:
+1. **TODAY — the helper cooks from what EXISTS.** Working links (all verified live 2026-07-07):
+   pilot liver-cutlets helper card + mum card, pilot kvass, `cook-cards/drinks.html` (15 drinks),
+   `cook-cards/index.html` (everything). First deliverable of the next session = **`pilot/week1.html`**,
+   one phone-friendly WhatsApp-able page linking: Tonight = Liver Cutlets (pilot helper card) ·
+   Start today = Beet Kvass · week-1 drinks (jujube-goji, golden milk, nettle, caraway, meat-stock
+   latte) · gentle mains (chicken bone broth, magic chicken soup, khichdi). No new content — just the door.
+2. **Cascade DRINKS first** (what a breastfeeding week-1 mum uses most), then gentle recovery
+   mains (broths/soups/khichdi), then the rest. Same per-card QA as below.
+3. **Template polish only when it blocks cooking. Photo pass background-only** — anchors v2 steer:
+   delicate Provençal porcelain (fluted/scalloped rims), much less herby, sparse wildflower posy
+   (lavender/chamomile), cream+sage cast iron stays, golden-brown oval cutlets. Generator script ready:
+   `<session-scratchpad>/gen_anchors_v2.py`; key expected at `~/.config/healing-kitchen/.env`
+   (moved from /tmp — macOS reaped it). v1 anchors live at `photo-anchors-preview.html`.
+4. The pre-birth "before-FINAL checklist" below still applies, but AFTER the above.
+
+**Paste-ready prompt (URGENT version — supersedes the one at the bottom):**
+> Read SESSION-HANDOVER.md, then HANDOVER-CARD-CASCADE.md including the REALITY CHANGE block —
+> Emil was born 2026-07-05; I'm week-1 postpartum and my helper must cook from these cards NOW.
+> Work in this order, push + live-confirm after each, don't ask me anything you can decide:
+> (1) build pilot/week1.html per the block above and give me the link to WhatsApp my helper;
+> (2) cascade the 15 DRINKS to the finalized mum+helper format (vessel-bound = no dial), per-card
+> QA, fresh ?v links per batch; (3) gentle recovery mains next; (4) photo pass background-only,
+> key at ~/.config/healing-kitchen/.env; (5) my feedback wins, never name creators, every health
+> line keeps its 3-label chips + real sources.
+
 ## What this is
 The mom+helper card format was hammered out on the **liver-cutlets pilot pair** through 8 rounds of
 Ilma's live feedback (2026-07-04). This file holds: (1) the locked card standard, (2) the checklist
