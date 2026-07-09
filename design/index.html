@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Design directions — pick one · Your Healing Kitchen</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%239c2b4e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Marcellus&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F8F2E7; --paper2:#FBF7EE; --sage:#6E8A6F; --sage-d:#4F6A54; --sage-soft:#DDE6D8;
+    --amber:#C0843A; --ink:#3B362C; --ink2:#6B6456; --line:#E2D8C5; --beet:#9c2b4e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{background:#cdc4b2; font-family:'EB Garamond',serif; color:var(--ink); min-height:100vh;
+       display:flex; flex-direction:column; align-items:center; padding:30px 16px 56px;}
+  a{text-decoration:none; color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px; border-radius:10px;}
+
+  .wrap{width:min(600px,100%);}
+  .sprig{width:40px; height:40px; margin:0 auto 12px; display:block;}
+  .brandmark{font-family:'Pinyon Script',cursive; font-size:38px; color:var(--sage-d); line-height:1; text-align:center;}
+  .brandtag{font-family:'Marcellus',serif; letter-spacing:.24em; text-transform:uppercase; font-size:10px; color:var(--amber); margin-top:6px; text-align:center;}
+  .rule{width:66px; height:1px; background:var(--line); margin:16px auto 18px;}
+
+  .eyebrow{font-family:'Marcellus',serif; letter-spacing:.2em; text-transform:uppercase; font-size:11px; color:#8a6326; text-align:center;}
+  h1{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(30px,7vw,40px); color:var(--sage-d);
+     line-height:1.05; text-align:center; margin:8px 0 10px;}
+  .lede{font-style:italic; font-size:17.5px; color:#5d564a; text-align:center; line-height:1.45; max-width:460px; margin:0 auto 8px;}
+  .samecard{background:var(--paper2); border:1px solid var(--line); border-radius:13px; padding:13px 18px;
+            font-size:14.5px; color:var(--ink2); line-height:1.5; margin:16px 0 24px; text-align:center; font-style:italic;}
+
+  .dir{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:20px 20px 16px;
+       box-shadow:0 14px 34px rgba(60,50,30,.16); margin-bottom:18px;}
+  .dnum{font-family:'Marcellus',serif; letter-spacing:.18em; text-transform:uppercase; font-size:11px; color:var(--amber);}
+  .dname{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:30px; color:var(--sage-d); line-height:1.05; margin:4px 0 6px;}
+  .dfeel{font-size:15.5px; color:var(--ink2); font-style:italic; line-height:1.45;}
+  .dtrial{font-size:13.5px; color:#8a6326; line-height:1.45; margin-top:8px;}
+  .dots{display:flex; gap:7px; margin:12px 0 14px; align-items:center;}
+  .dots i{width:22px; height:22px; border-radius:50%; display:block; border:1px solid rgba(60,50,30,.15);}
+  .dots .lab{font-family:'Marcellus',serif; letter-spacing:.1em; text-transform:uppercase; font-size:9.5px; color:#a59c8a; margin-left:4px;}
+  .door{display:flex; align-items:center; justify-content:space-between; background:var(--sage-d); color:#fff;
+        border-radius:13px; padding:14px 18px; font-family:'Marcellus',serif; letter-spacing:.07em;
+        text-transform:uppercase; font-size:13px; margin-bottom:10px;}
+  .door span{font-family:'Cormorant Garamond',serif; font-size:21px; text-transform:none; letter-spacing:0;}
+  .surf{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .surf a{display:flex; align-items:center; justify-content:space-between; background:var(--paper2); border:1px solid var(--line);
+          border-radius:11px; padding:11px 14px; font-size:15.5px; color:var(--sage-d); min-height:46px;}
+  .surf a b{font-family:'Marcellus',serif; font-weight:400; font-size:13px;}
+
+  .ask{background:#fff; border:1.5px solid var(--sage); border-radius:16px; padding:18px 20px; margin-top:8px;
+       box-shadow:0 10px 26px rgba(79,106,84,.10);}
+  .ask .blockh{font-family:'Marcellus',serif; letter-spacing:.14em; text-transform:uppercase; font-size:12px; color:var(--sage-d); margin-bottom:8px;}
+  .ask p{font-size:16px; line-height:1.5;}
+  .ask p+p{margin-top:8px;}
+
+  .foot{text-align:center; font-size:12.5px; color:#7d7563; font-style:italic; margin-top:26px; line-height:1.5;}
+  @media (max-width:430px){ .surf{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <svg class="sprig" viewBox="0 0 40 40" fill="none" stroke="#6E8A6F" stroke-width="1.4" stroke-linecap="round">
+    <path d="M20 34 V10"/><path d="M20 16 C13 15 11 11 11 7 C16 8 19 11 20 16Z" fill="#DDE6D8"/>
+    <path d="M20 22 C27 21 29 17 29 13 C24 14 21 17 20 22Z" fill="#DDE6D8"/>
+    <path d="M20 12 C15 12 13 9 13 6"/><path d="M20 18 C25 18 27 15 27 12"/>
+  </svg>
+  <div class="brandmark">Your Healing Kitchen</div>
+  <div class="brandtag">Design Session &middot; July 2026</div>
+  <div class="rule"></div>
+
+  <p class="eyebrow">Three directions &middot; you pick one</p>
+  <h1>How should it all feel?</h1>
+  <p class="lede">Same DNA in all three &mdash; your approved photo style, the apothecary fonts, the card rules. Three intensities of the fresh Provence feel: sage, lavender, soft pink. Open each on your phone and tap through the real pages.</p>
+
+  <div class="samecard">Fixed in every direction: Cormorant / EB&nbsp;Garamond / Marcellus / Pinyon &middot; the 3 label chips &middot; big-type helper screens &middot; no emoji &middot; sparse, never cluttered.</div>
+
+  <!-- 1 -->
+  <div class="dir">
+    <div class="dnum">Direction 1</div>
+    <div class="dname">Porcelain minimal</div>
+    <p class="dfeel">The quietest. White porcelain and pale cream linen, crisp sage headings, lavender kept to the fine print, a scalloped hairline under the wordmark &mdash; like the fluted plates in your photos.</p>
+    <div class="dots">
+      <i style="background:#FCFAF3"></i><i style="background:#546E59"></i><i style="background:#B98F56"></i>
+      <i style="background:#8C81A9"></i><i style="background:#C98A9B"></i><i style="background:#9C2B4E"></i>
+      <span class="lab">porcelain &middot; sage &middot; honey &middot; lavender &middot; pink &middot; beet action</span>
+    </div>
+    <a class="door" href="porcelain/week1.html?v=d1"><span>Open the week-one door</span> &rarr;</a>
+    <div class="surf">
+      <a href="porcelain/liver-cutlets-mum.html?v=d1">Mum&rsquo;s card <b>&rarr;</b></a>
+      <a href="porcelain/liver-cutlets.html?v=d1">Helper&rsquo;s card <b>&rarr;</b></a>
+      <a href="porcelain/index.html?v=d1">Card index <b>&rarr;</b></a>
+      <a href="porcelain/week1.html?v=d1">Week-one door <b>&rarr;</b></a>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="dir">
+    <div class="dnum">Direction 2</div>
+    <div class="dname">Provence garden</div>
+    <p class="dfeel">The freshest. Lavender takes the section headings, a wildflower posy sits under the wordmark, soft pink in the warm notes and hovers &mdash; the garden through the farmhouse window.</p>
+    <p class="dtrial">One deliberate trial here: your &ldquo;Send to my helper&rdquo; button is deep <b>iris purple</b> instead of beet. Tell me if beet should stay.</p>
+    <div class="dots">
+      <i style="background:#FAF5E8"></i><i style="background:#4D6852"></i><i style="background:#C08A43"></i>
+      <i style="background:#5D5382"></i><i style="background:#C97F92"></i><i style="background:#6D5F92"></i>
+      <span class="lab">cream &middot; sage &middot; honey &middot; lavender &middot; pink &middot; iris action</span>
+    </div>
+    <a class="door" href="garden/week1.html?v=d1"><span>Open the week-one door</span> &rarr;</a>
+    <div class="surf">
+      <a href="garden/liver-cutlets-mum.html?v=d1">Mum&rsquo;s card <b>&rarr;</b></a>
+      <a href="garden/liver-cutlets.html?v=d1">Helper&rsquo;s card <b>&rarr;</b></a>
+      <a href="garden/index.html?v=d1">Card index <b>&rarr;</b></a>
+      <a href="garden/week1.html?v=d1">Week-one door <b>&rarr;</b></a>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="dir">
+    <div class="dnum">Direction 3</div>
+    <div class="dname">Linen apothecary</div>
+    <p class="dfeel">The warmest. Deep oatmeal linen with a woven texture, label-frame double rules like a hand-labelled jar, amber small-caps, a lavender-ink eyebrow finished with a wax-seal pink dot.</p>
+    <div class="dots">
+      <i style="background:#F7F0E1"></i><i style="background:#4E634E"></i><i style="background:#B27E35"></i>
+      <i style="background:#8678A2"></i><i style="background:#C2848F"></i><i style="background:#8E2A47"></i>
+      <span class="lab">oatmeal &middot; sage &middot; amber &middot; lavender &middot; pink &middot; beet action</span>
+    </div>
+    <a class="door" href="apothecary/week1.html?v=d1"><span>Open the week-one door</span> &rarr;</a>
+    <div class="surf">
+      <a href="apothecary/liver-cutlets-mum.html?v=d1">Mum&rsquo;s card <b>&rarr;</b></a>
+      <a href="apothecary/liver-cutlets.html?v=d1">Helper&rsquo;s card <b>&rarr;</b></a>
+      <a href="apothecary/index.html?v=d1">Card index <b>&rarr;</b></a>
+      <a href="apothecary/week1.html?v=d1">Week-one door <b>&rarr;</b></a>
+    </div>
+  </div>
+
+  <div class="ask">
+    <div class="blockh">Your call</div>
+    <p>Reply <b>1</b>, <b>2</b> or <b>3</b> &mdash; or mix (&ldquo;Garden, but keep the beet button&rdquo;, &ldquo;Porcelain, but with the posy&rdquo;).</p>
+    <p>After your pick I&rsquo;ll bring the next choices the same way: three palette mixes, three divider motifs, three accent strengths &mdash; on these same pages.</p>
+  </div>
+
+  <p class="foot">Every page up there is the real thing &mdash; the live week-one door, the real liver-cutlets pair, the card index &mdash; just re-dressed. Nothing on the live links your helper uses has changed.</p>
+</div>
+</body>
+</html>
