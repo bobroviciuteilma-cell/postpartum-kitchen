@@ -53,7 +53,23 @@ library DEDUPED across cards (shoot turmeric once, reuse everywhere), throttled 
    `cook-cards/beet-kvass-card.html` (upgraded, ferment-shaped). `pilot/kvass.html` +
    `pilot/index.html` upgrades stay on the before-FINAL checklist.
 
-## 🎨 DESIGN SESSION — READY TO RUN (steer locked 2026-07-09)
+## 🎨 DESIGN SESSION — Deliverable 1 SHIPPED 2026-07-09 eve, awaiting Ilma's pick
+**Three directions live** (same DNA, three intensities), each applied to REAL surfaces
+(week1 door · liver-cutlets mum card · liver-cutlets helper card · card index), with a
+switcher bar on every page. Originals untouched. Chooser: `design/index.html?v=d1`.
+1. **Porcelain minimal** (`design/porcelain/`) — quietest: white porcelain + pale linen,
+   sage headings, lavender fine-print, scalloped hairline. Beet action.
+2. **Provence garden** (`design/garden/`) — freshest: lavender headings, wildflower-posy
+   divider, pink notes/hovers. **Trial: mum's "Send to my helper" in deep iris, not beet.**
+3. **Linen apothecary** (`design/apothecary/`) — warmest: woven oatmeal texture,
+   label-frame double rules, amber small-caps, lavender eyebrow + wax-seal pink dot. Beet action.
+All three: destriped callouts (tinted, per the house ban), 3-label chips untouched, big-type
+helper preserved. Build script: `design/build_directions.py` (regenerates all
+12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
+**Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
+strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**
+
+### (original brief below — steer locked 2026-07-09)
 Ilma: seed the design system **from the approved photo anchors** (no screenshots needed). Her words:
 *"love the fresh crispy style — sage, purple, pink, herby wild flowers, lavender, lilies, chamomile —
 design it all and give me options to approve."*
