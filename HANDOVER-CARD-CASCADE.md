@@ -40,6 +40,13 @@ subject line first, then append this style suffix VERBATIM:
 > no hands, no text, no watermark."
 Subject rules: cutlets/patties = golden-brown ovals · ferments = the 1.6 L clip-top Kilner (orange
 seal) · pots = sage or cream enamelled cast iron · ingredient shots = small fluted porcelain bowls.
+**FRAMING (Ilma, 2026-07-09): shoot CLOSER — on the cards these render small** (ingredient circles
+44–60px, steps/heroes ~84–160px). The subject fills **~70–80% of the frame**; ingredients = tight
+close-up on the bowl (posy/context only at the edges or out of frame); heroes/steps = close crop on
+the food/pot, the airy Provence context in the margins, never the center. Append to every prompt:
+*"Framed close on the subject — it fills most of the frame; context stays at the edges."* The v2
+anchors are style-true but framed WIDE — do not copy their framing. **QA: check the first 3 batch
+images at 60px thumbnail size before running the rest.**
 Output into the shared `cook-cards/img/<slug>/` dirs (cardgen architecture) — heroes + ingredient
 library DEDUPED across cards (shoot turmeric once, reuse everywhere), throttled ≤4/min.
 5. Old pilot cards remain live but `week1.html` now points the kvass tile at the NEW
