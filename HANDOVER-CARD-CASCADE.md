@@ -46,6 +46,25 @@ library DEDUPED across cards (shoot turmeric once, reuse everywhere), throttled 
    `cook-cards/beet-kvass-card.html` (upgraded, ferment-shaped). `pilot/kvass.html` +
    `pilot/index.html` upgrades stay on the before-FINAL checklist.
 
+## 🎨 DESIGN SESSION — READY TO RUN (steer locked 2026-07-09)
+Ilma: seed the design system **from the approved photo anchors** (no screenshots needed). Her words:
+*"love the fresh crispy style — sage, purple, pink, herby wild flowers, lavender, lilies, chamomile —
+design it all and give me options to approve."*
+- **Seed:** `photo-anchors-preview.html` (the LOCKED PHOTO STYLE below) + the card language standard.
+- **Palette direction:** paper-cream + sage lead · **lavender/purple + soft pink accents (NEW)** ·
+  honey-amber whisper · beet stays the action colour unless an option shows something better.
+- **Motifs:** oatmeal linen, fluted/scalloped porcelain shapes, sparse wildflower posies
+  (lavender, chamomile, **lilies**) — sparse like the anchors, never cluttered.
+- **Fixed:** apothecary fonts (Cormorant Garamond / EB Garamond / Marcellus / Pinyon Script — never
+  Fraunces/Mulish) · "keep it simple, never overwhelm" · helper surfaces big-type phone-first ·
+  3-label chips · no emoji on cards · no creator names.
+- **Deliverable 1:** THREE design directions as live Pages previews (same DNA, different intensity —
+  e.g. porcelain-minimal / Provence-garden / linen-apothecary), each applied to REAL surfaces:
+  `pilot/week1.html`, one mum card, one helper card, an index tile. Fresh `?v` links → Ilma picks.
+- **Deliverable 2 (after her pick):** write **`docs/design.md`** (type scale, spacing, palette incl.
+  the lavender/pink accents, components, photo treatment, motion) as the single source of truth,
+  then apply across week1 + live pairs + index/tab pages + printables, batch by batch, live-confirmed.
+
 ## ⚡ REALITY CHANGE — 2026-07-07
 **Emil was born 2026-07-05.** Ilma is week-1 postpartum NOW and could not yet cook/delegate from
 the recipes. Priorities are FLIPPED — usefulness today beats finalization:
