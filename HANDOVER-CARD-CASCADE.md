@@ -21,9 +21,27 @@ Paste SESSION-HANDOVER.md first, then this. **Ilma's live feedback always wins o
    (gpt-image-2, snapshot 2026-04-21): the locked steer = delicate **French Provençal porcelain**
    (fluted/scalloped rims), **sparse wildflower posy** (lavender/chamomile) not scattered herbs,
    crisp/light/uncluttered, cream+sage enamelled cast iron, golden-brown oval cutlets. Prompt lives
-   in `<scratchpad>/gen_anchors_v2.py`. **Awaiting Ilma's per-shot sign-off** → then lock the prompt
-   here and run the full 49-card pass (mind the gpt-image-2 rate limit: 5 input-images/min — throttle
+   in `<scratchpad>/gen_anchors_v2.py`. **SIGNED OFF by Ilma 2026-07-09 ("yes i love this style")** —
+   the prompt below is LOCKED for the full pass (mind the gpt-image-2 rate limit: 5/min — throttle
    or retry-on-429, as `regen_liver.py` does).
+
+### 🔒 THE LOCKED PHOTO STYLE (signed off 2026-07-09 — use verbatim on every image)
+Model **`gpt-image-2-2026-04-21`** (pinned; never the alias) · size 1024×1024 · quality high ·
+subject line first, then append this style suffix VERBATIM:
+> " Editorial food photography in a bright Provencal farmhouse kitchen. Soft diffused morning
+> window light, gentle shadows, crisp fresh airy feel. Rumpled natural oatmeal linen cloth on a
+> pale stone surface. Tableware is delicate French Provencal porcelain: white-cream porcelain with
+> softly fluted, scalloped rims. Styling is sparse and uncluttered: at most one small loose posy of
+> wildflowers (lavender, chamomile, meadow flowers) in soft focus to the side; clean surfaces,
+> plenty of breathing room, no herb sprigs scattered about. Palette: warm paper-cream, muted sage
+> green, soft honey-amber, a whisper of lavender. Where cookware appears: French enamelled cast
+> iron in matte cream or soft sage, heavy rounded form, glossy enamel interior, no logos or brand
+> marks. Shallow depth of field, 50mm lens look, luxury in simplicity, photorealistic, no people,
+> no hands, no text, no watermark."
+Subject rules: cutlets/patties = golden-brown ovals · ferments = the 1.6 L clip-top Kilner (orange
+seal) · pots = sage or cream enamelled cast iron · ingredient shots = small fluted porcelain bowls.
+Output into the shared `cook-cards/img/<slug>/` dirs (cardgen architecture) — heroes + ingredient
+library DEDUPED across cards (shoot turmeric once, reuse everywhere), throttled ≤4/min.
 5. Old pilot cards remain live but `week1.html` now points the kvass tile at the NEW
    `cook-cards/beet-kvass-card.html` (upgraded, ferment-shaped). `pilot/kvass.html` +
    `pilot/index.html` upgrades stay on the before-FINAL checklist.
