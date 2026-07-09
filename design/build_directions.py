@@ -21,38 +21,50 @@ for name, path in [
 # ---------------------------------------------------------------- direction CSS
 SCALLOP = ("url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='112' height='8' "
            "viewBox='0 0 112 8'><path d='M1 7 Q8 0 15 7 T29 7 T43 7 T57 7 T71 7 T85 7 T99 7 T113 7' "
-           "fill='none' stroke='%23BFB0CE' stroke-width='1.2'/></svg>\")")
+           "fill='none' stroke='%23A9BCD4' stroke-width='1.2'/></svg>\")")
 
-POSY = ("url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='104' height='26' viewBox='0 0 104 26'>"
+POSY = ("url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='112' height='26' viewBox='0 0 112 26'>"
         "<g stroke='%236E8A6F' stroke-width='1.1' fill='none' stroke-linecap='round'>"
-        "<path d='M52 23 C46 17 38 13 27 11'/><path d='M52 23 C52 17 52 13 52 10'/><path d='M52 23 C58 17 66 14 78 13'/></g>"
+        "<path d='M54 23 C48 17 40 13 27 11'/><path d='M54 23 C51 17 47 13 46 10'/>"
+        "<path d='M54 23 C60 17 66 13 71 10'/><path d='M54 23 C62 19 74 16 86 15'/></g>"
         "<g fill='%237C6E9E'><ellipse cx='25' cy='10' rx='2' ry='3.1' transform='rotate(-38 25 10)'/>"
         "<ellipse cx='20' cy='8' rx='1.8' ry='2.8' transform='rotate(-38 20 8)'/>"
         "<ellipse cx='15.6' cy='6.4' rx='1.6' ry='2.5' transform='rotate(-38 15.6 6.4)'/>"
         "<ellipse cx='11.8' cy='5.2' rx='1.3' ry='2.1' transform='rotate(-38 11.8 5.2)'/></g>"
         "<g fill='%23FFFFFF' stroke='%23DCD0B6' stroke-width='.5'>"
-        "<ellipse cx='52' cy='5.2' rx='1.6' ry='2.7'/><ellipse cx='52' cy='14.8' rx='1.6' ry='2.7'/>"
-        "<ellipse cx='47.2' cy='10' rx='2.7' ry='1.6'/><ellipse cx='56.8' cy='10' rx='2.7' ry='1.6'/>"
-        "<ellipse cx='48.6' cy='6.6' rx='1.5' ry='2.5' transform='rotate(-45 48.6 6.6)'/>"
-        "<ellipse cx='55.4' cy='13.4' rx='1.5' ry='2.5' transform='rotate(-45 55.4 13.4)'/>"
-        "<ellipse cx='55.4' cy='6.6' rx='1.5' ry='2.5' transform='rotate(45 55.4 6.6)'/>"
-        "<ellipse cx='48.6' cy='13.4' rx='1.5' ry='2.5' transform='rotate(45 48.6 13.4)'/></g>"
-        "<circle cx='52' cy='10' r='2.4' fill='%23E7C878'/>"
-        "<path d='M78 13 C84 9 90 9 95 11 C90 16 83 17 78 13 Z' fill='%23DFE7D5' stroke='%236E8A6F' stroke-width='.8'/></svg>\")")
+        "<ellipse cx='46' cy='4.2' rx='1.6' ry='2.7'/><ellipse cx='46' cy='13.8' rx='1.6' ry='2.7'/>"
+        "<ellipse cx='41.2' cy='9' rx='2.7' ry='1.6'/><ellipse cx='50.8' cy='9' rx='2.7' ry='1.6'/>"
+        "<ellipse cx='42.6' cy='5.6' rx='1.5' ry='2.5' transform='rotate(-45 42.6 5.6)'/>"
+        "<ellipse cx='49.4' cy='12.4' rx='1.5' ry='2.5' transform='rotate(-45 49.4 12.4)'/>"
+        "<ellipse cx='49.4' cy='5.6' rx='1.5' ry='2.5' transform='rotate(45 49.4 5.6)'/>"
+        "<ellipse cx='42.6' cy='12.4' rx='1.5' ry='2.5' transform='rotate(45 42.6 12.4)'/></g>"
+        "<circle cx='46' cy='9' r='2.4' fill='%23E7C878'/>"
+        "<g fill='%236E8FBF'>"
+        "<ellipse cx='72' cy='4.6' rx='1.3' ry='2.6'/>"
+        "<ellipse cx='72' cy='11.4' rx='1.3' ry='2.6'/>"
+        "<ellipse cx='69' cy='6.3' rx='1.3' ry='2.6' transform='rotate(60 69 6.3)'/>"
+        "<ellipse cx='75' cy='9.7' rx='1.3' ry='2.6' transform='rotate(60 75 9.7)'/>"
+        "<ellipse cx='75' cy='6.3' rx='1.3' ry='2.6' transform='rotate(-60 75 6.3)'/>"
+        "<ellipse cx='69' cy='9.7' rx='1.3' ry='2.6' transform='rotate(-60 69 9.7)'/></g>"
+        "<circle cx='72' cy='8' r='1.5' fill='%233F5E8C'/>"
+        "<path d='M86 15 C91 11 97 11 102 13 C97 17 91 18 86 15 Z' fill='%23DFE7D5' stroke='%236E8A6F' stroke-width='.8'/></svg>\")")
 
 CSS_PORCELAIN = """
 /* DIRECTION 1 — PORCELAIN MINIMAL: white porcelain on pale linen, sage-crisp,
-   lavender only in the fine print, a scalloped hairline under the wordmark. */
+   lavender + azure only in the fine print, an azure-glaze scalloped hairline
+   under the wordmark (the blue rim line on French porcelain). */
 :root{
   --paper:#FCFAF3; --paper2:#FFFFFF; --sage:#7A917C; --sage-d:#546E59; --sage-soft:#E4EBE0;
   --amber:#B98F56; --amber-soft:#F0E5CF; --ink:#3D392F; --ink2:#6F695B; --line:#E9E1D0;
   --beet:#9C2B4E; --beet-soft:#F5E4EA;
   --lav:#8C81A9; --lav-soft:#EDEAF3; --pink:#C98A9B; --pink-soft:#F7E8EC;
+  --azure:#7E96B8; --azure-soft:#E7EDF5;
 }
 body{background:#EFE9DB;}
 .brandtag{color:var(--lav);}
 .eyebrow{color:var(--lav);}
-.tkind{color:var(--lav);}
+.tkind{color:var(--azure);}
+.dots i.on{background:var(--azure);}
 .sech,.blockh,.hkicker,.ovscale-lab{color:var(--sage-d);}
 h1,.tname,.askname{color:var(--ink);}
 .tile{background:#FFFFFF; border-radius:15px; box-shadow:0 8px 20px rgba(88,78,56,.10);}
@@ -68,13 +80,15 @@ h1,.tname,.askname{color:var(--ink);}
 """
 
 CSS_GARDEN = """
-/* DIRECTION 2 — PROVENCE GARDEN: lavender headings, a wildflower posy under the
-   wordmark, pink in the warm notes, and the send/cooked action tried in deep iris. */
+/* DIRECTION 2 — PROVENCE GARDEN: lavender headings, a wildflower posy (now with a
+   cornflower) under the wordmark, pink in the warm notes, azure in the when-band
+   and the arrows, and the send action tried in deep iris. */
 :root{
   --paper:#FAF5E8; --paper2:#FFFDF5; --sage:#6E8A6F; --sage-d:#4D6852; --sage-soft:#DFE7D5;
   --amber:#C08A43; --amber-soft:#EDDFC2; --ink:#3B362C; --ink2:#6B6456; --line:#E3D9C3;
   --beet:#6D5F92; --beet-soft:#E9E4F2;
   --lav:#7C6E9E; --lav-d:#5D5382; --lav-soft:#E9E4F2; --pink:#C97F92; --pink-soft:#F5DFE5;
+  --azure:#46608A; --azure-mid:#6E8FBF; --azure-soft:#E3EBF5;
 }
 body{background:#DADEC7; background-image:radial-gradient(circle at 25% 10%, rgba(255,255,255,.4), transparent 55%);}
 .sech,.blockh,.hkicker,.ovscale-lab,.ctl-lab{color:var(--lav-d);}
@@ -82,8 +96,9 @@ body{background:#DADEC7; background-image:radial-gradient(circle at 25% 10%, rgb
 .eyebrow{color:#B06A7E;}
 .brandtag{color:var(--lav);}
 .tkind{color:var(--lav-d);}
-.whenband{background:var(--lav-soft); color:var(--lav-d);}
-.whenband b{color:var(--lav-d);}
+.whenband{background:var(--azure-soft); color:var(--azure);}
+.whenband b{color:var(--azure);}
+.tarrow{color:var(--azure-mid);}
 .controls{border-color:#B7AECD; box-shadow:0 10px 26px rgba(108,95,146,.13);}
 .ovscale{border-color:#B7AECD; box-shadow:0 6px 16px rgba(108,95,146,.10);}
 .dots i.on{background:var(--lav-d);}
@@ -101,12 +116,14 @@ body{background:#DADEC7; background-image:radial-gradient(circle at 25% 10%, rgb
 CSS_APOTHECARY = """
 /* DIRECTION 3 — LINEN APOTHECARY: deep oatmeal linen with a woven texture,
    label-frame double rules like a hand-labelled jar, amber small-caps,
-   lavender-ink eyebrow with a wax-seal pink dot. */
+   lavender-ink eyebrow with a wax-seal pink dot, azure as the written ink
+   (the numbers and counts, like blue ink on a jar label). */
 :root{
   --paper:#F7F0E1; --paper2:#FCF7E9; --sage:#6C8268; --sage-d:#4E634E; --sage-soft:#DFE4D1;
   --amber:#B27E35; --amber-soft:#ECDCBE; --ink:#39342A; --ink2:#6B6456; --line:#DCCFB4;
   --beet:#8E2A47; --beet-soft:#F1DDE3;
   --lav:#8678A2; --lav-soft:#EAE6F0; --pink:#C2848F; --pink-soft:#F3E2E4;
+  --azure-ink:#5E739B;
 }
 body{background-color:#C9BFA9; background-image:
   repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px),
@@ -119,6 +136,10 @@ body{background-color:#C9BFA9; background-image:
 h1,.tname,.askname{color:var(--ink);}
 .brandmark{color:#4E634E;}
 .step .n{background:var(--amber);}
+.metarow b{color:var(--azure-ink);}
+.ovmeta b{color:var(--azure-ink);}
+.ct{color:var(--azure-ink);}
+.tarrow{color:var(--azure-ink);}
 .tile{border-radius:11px; box-shadow:inset 0 0 0 3px var(--paper), inset 0 0 0 4px rgba(178,126,53,.45), 0 12px 26px rgba(60,50,30,.16);}
 .tile img{border-radius:9px;}
 .more a{box-shadow:inset 0 0 0 2px var(--paper2), inset 0 0 0 3px rgba(178,126,53,.35);}

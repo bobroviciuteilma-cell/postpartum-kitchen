@@ -64,7 +64,12 @@ switcher bar on every page. Originals untouched. Chooser: `design/index.html?v=d
 3. **Linen apothecary** (`design/apothecary/`) — warmest: woven oatmeal texture,
    label-frame double rules, amber small-caps, lavender eyebrow + wax-seal pink dot. Beet action.
 All three: destriped callouts (tinted, per the house ban), 3-label chips untouched, big-type
-helper preserved. Build script: `design/build_directions.py` (regenerates all
+helper preserved.
+**Azure added (Ilma, 2026-07-09 eve: "i like azure — think of wild flower colours"):**
+cornflower/chicory azure is now in all three, direction-weighted — porcelain: azure glaze
+scallop + fine-print kickers · garden: cornflower in the posy + chicory-azure when-band +
+azure arrows · apothecary: azure-ink numbers/meta labels. How MUCH azure = one of the
+post-pick sub-choices. Build script: `design/build_directions.py` (regenerates all
 12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
 **Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
 strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**
