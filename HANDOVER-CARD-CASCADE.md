@@ -65,9 +65,15 @@ design it all and give me options to approve."*
 - **Fixed:** apothecary fonts (Cormorant Garamond / EB Garamond / Marcellus / Pinyon Script — never
   Fraunces/Mulish) · "keep it simple, never overwhelm" · helper surfaces big-type phone-first ·
   3-label chips · no emoji on cards · no creator names.
+- **STANDING RULE (Ilma, 2026-07-09): every aesthetic decision = ASK her, with ≥3 OPTIONS** —
+  palettes, type scales, motifs, component shapes, photo looks — always shown on REAL surfaces with
+  live links, never abstract swatches. ("Don't ask what you can decide" applies to MECHANICAL work
+  only — deploys, QA, extraction, scaling math. Taste always goes back to her as options.)
 - **Deliverable 1:** THREE design directions as live Pages previews (same DNA, different intensity —
   e.g. porcelain-minimal / Provence-garden / linen-apothecary), each applied to REAL surfaces:
   `pilot/week1.html`, one mum card, one helper card, an index tile. Fresh `?v` links → Ilma picks.
+  Within the winning direction, sub-choices (exact palette, accent intensity, divider motif…) also
+  come as ≥3 options each — e.g. three lavender/pink palette mixes side by side.
 - **Deliverable 2 (after her pick):** write **`docs/design.md`** (type scale, spacing, palette incl.
   the lavender/pink accents, components, photo treatment, motion) as the single source of truth,
   then apply across week1 + live pairs + index/tab pages + printables, batch by batch, live-confirmed.
