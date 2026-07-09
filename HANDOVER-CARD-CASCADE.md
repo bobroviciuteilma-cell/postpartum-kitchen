@@ -69,7 +69,12 @@ helper preserved.
 cornflower/chicory azure is now in all three, direction-weighted — porcelain: azure glaze
 scallop + fine-print kickers · garden: cornflower in the posy + chicory-azure when-band +
 azure arrows · apothecary: azure-ink numbers/meta labels. How MUCH azure = one of the
-post-pick sub-choices. Build script: `design/build_directions.py` (regenerates all
+post-pick sub-choices.
+**Approved anchor photos wired in (her ask, 2026-07-09 eve):** the previews now wear the
+v2 anchors wherever one exists (hero plate, skillet step, liver/herbs/seeds/veg ingredients,
+Kilner jar on the kvass tile) — `design/anchor-images.json` (downscaled 800px, ingredients
+center-cropped tighter) + swap logic in `build_directions.py`. Remaining images stay old
+until the full photo pass. Anchors are framed WIDE — final pass shoots closer per her rule. Build script: `design/build_directions.py` (regenerates all
 12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
 **Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
 strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**

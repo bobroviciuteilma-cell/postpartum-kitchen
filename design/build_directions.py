@@ -2,11 +2,31 @@
 """Build the three design-direction previews under design/<slug>/ from the real surfaces.
 Sources are copied verbatim (base64 photos included); each copy gets a <style id="direction">
 override appended after the original CSS, a switcher bar, rewritten relative links, and a
-titled <title>. Original files/URLs are never touched."""
+titled <title>. Original files/URLs are never touched.
+Photos: where an approved v2 style anchor exists (design/anchor-images.json, extracted
+from photo-anchors-preview.html and downscaled to 800px), it replaces the old card photo
+in the copies — so the previews wear the locked photo style. Anchors are framed WIDE;
+the real photo pass shoots closer per Ilma's framing rule."""
+import json
 import os
+import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DESIGN = os.path.join(ROOT, 'design')
+
+ANCH_PATH = os.path.join(DESIGN, 'anchor-images.json')
+ANCHORS = json.load(open(ANCH_PATH)) if os.path.exists(ANCH_PATH) else {}
+SWAP_CARD = {'hero': 'the-hero-plate', 'step_cook': 'the-skillet-step',
+             'i_liver': 'ingredient-liver', 'i_dill': 'ingredient-the-herbs',
+             'i_seeds': 'ingredient-pumpkin-seeds', 'i_veg': 'ingredient-grated-veg'}
+SWAP_WEEK1 = {'liver': 'the-hero-plate', 'kvass': 'the-kilner-jar'}
+
+def swap_images(h, mapping):
+    for key, slug in mapping.items():
+        if slug in ANCHORS:
+            h = re.sub('("' + key + '": ")data:image/[^"]+(")',
+                       lambda m: m.group(1) + ANCHORS[slug] + m.group(2), h, count=1)
+    return h
 
 SRC = {}
 for name, path in [
@@ -197,7 +217,12 @@ for i, (slug, name, css) in enumerate(DIRECTIONS):
                 h = h.replace('href="' + t + '"', 'href="../../cook-cards/' + t + '"')
             h = h.replace('<meta name="viewport" content="width=device-width, initial-scale=1">',
                           '<meta name="viewport" content="width=device-width, initial-scale=1">\n' + NOCACHE)
-        h = h.replace('</head>', '<style id="direction">' + css + COMMON_CSS + '</style>\n</head>', 1)
+        if fname == 'week1.html':
+            h = swap_images(h, SWAP_WEEK1)
+        elif fname in ('liver-cutlets.html', 'liver-cutlets-mum.html'):
+            h = swap_images(h, SWAP_CARD)
+        h = h.replace('</head>', '<style id="direction">' + css + COMMON_CSS + '</style>\n'
+                      '<!-- photos: approved v2 anchors where available -->\n</head>', 1)
         links = ' · '.join('<a href="../' + s + '/' + fname + '?v=d1">' + n + '</a>' for s, n in others)
         bar = ('<div class="dxn-bar"><a href="../index.html?v=d1">&larr; All directions</a>'
                '<span class="dxn-name">Direction ' + str(i + 1) + ' · ' + name + '</span>'
