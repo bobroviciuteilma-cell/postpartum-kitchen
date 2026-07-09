@@ -14,11 +14,16 @@ Paste SESSION-HANDOVER.md first, then this. **Ilma's live feedback always wins o
    `main-meals.html` updated for those three tiles only. **18/49 recipes are now pairs.**
    Build system: `cardgen/` (generator + per-drink data + QA script) — extend `data_*.py` for
    the remaining batches; khichdi is the dial reference.
-4. **Photo pass BLOCKED on the OpenAI key**: Keychain service `healing-kitchen-openai` is EMPTY
-   on this machine and the old `.env` is gone. Script rescued to `cardgen/gen_anchors_v2.py`
-   (already Keychain-aware). Ilma: add the key with
-   `security add-generic-password -s healing-kitchen-openai -a ilma -w '<KEY>'` and any session
-   can run the pass.
+4. **Photo pass UNBLOCKED (2026-07-07 eve)**: the OpenAI key is now live in Keychain, service
+   `healing-kitchen-openai` account `openai` (164 chars, verified HTTP 200). Read it in any script
+   with `security find-generic-password -w -s healing-kitchen-openai` (same `security` binary stores
+   + reads, so NO GUI prompt). **v2 style anchors GENERATED + live** at `photo-anchors-preview.html`
+   (gpt-image-2, snapshot 2026-04-21): the locked steer = delicate **French Provençal porcelain**
+   (fluted/scalloped rims), **sparse wildflower posy** (lavender/chamomile) not scattered herbs,
+   crisp/light/uncluttered, cream+sage enamelled cast iron, golden-brown oval cutlets. Prompt lives
+   in `<scratchpad>/gen_anchors_v2.py`. **Awaiting Ilma's per-shot sign-off** → then lock the prompt
+   here and run the full 49-card pass (mind the gpt-image-2 rate limit: 5 input-images/min — throttle
+   or retry-on-429, as `regen_liver.py` does).
 5. Old pilot cards remain live but `week1.html` now points the kvass tile at the NEW
    `cook-cards/beet-kvass-card.html` (upgraded, ferment-shaped). `pilot/kvass.html` +
    `pilot/index.html` upgrades stay on the before-FINAL checklist.
