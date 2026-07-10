@@ -341,27 +341,30 @@ for slug, letter, name, css in PANTRY_OPTS:
 # Three treatments over the Garden direction, at the same depth as design/garden/
 # so all relative link rewrites stay valid.
 GOLD_ROOMS = """
-/* GOLDEN 1 — LIGHT INSIDE THE ROOMS: every card/screen catches the morning gold at
-   its top (the pantry-B pattern); the page ground stays garden sage-grass linen. */
-.card{background-image:radial-gradient(130% 22% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
-.pscreen{background-image:radial-gradient(130% 18% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
-body{background-image:radial-gradient(120% 14% at 50% 0%, rgba(246,232,199,.8), rgba(246,232,199,0) 70%),
-     radial-gradient(circle at 25% 10%, rgba(255,255,255,.4), transparent 55%);}
+/* GOLDEN 1 — LIGHT INSIDE THE ROOMS: cool green garden page; every card, screen and
+   tile glows gold from its top. Green outside, golden inside. */
+body{background:#D6DCC2; background-image:radial-gradient(circle at 25% 10%, rgba(255,255,255,.4), transparent 55%);}
+.card{background-image:radial-gradient(140% 30% at 50% 0%, #F3DFA8, rgba(243,223,168,0) 72%);}
+.pscreen{background-image:radial-gradient(140% 26% at 50% 0%, #F3DFA8, rgba(243,223,168,0) 72%);}
+.tile{background-image:radial-gradient(160% 80% at 50% 0%, rgba(243,223,168,.6), rgba(243,223,168,0) 80%);}
+.more a{background-image:radial-gradient(160% 90% at 50% 0%, rgba(243,223,168,.45), rgba(243,223,168,0) 80%);}
 """
 GOLD_GROUND = """
-/* GOLDEN 2 — GOLDEN MORNING GROUND: the page itself is lit from above — warm gold
-   falling onto warm linen; cards stay clean cream with no interior wash. */
-body{background:#E4DAC0; background-image:radial-gradient(120% 34% at 50% 0%, rgba(248,235,203,.95), rgba(248,235,203,0) 65%);}
+/* GOLDEN 2 — GOLDEN MORNING GROUND: the page itself is unmistakably golden, lit from
+   above; cards, tiles and screens stay clean cool cream. Golden outside, cream inside. */
+body{background:#DCCFA4; background-image:radial-gradient(120% 42% at 50% 0%, rgba(246,229,183,1), rgba(246,229,183,0) 70%);}
 """
 GOLD_FULL = """
-/* GOLDEN 3 — FULL GOLDEN HOUR: both — golden ground AND golden light inside every
-   room. The warmest, most enveloping read. */
-body{background:#E4DAC0; background-image:radial-gradient(120% 34% at 50% 0%, rgba(248,235,203,.95), rgba(248,235,203,0) 65%);}
-.card{background-image:radial-gradient(130% 22% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
-.pscreen{background-image:radial-gradient(130% 18% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
+/* GOLDEN 3 — FULL GOLDEN HOUR: both at once — golden page AND golden light inside
+   every room and tile. The warmest, most enveloping read. */
+body{background:#DCCFA4; background-image:radial-gradient(120% 42% at 50% 0%, rgba(246,229,183,1), rgba(246,229,183,0) 70%);}
+.card{background-image:radial-gradient(140% 30% at 50% 0%, #F3DFA8, rgba(243,223,168,0) 72%);}
+.pscreen{background-image:radial-gradient(140% 26% at 50% 0%, #F3DFA8, rgba(243,223,168,0) 72%);}
+.tile{background-image:radial-gradient(160% 80% at 50% 0%, rgba(243,223,168,.6), rgba(243,223,168,0) 80%);}
+.more a{background-image:radial-gradient(160% 90% at 50% 0%, rgba(243,223,168,.45), rgba(243,223,168,0) 80%);}
 """
 GOLD_PANTRY_GROUND = """
-body{background:#E4DAC0; background-image:radial-gradient(120% 34% at 50% 0%, rgba(248,235,203,.95), rgba(248,235,203,0) 65%);}
+body{background:#DCCFA4; background-image:radial-gradient(120% 42% at 50% 0%, rgba(246,229,183,1), rgba(246,229,183,0) 70%);}
 """
 
 GOLDEN = [
