@@ -333,4 +333,88 @@ for slug, letter, name, css in PANTRY_OPTS:
     with open(os.path.join(DESIGN, 'garden', slug + '.html'), 'w') as f:
         f.write(h)
     print('garden/' + slug + '.html', len(h), 'bytes')
+
+# ------------------------------------------------------------- golden light options
+# Ilma (2026-07-10, on pantry B): "LIKE THE GOLDEN FROM TOP DOWN — how to make the
+# whole app consistent with this background — give me options."
+# The golden = pantry-B's morning-light wash (#F6E8C7 radial from the screen top).
+# Three treatments over the Garden direction, at the same depth as design/garden/
+# so all relative link rewrites stay valid.
+GOLD_ROOMS = """
+/* GOLDEN 1 — LIGHT INSIDE THE ROOMS: every card/screen catches the morning gold at
+   its top (the pantry-B pattern); the page ground stays garden sage-grass linen. */
+.card{background-image:radial-gradient(130% 22% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
+.pscreen{background-image:radial-gradient(130% 18% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
+body{background-image:radial-gradient(120% 14% at 50% 0%, rgba(246,232,199,.8), rgba(246,232,199,0) 70%),
+     radial-gradient(circle at 25% 10%, rgba(255,255,255,.4), transparent 55%);}
+"""
+GOLD_GROUND = """
+/* GOLDEN 2 — GOLDEN MORNING GROUND: the page itself is lit from above — warm gold
+   falling onto warm linen; cards stay clean cream with no interior wash. */
+body{background:#E4DAC0; background-image:radial-gradient(120% 34% at 50% 0%, rgba(248,235,203,.95), rgba(248,235,203,0) 65%);}
+"""
+GOLD_FULL = """
+/* GOLDEN 3 — FULL GOLDEN HOUR: both — golden ground AND golden light inside every
+   room. The warmest, most enveloping read. */
+body{background:#E4DAC0; background-image:radial-gradient(120% 34% at 50% 0%, rgba(248,235,203,.95), rgba(248,235,203,0) 65%);}
+.card{background-image:radial-gradient(130% 22% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
+.pscreen{background-image:radial-gradient(130% 18% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 70%);}
+"""
+GOLD_PANTRY_GROUND = """
+body{background:#E4DAC0; background-image:radial-gradient(120% 34% at 50% 0%, rgba(248,235,203,.95), rgba(248,235,203,0) 65%);}
+"""
+
+GOLDEN = [
+    ('golden1', '1', 'Gold inside the rooms', GOLD_ROOMS, ''),
+    ('golden2', '2', 'Golden morning ground', GOLD_GROUND, GOLD_PANTRY_GROUND),
+    ('golden3', '3', 'Full golden hour', GOLD_FULL, GOLD_PANTRY_GROUND),
+]
+for gslug, gnum, gname, gcss, gpantry in GOLDEN:
+    outdir = os.path.join(DESIGN, gslug)
+    os.makedirs(outdir, exist_ok=True)
+    others = [(s, n) for s, _, n, _, _ in GOLDEN if s != gslug]
+    # the four card surfaces, garden direction + golden treatment
+    for fname, html in SRC.items():
+        h = html
+        h = h.replace('<title>', '<title>Golden ' + gnum + ' — ' + gname + ' · ', 1)
+        if fname == 'week1.html':
+            h = h.replace('../cook-cards/index.html?v=w1', 'index.html?v=d1')
+            h = h.replace('../cook-cards/', '../../cook-cards/')
+            h = h.replace('liver-cutlets.html?v=w1', 'liver-cutlets.html?v=d1')
+        elif fname == 'liver-cutlets.html':
+            h = h.replace('<a href="index.html">', '<a href="week1.html?v=d1">')
+        elif fname == 'liver-cutlets-mum.html':
+            h = h.replace('href="index.html"', 'href="week1.html?v=d1"')
+        elif fname == 'index.html':
+            for t in ['main-meals.html', 'drinks.html', 'snacks.html', 'desserts.html']:
+                h = h.replace('href="' + t + '"', 'href="../../cook-cards/' + t + '"')
+            h = h.replace('<meta name="viewport" content="width=device-width, initial-scale=1">',
+                          '<meta name="viewport" content="width=device-width, initial-scale=1">\n' + NOCACHE)
+        if fname == 'week1.html':
+            h = swap_images(h, SWAP_WEEK1)
+        elif fname in ('liver-cutlets.html', 'liver-cutlets-mum.html'):
+            h = swap_images(h, SWAP_CARD)
+        h = h.replace('</head>', '<style id="direction">' + CSS_GARDEN + gcss + COMMON_CSS + '</style>\n'
+                      '<!-- photos: approved v2 anchors where available -->\n</head>', 1)
+        links = ' · '.join('<a href="../' + s + '/' + fname + '?v=d1">' + n + '</a>' for s, n in others)
+        bar = ('<div class="dxn-bar"><a href="../index.html?v=d1">&larr; All directions</a>'
+               '<span class="dxn-name">Golden ' + gnum + ' · ' + gname + ' (on Garden)</span>'
+               '<span>Also: ' + links + ' · <a href="../garden/' + fname + '?v=d1">No gold</a></span></div>')
+        h = h.replace('<body>', '<body>\n' + bar, 1)
+        with open(os.path.join(outdir, fname), 'w') as f:
+            f.write(h)
+        print(gslug + '/' + fname, len(h), 'bytes')
+    # the pantry, option B + golden treatment
+    h = PANTRY_SRC
+    h = h.replace('<title>', '<title>Golden ' + gnum + ' — pantry (amber shelf) · ', 1)
+    common = PANTRY_COMMON.replace('POSY_SVG', POSY)
+    h = h.replace('</head>', '<style id="direction">' + CSS_PANTRY_B + gpantry + common + '</style>\n</head>', 1)
+    links = ' · '.join('<a href="../' + s + '/pantry.html?v=d1">' + n + '</a>' for s, n in others)
+    bar = ('<div class="dxn-bar"><a href="../index.html?v=d1">&larr; All directions</a>'
+           '<span class="dxn-name">Golden ' + gnum + ' · ' + gname + ' · pantry B</span>'
+           '<span>Also: ' + links + '</span></div>')
+    h = h.replace('<body>', '<body>\n' + bar, 1)
+    with open(os.path.join(outdir, 'pantry.html'), 'w') as f:
+        f.write(h)
+    print(gslug + '/pantry.html', len(h), 'bytes')
 print('done')

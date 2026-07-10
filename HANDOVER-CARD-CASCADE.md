@@ -92,9 +92,19 @@ porcelain family — plates, bowls, cups [plate shape LOCKED, above]; (2) ONE dr
 style — her pick from the tableware board (plain clear glass / French bistro fluted glass /
 sage stoneware); (3) the 1.6 L clip-top Kilner, orange seal — all ferments & storage jars;
 (4) cream/sage enamelled cast iron — all cookware [already locked]. Board:
-`design/tableware.html` (3 kit options generated with the locked prompt); the winner's
-tableware sentence gets appended to the photo-style suffix and governs the full photo pass.
-Cutlery/small props: standardise in the same sentence once the kit is picked (propose 3). Build script: `design/build_directions.py` (regenerates all
+`design/tableware.html`; the winners' tableware sentences get appended to the photo-style
+suffix and govern the full photo pass.
+Cutlery/small props: standardise in the same sentence once the kit is picked (propose 3).
+**Board v1 feedback (Ilma 2026-07-10) — the taste law it revealed:** v1 ceramics were
+"too polished" and off-plate. **CERAMICS FINISH RULE: satin/vintage glaze, never glossy;
+the family = the LOCKED cutlets plate exactly** — warm cream, gently LOBED scallop (open
+flower, raised edge line), **sparse hand-painted sage-green wildflower sprigs** (look at the
+hero anchor, not a generic scallop). Sage cast iron pot: she LIKES it — cream+sage both stay.
+Kit-1 plain glass: OUT. Kit-2 bistro glass + kit-3 goblet: in the running. Jar: fixed.
+**Board v2 (in flight):** plates/bowls = ONE family from the locked plate (sizes/shapes
+vary, 1 confirm shot) + 4 CUP options + 4 GLASS options; ceramics generated with the hero
+anchor as reference image (`/v1/images/edits`), script `<scratchpad>/gen_tableware_v2.py`.
+She picks: family yes/no · cup 1-4 · glass 1-4. Build script: `design/build_directions.py` (regenerates all
 12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
 **Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
 strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**
