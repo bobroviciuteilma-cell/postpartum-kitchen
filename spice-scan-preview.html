@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scan your spice drawer — your everyday apothecary</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Marcellus&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--paper:#f5efe0;--paper2:#fcf8ef;--ink:#3a3020;--ink2:#6e6250;--soft:#9a8d73;
+    --sage:#7c8a5c;--sage2:#5d6a42;--lav:#9a8ab4;--amber:#c39a45;--amber2:#a67c2c;--rust:#b0623a;--rule:#dccfb2;--line:#ece2cd}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e3d9c2;display:flex;justify-content:center;align-items:flex-start;gap:30px;flex-wrap:wrap;padding:46px 18px 80px;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+
+  .stepwrap{display:flex;flex-direction:column;align-items:center;width:330px}
+  .cap{display:flex;align-items:baseline;gap:8px;margin-bottom:9px;align-self:flex-start}
+  .cap .no{font-family:'Marcellus',serif;font-size:10px;color:#fff;background:var(--amber);width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
+  .cap .tt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:19px;color:#46371f}
+  .cap .ar{margin-left:auto;color:var(--soft);font-style:italic;font-size:12px}
+
+  .ph{width:330px;height:702px;border-radius:42px;background:#251e13;padding:8px;box-shadow:0 26px 60px rgba(55,42,20,.3)}
+  .scr{width:100%;height:100%;border-radius:35px;overflow:hidden;position:relative;background:var(--paper)}
+  .scr .bg{position:absolute;inset:0;background:radial-gradient(130% 24% at 50% 0%,#f6e8c7,rgba(246,232,199,0)),var(--paper)}
+  .scr:before{content:"";position:absolute;inset:0;opacity:.4;pointer-events:none;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px)}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:114px;height:21px;background:#251e13;border-radius:0 0 14px 14px;z-index:6}
+  .in{position:absolute;inset:0;z-index:2;padding:46px 22px 22px;display:flex;flex-direction:column;overflow:hidden}
+  .kj{font-family:'Pinyon Script',cursive;font-size:18px;color:#7a4f2c;text-align:center}
+  .kick{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber2);text-align:center}
+  .muted{color:var(--ink2)}
+
+  .view{position:relative;height:206px;border-radius:14px;margin-top:14px;overflow:hidden;background:linear-gradient(155deg,#b08a52,#7c5a30 45%,#9a7340)}
+  .view:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.12) 0 30px,rgba(255,255,255,.05) 30px 33px),repeating-linear-gradient(0deg,rgba(0,0,0,.1) 0 48px,transparent 48px 52px)}
+  .br{position:absolute;width:20px;height:20px;border:2px solid rgba(255,255,255,.85)}
+  .br.tl{top:12px;left:12px;border-right:none;border-bottom:none}.br.tr{top:12px;right:12px;border-left:none;border-bottom:none}
+  .br.bl{bottom:12px;left:12px;border-right:none;border-top:none}.br.brc{bottom:12px;right:12px;border-left:none;border-top:none}
+  .det{position:absolute;z-index:2;font-family:'Marcellus',serif;font-size:8px;letter-spacing:.03em;background:rgba(37,30,19,.85);color:#f3e8d0;padding:3px 7px;border-radius:5px;white-space:nowrap}
+  .aha{text-align:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:23px;color:#33291a;margin-top:18px;line-height:1.1}
+  .aha em{font-style:italic;color:#7a4f2c}
+  .sub{text-align:center;font-size:13px;color:var(--ink2);margin-top:8px}
+  .go{display:block;text-align:center;margin-top:auto;font-family:'Marcellus',serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(#caa14b,#a87c2c);color:#fdf6e7;padding:14px;border-radius:12px}
+
+  /* apothecary list */
+  .ap-h{text-align:center;margin-bottom:4px}
+  .ap{flex:1;overflow-y:auto;margin-top:8px}
+  .sp{display:flex;align-items:flex-start;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .sp .j{width:30px;height:30px;border-radius:8px;flex:none;margin-top:2px;box-shadow:inset 0 -3px 4px rgba(0,0,0,.12)}
+  .sp .tx{flex:1}
+  .sp .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;color:#46371f;line-height:1}
+  .sp .hl{font-size:12px;color:var(--ink2);margin-top:2px;line-height:1.4}
+  .sp .syn{font-size:11px;color:var(--sage2);margin-top:3px;font-style:italic}
+  .sp .syn b{font-style:normal;color:#7a4f2c}
+  .sp .warn{font-size:10.5px;color:var(--rust);font-style:italic;margin-top:2px}
+
+  .tonight{margin-top:10px;border:1px solid #e6d3a4;border-radius:12px;background:rgba(195,154,71,.1);padding:11px 13px}
+  .tonight .tk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--amber2);margin-bottom:4px}
+  .tonight p{font-size:12.5px;color:#46371f;line-height:1.45}
+  .tonight p b{color:#7a4f2c}
+
+  .note{max-width:300px;align-self:center}
+  .note h3{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:#33291a;margin-bottom:4px}
+  .note .s{font-size:13px;color:var(--ink2);margin-bottom:16px;line-height:1.5}
+  .note .it{border-left:2px solid var(--sage);padding-left:12px;margin-bottom:14px}
+  .note .it h4{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--sage2);margin-bottom:3px}
+  .note .it p{font-size:12.5px;color:var(--ink2);line-height:1.5}
+  .note .it b{color:#46371f}
+</style></head>
+<body>
+
+<!-- 1 · scan -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">1</span><span class="tt">Scan your spice drawer</span><span class="ar">the wow →</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="kj">your everyday apothecary</div>
+    <div class="kick" style="margin-top:5px">point at the rack</div>
+    <div class="view">
+      <span class="br tl"></span><span class="br tr"></span><span class="br bl"></span><span class="br brc"></span>
+      <span class="det" style="top:34px;left:20px">turmeric</span>
+      <span class="det" style="top:30px;right:18px">ginger</span>
+      <span class="det" style="top:92px;left:40px">cinnamon</span>
+      <span class="det" style="top:120px;right:34px">black pepper</span>
+      <span class="det" style="bottom:54px;left:24px">cumin</span>
+      <span class="det" style="bottom:24px;right:22px">fennel</span>
+      <span class="det" style="bottom:22px;left:50px">cardamom</span>
+    </div>
+    <div class="aha">You're sitting on<br>a little <em>pharmacy.</em></div>
+    <div class="sub">7 healing spices, already in your kitchen.</div>
+    <a class="go" href="#">Read my rack</a>
+  </div></div></div>
+</div>
+
+<!-- 2 · the apothecary -->
+<div class="stepwrap">
+  <div class="cap"><span class="no">2</span><span class="tt">Your spice apothecary</span><span class="ar">what each one does</span></div>
+  <div class="ph"><div class="scr"><div class="bg"></div><div class="notch"></div><div class="in">
+    <div class="ap-h"><div class="kick" style="color:var(--sage2)">your rack · 7 found</div><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;color:#33291a">Already healing</div></div>
+    <div class="ap">
+      <div class="sp"><span class="j" style="background:linear-gradient(135deg,#e8b53a,#bf8410)"></span><div class="tx"><div class="nm">Turmeric</div><div class="hl">Calms inflammation as you heal.</div><div class="syn">✦ <b>+ black pepper</b> = absorbed ~20× more</div></div></div>
+      <div class="sp"><span class="j" style="background:linear-gradient(135deg,#e7cfa0,#c39a55)"></span><div class="tx"><div class="nm">Ginger</div><div class="hl">Warming; eases digestion + circulation.</div><div class="syn">✦ <b>+ lemon</b> · the confinement classic</div></div></div>
+      <div class="sp"><span class="j" style="background:linear-gradient(135deg,#c4895a,#a9663a)"></span><div class="tx"><div class="nm">Cinnamon</div><div class="hl">Steadies blood sugar; warming.</div></div></div>
+      <div class="sp"><span class="j" style="background:linear-gradient(135deg,#a9d9c6,#7faf8c)"></span><div class="tx"><div class="nm">Fennel</div><div class="hl">Soothes digestion; traditionally for milk.</div></div></div>
+      <div class="sp"><span class="j" style="background:linear-gradient(135deg,#5a5142,#332b1d)"></span><div class="tx"><div class="nm">Black pepper</div><div class="hl">The absorption key.</div><div class="syn">✦ unlocks <b>turmeric + iron</b></div></div></div>
+      <div class="sp"><span class="j" style="background:linear-gradient(135deg,#cbe2b3,#9bbd72)"></span><div class="tx"><div class="nm">Cardamom</div><div class="hl">Warming; settles the stomach.</div><div class="warn">⚠ a pinch in food — not medicinal doses</div></div></div>
+    </div>
+    <div class="tonight">
+      <div class="tk">add to tonight's pot</div>
+      <p><b>Turmeric + a crack of black pepper</b> into the chicken stock — the pepper makes it actually absorb. Your helper just sprinkles.</p>
+    </div>
+  </div></div></div>
+</div>
+
+<div class="note">
+  <h3>Why this lands</h3>
+  <div class="s">It's not a new feature — it's your apothecary, made everyday.</div>
+  <div class="it"><h4>Reuses the scan</h4><p>Same camera-in / structured-out primitive as the fridge + cart. Mum or helper can do it in 20 seconds.</p></div>
+  <div class="it"><h4>Pure "add, don't subtract"</h4><p>Already owned, free, a sprinkle. The lowest-effort healing act there is — zero shopping.</p></div>
+  <div class="it"><h4>Actionable, not a wiki</h4><p>It knows what she <i>has</i> and says what to do <b>tonight</b> — and the spice prompts ride the Cook Card to the helper.</p></div>
+  <div class="it"><h4>Synergy + safe</h4><p>Turmeric+pepper, ginger+lemon — the moat made everyday. Culinary amounts only; a gentle ⚠ where a spice has dose cautions.</p></div>
+  <div class="it"><h4>Feeds the moat</h4><p>Her spice inventory joins the Family Health Graph — so every future dinner can quietly reach for what she already owns.</p></div>
+</div>
+
+</body></html>

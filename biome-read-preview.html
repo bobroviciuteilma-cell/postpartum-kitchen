@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biome Read</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--linen:#efe8d7;--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;--sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rust:#b0623a;--rule:#d9cdb6;--line:#e3d9c4}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e7ddc7;padding:40px;display:flex;justify-content:center}
+  .card{width:480px;border-radius:24px;overflow:hidden;position:relative;
+    background:radial-gradient(120% 26% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 46%),var(--paper);
+    border:1px solid #cdbf9f;box-shadow:0 22px 50px rgba(70,55,30,.22)}
+  .card:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.34;
+    background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px)}
+  .inner{position:relative;z-index:2;padding:28px 30px 24px}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .brand{font-family:'Pinyon Script',cursive;font-size:20px;color:#7a4f2c}
+  .kick{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber2)}
+
+  .hero{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:34px;color:#46371f;line-height:1.02;letter-spacing:-.01em}
+  .lede{font-size:15px;color:var(--ink2);line-height:1.5;margin-top:9px}
+  .lede b{color:#46371f}
+  .lede em{font-style:italic;color:#7a4f2c}
+
+  .aha{margin-top:16px;border-left:3px solid var(--amber);background:rgba(195,154,71,.12);border-radius:0 10px 10px 0;padding:14px 16px}
+  .aha .k{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber2);margin-bottom:4px}
+  .aha p{font-size:15px;color:#5a481f;line-height:1.5}
+  .aha p b{font-weight:600}
+  .aha p em{font-style:italic;color:#7a4f2c}
+
+  /* ancestral healing larder */
+  .larder{margin-top:16px}
+  .larder .lk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#a8946a;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .larder .lk:before,.larder .lk:after{content:"";height:1px;background:var(--line);flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+  .tag{font-size:12px;color:#5a481f;background:#fbf7ee;border:1px solid var(--rule);border-radius:20px;padding:6px 12px;display:inline-flex;align-items:center;gap:6px}
+  .tag i{width:6px;height:6px;border-radius:50%;background:var(--sage);display:inline-block}
+  .tag.f i{background:var(--lav)}
+  .tag.b i{background:var(--rust)}
+
+  .fix{margin-top:16px;border:1px solid var(--rule);border-radius:14px;background:#fbf7ee;overflow:hidden}
+  .fix .ft{background:linear-gradient(#efe6cf,#e8dcbf);padding:10px 15px;display:flex;align-items:baseline;justify-content:space-between}
+  .fix .ft .t{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:19px;color:#46371f}
+  .fix .ft .k{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#a8946a}
+  .fix .fb{padding:11px 15px;font-size:13px;color:var(--ink2);line-height:1.45}
+  .fix .fb b{color:var(--sage2)}
+
+  /* mama -> milk -> baby throughline */
+  .dyad{margin-top:16px;border:1px solid #cdd9b6;border-radius:14px;background:linear-gradient(rgba(122,137,90,.10),rgba(95,110,68,.06));padding:15px 15px 13px}
+  .dyad .dk{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage2);text-align:center;margin-bottom:11px}
+  .flow{display:flex;align-items:center;justify-content:center;gap:6px}
+  .node{text-align:center;flex:0 0 auto;width:92px}
+  .node .dot{width:34px;height:34px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;
+    background:#f7f1e3;border:1.5px solid var(--sage);color:var(--sage2)}
+  .node .dot svg{width:18px;height:18px}
+  .node .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#46371f;line-height:1.05}
+  .node .ds{font-size:10.5px;color:var(--ink2);line-height:1.25;margin-top:2px}
+  .arrow{color:var(--sage);flex:0 0 auto;opacity:.7}
+  .arrow svg{width:16px;height:16px;display:block}
+  .dyad .cap{text-align:center;font-style:italic;font-size:12.5px;color:#5a481f;margin-top:11px;line-height:1.4}
+
+  .magic{display:flex;align-items:center;gap:9px;margin:14px 0 0;padding:13px 15px;border-radius:12px;
+    background:rgba(195,154,71,.10);border:1px solid #e2d2a6}
+  .magic svg{width:19px;height:19px;color:var(--amber2);flex:none}
+  .magic span{font-size:14px;color:#46371f;line-height:1.35}
+  .magic b{color:var(--amber2)}
+
+  .src{margin-top:15px;font-size:10.5px;color:#a89c81;font-style:italic;line-height:1.5;border-top:1px solid var(--line);padding-top:11px}
+  .cta{margin-top:13px;text-align:center;font-family:'Marcellus',serif;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+    background:linear-gradient(var(--amber),#b0822c);color:#fff8e9;padding:15px;border-radius:11px;box-shadow:0 6px 16px rgba(168,127,47,.22)}
+  .cta small{display:block;font-family:'EB Garamond';font-weight:400;font-size:11px;letter-spacing:0;text-transform:none;font-style:italic;opacity:.9;margin-top:3px}
+</style></head>
+<body>
+<div class="card"><div class="inner">
+
+  <div class="top"><span class="brand">Your Healing Kitchen</span><span class="kick">a 30-sec read &middot; from bed</span></div>
+
+  <div class="hero">It&rsquo;s not just<br>sleep &mdash; it&rsquo;s your gut.</div>
+  <div class="lede">Wiped out, foggy, digestion off since birth? <b>Birth empties a mother&rsquo;s gut</b> &mdash; and your <em>milk, mood &amp; energy</em> are all built from it. The good news: it rebuilds, starting with tonight&rsquo;s pot.</div>
+
+  <div class="aha"><div class="k">The bit no one tells you</div><p>For centuries, every culture fed a new mother the same first food &mdash; a pot of gently simmered <b>meat stock</b> (gentler than a long bone broth). The gelatin &amp; minerals are exactly what a torn-down gut <em>rebuilds with</em>.</p></div>
+
+  <div class="larder">
+    <div class="lk">tonight&rsquo;s healing larder</div>
+    <div class="tags">
+      <span class="tag"><i></i>Meat stock</span>
+      <span class="tag f"><i></i>A spoon of sauerkraut</span>
+      <span class="tag b"><i></i>Soft egg yolk</span>
+      <span class="tag"><i></i>Ginger</span>
+    </div>
+  </div>
+
+  <div class="fix">
+    <div class="ft"><span class="t">Ginger meat-stock congee</span><span class="k">tonight &middot; one pot</span></div>
+    <div class="fb"><b>Family:</b> over rice with shredded chicken. &nbsp;<b>Your boost:</b> stir in a soft yolk + a spoon of ferment &mdash; stock + live cultures reseed your gut. 5 seconds.</div>
+  </div>
+
+  <div class="dyad">
+    <div class="dk">why one pot does so much</div>
+    <div class="flow">
+      <div class="node">
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div>
+        <div class="nm">You</div><div class="ds">gut rebuilds</div>
+      </div>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <div class="node">
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c2 3 4 4.5 4 8a4 4 0 0 1-8 0c0-3.5 2-5 4-8z"/></svg></div>
+        <div class="nm">Your milk</div><div class="ds">carries it</div>
+      </div>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <div class="node">
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="9" r="4"/><path d="M5 21c0-3.3 3-6 7-6s7 2.7 7 6"/></svg></div>
+        <div class="nm">Baby</div><div class="ds">biome seeded</div>
+      </div>
+    </div>
+    <div class="cap">Heal yourself first &mdash; the rest follows from the same bowl.</div>
+  </div>
+
+  <div class="magic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg>
+    <span><b>It already sent the recipe to whoever&rsquo;s cooking.</b> You don&rsquo;t lift a finger. Just rest.</span></div>
+
+  <div class="src">Patterns, not a diagnosis &mdash; rooted in traditional postpartum food wisdom (broth, gentle proteins, live ferments). Every mum differs; your tissues rebuild as you refill.</div>
+  <div class="cta">Do your own 30-second read<small>free &middot; just talk &mdash; yourhealingkitchen.app</small></div>
+
+</div></div>
+</body></html>

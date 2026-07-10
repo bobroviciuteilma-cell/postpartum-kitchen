@@ -1,0 +1,173 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--linen:#efe8d7;--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;
+    --sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rust:#b0623a;--rule:#d9cdb6;--line:#e3d9c4}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e7ddc7;padding:40px 30px 60px}
+  .strip{display:flex;gap:26px;align-items:flex-start;width:max-content;margin:0 auto}
+  .ph{width:334px;min-height:710px;border-radius:38px;background:
+      radial-gradient(120% 30% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 44%),var(--paper);
+    border:1px solid #cdbf9f;box-shadow:0 18px 40px rgba(70,55,30,.18);position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .ph:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
+    background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.022) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.022) 0 1px,transparent 1px 3px)}
+  .lbl{text-align:center;font-family:'Marcellus',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8a7c64;margin-bottom:11px}
+  .pad{padding:26px 24px 24px;position:relative;z-index:2;flex:1;display:flex;flex-direction:column}
+  .brand{font-family:'Pinyon Script',cursive;font-size:19px;color:#7a4f2c;text-align:center;margin-bottom:3px}
+  .moonrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .back{font-size:20px;color:#b09a78;line-height:1}
+  .step{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;color:#b0a184;text-transform:uppercase}
+  .q{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;color:#46371f;line-height:1.08;text-align:center}
+  .sub{font-style:italic;color:var(--soft);font-size:13.5px;margin-top:7px;line-height:1.45;text-align:center}
+  .cta{display:block;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    background:linear-gradient(var(--amber),#b0822c);color:#fff8e9;padding:15px;border-radius:12px;margin-top:auto;box-shadow:0 6px 16px rgba(168,127,47,.22)}
+  .note{font-size:11.5px;color:#a4977c;font-style:italic;text-align:center;margin-top:13px;line-height:1.45}
+
+  /* symptom cards */
+  .scwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+  .sc{border:1px solid var(--rule);border-radius:14px;background:rgba(255,255,255,.55);padding:14px 12px;text-align:center}
+  .sc svg{width:24px;height:24px;color:#b0a184;margin-bottom:6px}
+  .sc .t{font-size:14px;color:var(--ink2);line-height:1.2}
+  .sc.on{border-color:var(--sage);background:linear-gradient(rgba(122,137,90,.14),rgba(95,110,68,.1))}
+  .sc.on svg{color:var(--sage2)}
+  .sc.on .t{color:var(--sage2);font-weight:600}
+
+  /* reveal */
+  .rv-k{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber2);text-align:center;margin-top:6px}
+  .rv-h{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:40px;color:#46371f;text-align:center;line-height:1.02;margin-top:2px}
+  .rv-sub{font-style:italic;color:var(--soft);font-size:12px;text-align:center;margin-top:6px}
+  .aha{margin-top:16px;border:1px solid var(--amber);border-radius:14px;background:linear-gradient(#fdf8ea,#f6ead0);padding:15px 16px;position:relative}
+  .aha .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber2);margin-bottom:5px}
+  .aha p{font-size:13.5px;color:#6a5a30;line-height:1.5}
+  .aha p b{color:#5a481f}
+
+  /* split-plate */
+  .sp{margin-top:18px;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:#fbf7ee;box-shadow:0 6px 18px rgba(70,55,30,.1)}
+  .sp-top{background:linear-gradient(#efe6cf,#e8dcbf);padding:12px 15px;text-align:center;border-bottom:1px solid var(--line)}
+  .sp-top .l{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#a8946a}
+  .sp-top .b{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;color:#46371f;margin-top:1px}
+  .sp-split{display:flex}
+  .sp-col{flex:1;padding:15px 14px}
+  .sp-col.fam{border-right:1px dashed var(--rule)}
+  .sp-col .ch{display:flex;align-items:center;gap:6px;font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:7px}
+  .sp-col.fam .ch{color:#a8946a}.sp-col.mum .ch{color:var(--sage2)}
+  .sp-col .ic{font-size:15px}
+  .sp-col p{font-size:13.5px;line-height:1.4}
+  .sp-col.fam p{color:#6a5c43}
+  .sp-col.mum{background:rgba(122,137,90,.07)}
+  .sp-col.mum p{color:#46371f}
+  .sp-col.mum p b{color:var(--sage2)}
+  .edu{text-align:center;font-size:11px;color:#a99a7e;font-style:italic;margin-top:13px}
+
+  /* week */
+  .wk{list-style:none;margin-top:16px}
+  .wk li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .wk li:last-child{border-bottom:none}
+  .wk .d{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#a8946a;width:32px;flex:none;padding-top:2px}
+  .wk .fam{font-size:15px;color:#3c3325;line-height:1.2}
+  .wk .mum{font-size:12px;color:var(--sage2);font-style:italic;margin-top:2px}
+  .wk .mum b{font-style:normal;font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#9aa17e}
+  .gro{margin-top:16px;border-left:3px solid var(--sage);background:rgba(122,137,90,.08);border-radius:0 8px 8px 0;padding:12px 14px}
+  .gro .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--sage2);margin-bottom:4px}
+  .gro p{font-size:12.5px;color:#5f6e44;line-height:1.5}
+  .wa{display:block;text-align:center;font-family:'Marcellus',serif;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+    background:linear-gradient(#6f8f4e,#5f6e44);color:#fff;padding:15px;border-radius:12px;margin-top:16px;box-shadow:0 6px 16px rgba(95,110,68,.25)}
+
+  /* share card */
+  .sharewrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .sig{width:248px;border-radius:18px;background:radial-gradient(120% 40% at 50% 0%,#f6e1bf,rgba(246,225,191,0) 55%),#fbf5e8;
+    border:1px solid #e2d3b0;box-shadow:0 12px 30px rgba(70,55,30,.16);padding:26px 22px;text-align:center}
+  .sig .bot{margin-bottom:8px}
+  .sig .bot svg{width:54px}
+  .sig .k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber2)}
+  .sig h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;color:#46371f;line-height:1.04;margin:3px 0 8px}
+  .sig p{font-size:12.5px;color:#6a5a30;font-style:italic;line-height:1.45}
+  .sig .tag{font-family:'Pinyon Script',cursive;font-size:17px;color:#7a4f2c;margin-top:12px}
+</style></head>
+<body>
+<div class="strip">
+
+  <!-- 1 DECODER -->
+  <div>
+  <div class="lbl">1 · The decoder</div>
+  <div class="ph"><div class="pad">
+    <div class="brand">Postpartum Kitchen</div>
+    <div class="q" style="margin-top:6px">How are you feeling?</div>
+    <div class="sub">Tap what&rsquo;s true &mdash; no tracking, no logging.</div>
+    <div class="scwrap">
+      <div class="sc on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12a7 7 0 0 1 14 0M12 12v8M8 20h8"/></svg><div class="t">Wiped out</div></div>
+      <div class="sc on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4c0 6-3 9-3 13M12 4c0 6-1 9-1 13M17 4c0 6 3 9 3 13"/></svg><div class="t">Hair in the drain</div></div>
+      <div class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 3L5 13h6l-1 8 8-11h-6z"/></svg><div class="t">3pm shakes</div></div>
+      <div class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="11" r="7"/><path d="M9 15c1 1 5 1 6 0M10 16l-1 4M14 16l1 4"/></svg><div class="t">Weeping at nothing</div></div>
+      <div class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M8 12h8M12 8v8" opacity=".5"/></svg><div class="t">Brain fog</div></div>
+      <div class="sc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a9 9 0 1 0 9 9M15 3l3 3-3 3"/></svg><div class="t">Catching every bug</div></div>
+    </div>
+    <span class="cta">Read my signals</span>
+  </div></div>
+  </div>
+
+  <!-- 2 REVEAL + SPLIT-PLATE (hero) -->
+  <div>
+  <div class="lbl">2 · Reveal + split-plate</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Your signals</span></div>
+    <div class="rv-k">Your body is asking for</div>
+    <div class="rv-h">Iron &amp; Zinc</div>
+    <div class="rv-sub">Signals, not a diagnosis &mdash; this is education, not medical advice.</div>
+    <div class="aha"><div class="k">Did you know?</div><p>The calcium in your <b>prenatal can block iron</b> &mdash; and a squeeze of <b>lime can nearly triple</b> how much you absorb. Keep tea &amp; coffee an hour apart.</p></div>
+    <div class="sp">
+      <div class="sp-top"><div class="l">Tonight &middot; one pot</div><div class="b">Ginger bone-broth chicken</div></div>
+      <div class="sp-split">
+        <div class="sp-col fam"><div class="ch"><span class="ic">&#127858;</span>The family</div><p>Shredded over rice with a little soy. Kids love it.</p></div>
+        <div class="sp-col mum"><div class="ch"><span class="ic">&#127807;</span>Your boost</div><p><b>+ squeeze of lime</b> (iron) <b>+ toasted pumpkin seeds</b> (zinc). 5 seconds.</p></div>
+      </div>
+    </div>
+    <div class="edu">One pot. One shop. Two finishes.</div>
+    <span class="cta">Make this a week &rarr;</span>
+  </div></div>
+  </div>
+
+  <!-- 3 THE WEEK -->
+  <div>
+  <div class="lbl">3 · The week, sorted</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Iron &amp; Zinc week</span></div>
+    <div class="q" style="text-align:left;font-size:24px">Your week, sorted</div>
+    <div class="sub" style="text-align:left">5 family dinners. Your recovery built in. One shop.</div>
+    <ul class="wk">
+      <li><span class="d">Mon</span><div><div class="fam">Ginger bone-broth chicken</div><div class="mum"><b>Boost</b> lime + pumpkin seeds</div></div></li>
+      <li><span class="d">Tue</span><div><div class="fam">Beef &amp; beet soup <span style="color:#9a8c70;font-style:italic;font-size:12px">&middot; from the base</span></div><div class="mum"><b>Boost</b> serve over spinach</div></div></li>
+      <li><span class="d">Wed</span><div><div class="fam">Chicken &amp; rice congee</div><div class="mum"><b>Boost</b> egg + sesame on top</div></div></li>
+      <li><span class="d">Thu</span><div><div class="fam">Lentil &amp; tomato stew</div><div class="mum"><b>Boost</b> a side of citrus</div></div></li>
+      <li><span class="d">Fri</span><div><div class="fam">Short-rib noodle soup <span style="color:#9a8c70;font-style:italic;font-size:12px">&middot; from the base</span></div><div class="mum"><b>Boost</b> extra greens + seeds</div></div></li>
+    </ul>
+    <div class="gro"><div class="k">One grocery list &middot; tap to copy</div><p>Beef shin · marrow bones · chicken · beetroot · spinach · limes · pumpkin seeds · ginger · rice · lentils…</p></div>
+    <span class="wa">Send the week to your helper</span>
+  </div></div>
+  </div>
+
+  <!-- 4 SHARE (virality) -->
+  <div>
+  <div class="lbl">4 · The forwardable card</div>
+  <div class="ph"><div class="pad">
+    <div class="moonrow"><span class="back">&larr;</span><span class="step">Share</span></div>
+    <div class="sharewrap">
+      <div class="sig">
+        <div class="bot"><svg viewBox="0 0 120 80" fill="none">
+          <g stroke="#6f7d54" stroke-width="1.5" stroke-linecap="round"><path d="M44 74 C46 56 50 38 58 22"/><path d="M52 56 C45 52 40 47 37 40 M52 56 C61 52 66 47 69 40"/></g>
+          <g fill="#9c8cb6"><ellipse cx="67" cy="24" rx="3" ry="5"/><ellipse cx="62" cy="29" rx="2.4" ry="4"/><ellipse cx="72" cy="29" rx="2.4" ry="4"/></g>
+          <g><circle cx="86" cy="36" r="5.5" fill="#e7c878"/><circle cx="86" cy="36" r="5.5" fill="none" stroke="#c39a47" stroke-width="1"/></g></svg></div>
+        <div class="k">My body is asking for</div>
+        <h3>Iron &amp; Zinc</h3>
+        <p>Did you know your prenatal can block iron? Do the 30-second check.</p>
+        <div class="tag">Postpartum Kitchen</div>
+      </div>
+      <div class="note" style="margin-top:18px">No symptoms shared &mdash; just the signal.<br>Drop it in your mums&rsquo; group.</div>
+    </div>
+    <span class="wa" style="margin-top:0">Share to my mums</span>
+  </div></div>
+  </div>
+
+</div>
+</body></html>

@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Marcellus&family=EB+Garamond:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;--sage:#7a895a;--sage2:#5f6e44;--amber:#c39a47;--amber2:#a87f2f;--rule:#d9cdb6;--line:#e3d9c4}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e7ddc7;padding:40px;display:flex;justify-content:center}
+  .ph{width:380px;border-radius:36px;overflow:hidden;background:
+      radial-gradient(120% 22% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 44%),var(--paper);
+    border:1px solid #cdbf9f;box-shadow:0 18px 44px rgba(70,55,30,.2);position:relative}
+  .ph:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.32;background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px)}
+  .pad{padding:26px 24px 24px;position:relative;z-index:2}
+  .brand{font-family:'Pinyon Script',cursive;font-size:17px;color:#7a4f2c;text-align:center;margin-bottom:10px}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:27px;color:#46371f;line-height:1.05}
+  .sub{font-style:italic;color:var(--soft);font-size:13px;line-height:1.45;margin-top:6px}
+
+  .flag{display:flex;gap:9px;align-items:center;margin-top:16px;border:1px solid #cdd9b6;background:rgba(122,137,90,.1);border-radius:11px;padding:11px 13px}
+  .flag svg{width:16px;height:16px;color:var(--sage2);flex:none}
+  .flag span{font-size:13px;color:var(--sage2);line-height:1.35}.flag b{font-weight:600}
+
+  .grp{margin-top:18px}
+  .gh{font-family:'Marcellus',serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#a8946a;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:4px}
+  .it{display:flex;align-items:center;gap:12px;padding:10px 2px}
+  .cb{width:22px;height:22px;border-radius:6px;border:1.7px solid #b9a877;flex:none;display:flex;align-items:center;justify-content:center}
+  .it.on .cb{background:var(--sage);border-color:var(--sage)}
+  .cb svg{width:13px;height:13px;color:#fff}
+  .nm{font-size:16px;color:#3c3325;flex:1}
+  .qty{font-size:13px;color:var(--soft);font-style:italic}
+  .it.on .nm{color:#3c3325}
+
+  .have{margin-top:16px;border-top:1px solid var(--line);padding-top:13px}
+  .have .hl{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--soft);font-style:italic}
+  .have .hl b{font-style:normal;color:var(--ink2)}
+  .have .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .have .chip{font-size:12.5px;color:#a89c81;border:1px solid var(--line);border-radius:16px;padding:5px 11px;background:rgba(255,255,255,.4)}
+  .have .chip:before{content:"\2713  ";color:#bcae8c}
+
+  .add{margin-top:14px;font-style:italic;color:var(--amber2);font-size:14px}
+  .cta{margin-top:18px;text-align:center;font-family:'Marcellus',serif;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;background:linear-gradient(var(--amber),#b0822c);color:#fff8e9;padding:16px;border-radius:12px;box-shadow:0 6px 16px rgba(168,127,47,.22)}
+  .cta2{margin-top:11px;text-align:center;font-style:italic;color:var(--soft);font-size:13.5px}
+  .cta2 b{color:var(--sage2);font-style:normal}
+</style></head>
+<body>
+<div class="ph"><div class="pad">
+  <div class="brand">Postpartum Kitchen</div>
+  <h1>This week&rsquo;s order</h1>
+  <div class="sub">We&rsquo;ve ticked what you&rsquo;re likely out of for your 5 dinners. Untick anything you&rsquo;ve already got &mdash; then order.</div>
+
+  <div class="flag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4v16M4 5h13l-2 4 2 4H4"/></svg><span><b>Maria flagged:</b> running low on fish sauce &mdash; added below.</span></div>
+
+  <div class="grp">
+    <div class="gh">Produce</div>
+    <div class="it on"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 13l4 4L19 7"/></svg></span><span class="nm">Limes</span><span class="qty">×6</span></div>
+    <div class="it on"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 13l4 4L19 7"/></svg></span><span class="nm">Beetroot</span><span class="qty">2</span></div>
+    <div class="it on"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 13l4 4L19 7"/></svg></span><span class="nm">Spinach</span><span class="qty">2 bunches</span></div>
+  </div>
+
+  <div class="grp">
+    <div class="gh">Protein</div>
+    <div class="it on"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 13l4 4L19 7"/></svg></span><span class="nm">Beef shin</span><span class="qty">600g</span></div>
+    <div class="it on"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 13l4 4L19 7"/></svg></span><span class="nm">Marrow bones</span><span class="qty">500g</span></div>
+    <div class="it"><span class="cb"></span><span class="nm">Chicken</span><span class="qty">already have</span></div>
+  </div>
+
+  <div class="grp">
+    <div class="gh">Pantry</div>
+    <div class="it on"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 13l4 4L19 7"/></svg></span><span class="nm">Fish sauce</span><span class="qty">Maria flagged</span></div>
+    <div class="it on"><span class="cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 13l4 4L19 7"/></svg></span><span class="nm">Pumpkin seeds</span><span class="qty">1 pack</span></div>
+  </div>
+
+  <div class="have">
+    <div class="hl">Already in your kitchen <b>(5)</b> <span style="color:#a89c81">tap to show &or;</span></div>
+    <div class="chips"><span class="chip">Rice</span><span class="chip">Ginger</span><span class="chip">Soy sauce</span><span class="chip">Olive oil</span><span class="chip">Lentils</span></div>
+  </div>
+
+  <div class="add">+ add something else</div>
+  <div class="cta">Order these 7 on RedMart &rarr;</div>
+  <div class="cta2"><b>Copy list</b> &middot; or send to whoever shops</div>
+</div></div>
+</body></html>

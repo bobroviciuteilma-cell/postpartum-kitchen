@@ -1,0 +1,530 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Healing Kitchen — full customer journey</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Marcellus&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --paper:#f7f1e3;--paper2:#fbf7ee;--linen:#efe8d7;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;
+    --sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rust:#b0623a;
+    --rule:#d9cdb6;--line:#e6ddc9;--shadow:0 18px 40px rgba(70,55,30,.18)}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e2d8c1;
+    -webkit-font-smoothing:antialiased;padding:42px 20px 80px}
+  .display{font-family:'Cormorant Garamond',serif}
+  .lbl{font-family:'Marcellus',serif;letter-spacing:.16em;text-transform:uppercase}
+
+  header.intro{max-width:1180px;margin:0 auto 30px;text-align:center}
+  header.intro .sig{font-family:'Pinyon Script',cursive;font-size:30px;color:#7a4f2c}
+  header.intro h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:40px;color:#46371f;line-height:1.05;margin:4px 0 10px}
+  header.intro p{max-width:720px;margin:0 auto;color:var(--ink2);font-size:15.5px;line-height:1.6}
+  .legend{display:inline-flex;gap:18px;margin-top:16px;flex-wrap:wrap;justify-content:center;font-size:12px;color:var(--soft)}
+  .legend b{color:var(--sage2)}
+
+  .chapter{max-width:1240px;margin:30px auto 0}
+  .chhead{display:flex;align-items:baseline;gap:14px;padding:0 6px 4px;border-bottom:1px solid var(--rule);margin-bottom:8px}
+  .chhead .cn{font-family:'Pinyon Script',cursive;font-size:26px;color:#b88a3c}
+  .chhead .ct{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:24px;color:#46371f}
+  .chhead .cd{margin-left:auto;font-size:12px;color:var(--soft);font-style:italic}
+
+  .rail{display:flex;gap:26px;overflow-x:auto;padding:14px 6px 26px;scroll-snap-type:x proximity}
+  .step{flex:0 0 auto;width:312px;scroll-snap-align:start}
+  .step .cap{display:flex;align-items:baseline;gap:9px;margin-bottom:5px}
+  .step .no{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.1em;color:#fff;background:var(--amber);width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .step .no.s{background:var(--sage)} .step .no.l{background:var(--lav)}
+  .step .tt{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px;color:#46371f;line-height:1.05}
+  .step .why{font-size:12px;color:var(--ink2);line-height:1.48;margin:7px 2px 12px}
+  .step .why b{color:var(--sage2)}
+
+  .ph{width:312px;height:632px;border-radius:36px;background:#2c2517;padding:8px;box-shadow:var(--shadow)}
+  .scr{width:100%;height:100%;border-radius:29px;overflow:hidden;position:relative;
+    background:radial-gradient(120% 16% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 40%),var(--paper)}
+  .scr.dark{background:radial-gradient(130% 30% at 50% 0%,#3a3322 0%,#211c12 60%)}
+  .scr:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;
+    background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px)}
+  .scr.dark:after{opacity:.12}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:112px;height:21px;background:#2c2517;border-radius:0 0 13px 13px;z-index:5}
+  .pad{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column}
+  .body{flex:1;overflow:hidden;padding:32px 17px 8px}
+  .brand{font-family:'Pinyon Script',cursive;font-size:16px;color:#7a4f2c;text-align:center}
+  .kick{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber2)}
+
+  h2.scrh{font-family:'Cormorant Garamond',serif;font-weight:700;color:#46371f;line-height:1.04}
+  .muted{color:var(--ink2)}
+  .pill{display:inline-flex;align-items:center;gap:6px;background:var(--paper2);border:1px solid var(--rule);border-radius:20px;padding:7px 11px;font-size:12px;color:#5a481f}
+  .pill i{width:7px;height:7px;border-radius:50%;background:var(--sage);display:inline-block}
+  .pill.am i{background:var(--amber)} .pill.lv i{background:var(--lav)} .pill.rs i{background:var(--rust)}
+  .card{background:var(--paper2);border:1px solid var(--rule);border-radius:15px;overflow:hidden}
+  .btn{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(var(--amber),#b0822c);color:#fff8e9;font-weight:700;font-size:13px;padding:12px;border-radius:12px;box-shadow:0 6px 14px rgba(168,127,47,.25)}
+  .btn.sage{background:linear-gradient(var(--sage),var(--sage2));box-shadow:0 6px 14px rgba(95,110,68,.22)}
+  .btn svg{width:16px;height:16px}
+  .ghost{text-align:center;font-size:11.5px;color:var(--soft);padding:8px}
+  .why-in{border-left:3px solid var(--amber);background:rgba(195,154,71,.1);border-radius:0 9px 9px 0;padding:9px 11px;font-size:11.5px;color:#5a481f;line-height:1.45}
+  .why-in b{font-weight:700}
+  .ck{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;color:#46371f}
+  .box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--sage);flex:none;display:flex;align-items:center;justify-content:center}
+  .box.on{background:var(--sage)}
+  .box.on:after{content:"✓";color:#fff;font-size:11px}
+
+  .tabs{display:flex;justify-content:space-around;padding:8px 6px 13px;border-top:1px solid var(--line);background:rgba(247,241,227,.85)}
+  .tabs div{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'Marcellus',serif;font-size:7px;letter-spacing:.07em;text-transform:uppercase;color:#bcae8d}
+  .tabs svg{width:19px;height:19px}
+  .tabs .on{color:#7a4f2c}
+
+  section.closing{max-width:1040px;margin:52px auto 0;background:var(--paper2);border:1px solid var(--rule);border-radius:20px;padding:34px 38px;box-shadow:var(--shadow)}
+  section.closing h3{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:28px;color:#46371f;margin-bottom:4px}
+  section.closing .sub{color:var(--ink2);font-size:14px;margin-bottom:22px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 30px}
+  .grid .it{border-left:2px solid var(--sage);padding-left:14px}
+  .grid .it h4{font-family:'Marcellus',serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage2);margin-bottom:4px}
+  .grid .it p{font-size:13px;color:var(--ink2);line-height:1.55}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style></head>
+<body>
+
+<header class="intro">
+  <div class="sig">Your Healing Kitchen</div>
+  <h1 class="display">The whole journey — welcome page to daily ritual</h1>
+  <p>From the public welcome page, through onboarding, to the daily loop, the smart kitchen, and the Pass. Scroll each chapter sideways. Provence apothecary warmth, one decision per screen. Each screen notes <b>why this UI is right</b>.</p>
+  <div class="legend"><span>● <b>Sage</b> = her healing</span><span>● <b>Amber</b> = the one action</span><span>● <b>Lavender</b> = calm / baby</span></div>
+</header>
+
+<!-- ============ CHAPTER ZERO — the welcome page ============ -->
+<div class="chapter" style="max-width:1060px">
+  <div class="chhead"><span class="cn">zero</span><span class="ct">The welcome page</span><span class="cd">the public front — empowering the mama (full: welcome.html)</span></div>
+  <div style="position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--rule);box-shadow:var(--shadow);text-align:center;padding:58px 30px 52px;
+      background:radial-gradient(120% 70% at 50% -10%,#f7e7c4 0,rgba(247,231,196,0) 52%),radial-gradient(90% 60% at 50% 120%,rgba(124,138,92,.2),rgba(124,138,92,0) 60%),linear-gradient(#f3ead6,#f6f0e1)">
+    <div style="color:var(--amber2);margin-bottom:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="width:34px;height:34px"><path d="M12 22V8M12 8c0-3.5 2.4-6 6-6 0 3.5-2.4 6-6 6zM12 12c0-3-2-5-5.5-5C6.5 10 8.5 12 12 12zM12 16c0-2.6 1.8-4.6 5-4.6C17 14 15.2 16 12 16z"/></svg></div>
+    <div style="font-family:'Pinyon Script',cursive;font-size:26px;color:#7a4f2c">welcome, mama</div>
+    <p style="max-width:540px;margin:10px auto 0;font-style:italic;font-size:16px;color:var(--ink2)">You hold the whole world together — the planning, the meals, the cries.</p>
+    <h2 class="display" style="font-weight:600;font-size:clamp(36px,6vw,64px);line-height:1.0;color:#33291a;margin-top:16px">This is your Healing Kitchen.</h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(19px,2.7vw,27px);color:#7a4f2c;margin-top:14px">Where you are fed first — so all you feed, flourish.</p>
+    <div style="margin-top:28px;display:inline-block;font-family:'Marcellus',serif;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;background:linear-gradient(#caa14b,#a87c2c);color:#fdf6e7;padding:16px 32px;border-radius:13px;box-shadow:0 12px 26px rgba(168,127,47,.28)">Step into your smart healing kitchen</div>
+    <div style="margin-top:20px;font-family:'Marcellus',serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#b3a585">No calorie counting · no seed oils · just ancestral nourishment</div>
+  </div>
+  <div style="text-align:center;font-style:italic;font-size:13px;color:var(--soft);margin-top:13px">she taps in — and steps inside ↓</div>
+</div>
+
+<!-- ============ CHAPTER A ============ -->
+<div class="chapter">
+  <div class="chhead"><span class="cn">one</span><span class="ct">First touch</span><span class="cd">free &amp; viral — to the first "aha"</span></div>
+  <div class="rail">
+
+    <div class="step">
+      <div class="cap"><span class="no">1</span><span class="tt">Front door</span></div>
+      <div class="why">Validate-first, gently: it <b>lifts the pressure</b> ("you don't need to bounce back"), shows a glimpse of the read, and one tap takes tonight off her hands. Feelings are optional.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px">
+        <div class="brand">Your Healing Kitchen</div>
+        <div style="text-align:center;margin-top:6px;color:var(--amber2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" style="width:20px;height:20px"><path d="M12 21V8M12 8c0-3 2-5 5-5 0 3-2 5-5 5zM12 11c0-2.5-2-4.5-5-4.5C7 9 9 11 12 11z"/></svg></div>
+        <h2 class="scrh" style="font-size:24px;margin:14px 0 7px;text-align:center">You don't need<br>to push through.<span style="display:block;font-style:italic;color:#7a4f2c">Just to be nourished.</span></h2>
+        <p class="muted" style="font-size:11.5px;text-align:center;line-height:1.55;margin-bottom:16px">Every mother's recovery is her own. Let me learn <i>where you are</i> — then I'll tune everything to you.</p>
+        <div class="btn">Let's find where you are</div>
+        <div class="ghost">two taps · about 20 seconds</div>
+        <div style="margin-top:auto;text-align:center;font-family:'Marcellus',serif;font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:#b3a585;padding-top:16px">No calorie counting · no seed oils · just ancestral nourishment</div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">2</span><span class="tt">Where you are → your read</span></div>
+      <div class="why">Two factual taps (her stage + feeding) make the read <b>earned, not a blanket statement</b> — then a named, shareable truth.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:28px">
+        <div class="kick" style="color:var(--amber2);text-align:center">Where are you?</div>
+        <div style="position:relative;height:44px;margin:12px 4px 4px">
+          <div style="position:absolute;left:0;right:0;top:9px;height:2px;background:linear-gradient(90deg,var(--rule),var(--amber),var(--rule))"></div>
+          <div style="position:absolute;left:0;right:0;top:4px;display:flex;justify-content:space-between">
+            <span style="width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--rule)"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--rule)"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:var(--amber);border:2px solid var(--amber2);box-shadow:0 0 0 3px rgba(195,154,71,.2)"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--rule)"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--rule)"></span>
+            <span style="width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--rule)"></span>
+          </div>
+          <div style="position:absolute;left:0;right:0;top:20px;display:flex;justify-content:space-between;font-family:'Marcellus',serif;font-size:6px;letter-spacing:.03em;text-transform:uppercase;color:#a89a7c">
+            <span style="width:16%;text-align:center">Pregnant</span><span style="width:16%;text-align:center">40 days</span><span style="width:16%;text-align:center;color:var(--amber2)">4th tri</span><span style="width:16%;text-align:center">Baby yr</span><span style="width:16%;text-align:center">Touched-out</span><span style="width:16%;text-align:center">Long game</span>
+          </div>
+        </div>
+        <div style="text-align:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#46371f">Fourth trimester · ~7 weeks</div>
+        <div style="display:flex;gap:6px;justify-content:center;margin-top:10px">
+          <span class="pill am" style="font-size:10px;padding:5px 9px"><i></i>Breastfeeding</span>
+          <span class="pill" style="font-size:10px;padding:5px 9px"><i></i>Mixed</span>
+          <span class="pill" style="font-size:10px;padding:5px 9px"><i></i>Not</span>
+        </div>
+        <div class="why-in" style="margin-top:14px;font-size:11.5px">At <b>~7 weeks &amp; breastfeeding</b>, your body's asking for <b>iron · minerals · extra protein</b>. Tonight: a gentle <b>meat stock</b> to begin refilling. <span style="color:var(--amber2)">Why?</span></div>
+        <div class="btn sage" style="margin-top:13px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share my read</div>
+        <div class="ghost">…then it's handled →</div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no l">3</span><span class="tt">The quick basics</span></div>
+      <div class="why">Set once, never asked again: <b>who cooks</b> + <b>anything to avoid</b>. (Stage, feeding &amp; household size already set.) Every personal detail feeds the kitchen that learns her.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px">
+        <div class="kick" style="color:var(--amber2);text-align:center">set once · about your kitchen</div>
+        <h2 class="scrh" style="font-size:22px;margin:5px 0 16px;text-align:center">A few quick things</h2>
+        <div style="font-family:'Marcellus',serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#a89a7c;margin-bottom:8px">Who's at the stove?</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="pill" style="font-size:11px;padding:7px 11px"><i></i>My helper</span>
+          <span class="pill am" style="font-size:11px;padding:7px 11px;border-color:var(--amber);background:rgba(195,154,71,.16)"><i></i>Me, when I can</span>
+          <span class="pill" style="font-size:11px;padding:7px 11px"><i></i>We share</span>
+        </div>
+        <div style="font-family:'Marcellus',serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#a89a7c;margin:18px 0 8px">Anything to avoid?</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="pill" style="font-size:11px;padding:6px 10px">Dairy</span>
+          <span class="pill" style="font-size:11px;padding:6px 10px">Egg</span>
+          <span class="pill" style="font-size:11px;padding:6px 10px">Gluten</span>
+          <span class="pill" style="font-size:11px;padding:6px 10px">Nut</span>
+          <span class="pill" style="font-size:11px;padding:6px 10px">Shellfish</span>
+          <span class="pill" style="font-size:11px;padding:6px 10px;border-color:#cdd6b6;background:rgba(124,138,92,.08);color:var(--sage2)">None — all good</span>
+        </div>
+        <div class="why-in" style="margin-top:18px;border-left-color:var(--lav);background:rgba(156,140,182,.1)">We'll skip those everywhere — and quietly flag the few recipes that need a breastfeeding check. Cards go to whoever cooks, as care.</div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">4</span><span class="tt">Import her kitchen</span></div>
+      <div class="why">The lock-in. Her dead camera-roll of saved recipes becomes a living library — <b>screenshot in, magic out</b>.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px">
+        <div class="kick" style="color:var(--amber2)">Bring your recipes</div>
+        <h2 class="scrh" style="font-size:22px;margin:5px 0 10px">Finally cook the<br>ones you saved.</h2>
+        <div class="card" style="border-style:dashed;border-color:#cdbf9f;padding:20px 14px;text-align:center;background:rgba(251,247,238,.6)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber2)" stroke-width="1.6" style="width:32px;height:32px"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 5l1.5-2h7L17 5"/></svg>
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#46371f;margin-top:7px">Drop screenshots</div>
+          <div class="muted" style="font-size:11px;margin-top:2px">cookbook photos · IG saves · links · voice</div>
+        </div>
+        <div style="display:flex;gap:7px;margin-top:11px">
+          <div style="flex:1;height:50px;border-radius:10px;background:linear-gradient(135deg,#e7d8b8,#d8c39a)"></div>
+          <div style="flex:1;height:50px;border-radius:10px;background:linear-gradient(135deg,#dfe0c6,#c2caa3)"></div>
+          <div style="flex:1;height:50px;border-radius:10px;background:linear-gradient(135deg,#e9cdbf,#d8a98f)"></div>
+        </div>
+        <div class="muted" style="font-size:10.5px;text-align:center;margin-top:7px;font-style:italic">3 added · reading them through the healing lens…</div>
+        <div class="btn" style="margin-top:10px">Build my kitchen</div>
+      </div></div></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ CHAPTER B ============ -->
+<div class="chapter">
+  <div class="chhead"><span class="cn">two</span><span class="ct">The daily loop</span><span class="cd">the habit — dinner handled, she rests</span></div>
+  <div class="rail">
+
+    <div class="step">
+      <div class="cap"><span class="no">5</span><span class="tt">Today</span></div>
+      <div class="why">One screen, <b>one decision</b>: dinner is handled. Relief leads; the healing "add one thing" rides along as Her Boost.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad">
+        <div class="body" style="padding-top:30px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="brand" style="font-size:14px">Morning, love</span><span class="kick" style="color:var(--amber2)">Wk 5 · rebuilding</span></div>
+          <div class="card" style="margin-top:13px">
+            <div style="background:linear-gradient(#efe6cf,#e8dcbf);padding:10px 13px;display:flex;justify-content:space-between;align-items:baseline">
+              <span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:17px;color:#46371f">Tonight is handled</span><span class="kick" style="font-size:7px;color:#a8946a">one pot</span></div>
+            <div style="padding:11px 13px">
+              <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;color:#46371f">Ginger meat-stock congee</div>
+              <div class="muted" style="font-size:11px;margin-top:3px"><b style="color:var(--sage2)">Her boost:</b> a soft yolk + a spoon of ferment.</div></div>
+            <div style="padding:0 13px 12px"><div class="btn sage"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/></svg>Send to the kitchen</div></div>
+          </div>
+          <div class="card" style="margin-top:10px;padding:10px 13px;display:flex;align-items:center;gap:9px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rust)" stroke-width="1.7" style="width:20px;height:20px;flex:none"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+            <div><div style="font-weight:700;font-size:12px;color:#46371f">I'm shaky — haven't eaten</div><div class="muted" style="font-size:10.5px">a warm thing in 10 min, for you</div></div>
+          </div>
+          <div class="muted" style="font-size:10.5px;text-align:center;margin-top:10px;font-style:italic">tap "I feel…" to adjust tonight</div>
+        </div>
+        <div class="tabs">
+          <div class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Today</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Kitchen</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>You</div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">6</span><span class="tt">Provision</span></div>
+      <div class="why">Mum's only job, made tiny: gaps pre-ticked, un-check what's home, <b>one tap to RedMart</b>. No inventory tracking, no homework.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px">
+        <div class="kick" style="color:var(--amber2)">For this week's pots</div>
+        <h2 class="scrh" style="font-size:21px;margin:4px 0 4px">What to order</h2>
+        <p class="muted" style="font-size:11px;margin-bottom:8px">Un-tick anything you already have.</p>
+        <div>
+          <div class="ck"><span class="box on"></span>Chicken + bones for stock</div>
+          <div class="ck"><span class="box on"></span>Eggs (pastured)</div>
+          <div class="ck"><span class="box"></span><span style="color:#b9ad92;text-decoration:line-through">Ginger</span></div>
+          <div class="ck"><span class="box on"></span>Sauerkraut</div>
+          <div class="ck"><span class="box on"></span>Red dates + goji</div>
+          <div class="ck" style="border:none"><span class="box on"></span>Pumpkin seeds</div>
+        </div>
+        <div class="btn" style="margin-top:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12zM6 6L5 3H3M9 20a1 1 0 1 0 0 .01M18 20a1 1 0 1 0 0 .01"/></svg>Copy list to RedMart</div>
+        <div class="ghost">helper flags low stock → your next list</div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no l">7</span><span class="tt">The hand-off</span></div>
+      <div class="why"><b>How it works:</b> ancestral technique is re-explained in dishes the helper already knows (<i>"low &amp; slow, like sabaw for tinola"</i>) — skill-calibrated, carrying the <i>why</i>. Opens from WhatsApp, zero chrome, 3 honest actions. Language optional. <span style="color:var(--soft)">(full: helper-card-preview.html)</span></div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px;display:flex;flex-direction:column">
+        <div class="kick" style="text-align:center;color:var(--amber2)">For the kitchen · from Ma'am</div>
+        <div class="card" style="margin-top:9px;background:var(--paper);box-shadow:0 10px 22px rgba(70,55,30,.14)">
+          <div style="padding:13px 14px 9px;border-bottom:1px solid var(--line)">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:17px;color:#46371f">Ginger meat-stock chicken</div>
+            <div class="why-in" style="margin-top:7px;font-size:11px">Ma'am is rebuilding her blood — keep the <b>ginger</b> &amp; the <b>fat</b>, and a soft yolk in her bowl. That's the medicine.</div>
+          </div>
+          <div style="padding:9px 14px 11px">
+            <div style="display:flex;gap:5px;margin-bottom:8px"><span style="font-family:'Marcellus',serif;font-size:8px;padding:4px 9px;border-radius:14px;background:#33291a;color:#f3ead7">English</span><span style="font-family:'Marcellus',serif;font-size:8px;padding:4px 9px;border-radius:14px;border:1px solid var(--rule);color:#5a4d35">Tagalog</span><span style="font-family:'Marcellus',serif;font-size:8px;padding:4px 9px;border-radius:14px;border:1px solid var(--rule);color:#5a4d35">Bahasa</span></div>
+            <div class="muted" style="font-size:11px;line-height:1.55">Boil low &amp; slow with ginger — <i style="color:var(--sage2)">like sabaw for tinola</i>; don't skim the fat. Spinach at the end, <i style="color:var(--sage2)">like malunggay</i>.</div>
+          </div>
+        </div>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:7px;padding-bottom:6px">
+          <div class="btn sage" style="padding:13px">Cooked ✓</div>
+          <div style="display:flex;gap:7px">
+            <div class="card" style="flex:1;text-align:center;padding:10px;font-size:11.5px;font-weight:700;color:var(--ink2)">Couldn't</div>
+            <div class="card" style="flex:1;text-align:center;padding:10px;font-size:11.5px;font-weight:700;color:var(--ink2)">Made instead</div>
+          </div>
+          <div class="ghost" style="padding:3px">“used the last stock” → her next list</div>
+        </div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no l">8</span><span class="tt">3am · Rescue</span></div>
+      <div class="why">Owning 3am is a moat. A dark, stripped screen: she <b>whispers</b> her state; a warm bite now + tomorrow's pot quietly queued. She's carried.</div>
+      <div class="ph"><div class="scr dark"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:40px;text-align:center;color:#efe3cb">
+        <div class="kick" style="color:#caa85f">3:14am · just you two</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;color:#f3e8d0;margin:14px 0 6px">I've got you.</h2>
+        <p style="font-size:12.5px;color:#c9bb9c;line-height:1.5;padding:0 4px">Sip the warm jujube tea in the flask. Then, when you can:</p>
+        <div style="margin:18px auto;width:120px;height:120px;border-radius:50%;border:1.5px solid #6f6244;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#3a3322,#241f14)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d8b76a" stroke-width="1.4" style="width:34px;height:34px"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM6 11a6 6 0 0 0 12 0M12 17v4"/></svg>
+        </div>
+        <p style="font-size:12px;color:#c9bb9c;font-style:italic">hold &amp; whisper how you feel</p>
+        <div class="why-in" style="margin-top:14px;text-align:left;border-left-color:#caa85f;background:rgba(202,168,95,.12);color:#e6d8b8">Said softly: “hollowed out, aching.” → A warming congee is <b>queued for your helper at 6:30</b>. Sleep.</div>
+      </div></div></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ CHAPTER C ============ -->
+<div class="chapter">
+  <div class="chhead"><span class="cn">three</span><span class="ct">Her smart kitchen</span><span class="cd">the moat — the AI that makes it hers (the Pass)</span></div>
+  <div class="rail">
+
+    <div class="step">
+      <div class="cap"><span class="no">9</span><span class="tt">The upgrade</span></div>
+      <div class="why">The company bet. Her own recipe <b>rewrites itself</b> — shown as a diff so it stays hers — with synergies no cookbook applies to <i>her</i> plate.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad">
+        <div class="body" style="padding-top:30px">
+          <div class="kick" style="color:var(--amber2)">From your library</div>
+          <h2 class="scrh" style="font-size:19px;margin:4px 0 9px">Made wiser for you</h2>
+          <div class="card" style="padding:12px 14px">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#46371f;margin-bottom:8px">Your lentil &amp; tomato stew</div>
+            <div style="font-size:12px;line-height:1.85;color:var(--ink2)">
+              <div><span style="text-decoration:line-through;color:#b9ad92">lentils in water</span> → <b style="color:var(--sage2)">in meat stock</b> <span style="font-size:9.5px;color:var(--sage)">gut + collagen</span></div>
+              <div style="margin-top:4px"><span style="text-decoration:line-through;color:#b9ad92">vegetable oil</span> → <b style="color:var(--sage2)">butter or olive oil</b> <span style="font-size:9.5px;color:var(--sage)">no seed oils</span></div>
+              <div style="margin-top:4px"><b style="color:var(--sage2)">+ lime</b> at the end <span style="font-size:9.5px;color:var(--amber2)">3× the iron</span></div>
+              <div style="margin-top:4px"><b style="color:var(--sage2)">yogurt to the side</b> <span style="font-size:9.5px;color:var(--soft)">calcium blocks iron</span></div>
+            </div>
+          </div>
+          <div class="why-in" style="margin-top:9px;border-left-color:var(--lav);background:rgba(156,140,182,.1)">Two plates from one pot: the family bowl + a <b>Mum Boost bowl</b> — same dinner, quietly upgraded for you.</div>
+          <div style="display:flex;gap:7px;margin-top:11px"><div class="btn sage" style="flex:1;padding:11px;font-size:12px">Save it</div><div class="btn" style="flex:1;padding:11px;font-size:12px">Cook tonight</div></div>
+        </div>
+        <div class="tabs">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Today</div>
+          <div class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Kitchen</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>You</div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">10</span><span class="tt">Healing Chart</span></div>
+      <div class="why">Your Ancient-Remedies clarity, alive: a <b>by-focus herbarium</b> — 5 foods, how-to-tonight, synergies — assembled for HER, one tap from dinner.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad">
+        <div class="body" style="padding-top:30px;overflow-y:auto">
+          <div class="kick" style="text-align:center;color:var(--sage2)">Your healing chart</div>
+          <h2 class="scrh" style="font-size:23px;text-align:center;margin:2px 0 11px">Rebuild Blood</h2>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="card" style="padding:9px 12px;display:flex;gap:10px;align-items:center"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#e9cdbf,#c98a6f);flex:none"></div><div style="flex:1"><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;color:#46371f">Liver, once a week</div><div class="muted" style="font-size:10px">richest iron + B12 there is</div></div><span class="pill am" style="font-size:9px;padding:4px 8px">add</span></div>
+            <div class="card" style="padding:9px 12px;display:flex;gap:10px;align-items:center"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#d8c39a,#b89a5e);flex:none"></div><div style="flex:1"><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;color:#46371f">Red dates (jujube)</div><div class="muted" style="font-size:10px">blood-building tea</div></div><span class="pill am" style="font-size:9px;padding:4px 8px">add</span></div>
+            <div class="card" style="padding:9px 12px;display:flex;gap:10px;align-items:center"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#dfe0c6,#9fb070);flex:none"></div><div style="flex:1"><div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;color:#46371f">Pumpkin seeds</div><div class="muted" style="font-size:10px">zinc + iron, a spoon on anything</div></div><span class="pill am" style="font-size:9px;padding:4px 8px">add</span></div>
+          </div>
+          <div style="text-align:center;margin:11px 0 7px"><span class="lbl" style="font-size:9.5px;color:#46371f">· Synergies ·</span></div>
+          <div class="why-in" style="border-left-color:var(--sage);background:rgba(122,137,90,.1)"><b>Iron + a squeeze of lime</b> = up to 3× absorbed. Keep tea &amp; dairy an hour apart.</div>
+        </div>
+        <div class="tabs">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Today</div>
+          <div class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Kitchen</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>You</div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">11</span><span class="tt">Ask your kitchen</span></div>
+      <div class="why">Not a chatbot — an assistant that <b>acts</b>. Grounded in her recipes + the canon, it answers <i>and</i> changes tonight's pot or builds a chart.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px;display:flex;flex-direction:column">
+        <div class="kick" style="text-align:center;color:var(--sage2)">Ask your kitchen</div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:9px;margin-top:12px">
+          <div style="align-self:flex-end;max-width:78%;background:linear-gradient(var(--sage),var(--sage2));color:#fff8ee;font-size:12.5px;padding:9px 12px;border-radius:14px 14px 4px 14px">What helps my milk come in?</div>
+          <div style="align-self:flex-start;max-width:86%;background:var(--paper2);border:1px solid var(--rule);font-size:12px;color:#46371f;padding:10px 12px;border-radius:14px 14px 14px 4px;line-height:1.5">Warm, fatty, mineral foods help most — oats, fennel, bone-in soups. From <i>your</i> library, your <b>chicken congee</b> fits tonight.</div>
+          <div style="align-self:flex-start;display:flex;gap:6px;flex-wrap:wrap;margin-top:1px">
+            <span class="pill am" style="font-size:10px;padding:5px 9px">Make it tonight</span>
+            <span class="pill" style="font-size:10px;padding:5px 9px">Build a Milk chart</span>
+          </div>
+        </div>
+        <div class="card" style="display:flex;align-items:center;gap:8px;padding:10px 13px;margin-bottom:4px"><span class="muted" style="font-size:12px;flex:1">Ask anything…</span><svg viewBox="0 0 24 24" fill="none" stroke="var(--amber2)" stroke-width="1.8" style="width:18px;height:18px"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM6 11a6 6 0 0 0 12 0M12 17v4"/></svg></div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">12</span><span class="tt">Cook once, eat all week</span></div>
+      <div class="why">The ancestral mechanic, AI-run: <b>one base → a week of healing meals</b>, each tuned to her changing day. Cuts the helper's load to almost nothing.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px">
+        <div class="kick" style="color:var(--sage2)">This week's base</div>
+        <h2 class="scrh" style="font-size:21px;margin:3px 0 12px">One pot of stock,<br>five dinners.</h2>
+        <div class="card" style="padding:12px 14px;display:flex;align-items:center;gap:11px;margin-bottom:11px;border-color:var(--sage);background:rgba(122,137,90,.08)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--sage2)" stroke-width="1.5" style="width:26px;height:26px;flex:none"><path d="M5 8h14l-1 11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2zM5 8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3M9 5V3h6v2"/></svg>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:15px;color:#46371f">Sunday: ginger meat stock</div><div class="muted" style="font-size:10.5px">cook once · the spine of the week</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px;padding-left:8px;border-left:2px dashed var(--rule);margin-left:14px">
+          <div class="muted" style="font-size:12px"><b style="color:#46371f">Mon</b> · congee + yolk <span style="font-size:9.5px;color:var(--sage)">energy</span></div>
+          <div class="muted" style="font-size:12px"><b style="color:#46371f">Tue</b> · lentil stew <span style="font-size:9.5px;color:var(--sage)">rebuild blood</span></div>
+          <div class="muted" style="font-size:12px"><b style="color:#46371f">Wed</b> · fish &amp; miso <span style="font-size:9.5px;color:var(--sage)">milk + mood</span></div>
+          <div class="muted" style="font-size:12px"><b style="color:#46371f">Thu</b> · greens &amp; egg drop <span style="font-size:9.5px;color:var(--sage)">calm</span></div>
+        </div>
+        <div class="btn sage" style="margin-top:13px">Send the week to the kitchen</div>
+      </div></div></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ CHAPTER D ============ -->
+<div class="chapter">
+  <div class="chhead"><span class="cn">four</span><span class="ct">The reward &amp; the Pass</span><span class="cd">why she stays — and how it earns</span></div>
+  <div class="rail">
+
+    <div class="step">
+      <div class="cap"><span class="no">13</span><span class="tt">You</span></div>
+      <div class="why">Progress with <b>zero logging, zero shame</b> — what she <i>added</i>, where her body is, the ripple to baby. The emotional reason to return.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad">
+        <div class="body" style="padding-top:30px">
+          <div class="kick" style="text-align:center;color:var(--sage2)">Your recovery</div>
+          <h2 class="scrh" style="font-size:21px;text-align:center;margin:2px 0 11px">You're refilling.</h2>
+          <div class="card" style="padding:12px 14px">
+            <div class="kick" style="font-size:8px;color:#a8946a;margin-bottom:8px">Added this week</div>
+            <div style="font-size:11.5px;color:#46371f;display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;justify-content:space-between">Meat stock <span style="letter-spacing:3px;color:var(--sage)">●●●○○</span></div>
+              <div style="display:flex;justify-content:space-between">Egg yolks <span style="letter-spacing:3px;color:var(--sage)">●●○○○</span></div>
+              <div style="display:flex;justify-content:space-between">Liver, once <span style="letter-spacing:3px;color:var(--amber)">●○○○○</span></div>
+              <div style="display:flex;justify-content:space-between">Live ferments <span style="letter-spacing:3px;color:var(--sage)">●●●●○</span></div>
+            </div>
+            <div class="muted" style="font-size:10px;font-style:italic;margin-top:8px">No streaks to keep. Every bit is already working.</div>
+          </div>
+          <div class="card" style="margin-top:9px;padding:11px 13px;background:linear-gradient(rgba(156,140,182,.1),rgba(122,137,90,.06))">
+            <div class="kick" style="font-size:8px;color:var(--sage2);text-align:center;margin-bottom:7px">why one bowl does so much</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:7px;font-family:'Cormorant Garamond',serif;font-size:13px;color:#46371f">You <span style="color:var(--sage)">→</span> your milk <span style="color:var(--sage)">→</span> baby</div>
+          </div>
+        </div>
+        <div class="tabs">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Today</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Kitchen</div>
+          <div class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>You</div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no s">14</span><span class="tt">Nourishment Picture</span></div>
+      <div class="why">A weekly artifact, auto-made from cooked meals (<b>zero logging</b>): celebrates how she nourished herself + family. Quietly shareable — the soft viral loop.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px;text-align:center">
+        <div style="font-family:'Pinyon Script',cursive;font-size:18px;color:#7a4f2c">this week, you</div>
+        <h2 class="scrh" style="font-size:24px;margin:0 0 14px">nourished well</h2>
+        <div style="display:flex;flex-direction:column;gap:11px;text-align:left;padding:0 6px">
+          <div style="display:flex;align-items:center;gap:11px"><span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;color:var(--sage2);width:34px">5</span><span class="muted" style="font-size:12.5px">nights home-cooked</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;color:var(--sage2);width:34px">4</span><span class="muted" style="font-size:12.5px">iron-rich dinners for you</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;color:var(--sage2);width:34px">3</span><span class="muted" style="font-size:12.5px">pots of healing stock</span></div>
+          <div style="display:flex;align-items:center;gap:11px"><span style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:22px;color:var(--amber2);width:34px">7</span><span class="muted" style="font-size:12.5px">nights you all ate together</span></div>
+        </div>
+        <div class="why-in" style="margin-top:15px;text-align:center;border-left:none;border-radius:10px;background:rgba(122,137,90,.1)">One gentle win for next week: a second liver night. 🌿</div>
+        <div class="btn sage" style="margin-top:13px">Share your week</div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">15</span><span class="tt">The Pass</span></div>
+      <div class="why">Gift-able, paid once, anchored to the $1.5–3k confinement spend. Sold as <b>"a kitchen that becomes yours"</b> — never billed to a depleted mum at 3am.</div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:32px;text-align:center">
+        <div style="font-family:'Pinyon Script',cursive;font-size:18px;color:#7a4f2c">the fourth-trimester</div>
+        <h2 class="scrh" style="font-size:28px;margin:0 0 7px">Healing Pass</h2>
+        <p class="muted" style="font-size:12px;line-height:1.5;padding:0 6px">Your family fed tonight is free. The Pass turns <i>your own recipes</i> into medicine — and learns your kitchen.</p>
+        <div style="display:flex;flex-direction:column;gap:7px;margin:15px 0;text-align:left">
+          <div class="muted" style="font-size:11.5px;display:flex;gap:8px"><span style="color:var(--sage2)">✦</span> the recipe-upgrade engine</div>
+          <div class="muted" style="font-size:11.5px;display:flex;gap:8px"><span style="color:var(--sage2)">✦</span> your living apothecary &amp; charts</div>
+          <div class="muted" style="font-size:11.5px;display:flex;gap:8px"><span style="color:var(--sage2)">✦</span> ask-your-kitchen + cook-once weeks</div>
+          <div class="muted" style="font-size:11.5px;display:flex;gap:8px"><span style="color:var(--sage2)">✦</span> a kitchen that learns your family</div>
+        </div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:#46371f">one season · <b>SGD 149</b></div>
+        <div class="btn" style="margin-top:11px">Begin the Pass</div>
+        <div class="ghost" style="padding-top:7px">or gift it to a mum who needs it 🌿</div>
+      </div></div></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ CHAPTER E — the smart layer ============ -->
+<div class="chapter">
+  <div class="chhead"><span class="cn">five</span><span class="ct">The smart layer</span><span class="cd">how it gets smarter — voice + camera in, structure out (AI for meaning, code for physics)</span></div>
+  <div class="rail">
+
+    <div class="step">
+      <div class="cap"><span class="no">16</span><span class="tt">The voice dump</span></div>
+      <div class="why"><b>How it works:</b> she holds one button and rambles — her state, the fridge, the chaos. Whisper transcribes; AI extracts <b>{pantry · symptoms · vetoes · intent}</b>; code builds the meals, list &amp; scaling. Zero forms — and it all feeds the graph. <span style="color:var(--soft)">(full: voice-dump-preview.html)</span></div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px;text-align:center;display:flex;flex-direction:column">
+        <div class="kick" style="color:var(--amber2)">your kitchen, listening</div>
+        <div style="width:104px;height:104px;border-radius:50%;margin:18px auto 0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 38% 32%,#f3e2bd,#d8b96f);border:1px solid #cdab63;box-shadow:0 12px 30px rgba(168,127,47,.28)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6e4a1d" stroke-width="1.5" style="width:36px;height:36px"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM6 11a6 6 0 0 0 12 0M12 17v4M8 21h8"/></svg>
+        </div>
+        <div class="kick" style="font-size:8px;margin-top:11px">hold &amp; talk</div>
+        <h2 class="scrh" style="font-size:21px;margin-top:14px">However you are —<br>just talk.</h2>
+        <div class="card" style="margin-top:auto;text-align:left;padding:11px 13px">
+          <div class="kick" style="font-size:7px;color:#a8946a;margin-bottom:6px">from one ramble →</div>
+          <div style="font-size:11px;color:var(--ink2);line-height:1.75">✓ 3 dinners queued<br>✓ a list of 5 → RedMart<br>✓ tonight's card → your helper<br>✓ noted: joint aches · toddler won't take eggs</div>
+        </div>
+      </div></div></div></div>
+    </div>
+
+    <div class="step">
+      <div class="cap"><span class="no">17</span><span class="tt">Scan &amp; audit</span></div>
+      <div class="why"><b>How it works:</b> point the camera at the fridge → tonight's dinner from what's on hand; screenshot her grocery cart → it flags hidden seed oils + missing synergies. Image in, structured out — AI reads meaning, code does the buy-delta. <span style="color:var(--soft)">(full: vision-cart-preview.html)</span></div>
+      <div class="ph"><div class="scr"><div class="notch"></div><div class="pad"><div class="body" style="padding-top:30px">
+        <div class="kick" style="color:var(--amber2);text-align:center">point · or screenshot</div>
+        <div style="position:relative;height:84px;border-radius:11px;margin-top:11px;overflow:hidden;background:linear-gradient(160deg,#cdd3c0,#b9bda6 45%,#d8c9a6)">
+          <span style="position:absolute;top:9px;left:9px;width:14px;height:14px;border:2px solid rgba(255,255,255,.85);border-right:none;border-bottom:none"></span>
+          <span style="position:absolute;bottom:9px;right:9px;width:14px;height:14px;border:2px solid rgba(255,255,255,.85);border-left:none;border-top:none"></span>
+          <span style="position:absolute;top:14px;left:22px;font-family:'Marcellus',serif;font-size:8px;background:rgba(37,30,19,.82);color:#f3e8d0;padding:3px 7px;border-radius:4px">roast chicken ·0.93</span>
+          <span style="position:absolute;bottom:16px;right:18px;font-family:'Marcellus',serif;font-size:8px;background:rgba(37,30,19,.82);color:#f3e8d0;padding:3px 7px;border-radius:4px">spinach</span>
+        </div>
+        <div class="muted" style="font-size:11px;margin-top:9px;line-height:1.5"><b style="color:var(--sage2)">Tonight, from what you have:</b> ginger meat-stock chicken · buy only 5.</div>
+        <div class="why-in" style="margin-top:13px;border-left-color:var(--rust);background:rgba(176,98,58,.08)"><b>Cart audit:</b> ⚠ that "vegetable oil" is a seed oil — swap to butter. 🌿 liver but no vitamin&nbsp;C — add limes to unlock the iron.</div>
+      </div></div></div></div>
+    </div>
+
+  </div>
+</div>
+
+<section class="closing">
+  <h3 class="display">Why this is the right UI</h3>
+  <div class="sub">Every choice serves one of two jobs: lower her effort to near-zero, or make the warmth feel earned and premium.</div>
+  <div class="grid">
+    <div class="it"><h4>One decision per screen</h4><p>A wrecked mum can't triage a dashboard. Each screen resolves to a single obvious action — Apple's clarity applied to exhaustion.</p></div>
+    <div class="it"><h4>Relief before homework</h4><p>"Tonight is handled" lands first; the healing "add one thing" rides inside it. Relieve the burden, then offer the boost — never the reverse.</p></div>
+    <div class="it"><h4>It owns 3am</h4><p>A dark, whisper-only Rescue screen meets her at the worst hour and quietly queues the morning. That's loyalty you can't design into a recipe app.</p></div>
+    <div class="it"><h4>Warmth that isn't a tech app</h4><p>Linen, botanicals, a serif soul, amber + sage — an heirloom apothecary, not a SaaS dashboard. The warmth <i>is</i> the product.</p></div>
+    <div class="it"><h4>Legible where it counts</h4><p>Cormorant serif sings in the headlines; a warm humanist sans carries every label and button — readable at 3am on low brightness.</p></div>
+    <div class="it"><h4>Zero-logging, zero shame</h4><p>Progress shows what she <i>added</i>, not what she missed. No streaks, no red badges — guilt is fatal in postpartum.</p></div>
+    <div class="it"><h4>The moat is visible</h4><p>The upgrade diff, the synergy lines, ask-your-kitchen acting on her library — "this isn't ChatGPT" is something she can <i>see</i>, and it's the paywall.</p></div>
+    <div class="it"><h4>It acts, not just answers</h4><p>Every question and chart ends in a tap that changes tonight's pot or the shopping list. Knowledge becomes dinner, not reading.</p></div>
+    <div class="it"><h4>Delegation with dignity</h4><p>The Cook Card carries the <i>why</i> to the helper and gives honest outs. Mum provisions, the helper cooks — roles never blur.</p></div>
+    <div class="it"><h4>Color is a language</h4><p>Sage = her healing, amber = the one action, lavender = calm/baby. She learns the grammar without being taught it.</p></div>
+  </div>
+</section>
+
+</body></html>

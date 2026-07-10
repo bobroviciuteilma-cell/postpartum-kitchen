@@ -1,0 +1,100 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Today — add one thing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--linen:#efe8d7;--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;--sage:#7a895a;--sage2:#5f6e44;--lav:#9c8cb6;--amber:#c39a47;--amber2:#a87f2f;--rust:#b0623a;--rule:#d9cdb6;--line:#e3d9c4}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e7ddc7;padding:34px;display:flex;justify-content:center}
+  .phone{width:390px;border-radius:34px;overflow:hidden;position:relative;
+    background:radial-gradient(120% 18% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 42%),var(--paper);
+    border:1px solid #cdbf9f;box-shadow:0 22px 50px rgba(70,55,30,.22)}
+  .phone:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.34;
+    background-image:repeating-linear-gradient(0deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(120,100,70,.02) 0 1px,transparent 1px 3px)}
+  .scr{position:relative;z-index:2;padding:24px 22px 20px}
+
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+  .brand{font-family:'Pinyon Script',cursive;font-size:19px;color:#7a4f2c}
+  .arc{font-family:'Marcellus',serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber2)}
+  .hi{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:27px;color:#46371f;margin-top:10px;line-height:1.05}
+  .feel{margin-top:8px;font-size:13.5px;color:var(--ink2)}
+  .feel b{color:#7a4f2c;font-style:italic;font-weight:500}
+  .feel a{color:#a8946a;text-decoration:underline;text-underline-offset:2px;font-size:12px;margin-left:4px}
+
+  /* THE ADD — hero */
+  .add{margin-top:16px;border:1px solid #cdd9b6;border-radius:18px;overflow:hidden;
+    background:linear-gradient(rgba(122,137,90,.12),rgba(95,110,68,.06))}
+  .add .ak{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage2);padding:14px 18px 0;display:flex;align-items:center;gap:7px}
+  .add .ak svg{width:14px;height:14px}
+  .add .big{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;color:#46371f;padding:4px 18px 0;line-height:1.04}
+  .add .big small{display:block;font-family:'EB Garamond';font-weight:400;font-style:italic;font-size:15px;color:var(--ink2);margin-top:2px}
+  .add .why{padding:9px 18px 0;font-size:13.5px;color:#4f463a;line-height:1.5}
+  .add .why b{color:var(--sage2)}
+  .add .how{margin:13px 18px 16px;background:#fbf7ee;border:1px solid var(--rule);border-radius:11px;padding:11px 13px;font-size:12.5px;color:var(--ink2);line-height:1.45}
+  .add .how b{color:#7a4f2c}
+
+  /* tonight */
+  .ton{margin-top:14px;border:1px solid var(--rule);border-radius:14px;background:#fbf7ee;overflow:hidden}
+  .ton .tt{background:linear-gradient(#efe6cf,#e8dcbf);padding:10px 15px;display:flex;align-items:baseline;justify-content:space-between}
+  .ton .tt .t{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#46371f}
+  .ton .tt .k{font-family:'Marcellus',serif;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#a8946a}
+  .ton .tb{padding:10px 15px 0;font-size:12.5px;color:var(--ink2);line-height:1.45}
+  .ton .tb b{color:var(--sage2)}
+  .sent{display:flex;align-items:center;gap:8px;padding:11px 15px 12px;font-size:12.5px;color:#7a4f2c}
+  .sent svg{width:16px;height:16px;color:var(--amber2);flex:none}
+  .sent b{color:#46371f}
+
+  /* added this week — additive, zero-logging */
+  .wk{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+  .wk .wk-k{font-family:'Marcellus',serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#a8946a;margin-bottom:11px}
+  .row{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+  .row .nm{font-size:13.5px;color:#46371f}
+  .dots{display:flex;gap:5px}
+  .dots i{width:9px;height:9px;border-radius:50%;background:#e2dcc9;display:inline-block}
+  .dots i.on{background:var(--sage)}
+  .dots i.am{background:var(--amber)}
+  .wk .cap{font-style:italic;font-size:12px;color:#a89c81;margin-top:9px;line-height:1.4}
+
+  .bar{display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);color:#b3a98a}
+  .bar div{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:'Marcellus',serif;font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+  .bar svg{width:19px;height:19px}
+  .bar .act{color:#7a4f2c}
+</style></head>
+<body>
+<div class="phone"><div class="scr">
+
+  <div class="top"><span class="brand">Your Healing Kitchen</span><span class="arc">Week 5 &middot; rebuilding</span></div>
+  <div class="hi">Morning, love.</div>
+  <div class="feel">You woke <b>foggy &amp; wiped</b>.<a href="#">change</a></div>
+
+  <div class="add">
+    <div class="ak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Today, add one thing</div>
+    <div class="big">Four egg yolks<small>stirred warm into your morning chai</small></div>
+    <div class="why">Yolks are quiet brain fuel &mdash; <b>choline + the fat-soluble vitamins</b> your foggy, rebuilding nervous system runs on. Not a restriction. Just one nourishing thing added.</div>
+    <div class="how"><b>How:</b> whisk 4 room-temp yolks into warm (not boiling) spiced milk + honey. 2 minutes &mdash; or tap to send it to the kitchen.</div>
+  </div>
+
+  <div class="ton">
+    <div class="tt"><span class="t">Ginger meat-stock congee</span><span class="k">tonight &middot; one pot</span></div>
+    <div class="tb"><b>Family:</b> over rice, shredded chicken. &nbsp;<b>Your boost:</b> a soft yolk + a spoon of ferment stirred in.</div>
+    <div class="sent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.4 8.4 0 1 1 21 11.5z"/></svg><span><b>Already with the kitchen.</b> You don&rsquo;t lift a finger.</span></div>
+  </div>
+
+  <div class="wk">
+    <div class="wk-k">what you&rsquo;ve added this week</div>
+    <div class="row"><span class="nm">Meat stock</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+    <div class="row"><span class="nm">Egg yolks</span><span class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+    <div class="row"><span class="nm">Liver, once</span><span class="dots"><i class="am"></i><i></i><i></i><i></i><i></i></span></div>
+    <div class="row"><span class="nm">Live ferments</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+    <div class="cap">No streaks to keep. Every bit you added is already working.</div>
+  </div>
+
+  <div class="bar">
+    <div class="act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Today</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16M4 12h16M4 19h10"/></svg>Kitchen</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3a9 9 0 1 0 9 9c0-1-7 1-9-2s1-9 0-7z"/></svg>Larder</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>You</div>
+  </div>
+
+</div></div>
+</body></html>
