@@ -66,7 +66,19 @@ docs/VISION.md · memories (positioning done-thesis, yhk evaluation 5-model mone
 consensus, mom-can-buy-too, singapore market, DISH teardown in reference_bridge_ayurveda).
 
 ## 🎨 DESIGN SESSION — state as of 2026-07-10 (all options LIVE, PICKS PENDING)
-**Ilma's picks still open — bring these to her FIRST in any follow-up session:**
+**⭐ FINAL MOVE (2026-07-10 late): Ilma said "too much going on — how would Apple do it?"
+→ built THE PICK (`design/apple/`, all 5 surfaces): ONE assembled design from her revealed
+taste — white rooms + air, golden as top-of-page morning light (not paint), posy = the
+single signature motif, lavender/azure/pink in content not chrome, sage+beet functional,
+one quiet label ink. Chooser (`design/index.html`) now LEADS with The Pick; the option
+sets below are demoted to a "parts library". Tableware board v2 (`design/tableware.html`)
+regenerated FROM the locked plate (satin/petal-rim/sprigs, edits-endpoint reference) —
+family shot + 4 cups + 4 glasses with recommendations marked (cup 1 + glass 1).
+HER WHOLE REMAINING TO-DO: "The Pick: yes/tweak" + "your picks" (or cup N glass N).
+⚠️ PROCESS LESSON (encode in future sessions): parallel option sets overwhelmed her —
+present ONE assembled recommendation with options available BEHIND it; the ≥3-options
+rule is satisfied by the parts library, not by fanning choices at her.**
+The superseded per-set picks (kept for reference if she digs into the parts library):
 - **Direction 1/2/3** — garden-leaning (all her explorations were on Garden) but NOT confirmed.
 - **Pantry A/B/C** (`design/garden/pantry-{a,b,c}.html`) — she LIKED B's golden top-down wash.
 - **Golden G1/G2/G3** (`design/golden{1,2,3}/`, compare: `design/golden-compare.html`) —
