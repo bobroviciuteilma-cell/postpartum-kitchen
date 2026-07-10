@@ -53,6 +53,32 @@ library DEDUPED across cards (shoot turmeric once, reuse everywhere), throttled 
    `cook-cards/beet-kvass-card.html` (upgraded, ferment-shaped). `pilot/kvass.html` +
    `pilot/index.html` upgrades stay on the before-FINAL checklist.
 
+## ⏭️ NEXT BIG SESSION (Ilma, 2026-07-10): FINAL UX/UI + BUSINESS PLAN, fresh chat
+Her brief: refine THE OFFER end-to-end (what YHK offers · who for · uniqueness · why it
+cannot-not make money / ridiculously attractive · the network effect per new member ·
+money+time saved for members · deep personalisation) **+ final UX/UI start to finish.**
+Her monetisation signal (encode, don't re-litigate the intent): **happy to launch first
+2 weeks FREE, but regular money coming in is VERY important.** (The open free-model
+decision in SESSION-HANDOVER Track B gets resolved WITH her in that session.)
+Paste-ready prompt: see my final message of the design session / memory
+`project_uxui_business_session`. Strategy sources: MASTER-PLAN.md · business/PITCH-DECK.md ·
+docs/VISION.md · memories (positioning done-thesis, yhk evaluation 5-model monetisation
+consensus, mom-can-buy-too, singapore market, DISH teardown in reference_bridge_ayurveda).
+
+## 🎨 DESIGN SESSION — state as of 2026-07-10 (all options LIVE, PICKS PENDING)
+**Ilma's picks still open — bring these to her FIRST in any follow-up session:**
+- **Direction 1/2/3** — garden-leaning (all her explorations were on Garden) but NOT confirmed.
+- **Pantry A/B/C** (`design/garden/pantry-{a,b,c}.html`) — she LIKED B's golden top-down wash.
+- **Golden G1/G2/G3** (`design/golden{1,2,3}/`, compare: `design/golden-compare.html`) —
+  she narrowed to G2/G3; recommendation given: **G2** (crisp + helper legibility), with
+  "G2 + golden masthead" offered as the middle if she wants G3's warmth.
+- **Tableware** (`design/tableware.html`): plate family CONFIRMED-style from the locked
+  plate (satin, lobed scallop, sage sprigs — v2 family image approved-quality); cups 1–4 +
+  glasses 1–4 board v2 (script `<scratchpad>/gen_tableware_v2.py`; rebuild page via
+  `<scratchpad>/build_tableware_board.py` pattern). Jar + cast iron fixed.
+After picks: sub-choices (≥3 each) → **docs/design.md** → batch-apply everywhere.
+
+### (original deliverable-1 record below)
 ## 🎨 DESIGN SESSION — Deliverable 1 SHIPPED 2026-07-09 eve, awaiting Ilma's pick
 **Three directions live** (same DNA, three intensities), each applied to REAL surfaces
 (week1 door · liver-cutlets mum card · liver-cutlets helper card · card index), with a
