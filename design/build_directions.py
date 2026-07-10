@@ -420,4 +420,103 @@ for gslug, gnum, gname, gcss, gpantry in GOLDEN:
     with open(os.path.join(outdir, 'pantry.html'), 'w') as f:
         f.write(h)
     print(gslug + '/pantry.html', len(h), 'bytes')
+
+# --------------------------------------------------------------- THE PICK (Apple discipline)
+# Ilma (2026-07-10): "if it was apple design how would they do it? too much going on for me."
+# One assembled design from her revealed taste — no more parallel option sets:
+# white rooms + air, ONE quiet label ink, faint golden dawn at the page top (the wash she
+# loved, demoted to light), posy as the single signature motif, sage+beet functional,
+# lavender/azure/pink live in content (chips, posy, photos) not chrome.
+CSS_APPLE = """
+/* THE PICK — Apple discipline x her Provence */
+:root{
+  --paper:#FFFFFF; --paper2:#FDFBF6; --sage:#7A917C; --sage-d:#54705A; --sage-soft:#E9EFE7;
+  --amber:#B08A50; --amber-soft:#F1E7D2; --ink:#37332B; --ink2:#75705F; --line:#ECE5D6;
+  --beet:#9C2B4E; --beet-soft:#F6E7EC;
+  --lav:#8C81A9; --lav-soft:#EEEBF4; --pink:#C98A9B; --pink-soft:#F7E9ED; --azure:#7E96B8;
+}
+body{background:#FAF6EC; background-image:radial-gradient(120% 20% at 50% 0%, rgba(246,232,199,.55), rgba(246,232,199,0) 70%);}
+.sech,.blockh,.hkicker,.ovscale-lab,.tkind,.metarow b,.eyebrow,.brandtag,.ctl-lab{color:#8B8371;}
+h1,.tname,.askname{color:var(--ink);}
+.tile{background:#FFFFFF; border:1px solid var(--line); border-radius:16px;
+      box-shadow:0 1px 2px rgba(60,50,30,.05), 0 10px 28px rgba(60,50,30,.07);}
+.tile:hover{transform:none; box-shadow:0 1px 2px rgba(60,50,30,.06), 0 14px 32px rgba(60,50,30,.10);}
+.tile img{box-shadow:none; border:1px solid var(--line);}
+.more a{background:#FFFFFF;}
+.card{box-shadow:0 1px 2px rgba(60,50,30,.05), 0 22px 48px rgba(60,50,30,.10);}
+.pscreen{background:#FDFBF6;}
+.hero{border:6px solid #fff; box-shadow:0 10px 24px rgba(60,50,30,.12);}
+.whenband{background:var(--sage-soft); color:#48604E;}
+.whenband b{color:#48604E;}
+.rule,.brandrule{width:104px; height:26px; background:POSY_SVG center/contain no-repeat;}
+.step .n{background:var(--sage-d);}
+.dots i.on{background:var(--sage-d);}
+.cooknote{background:var(--beet-soft); color:#7a2740;}
+.tag.b{background:var(--pink-soft); color:#9A4B62;}
+.gqty{background:var(--sage-soft);}
+"""
+CSS_APPLE = CSS_APPLE.replace('POSY_SVG', POSY)
+
+CSS_APPLE_PANTRY = """
+body{background:#FAF6EC; background-image:radial-gradient(120% 20% at 50% 0%, rgba(246,232,199,.55), rgba(246,232,199,0) 70%);}
+.scr{background:#FDFBF6;}
+.scr .bg{background:radial-gradient(130% 22% at 50% 0%, #F6E8C7, rgba(246,232,199,0) 65%), #FDFBF6;}
+.kick,.dsec,.hintbox .tk{color:#8B8371;}
+.h1,.cap .tt,.row .nm,.hrow .nm,.dtop .nm,.note h3{color:#37332B;}
+.cap .no{background:#54705A;}
+.shf .nm{color:#37332B;}
+.row .cc b{color:#75705F;}
+.gobtn,.elsebox button,.restock .rr .ord{background:#54705A;}
+.mic{background:radial-gradient(circle at 35% 30%, #8FA893, #54705A); box-shadow:0 8px 24px rgba(84,112,90,.4);}
+.mic:after{border-color:rgba(84,112,90,.35);}
+.hintbox{border-color:#ECE5D6; background:#FDFBF6;}
+.hintbox p b{color:#54705A;}
+.dots i.on{background:#54705A;}
+.dtop .sub{color:#8B8371;}
+.rl{color:#54705A;}
+.sheet{background:#FFFFFF;}
+.st.full i{background:#7A917C;}
+.seg3 button.on.s-full{background:#7A917C;}
+"""
+
+outdir = os.path.join(DESIGN, 'apple')
+os.makedirs(outdir, exist_ok=True)
+for fname, html in SRC.items():
+    h = html
+    h = h.replace('<title>', '<title>The Pick · ', 1)
+    if fname == 'week1.html':
+        h = h.replace('../cook-cards/index.html?v=w1', 'index.html?v=d1')
+        h = h.replace('../cook-cards/', '../../cook-cards/')
+        h = h.replace('liver-cutlets.html?v=w1', 'liver-cutlets.html?v=d1')
+    elif fname == 'liver-cutlets.html':
+        h = h.replace('<a href="index.html">', '<a href="week1.html?v=d1">')
+    elif fname == 'liver-cutlets-mum.html':
+        h = h.replace('href="index.html"', 'href="week1.html?v=d1"')
+    elif fname == 'index.html':
+        for t in ['main-meals.html', 'drinks.html', 'snacks.html', 'desserts.html']:
+            h = h.replace('href="' + t + '"', 'href="../../cook-cards/' + t + '"')
+        h = h.replace('<meta name="viewport" content="width=device-width, initial-scale=1">',
+                      '<meta name="viewport" content="width=device-width, initial-scale=1">\n' + NOCACHE)
+    if fname == 'week1.html':
+        h = swap_images(h, SWAP_WEEK1)
+    elif fname in ('liver-cutlets.html', 'liver-cutlets-mum.html'):
+        h = swap_images(h, SWAP_CARD)
+    h = h.replace('</head>', '<style id="direction">' + CSS_APPLE + COMMON_CSS + '</style>\n'
+                  '<!-- photos: approved v2 anchors where available -->\n</head>', 1)
+    bar = ('<div class="dxn-bar"><a href="../index.html?v=d1">&larr; The parts library</a>'
+           '<span class="dxn-name">The Pick · assembled, Apple discipline</span></div>')
+    h = h.replace('<body>', '<body>\n' + bar, 1)
+    with open(os.path.join(outdir, fname), 'w') as f:
+        f.write(h)
+    print('apple/' + fname, len(h), 'bytes')
+h = PANTRY_SRC
+h = h.replace('<title>', '<title>The Pick · pantry · ', 1)
+common = PANTRY_COMMON.replace('POSY_SVG', POSY)
+h = h.replace('</head>', '<style id="direction">' + CSS_APPLE_PANTRY + common + '</style>\n</head>', 1)
+bar = ('<div class="dxn-bar"><a href="../index.html?v=d1">&larr; The parts library</a>'
+       '<span class="dxn-name">The Pick · pantry</span></div>')
+h = h.replace('<body>', '<body>\n' + bar, 1)
+with open(os.path.join(outdir, 'pantry.html'), 'w') as f:
+    f.write(h)
+print('apple/pantry.html', len(h), 'bytes')
 print('done')
