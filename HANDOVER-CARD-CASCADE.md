@@ -139,10 +139,19 @@ the family = the LOCKED cutlets plate exactly** — warm cream, gently LOBED sca
 flower, raised edge line), **sparse hand-painted sage-green wildflower sprigs** (look at the
 hero anchor, not a generic scallop). Sage cast iron pot: she LIKES it — cream+sage both stay.
 Kit-1 plain glass: OUT. Kit-2 bistro glass + kit-3 goblet: in the running. Jar: fixed.
-**Board v2 (in flight):** plates/bowls = ONE family from the locked plate (sizes/shapes
-vary, 1 confirm shot) + 4 CUP options + 4 GLASS options; ceramics generated with the hero
-anchor as reference image (`/v1/images/edits`), script `<scratchpad>/gen_tableware_v2.py`.
-She picks: family yes/no · cup 1-4 · glass 1-4. Build script: `design/build_directions.py` (regenerates all
+**Board v2 (shipped):** plates/bowls family from the locked plate + 4 cups + 4 glasses;
+ceramics via `/v1/images/edits` with the hero anchor as reference (the fidelity fix).
+**Board v2 feedback (Ilma 2026-07-10 late) → v3 LOCKS + steer:**
+- **🔒 GLASS FAMILY LOCKED = the OPTIC WAVY** (vintage pressed glass, soft ripple, never
+  polished). She asked for 4 styles OF it to complete the set: short-stem goblet, tall,
+  small, jug/carafe — generated with her liked glass-3 image as the reference.
+- **CERAMICS STEER: "less flowery, more cool vintage — what Gwyneth Paltrow would own."**
+  = quiet-luxury handmade vintage (Astier-de-Villatte / old French ironstone energy),
+  satin rule stands. 4 shape characters × plate/bowl/cup (12 images): s1 scallop+sprigs
+  (the v2 look) · s2 scallop PLAIN · s3 atelier organic rim · s4 embossed tone-on-tone.
+  Script `<scratchpad>/gen_tableware_v3.py` → board v3 on `design/tableware.html`,
+  recommendations marked (rec: s2, the bridge between her locked scallop and less-flowery).
+  She picks one character per piece (or "your picks"). Build script: `design/build_directions.py` (regenerates all
 12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
 **Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
 strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**
