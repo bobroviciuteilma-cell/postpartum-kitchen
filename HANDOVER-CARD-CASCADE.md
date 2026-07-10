@@ -84,10 +84,17 @@ harmonises bf-note→soft-beet, tradition→amber). Awaiting her letter pick.
 cutlets — that provence flowery — we should follow this or similar."** Every plate/bowl in
 generated photos = the softly fluted, scalloped-rim white-cream Provençal porcelain of the
 approved hero anchor (already in the locked prompt — now explicitly THE plate, not an example).
-**Tableware standard (her steer, same message): standardise pottery/glasses/cups** — a
-3-option tableware board (all-porcelain / porcelain+bistro-glass / porcelain+sage-stoneware)
-generated with the locked prompt for her pick; the winner's tableware line then gets appended
-to the photo-style suffix and governs the full photo pass. Build script: `design/build_directions.py` (regenerates all
+**🔒 THE PROP-KIT RULE (Ilma, 2026-07-10): "the glasses, cups, jars and everything else
+appearing should be standardised with 3-4 styles so it looks consistent but enough variety."**
+Every generated photo draws ONLY from a locked kit of 3–4 vessel families — nothing off-kit
+(no random mugs, boards, odd glasses). Kit members: (1) the fluted scalloped white-cream
+porcelain family — plates, bowls, cups [plate shape LOCKED, above]; (2) ONE drink-vessel
+style — her pick from the tableware board (plain clear glass / French bistro fluted glass /
+sage stoneware); (3) the 1.6 L clip-top Kilner, orange seal — all ferments & storage jars;
+(4) cream/sage enamelled cast iron — all cookware [already locked]. Board:
+`design/tableware.html` (3 kit options generated with the locked prompt); the winner's
+tableware sentence gets appended to the photo-style suffix and governs the full photo pass.
+Cutlery/small props: standardise in the same sentence once the kit is picked (propose 3). Build script: `design/build_directions.py` (regenerates all
 12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
 **Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
 strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**
