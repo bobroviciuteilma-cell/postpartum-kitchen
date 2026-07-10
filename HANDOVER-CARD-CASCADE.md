@@ -74,7 +74,20 @@ post-pick sub-choices.
 v2 anchors wherever one exists (hero plate, skillet step, liver/herbs/seeds/veg ingredients,
 Kilner jar on the kvass tile) — `design/anchor-images.json` (downscaled 800px, ingredients
 center-cropped tighter) + swap logic in `build_directions.py`. Remaining images stay old
-until the full photo pass. Anchors are framed WIDE — final pass shoots closer per her rule. Build script: `design/build_directions.py` (regenerates all
+until the full photo pass. Anchors are framed WIDE — final pass shoots closer per her rule.
+**Pantry × Garden, 3 options (her ask, 2026-07-09 late):** `design/garden/pantry-{a,b,c}.html`
+— A same-coat (lavender/azure/iris) · B amber shelf (keeps gold character, garden ground+posy)
+· C fresh larder (porcelain-white, sage actions). Class-level overrides in the build script;
+pantry CONTENT untouched (4→3 label reconcile stays with the Unify session; preview only
+harmonises bf-note→soft-beet, tradition→amber). Awaiting her letter pick.
+**🔒 PLATE SHAPE LOCKED (Ilma, 2026-07-09 late): "I like the shape of the plate in the
+cutlets — that provence flowery — we should follow this or similar."** Every plate/bowl in
+generated photos = the softly fluted, scalloped-rim white-cream Provençal porcelain of the
+approved hero anchor (already in the locked prompt — now explicitly THE plate, not an example).
+**Tableware standard (her steer, same message): standardise pottery/glasses/cups** — a
+3-option tableware board (all-porcelain / porcelain+bistro-glass / porcelain+sage-stoneware)
+generated with the locked prompt for her pick; the winner's tableware line then gets appended
+to the photo-style suffix and governs the full photo pass. Build script: `design/build_directions.py` (regenerates all
 12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
 **Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
 strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**

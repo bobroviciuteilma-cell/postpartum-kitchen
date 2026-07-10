@@ -231,4 +231,106 @@ for i, (slug, name, css) in enumerate(DIRECTIONS):
         with open(os.path.join(outdir, fname), 'w') as f:
             f.write(h)
         print(slug + '/' + fname, len(h), 'bytes')
+
+# ------------------------------------------------------------------ pantry × garden
+# Ilma (2026-07-09 eve): "look at the pantry — how would you match that in provence
+# garden style — give me 3 options". The pantry preview has its OWN chrome (parallel
+# chat), so these are class-level literal overrides, not the card token swap.
+# Content (incl. its 4 labels) is untouched — the 3-label reconcile is the Unify session.
+PANTRY_SRC = open(os.path.join(ROOT, 'pantry-preview.html')).read()
+
+PANTRY_COMMON = """
+.dxn-bar{width:100%; margin:0 auto 6px; display:flex; flex-wrap:wrap; gap:4px 16px;
+  align-items:center; justify-content:center; font-family:'Marcellus',serif; font-size:10.5px;
+  letter-spacing:.13em; text-transform:uppercase; color:#7a7263; text-align:center; padding:0 12px;}
+.dxn-bar a{color:#5b5344; text-decoration:underline; text-underline-offset:3px;}
+.dxn-bar .dxn-name{color:#3b362c;}
+@media print{.dxn-bar{display:none !important;}}
+/* house label harmony: bf note = soft beet, tradition = amber (full reconcile in Unify) */
+.lbl.w{background:rgba(156,43,78,.10); color:#8d3a5c;}
+.lbl.t{background:rgba(192,138,67,.16); color:#8a6326;}
+/* the garden posy under each screen title */
+.h1::after{content:""; display:block; width:96px; height:20px; margin:5px auto 0;
+  background:POSY_SVG center/contain no-repeat;}
+"""
+
+CSS_PANTRY_A = """
+/* PANTRY OPTION A — SAME COAT: the pantry wears exactly the garden card chrome —
+   cream paper, lavender headings, azure counts, iris actions, posy under the title. */
+body{background:#DADEC7; background-image:radial-gradient(circle at 25% 10%, rgba(255,255,255,.4), transparent 55%);}
+.scr{background:#FAF5E8;}
+.scr .bg{background:radial-gradient(130% 24% at 50% 0%, #EFE9F5, rgba(239,233,245,0)), #FAF5E8;}
+.h1,.cap .tt,.row .nm,.hrow .nm,.dtop .nm,.note h3{color:#3B362C;}
+.kick,.dsec,.hintbox .tk,.hintbox p b{color:#5D5382;}
+.cap .no{background:#5D5382;}
+.shf .nm{color:#4D6852;}
+.row .cc b{color:#46608A;}
+.doors button.on{color:#5D5382;}
+.gobtn,.elsebox button,.restock .rr .ord{background:#6D5F92;}
+.mic{background:radial-gradient(circle at 35% 30%, #9C8FC0, #6D5F92); box-shadow:0 8px 24px rgba(109,95,146,.4);}
+.mic:after{border-color:rgba(109,95,146,.35);}
+.hintbox{border-color:#CFC7E0; background:rgba(124,110,158,.08);}
+.dots i.on{background:#5D5382;}
+.dtop .sub{color:#7C6E9E;}
+.rl{color:#46608A; border-bottom-color:#8FA6C8;}
+.sheet{background:#FFFDF5;}
+.st.full i{background:#6E8A6F;}
+.seg3 button.on.s-full{background:#6E8A6F;}
+"""
+
+CSS_PANTRY_B = """
+/* PANTRY OPTION B — THE AMBER SHELF: the pantry keeps its own apothecary-amber
+   character (gold buttons, amber kickers) but moves into the garden — garden ground,
+   posy, azure counts, lavender whispers. A distinct room in the same house. */
+body{background:#DADEC7; background-image:radial-gradient(circle at 25% 10%, rgba(255,255,255,.4), transparent 55%);}
+.scr{background:#F7F0E1;}
+.row .cc b{color:#5E739B;}
+.hintbox{border-color:#CFC7E0;}
+.dtop .sub{color:#8678A2;}
+.dots i.on{background:#8678A2;}
+"""
+
+CSS_PANTRY_C = """
+/* PANTRY OPTION C — THE FRESH LARDER: the brightest room in the garden house —
+   porcelain-white screens, sage headings & actions, lavender fine print, azure counts. */
+body{background:#DADEC7; background-image:radial-gradient(circle at 25% 10%, rgba(255,255,255,.4), transparent 55%);}
+.scr{background:#FCFAF3;}
+.scr .bg{background:radial-gradient(130% 24% at 50% 0%, #FFFFFF, rgba(255,255,255,0)), #FCFAF3;}
+.h1,.cap .tt,.row .nm,.hrow .nm,.dtop .nm,.note h3{color:#3D392F;}
+.kick{color:#8C81A9;}
+.dsec,.hintbox .tk,.hintbox p b{color:#546E59;}
+.cap .no{background:#546E59;}
+.shf .nm{color:#546E59;}
+.row .cc b{color:#7E96B8;}
+.gobtn,.elsebox button,.restock .rr .ord{background:#546E59;}
+.mic{background:radial-gradient(circle at 35% 30%, #8FA893, #546E59); box-shadow:0 8px 24px rgba(84,110,89,.4);}
+.mic:after{border-color:rgba(84,110,89,.35);}
+.hintbox{border-color:#DCE3DC; background:rgba(84,110,89,.07);}
+.dots i.on{background:#7E96B8;}
+.dtop .sub{color:#7C6E9E;}
+.rl{color:#546E59;}
+.sheet{background:#FFFFFF;}
+.st.full i{background:#6E8A6F;}
+.seg3 button.on.s-full{background:#6E8A6F;}
+"""
+
+PANTRY_OPTS = [
+    ('pantry-a', 'A', 'Same coat as the cards', CSS_PANTRY_A),
+    ('pantry-b', 'B', 'The amber shelf', CSS_PANTRY_B),
+    ('pantry-c', 'C', 'The fresh larder', CSS_PANTRY_C),
+]
+for slug, letter, name, css in PANTRY_OPTS:
+    h = PANTRY_SRC
+    h = h.replace('<title>', '<title>Pantry in Garden ' + letter + ' — ' + name + ' · ', 1)
+    common = PANTRY_COMMON.replace('POSY_SVG', POSY)
+    h = h.replace('</head>', '<style id="direction">' + css + common + '</style>\n</head>', 1)
+    others = ' · '.join('<a href="' + s + '.html?v=d1">' + l + ' — ' + n + '</a>'
+                        for s, l, n, _ in PANTRY_OPTS if s != slug)
+    bar = ('<div class="dxn-bar"><a href="../index.html?v=d1">&larr; All directions</a>'
+           '<span class="dxn-name">Pantry &times; Provence garden &middot; Option ' + letter +
+           ' &middot; ' + name + '</span><span>Also: ' + others + '</span></div>')
+    h = h.replace('<body>', '<body>\n' + bar, 1)
+    with open(os.path.join(DESIGN, 'garden', slug + '.html'), 'w') as f:
+        f.write(h)
+    print('garden/' + slug + '.html', len(h), 'bytes')
 print('done')
