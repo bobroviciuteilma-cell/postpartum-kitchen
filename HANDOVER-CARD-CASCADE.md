@@ -66,6 +66,14 @@ docs/VISION.md · memories (positioning done-thesis, yhk evaluation 5-model mone
 consensus, mom-can-buy-too, singapore market, DISH teardown in reference_bridge_ayurveda).
 
 ## 🎨 DESIGN SESSION — state as of 2026-07-10 (all options LIVE, PICKS PENDING)
+**🛑 PARKED BY ILMA (2026-07-10, the business/UX session): "focus on business plan and what
+features we want to work/refine and talk about customer journey — not UI/UX design yet, we
+are not there yet."** UX/UI resumes only after business plan + feature set + customer journey
+are settled (that session's Part 1 = THE OFFER is LOCKED — see MASTER-PLAN.md + memory
+`project_offer_locked`). Picks she DID give that session before parking (feed them into The
+Pick when design resumes): **direction = Garden but "refine — too much going on"** (consistent
+with The Pick's quieting) · **pantry B (amber shelf)** · **golden G2 (golden ground)** ·
+tableware cup/glass explicitly deferred ("not there yet").
 **⭐ FINAL MOVE (2026-07-10 late): Ilma said "too much going on — how would Apple do it?"
 → built THE PICK (`design/apple/`, all 5 surfaces): ONE assembled design from her revealed
 taste — white rooms + air, golden as top-of-page morning light (not paint), posy = the
@@ -149,9 +157,11 @@ ceramics via `/v1/images/edits` with the hero anchor as reference (the fidelity 
   = quiet-luxury handmade vintage (Astier-de-Villatte / old French ironstone energy),
   satin rule stands. 4 shape characters × plate/bowl/cup (12 images): s1 scallop+sprigs
   (the v2 look) · s2 scallop PLAIN · s3 atelier organic rim · s4 embossed tone-on-tone.
-  Script `<scratchpad>/gen_tableware_v3.py` → board v3 on `design/tableware.html`,
-  recommendations marked (rec: s2, the bridge between her locked scallop and less-flowery).
-  She picks one character per piece (or "your picks"). Build script: `design/build_directions.py` (regenerates all
+  Script committed: `design/gen_tableware_v3.py` → **board v3 SHIPPED on
+  `design/tableware.html` with a PARKED banner** (all 16 v3 images archive-quality,
+  embedded in the page; glass family of 5 incl. her liked tumbler; rec marked: s2).
+  When design resumes: she picks one ceramic character per piece (or "your picks");
+  glass family just needs a confirm. Build script: `design/build_directions.py` (regenerates all
 12 pages from the live pilot/cook-cards sources — rerun after any source-card change).
 **Next: her pick → sub-choices as ≥3 options each (palette mixes, divider motif, accent
 strength) on the same surfaces → docs/design.md → batch-apply cascade (Deliverable 2).**
