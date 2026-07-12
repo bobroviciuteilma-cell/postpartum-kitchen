@@ -1,0 +1,176 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Your Healing Kitchen — the whole kitchen, one picture</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Marcellus&family=EB+Garamond:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--paper:#f7f1e3;--ink:#3c3325;--ink2:#6f6353;--soft:#938671;--sage:#7a895a;--sage2:#5f6e44;--amber:#c39a47;--amber2:#a87f2f;--beet:#8e3b52;--lav:#7c6f9e;--rule:#d9cdb6;--line:#e3d9c4}
+  body{font-family:'EB Garamond',Georgia,serif;color:var(--ink);background:#e7ddc7;padding:34px 18px 60px}
+  .wrap{max-width:860px;margin:0 auto}
+  .brand{font-family:'Pinyon Script',cursive;font-size:20px;color:#7a4f2c;text-align:center}
+  h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(28px,5vw,40px);color:#46371f;text-align:center;line-height:1.08;margin-top:6px}
+  .sub{text-align:center;font-style:italic;color:var(--ink2);font-size:clamp(14px,2.4vw,16.5px);margin:10px auto 0;max-width:620px;line-height:1.5}
+  .sub b{color:var(--sage2);font-style:normal}
+
+  /* the loop ring */
+  .loop{margin:30px auto 8px;max-width:640px;background:radial-gradient(120% 30% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 50%),var(--paper);border:1px solid #cdbf9f;border-radius:22px;box-shadow:0 14px 34px rgba(70,55,30,.14);padding:20px 18px 16px}
+  .loop .t{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#a8946a;text-align:center;margin-bottom:12px}
+  .ring{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+  .st{text-align:center;padding:9px 10px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.5);min-width:104px}
+  .st b{display:block;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16.5px;color:#46371f}
+  .st span{font-size:11.5px;font-style:italic;color:var(--soft)}
+  .arr{color:#b9a877;font-size:17px}
+  .back{ text-align:center;font-size:12px;font-style:italic;color:var(--sage2);margin-top:9px}
+
+  /* smart callout */
+  .smart{margin:26px auto 0;max-width:720px;border:1px solid #d8cba9;background:rgba(195,154,71,.09);border-radius:16px;padding:17px 20px}
+  .smart .t{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8a6b28;margin-bottom:7px}
+  .smart p{font-size:15.5px;line-height:1.6;color:var(--ink)}
+  .smart p b{color:#46371f}
+
+  /* bands */
+  .band{margin:30px auto 0;background:radial-gradient(120% 26% at 50% 0%,#f6e1bf 0%,rgba(246,225,191,0) 46%),var(--paper);border:1px solid #cdbf9f;border-radius:22px;box-shadow:0 14px 34px rgba(70,55,30,.14);padding:22px 22px 19px;position:relative}
+  .num{position:absolute;top:-13px;left:24px;font-family:'Marcellus',serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#fff8e9;background:linear-gradient(var(--sage),#66744c);border-radius:14px;padding:5px 13px;box-shadow:0 4px 10px rgba(95,110,68,.25)}
+  .band.amb .num{background:linear-gradient(var(--amber),#b0822c);box-shadow:0 4px 10px rgba(168,127,47,.25)}
+  .band.bt .num{background:linear-gradient(#96455e,#7d3049);box-shadow:0 4px 10px rgba(142,59,82,.25)}
+  .band.lv .num{background:linear-gradient(#8578ab,#6c5f92);box-shadow:0 4px 10px rgba(124,111,158,.25)}
+  h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:#46371f;margin-top:4px}
+  .ess{font-style:italic;color:var(--ink2);font-size:14.5px;line-height:1.5;margin-top:5px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .c{font-size:13.5px;color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:7px 13px;background:rgba(255,255,255,.55);text-decoration:none;line-height:1.3}
+  .c:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px}
+  .c.live:before{background:var(--sage)}
+  .c.dec:before{background:var(--amber)}
+  .c.later:before{background:none;border:1.4px solid #b9a877;width:6px;height:6px}
+  a.c.live{color:var(--sage2);border-color:#c3d0a8}
+  a.c.live:hover{background:rgba(122,137,90,.12)}
+  .down{display:flex;justify-content:center;margin:10px 0 -6px}
+  .down svg{width:22px;height:26px;color:#b9a877}
+  .flow{margin-top:12px;font-size:13px;font-style:italic;color:var(--sage2)}
+
+  /* day strip */
+  .day{margin:34px auto 0;max-width:860px}
+  .day .t{font-family:'Marcellus',serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#a8946a;text-align:center;margin-bottom:13px}
+  .hours{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+  .h{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.5);padding:14px 15px}
+  .h b{display:block;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:#46371f}
+  .h em{display:block;font-size:10.5px;font-style:normal;font-family:'Marcellus',serif;letter-spacing:.13em;text-transform:uppercase;color:#a8946a;margin-bottom:4px}
+  .h span{font-size:13px;font-style:italic;color:var(--ink2);line-height:1.45;display:block;margin-top:3px}
+
+  .legend{margin:30px auto 0;text-align:center;font-size:12.5px;font-style:italic;color:var(--soft)}
+  .legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin:0 5px 0 14px;vertical-align:0}
+  .legend .g{background:var(--sage)}.legend .a{background:var(--amber)}.legend .o{background:none;border:1.4px solid #b9a877;width:6px;height:6px}
+  .foot{margin-top:26px;text-align:center;font-size:11.5px;color:#a89c81;font-style:italic}
+</style></head>
+<body><div class="wrap">
+
+  <div class="brand">Your Healing Kitchen</div>
+  <h1>One kitchen. Five parts. One loop.</h1>
+  <div class="sub"><b>Any meal</b> — first drink of the morning to dinner. <b>Any recipe</b> — an Instagram save, a link, a photo, her mum&rsquo;s classic. Chosen for how she feels, <b>cooked by the hands around her.</b></div>
+
+  <div class="loop">
+    <div class="t">The engine &mdash; runs every single day</div>
+    <div class="ring">
+      <div class="st"><b>She feels</b><span>10-second check-in</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="st"><b>It knows</b><span>her body + her table</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="st"><b>Hands cook</b><span>helper, not her</span></div>
+      <div class="arr">&rarr;</div>
+      <div class="st"><b>It learns</b><span>every plate, every tap</span></div>
+    </div>
+    <div class="back">&hellip;and tomorrow it knows her better &mdash; the loop never opens.</div>
+  </div>
+
+  <div class="smart">
+    <div class="t">What makes it a SMART kitchen &mdash; not a recipe app</div>
+    <p>A recipe app shows food. This kitchen <b>knows who&rsquo;s at her table</b>, <b>reads how she is today</b>, <b>boosts every meal from what she already owns</b>, <b>hands the cooking to someone else</b>, <b>learns from every plate</b> &mdash; and <b>proves what it saved her</b>, in hours and dollars. Take any one part away and it&rsquo;s just an app. Together, it&rsquo;s a kitchen that thinks.</p>
+  </div>
+
+  <div class="band">
+    <div class="num">1 &middot; It knows her</div>
+    <h2>The brain</h2>
+    <div class="ess">Eight little answers to start; everything else it earns quietly &mdash; her stage, her feeding, what her family loved, refused, wasted. Nobody can copy this; it&rsquo;s hers.</div>
+    <div class="chips">
+      <a class="c live" href="front-door-v4.html">the 8 questions &middot; locate her</a>
+      <a class="c live" href="pantry-preview.html">her Apothecary &mdash; what she owns</a>
+      <span class="c dec">verdicts: loved / nope / too hard / didn&rsquo;t eat</span>
+      <span class="c dec">&ldquo;mums at your week&rdquo; &mdash; kitchens learning together</span>
+    </div>
+    <div class="flow">&darr; feeds everything below &mdash; nothing is generic after day one</div>
+  </div>
+
+  <div class="down"><svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20m0 0l-6-6m6 6l6-6"/></svg></div>
+
+  <div class="band amb">
+    <div class="num">2 &middot; Everything she wants to cook</div>
+    <h2>Her library &mdash; any meal, from anywhere</h2>
+    <div class="ess">49 verified recipes on 7 healing shelves &mdash; breakfasts, drinks, snacks, mains, desserts. And <b>anything she brings</b>: paste an Instagram link, a blog, a screenshot, a voice note &mdash; it becomes a real card in <i>her</i> kitchen, sendable to her helper like everything else.</div>
+    <div class="chips">
+      <a class="c live" href="cook-cards/index.html">the 49 verified cards &middot; 7 shelves</a>
+      <a class="c live" href="own-recipe-boost-preview.html">bring any recipe &mdash; link / paste / photo / voice</a>
+      <span class="c dec">her saves become her shelf (&ldquo;Ours&rdquo;)</span>
+      <span class="c later">photo of handwriting &middot; voice capture</span>
+    </div>
+    <div class="flow">&darr; every card &mdash; ours or hers &mdash; flows through the advisor</div>
+  </div>
+
+  <div class="down"><svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20m0 0l-6-6m6 6l6-6"/></svg></div>
+
+  <div class="band">
+    <div class="num">3 &middot; It thinks for her</div>
+    <h2>The advisor</h2>
+    <div class="ess">She taps how she feels; it tells her what her body is asking for &mdash; one warm, cited fact &mdash; then sets the day&rsquo;s meals for her AND the family, and <b>boosts every recipe to the maximum her own shelf allows</b>. One thing worth buying, never a catalog. Every claim carries its receipt.</div>
+    <div class="chips">
+      <a class="c live" href="onepot-preview.html">morning read &rarr; one pot, two finishes</a>
+      <a class="c live" href="own-recipe-boost-preview.html">the Boost Advisor &mdash; on her recipes too</a>
+      <a class="c live" href="add-one-thing-preview.html">add one thing &mdash; today&rsquo;s micro-boost</a>
+      <span class="c dec">3 honesty labels &middot; tap to see sources</span>
+    </div>
+    <div class="flow">&darr; decided &mdash; now someone has to cook it (not her)</div>
+  </div>
+
+  <div class="down"><svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20m0 0l-6-6m6 6l6-6"/></svg></div>
+
+  <div class="band lv">
+    <div class="num">4 &middot; It borrows hands</div>
+    <h2>The helper carries it &mdash; she never trains, writes, or nags</h2>
+    <div class="ess">One WhatsApp link opens kitchen-mode on the helper&rsquo;s phone &mdash; no app, no account: photos, big type, one step at a time. The helper cooks any meal, taps <b>Cooked ✓</b> (her phone hums), keeps the pantry honest with Plenty&nbsp;/&nbsp;Low&nbsp;/&nbsp;Out taps, flags what&rsquo;s missing &mdash; and the week&rsquo;s order writes itself.</div>
+    <div class="chips">
+      <a class="c live" href="pilot/liver-cutlets.html">kitchen-mode card &mdash; how Maria sees it</a>
+      <a class="c live" href="pilot/week1.html">her whole week, one door</a>
+      <a class="c live" href="pantry-preview.html">Plenty / Low / Out &mdash; notify, never order</a>
+      <a class="c live" href="order-screen-preview.html">the order screen &mdash; pre-ticked + her flags</a>
+    </div>
+    <div class="flow">&darr; every Cooked ✓ and every flag teaches the brain</div>
+  </div>
+
+  <div class="down"><svg viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20m0 0l-6-6m6 6l6-6"/></svg></div>
+
+  <div class="band bt">
+    <div class="num">5 &middot; It proves itself</div>
+    <h2>The receipts &mdash; why she stays, why she pays</h2>
+    <div class="ess">One tap after each meal and the kitchen keeps the ledger: dinners handled, hours given back, what catering would have cost, what her own shelf covered. Every Sunday, the quiet receipt. Day 10, the only ask &mdash; by then it has already paid for itself.</div>
+    <div class="chips">
+      <a class="c live" href="recap-preview.html">the Sunday recap &middot; the day-10 ask</a>
+      <span class="c dec">the pays-for-itself guarantee</span>
+      <span class="c dec">ask my village to gift it</span>
+    </div>
+    <div class="flow">&#8635; and everything it learned makes tomorrow&rsquo;s morning smarter &mdash; back to the top</div>
+  </div>
+
+  <div class="day">
+    <div class="t">Why she opens it every day &mdash; her rhythm, not a habit trick</div>
+    <div class="hours">
+      <div class="h"><em>7 am</em><b>Held, first thing</b><span>her morning drink&rsquo;s ready to start; she taps how she slept &mdash; the kitchen reads her and sets the day&rsquo;s meals.</span></div>
+      <div class="h"><em>4 pm</em><b>The collapse that doesn&rsquo;t come</b><span>tonight was decided hours ago and it&rsquo;s already on Maria&rsquo;s phone. She does nothing.</span></div>
+      <div class="h"><em>7 pm</em><b>The hum</b><span>&ldquo;Cooked ✓ &mdash; dinner&rsquo;s on the stove.&rdquo; One tap: loved it. The kitchen just got smarter.</span></div>
+      <div class="h"><em>Sunday</em><b>The receipt</b><span>7 dinners &middot; 5¼ hours &middot; S$440 handled &mdash; proof, not a streak. No guilt anywhere.</span></div>
+    </div>
+  </div>
+
+  <div class="legend"><i class="g"></i>live &mdash; tap it &nbsp;<i class="a"></i>decided, being built &nbsp;<i class="o"></i>later, behind the Pass</div>
+  <div class="foot">Food, not medical advice &middot; made for this season of motherhood</div>
+
+</div></body></html>
